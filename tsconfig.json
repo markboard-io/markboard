@@ -28,7 +28,9 @@
     "resolveJsonModule": true,
     "types": [
       "node",
-      "mocha"
+      "mocha",
+      "types/scss.d.ts",
+      "types/global.d.ts"
     ],
     "esModuleInterop": true,
     "preserveSymlinks": true

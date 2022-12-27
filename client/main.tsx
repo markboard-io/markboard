@@ -1,8 +1,10 @@
 import React from 'react'
 import { Meteor } from 'meteor/meteor'
-import { render } from 'react-dom'
-import { App } from '/imports/ui/App'
+import { createRoot } from 'react-dom/client'
+import { router } from '../imports/pages/routes'
+import { RouterProvider } from 'react-router-dom'
 
 Meteor.startup(() => {
-  render(<App />, document.getElementById('react-target'))
+  const root = document.getElementById('root') as HTMLDivElement
+  createRoot(root).render(<RouterProvider router={router} />)
 })
