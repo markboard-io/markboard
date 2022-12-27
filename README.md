@@ -32,7 +32,7 @@ Watch the following Youtube video to see how BoardX brings AI into your workflow
 
 ## Installation Guide
 
-BoardX is open-source, you can deploy Rocket.Chat on your own server freely, or you can use our SaaS by visiting [app.boardx.us](https://app.boardx.us).
+BoardX is open-source forever, you can deploy BoardX on your own server freely, or you can use our SaaS version by visiting [app.boardx.us](https://app.boardx.us).
 
 > TO BE DONE
 
