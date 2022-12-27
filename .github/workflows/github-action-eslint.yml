@@ -9,5 +9,9 @@ jobs:
       - uses: meteorengineer/setup-meteor@v1
         with:
           meteor-release: '2.9.0'
+      - uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
       - run: meteor npm install
       - run: meteor npm run lint
