@@ -10,7 +10,6 @@
       <img alt="Join Discord" style="margin-left:5px;" src="https://img.shields.io/discord/1052420232704184350?style=for-the-badge&label=Join+Discord">
     </a>
   </p>
-  <a href="https://github.com/boardx/boardx-core/actions/workflows/github-action-eslint.yml"><img src="https://github.com/boardx/boardx-core/actions/workflows/github-action-eslint.yml/badge.svg" /></a>
 </div>
 
 <h1 align="center">Next-Gen Collaborative Platform built on Web3 & AI</h3>
