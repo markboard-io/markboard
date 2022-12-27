@@ -40,7 +40,8 @@ BoardX is open-source forever, you can deploy BoardX on your own server freely, 
 
 ```bash
 meteor npm install
-npm start
+npm start # or meteor run
+meteor shell # for debugging
 ```
 
 ### References
