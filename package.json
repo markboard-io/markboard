@@ -5,7 +5,8 @@
     "start": "meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
-    "visualize": "meteor --production --extra-packages bundle-visualizer"
+    "visualize": "meteor --production --extra-packages bundle-visualizer",
+    "lint": "meteor npx eslint server client imports"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
@@ -19,6 +20,8 @@
     "@types/mocha": "^8.2.3",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.30.0",
     "eslint-config-airbnb": "^19.0.4",
