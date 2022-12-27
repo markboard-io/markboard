@@ -1,8 +1,8 @@
-name: OnPushEslint
+name: OnPush
 run-name: Lint ${{ github.actor }}' latest code
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Build and Test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
