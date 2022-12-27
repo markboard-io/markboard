@@ -14,10 +14,19 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@meteorjs/eslint-config-meteor": "^1.0.5",
     "@types/meteor": "^2.8.1",
     "@types/mocha": "^8.2.3",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.30.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-import-resolver-meteor": "^0.4.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-meteor": "^7.3.0",
+    "eslint-plugin-react": "^7.31.11",
     "typescript": "^4.6.4"
   },
   "meteor": {
