@@ -1,6 +1,6 @@
 <div align="center" style="display:flex;flex-direction:column;">
   <a href="https://app.boardx.us">
-    <img width="540" src="./docs/logo.svg" alt="Excalidraw logo: Sketch handrawn like diagrams." />
+    <img width="540" src="./docs/logo.svg" alt="BoardX Logo" />
   </a>
   <p>
     <a href="https://twitter.com/intent/follow?screen_name=boardxus" target="_blank">
@@ -12,7 +12,7 @@
   </p>
 </div>
 
-<h1 align="center">Next Generation Collaborative Platform built on Web3 and AIGC</h3>
+<h1 align="center">Next-Gen Collaborative Platform built on Web3 & AI</h3>
 
 [BoardX](https://app.boardx.us) is an open-source evolutionary new collaborative platform built on the foundations of Web3 and AIGC. This platform is designed to facilitate collaboration and connection within teams, making it easy for users to share ideas, work on projects together, and stay up-to-date on the latest developments.
 
