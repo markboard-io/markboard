@@ -4,7 +4,7 @@ import ExampleSidebar from './sidebar/ExampleSidebar'
 
 import type * as TExcalidraw from '../index'
 
-import './App.scss'
+import './App.style.scss'
 import initialData from './initialData'
 import { nanoid } from 'nanoid'
 import {
@@ -29,12 +29,6 @@ import {
 import { NonDeletedExcalidrawElement } from '../../../element/types'
 import { ImportedLibraryData } from '../../../data/types'
 
-declare global {
-  interface Window {
-    ExcalidrawLib: typeof TExcalidraw
-  }
-}
-
 type Comment = {
   x: number
   y: number
@@ -55,8 +49,7 @@ type PointerDownState = {
 }
 // This is so that we use the bundled excalidraw.development.js file instead
 // of the actual source code
-
-const {
+import {
   exportToCanvas,
   exportToSvg,
   exportToBlob,
@@ -69,7 +62,7 @@ const {
   restoreElements,
   Sidebar,
   Footer
-} = window.ExcalidrawLib
+} from '../index'
 
 const COMMENT_SVG = (
   <svg

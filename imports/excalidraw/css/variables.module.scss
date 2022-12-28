@@ -1,4 +1,4 @@
-@import "open-color/open-color.scss";
+@import "./open-color.scss";
 
 @mixin isMobile() {
   @at-root .excalidraw--mobile#{&} {
