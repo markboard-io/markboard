@@ -1,0 +1,16 @@
+.FileExplorerPanel {
+	width: 100%;
+	height: 100vh;
+	background-color: var(--sidebar-background-color);
+}
+.PanelResizeHandle {
+	width: 4px;
+	background-color: var(--sidebar-background-color);
+	.Divider {
+		width: 2px;
+		height: 100%;
+	}
+	&:hover .Divider {
+		border-right: 1px solid #dedfe1;
+	}
+}
