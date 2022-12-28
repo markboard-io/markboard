@@ -26,13 +26,14 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
-    'react/no-unescaped-entities': ['off'],
-    'react/jsx-no-target-blank': ['off'],
     '@typescript-eslint/no-explicit-any': ['off'],
     '@typescript-eslint/no-unnecessary-type-constraint': ['off'],
     '@typescript-eslint/no-non-null-assertion': ['off'],
     '@typescript-eslint/ban-ts-comment': ['off'],
     'no-misleading-character-class': ['off'],
-    '@typescript-eslint/no-unused-vars': ['off']
+    '@typescript-eslint/no-unused-vars': ['off'],
+    'react/prop-types': ['off'],
+    'react/no-unescaped-entities': ['off'],
+    'react/jsx-no-target-blank': ['off']
   }
 }

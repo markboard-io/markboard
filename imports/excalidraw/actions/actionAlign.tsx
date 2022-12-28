@@ -1,3 +1,4 @@
+import React from 'react'
 import { alignElements, Alignment } from '../align'
 import {
   AlignBottomIcon,

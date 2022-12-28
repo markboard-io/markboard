@@ -1,3 +1,4 @@
+import React from 'react'
 import { ColorPicker } from '../components/ColorPicker'
 import { eraser, MoonIcon, SunIcon, ZoomInIcon, ZoomOutIcon } from '../components/icons'
 import { ToolButton } from '../components/ToolButton'
@@ -82,7 +83,7 @@ export const actionZoomIn = register({
   name: 'zoomIn',
   viewMode: true,
   trackEvent: { category: 'canvas' },
-  perform: (_elements, appState, _, app) => {
+  perform: (_elements, appState, _, _app) => {
     return {
       appState: {
         ...appState,
@@ -119,7 +120,7 @@ export const actionZoomOut = register({
   name: 'zoomOut',
   viewMode: true,
   trackEvent: { category: 'canvas' },
-  perform: (_elements, appState, _, app) => {
+  perform: (_elements, appState, _, _app) => {
     return {
       appState: {
         ...appState,
@@ -156,7 +157,7 @@ export const actionResetZoom = register({
   name: 'resetZoom',
   viewMode: true,
   trackEvent: { category: 'canvas' },
-  perform: (_elements, appState, _, app) => {
+  perform: (_elements, appState, _, _app) => {
     return {
       appState: {
         ...appState,
@@ -294,7 +295,7 @@ export const actionToggleTheme = register({
 export const actionErase = register({
   name: 'eraser',
   trackEvent: { category: 'toolbar' },
-  perform: (elements, appState) => {
+  perform: (_elements, appState) => {
     let activeTool: AppState['activeTool']
 
     if (isEraserActive(appState)) {
@@ -322,7 +323,7 @@ export const actionErase = register({
     }
   },
   keyTest: event => event.key === KEYS.E,
-  PanelComponent: ({ elements, appState, updateData, data }) => (
+  PanelComponent: ({ elements: _elements, appState, updateData, data }) => (
     <ToolButton
       type='button'
       icon={eraser}
