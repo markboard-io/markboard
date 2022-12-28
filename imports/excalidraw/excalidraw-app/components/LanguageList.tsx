@@ -8,7 +8,7 @@ export const LanguageList = ({ style }: { style?: React.CSSProperties }) => {
   const [langCode, setLangCode] = useAtom(langCodeAtom)
 
   return (
-    <React.Fragment>
+    <>
       <select
         className='dropdown-select dropdown-select__language'
         onChange={({ target }) => setLangCode(target.value)}
@@ -25,6 +25,6 @@ export const LanguageList = ({ style }: { style?: React.CSSProperties }) => {
           </option>
         ))}
       </select>
-    </React.Fragment>
+    </>
   )
 }

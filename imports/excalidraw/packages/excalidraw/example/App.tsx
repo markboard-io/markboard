@@ -609,8 +609,9 @@ export default function App() {
           <Excalidraw
             ref={(api: ExcalidrawImperativeAPI) => setExcalidrawAPI(api)}
             initialData={initialStatePromiseRef.current.promise}
-            onChange={(elements, state) => {
-              console.info('Elements :', elements, 'State : ', state)
+            onChange={(_elements, _state) => {
+              // NOTE debug excalidraw elements here
+              // console.info('Elements :', elements, 'State : ', state)
             }}
             onPointerUpdate={(payload: {
               pointer: { x: number; y: number }
