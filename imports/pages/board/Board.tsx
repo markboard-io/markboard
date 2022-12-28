@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styles from './Board.module.scss'
 import { fabric } from 'fabric'
+import { Sidebar } from '/imports/components'
 
 export function Board() {
   useEffect(() => {
@@ -29,6 +30,7 @@ export function Board() {
 
   return (
     <div className={styles.page}>
+      <Sidebar />
       <canvas id='canvas-container' className={styles.canvasContainer} height='100%' width='100%' />
     </div>
   )

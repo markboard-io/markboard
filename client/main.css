@@ -2,3 +2,35 @@ body {
   margin: 0;
   font-family: sans-serif;
 }
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --main-bg-color: #000000;
+    --card-shadow-color: #333333;
+    --primary-text-color: #ffffff;
+    --secondry-text-color: #cfcfcf;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    --main-bg-color: #a9a9a9;
+    --card-shadow-color: #878787;
+    --primary-text-color: #111111;
+    --secondry-text-color: #333333;
+  }
+}
+
+html[data-theme="light"] {
+  --main-bg-color: #a9a9a9;
+  --card-shadow-color: #878787;
+  --primary-text-color: #111111;
+  --secondry-text-color: #333333;
+}
+
+html[data-theme="dark"] {
+  --main-bg-color: #000000;
+  --card-shadow-color: #333333;
+  --primary-text-color: #ffffff;
+  --secondry-text-color: #cfcfcf;
+}
