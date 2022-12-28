@@ -1,3 +1,4 @@
+import React from 'react'
 import { useAtom } from 'jotai'
 import { actionLoadScene, actionShortcuts } from '../actions'
 import { ActionManager } from '../actions/manager'

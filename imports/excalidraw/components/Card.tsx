@@ -1,3 +1,4 @@
+import React from 'react'
 import OpenColor from 'open-color'
 
 import './Card.scss'

@@ -1,3 +1,4 @@
+import React from 'react'
 import './ToolIcon.scss'
 
 import clsx from 'clsx'

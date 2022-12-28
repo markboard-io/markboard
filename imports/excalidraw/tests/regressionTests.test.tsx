@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactDOM from 'react-dom'
 import { ExcalidrawElement } from '../element/types'
 import { CODES, KEYS } from '../keys'
@@ -354,7 +355,7 @@ describe('regression tests', () => {
     expect(h.elements.filter(element => !element.isDeleted).length).toBe(2)
   })
 
-  it('noop interaction after undo shouldn\'t create history entry', () => {
+  it("noop interaction after undo shouldn't create history entry", () => {
     expect(API.getStateHistory().length).toBe(1)
 
     UI.clickTool('rectangle')
@@ -648,7 +649,7 @@ describe('regression tests', () => {
     expect(h.state.currentItemFontFamily).toEqual(FONT_FAMILY.Cascadia)
   })
 
-  it('deselects selected element, on pointer up, when click hits element bounding box but doesn\'t hit the element', () => {
+  it("deselects selected element, on pointer up, when click hits element bounding box but doesn't hit the element", () => {
     UI.clickTool('ellipse')
     mouse.down()
     mouse.up(100, 100)
@@ -704,7 +705,7 @@ describe('regression tests', () => {
     expect(API.getSelectedElement().type).toBe('rectangle')
   })
 
-  it('deselects selected element on pointer down when pointer doesn\'t hit any element', () => {
+  it("deselects selected element on pointer down when pointer doesn't hit any element", () => {
     UI.clickTool('rectangle')
     mouse.down()
     mouse.up(10, 10)
@@ -810,7 +811,7 @@ describe('regression tests', () => {
     }
   )
 
-  it('deselects group of selected elements on pointer down when pointer doesn\'t hit any element', () => {
+  it("deselects group of selected elements on pointer down when pointer doesn't hit any element", () => {
     UI.clickTool('rectangle')
     mouse.down()
     mouse.up(10, 10)
@@ -889,7 +890,7 @@ describe('regression tests', () => {
     expect(API.getSelectedElements().length).toBe(0)
   })
 
-  it('drags selected elements from point inside common bounding box that doesn\'t hit any element and keeps elements selected after dragging', () => {
+  it("drags selected elements from point inside common bounding box that doesn't hit any element and keeps elements selected after dragging", () => {
     UI.clickTool('rectangle')
     mouse.down()
     mouse.up(10, 10)
@@ -960,7 +961,7 @@ describe('regression tests', () => {
   it(
     'given a selected element A and a not selected element B with higher z-index than A ' +
       'and given B partially overlaps A ' +
-      'when there\'s a shift-click on the overlapped section B is added to the selection',
+      "when there's a shift-click on the overlapped section B is added to the selection",
     () => {
       UI.clickTool('rectangle')
       // change background color since default is transparent

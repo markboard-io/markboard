@@ -135,32 +135,32 @@ export const getCursorForResizingElement = (resizingElement: {
   let cursor = null
 
   switch (transformHandleType) {
-  case 'n':
-  case 's':
-    cursor = 'ns'
-    break
-  case 'w':
-  case 'e':
-    cursor = 'ew'
-    break
-  case 'nw':
-  case 'se':
-    if (shouldSwapCursors) {
-      cursor = 'nesw'
-    } else {
-      cursor = 'nwse'
-    }
-    break
-  case 'ne':
-  case 'sw':
-    if (shouldSwapCursors) {
-      cursor = 'nwse'
-    } else {
-      cursor = 'nesw'
-    }
-    break
-  case 'rotation':
-    return 'grab'
+    case 'n':
+    case 's':
+      cursor = 'ns'
+      break
+    case 'w':
+    case 'e':
+      cursor = 'ew'
+      break
+    case 'nw':
+    case 'se':
+      if (shouldSwapCursors) {
+        cursor = 'nesw'
+      } else {
+        cursor = 'nwse'
+      }
+      break
+    case 'ne':
+    case 'sw':
+      if (shouldSwapCursors) {
+        cursor = 'nwse'
+      } else {
+        cursor = 'nesw'
+      }
+      break
+    case 'rotation':
+      return 'grab'
   }
 
   if (cursor && element) {

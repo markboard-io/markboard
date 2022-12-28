@@ -24,7 +24,7 @@ export const actionCopy = register({
       commitToHistory: false
     }
   },
-  contextItemPredicate: (elements, appState, appProps, app) => {
+  contextItemPredicate: (_elements, _appState, _appProps, app) => {
     return app.device.isMobile && !!navigator.clipboard
   },
   contextItemLabel: 'labels.copy',
@@ -35,13 +35,13 @@ export const actionCopy = register({
 export const actionPaste = register({
   name: 'paste',
   trackEvent: { category: 'element' },
-  perform: (elements: any, appStates: any, data, app) => {
+  perform: (_elements: any, _appStates: any, _data, app) => {
     app.pasteFromClipboard(null)
     return {
       commitToHistory: false
     }
   },
-  contextItemPredicate: (elements, appState, appProps, app) => {
+  contextItemPredicate: (_elements, _appState, _appProps, app) => {
     return app.device.isMobile && !!navigator.clipboard
   },
   contextItemLabel: 'labels.paste',
@@ -56,7 +56,7 @@ export const actionCut = register({
     actionCopy.perform(elements, appState, data, app)
     return actionDeleteSelected.perform(elements, appState)
   },
-  contextItemPredicate: (elements, appState, appProps, app) => {
+  contextItemPredicate: (_elements, _appState, _appProps, app) => {
     return app.device.isMobile && !!navigator.clipboard
   },
   contextItemLabel: 'labels.cut',

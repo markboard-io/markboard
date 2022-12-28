@@ -1,3 +1,4 @@
+import React from 'react'
 import { fireEvent, render, waitFor } from './test-utils'
 import { queryByTestId } from '@testing-library/react'
 

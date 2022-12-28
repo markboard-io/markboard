@@ -1,3 +1,4 @@
+import React from 'react'
 import ExcalidrawApp from '../excalidraw-app'
 import { t } from '../i18n'
 import { CODES } from '../keys'

@@ -8,7 +8,7 @@ export const actionToggleZenMode = register({
     category: 'canvas',
     predicate: appState => !appState.zenModeEnabled
   },
-  perform(elements, appState) {
+  perform(_elements, appState) {
     return {
       appState: {
         ...appState,
@@ -18,7 +18,7 @@ export const actionToggleZenMode = register({
     }
   },
   checked: appState => appState.zenModeEnabled,
-  contextItemPredicate: (elements, appState, appProps) => {
+  contextItemPredicate: (_elements, _appState, appProps) => {
     return typeof appProps.zenModeEnabled === 'undefined'
   },
   contextItemLabel: 'buttons.zenMode',

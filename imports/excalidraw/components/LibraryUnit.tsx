@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+import React from 'react'
 import clsx from 'clsx'
 import oc from 'open-color'
 import { useEffect, useRef, useState } from 'react'
@@ -32,7 +34,7 @@ export const LibraryUnit = ({
       return
     }
 
-    (async () => {
+    async function execute() {
       if (!elements) {
         return
       }
@@ -45,8 +47,9 @@ export const LibraryUnit = ({
         null
       )
       svg.querySelector('.style-fonts')?.remove()
-      node.innerHTML = svg.outerHTML
-    })()
+      node!.innerHTML = svg.outerHTML
+    }
+    execute()
 
     return () => {
       node.innerHTML = ''
@@ -76,12 +79,12 @@ export const LibraryUnit = ({
         onClick={
           !!elements || !!isPending
             ? event => {
-              if (id && event.shiftKey) {
-                onToggle(id, event)
-              } else {
-                onClick()
+                if (id && event.shiftKey) {
+                  onToggle(id, event)
+                } else {
+                  onClick()
+                }
               }
-            }
             : undefined
         }
         onDragStart={event => {
@@ -97,7 +100,7 @@ export const LibraryUnit = ({
       {id && elements && (isHovered || isMobile || selected) && (
         <CheckboxItem
           checked={selected}
-          onChange={(checked, event) => onToggle(id, event)}
+          onChange={(_checked, event) => onToggle(id, event)}
           className='library-unit__checkbox'
         />
       )}

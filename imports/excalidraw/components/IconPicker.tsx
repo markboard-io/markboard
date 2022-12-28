@@ -62,17 +62,17 @@ function Picker<T>({
 
         switch (event.key) {
         // Select the next option
-        case isRTL ? KEYS.ARROW_LEFT : KEYS.ARROW_RIGHT:
-        case KEYS.ARROW_DOWN: {
-          nextIndex = (index + 1) % length
-          break
-        }
-        // Select the previous option
-        case isRTL ? KEYS.ARROW_RIGHT : KEYS.ARROW_LEFT:
-        case KEYS.ARROW_UP: {
-          nextIndex = (length + index - 1) % length
-          break
-        }
+          case isRTL ? KEYS.ARROW_LEFT : KEYS.ARROW_RIGHT:
+          case KEYS.ARROW_DOWN: {
+            nextIndex = (index + 1) % length
+            break
+          }
+          // Select the previous option
+          case isRTL ? KEYS.ARROW_RIGHT : KEYS.ARROW_LEFT:
+          case KEYS.ARROW_UP: {
+            nextIndex = (length + index - 1) % length
+            break
+          }
         }
 
         (rGallery.current!.children![nextIndex] as any).focus()

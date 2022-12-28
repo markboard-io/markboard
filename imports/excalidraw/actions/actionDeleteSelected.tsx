@@ -1,3 +1,4 @@
+import React from 'react'
 import { isSomeElementSelected } from '../scene'
 import { KEYS } from '../keys'
 import { ToolButton } from '../components/ToolButton'

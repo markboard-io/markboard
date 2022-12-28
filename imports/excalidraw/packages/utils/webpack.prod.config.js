@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
-const BundleAnalyzerPlugin =
-  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   mode: 'production',
@@ -10,20 +9,20 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     library: 'ExcalidrawUtils',
-    libraryTarget: 'umd',
+    libraryTarget: 'umd'
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.css', '.scss'],
+    extensions: ['.tsx', '.ts', '.js', '.css', '.scss']
   },
   optimization: {
-    runtimeChunk: false,
+    runtimeChunk: false
   },
   module: {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
         exclude: /node_modules/,
-        use: ['style-loader', { loader: 'css-loader' }, 'sass-loader'],
+        use: ['style-loader', { loader: 'css-loader' }, 'sass-loader']
       },
       {
         test: /\.(ts|tsx|js)$/,
@@ -32,8 +31,8 @@ module.exports = {
             loader: 'ts-loader',
             options: {
               transpileOnly: true,
-              configFile: path.resolve(__dirname, '../tsconfig.prod.json'),
-            },
+              configFile: path.resolve(__dirname, '../tsconfig.prod.json')
+            }
           },
           {
             loader: 'babel-loader',
@@ -42,19 +41,19 @@ module.exports = {
               presets: [
                 '@babel/preset-env',
                 ['@babel/preset-react', { runtime: 'automatic' }],
-                '@babel/preset-typescript',
+                '@babel/preset-typescript'
               ],
-              plugins: [['@babel/plugin-transform-runtime']],
-            },
-          },
-        ],
-      },
-    ],
+              plugins: [['@babel/plugin-transform-runtime']]
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1,
+      maxChunks: 1
     }),
-    ...(process.env.ANALYZER === 'true' ? [new BundleAnalyzerPlugin()] : []),
-  ],
+    ...(process.env.ANALYZER === 'true' ? [new BundleAnalyzerPlugin()] : [])
+  ]
 }

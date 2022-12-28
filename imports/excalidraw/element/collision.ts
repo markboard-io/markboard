@@ -180,33 +180,33 @@ type HitTestArgs = {
 
 const hitTestPointAgainstElement = (args: HitTestArgs): boolean => {
   switch (args.element.type) {
-  case 'rectangle':
-  case 'image':
-  case 'text':
-  case 'diamond':
-  case 'ellipse':
-    const distance = distanceToBindableElement(args.element, args.point)
-    return args.check(distance, args.threshold)
-  case 'freedraw': {
-    if (
-      !args.check(
-        distanceToRectangle(args.element, args.point),
-        args.threshold,
-      )
-    ) {
-      return false
-    }
+    case 'rectangle':
+    case 'image':
+    case 'text':
+    case 'diamond':
+    case 'ellipse':
+      const distance = distanceToBindableElement(args.element, args.point)
+      return args.check(distance, args.threshold)
+    case 'freedraw': {
+      if (
+        !args.check(
+          distanceToRectangle(args.element, args.point),
+          args.threshold,
+        )
+      ) {
+        return false
+      }
 
-    return hitTestFreeDrawElement(args.element, args.point, args.threshold)
-  }
-  case 'arrow':
-  case 'line':
-    return hitTestLinear(args)
-  case 'selection':
-    console.warn(
-      'This should not happen, we need to investigate why it does.',
-    )
-    return false
+      return hitTestFreeDrawElement(args.element, args.point, args.threshold)
+    }
+    case 'arrow':
+    case 'line':
+      return hitTestLinear(args)
+    case 'selection':
+      console.warn(
+        'This should not happen, we need to investigate why it does.',
+      )
+      return false
   }
 }
 
@@ -215,14 +215,14 @@ export const distanceToBindableElement = (
   point: Point,
 ): number => {
   switch (element.type) {
-  case 'rectangle':
-  case 'image':
-  case 'text':
-    return distanceToRectangle(element, point)
-  case 'diamond':
-    return distanceToDiamond(element, point)
-  case 'ellipse':
-    return distanceToEllipse(element, point)
+    case 'rectangle':
+    case 'image':
+    case 'text':
+      return distanceToRectangle(element, point)
+    case 'diamond':
+      return distanceToDiamond(element, point)
+    case 'ellipse':
+      return distanceToEllipse(element, point)
   }
 }
 
@@ -527,14 +527,14 @@ export const determineFocusDistance = (
   const mabs = Math.abs(m)
   const nabs = Math.abs(n)
   switch (element.type) {
-  case 'rectangle':
-  case 'image':
-  case 'text':
-    return c / (hwidth * (nabs + q * mabs))
-  case 'diamond':
-    return mabs < nabs ? c / (nabs * hwidth) : c / (mabs * hheight)
-  case 'ellipse':
-    return c / (hwidth * Math.sqrt(n ** 2 + q ** 2 * m ** 2))
+    case 'rectangle':
+    case 'image':
+    case 'text':
+      return c / (hwidth * (nabs + q * mabs))
+    case 'diamond':
+      return mabs < nabs ? c / (nabs * hwidth) : c / (mabs * hheight)
+    case 'ellipse':
+      return c / (hwidth * Math.sqrt(n ** 2 + q ** 2 * m ** 2))
   }
 }
 
@@ -558,15 +558,15 @@ export const determineFocusPoint = (
   const reverseRelateToCenter = GA.reverse(relateToCenter)
   let point
   switch (element.type) {
-  case 'rectangle':
-  case 'image':
-  case 'text':
-  case 'diamond':
-    point = findFocusPointForRectangulars(element, focus, adjecentPointRel)
-    break
-  case 'ellipse':
-    point = findFocusPointForEllipse(element, focus, adjecentPointRel)
-    break
+    case 'rectangle':
+    case 'image':
+    case 'text':
+    case 'diamond':
+      point = findFocusPointForRectangulars(element, focus, adjecentPointRel)
+      break
+    case 'ellipse':
+      point = findFocusPointForEllipse(element, focus, adjecentPointRel)
+      break
   }
   return GAPoint.toTuple(GATransform.apply(reverseRelateToCenter, point))
 }
@@ -608,23 +608,23 @@ const getSortedElementLineIntersections = (
 ): GA.Point[] => {
   let intersections: GA.Point[]
   switch (element.type) {
-  case 'rectangle':
-  case 'image':
-  case 'text':
-  case 'diamond':
-    const corners = getCorners(element)
-    intersections = corners
-      .flatMap((point, i) => {
-        const edge: [GA.Point, GA.Point] = [point, corners[(i + 1) % 4]]
-        return intersectSegment(line, offsetSegment(edge, gap))
-      })
-      .concat(
-        corners.flatMap((point) => getCircleIntersections(point, gap, line)),
-      )
-    break
-  case 'ellipse':
-    intersections = getEllipseIntersections(element, gap, line)
-    break
+    case 'rectangle':
+    case 'image':
+    case 'text':
+    case 'diamond':
+      const corners = getCorners(element)
+      intersections = corners
+        .flatMap((point, i) => {
+          const edge: [GA.Point, GA.Point] = [point, corners[(i + 1) % 4]]
+          return intersectSegment(line, offsetSegment(edge, gap))
+        })
+        .concat(
+          corners.flatMap((point) => getCircleIntersections(point, gap, line)),
+        )
+      break
+    case 'ellipse':
+      intersections = getEllipseIntersections(element, gap, line)
+      break
   }
   if (intersections.length < 2) {
     // Ignore the "edge" case of only intersecting with a single corner
@@ -651,22 +651,22 @@ const getCorners = (
   const hx = (scale * element.width) / 2
   const hy = (scale * element.height) / 2
   switch (element.type) {
-  case 'rectangle':
-  case 'image':
-  case 'text':
-    return [
-      GA.point(hx, hy),
-      GA.point(hx, -hy),
-      GA.point(-hx, -hy),
-      GA.point(-hx, hy),
-    ]
-  case 'diamond':
-    return [
-      GA.point(0, hy),
-      GA.point(hx, 0),
-      GA.point(0, -hy),
-      GA.point(-hx, 0),
-    ]
+    case 'rectangle':
+    case 'image':
+    case 'text':
+      return [
+        GA.point(hx, hy),
+        GA.point(hx, -hy),
+        GA.point(-hx, -hy),
+        GA.point(-hx, hy),
+      ]
+    case 'diamond':
+      return [
+        GA.point(0, hy),
+        GA.point(hx, 0),
+        GA.point(0, -hy),
+        GA.point(-hx, 0),
+      ]
   }
 }
 

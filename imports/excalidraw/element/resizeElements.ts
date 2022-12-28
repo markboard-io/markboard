@@ -262,30 +262,30 @@ const resizeSingleTextElement = (
   )
   let scale: number
   switch (transformHandleType) {
-  case 'se':
-    scale = Math.max(
-      (rotatedX - x1) / (x2 - x1),
-      (rotatedY - y1) / (y2 - y1),
-    )
-    break
-  case 'nw':
-    scale = Math.max(
-      (x2 - rotatedX) / (x2 - x1),
-      (y2 - rotatedY) / (y2 - y1),
-    )
-    break
-  case 'ne':
-    scale = Math.max(
-      (rotatedX - x1) / (x2 - x1),
-      (y2 - rotatedY) / (y2 - y1),
-    )
-    break
-  case 'sw':
-    scale = Math.max(
-      (x2 - rotatedX) / (x2 - x1),
-      (rotatedY - y1) / (y2 - y1),
-    )
-    break
+    case 'se':
+      scale = Math.max(
+        (rotatedX - x1) / (x2 - x1),
+        (rotatedY - y1) / (y2 - y1),
+      )
+      break
+    case 'nw':
+      scale = Math.max(
+        (x2 - rotatedX) / (x2 - x1),
+        (y2 - rotatedY) / (y2 - y1),
+      )
+      break
+    case 'ne':
+      scale = Math.max(
+        (rotatedX - x1) / (x2 - x1),
+        (y2 - rotatedY) / (y2 - y1),
+      )
+      break
+    case 'sw':
+      scale = Math.max(
+        (x2 - rotatedX) / (x2 - x1),
+        (rotatedY - y1) / (y2 - y1),
+      )
+      break
   }
   if (scale > 0) {
     const nextWidth = element.width * scale
@@ -798,24 +798,24 @@ export const getResizeOffsetXY = (
   const angle = selectedElements.length === 1 ? selectedElements[0].angle : 0;
   [x, y] = rotate(x, y, cx, cy, -angle)
   switch (transformHandleType) {
-  case 'n':
-    return rotate(x - (x1 + x2) / 2, y - y1, 0, 0, angle)
-  case 's':
-    return rotate(x - (x1 + x2) / 2, y - y2, 0, 0, angle)
-  case 'w':
-    return rotate(x - x1, y - (y1 + y2) / 2, 0, 0, angle)
-  case 'e':
-    return rotate(x - x2, y - (y1 + y2) / 2, 0, 0, angle)
-  case 'nw':
-    return rotate(x - x1, y - y1, 0, 0, angle)
-  case 'ne':
-    return rotate(x - x2, y - y1, 0, 0, angle)
-  case 'sw':
-    return rotate(x - x1, y - y2, 0, 0, angle)
-  case 'se':
-    return rotate(x - x2, y - y2, 0, 0, angle)
-  default:
-    return [0, 0]
+    case 'n':
+      return rotate(x - (x1 + x2) / 2, y - y1, 0, 0, angle)
+    case 's':
+      return rotate(x - (x1 + x2) / 2, y - y2, 0, 0, angle)
+    case 'w':
+      return rotate(x - x1, y - (y1 + y2) / 2, 0, 0, angle)
+    case 'e':
+      return rotate(x - x2, y - (y1 + y2) / 2, 0, 0, angle)
+    case 'nw':
+      return rotate(x - x1, y - y1, 0, 0, angle)
+    case 'ne':
+      return rotate(x - x2, y - y1, 0, 0, angle)
+    case 'sw':
+      return rotate(x - x1, y - y2, 0, 0, angle)
+    case 'se':
+      return rotate(x - x2, y - y2, 0, 0, angle)
+    default:
+      return [0, 0]
   }
 }
 

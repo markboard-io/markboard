@@ -1,3 +1,4 @@
+import React from 'react'
 import { LoadIcon, questionCircle, saveAs } from '../components/icons'
 import { ProjectName } from '../components/ProjectName'
 import { ToolButton } from '../components/ToolButton'
@@ -117,7 +118,7 @@ export const actionChangeExportEmbedScene = register({
 export const actionSaveToActiveFile = register({
   name: 'saveToActiveFile',
   trackEvent: { category: 'export' },
-  perform: async (elements, appState, value, app) => {
+  perform: async (elements, appState, _value, app) => {
     const fileHandleExists = !!appState.fileHandle
 
     try {
@@ -158,7 +159,7 @@ export const actionSaveFileToDisk = register({
   name: 'saveFileToDisk',
   viewMode: true,
   trackEvent: { category: 'export' },
-  perform: async (elements, appState, value, app) => {
+  perform: async (elements, appState, _value, app) => {
     try {
       const { fileHandle } = await saveAsJSON(
         elements,

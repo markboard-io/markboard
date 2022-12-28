@@ -1,3 +1,4 @@
+import React from 'react'
 import { GithubIcon, DiscordIcon, PlusPromoIcon, TwitterIcon } from './icons'
 
 export const MenuLinks = () => (

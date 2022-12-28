@@ -16,13 +16,16 @@
     "@types/chai": "^4.3.4",
     "@types/fabric": "^4.5.14",
     "@types/jest": "^29.2.4",
+    "@types/lodash.throttle": "^4.1.7",
     "@types/pako": "^2.0.0",
     "@types/pica": "^9.0.1",
     "browser-fs-access": "^0.31.1",
     "chai": "^4.3.7",
     "clsx": "^1.2.1",
     "fabric": "^5.3.0",
+    "i18next-browser-languagedetector": "^7.0.1",
     "jotai": "^1.12.0",
+    "lodash.throttle": "^4.1.1",
     "meteor-node-stubs": "^1.2.1",
     "nanoid": "^4.0.0",
     "node-sass": "^4.14.1",
@@ -34,7 +37,8 @@
     "react-dom": "^18.2.0",
     "react-resizable-panels": "0.0.18",
     "react-router-dom": "^6.6.1",
-    "roughjs": "^4.5.2"
+    "roughjs": "^4.5.2",
+    "socket.io-client": "^4.5.4"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
@@ -53,6 +57,7 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-meteor": "^7.3.0",
     "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "react-scripts": "^5.0.1",
     "typescript": "^4.6.4"
   },

@@ -101,14 +101,14 @@ export const decode = async (data: EncodedData): Promise<string> => {
   let decoded: string
 
   switch (data.encoding) {
-  case 'bstring':
-    // if compressed, do not double decode the bstring
-    decoded = data.compressed
-      ? data.encoded
-      : await byteStringToString(data.encoded)
-    break
-  default:
-    throw new Error(`decode: unknown encoding "${ data.encoding }"`)
+    case 'bstring':
+      // if compressed, do not double decode the bstring
+      decoded = data.compressed
+        ? data.encoded
+        : await byteStringToString(data.encoded)
+      break
+    default:
+      throw new Error(`decode: unknown encoding "${ data.encoding }"`)
   }
 
   if (data.compressed) {

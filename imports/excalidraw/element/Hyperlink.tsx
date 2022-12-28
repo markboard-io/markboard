@@ -1,3 +1,4 @@
+import React from 'react'
 import { AppState, ExcalidrawProps, Point } from '../types'
 import {
   getShortcutKey,

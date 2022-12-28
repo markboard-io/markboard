@@ -1,3 +1,4 @@
+import React from 'react'
 import { render, updateSceneData, waitFor } from './test-utils'
 import ExcalidrawApp from '../excalidraw-app'
 import { API } from './helpers/api'
@@ -7,7 +8,7 @@ const { h } = window
 Object.defineProperty(window, 'crypto', {
   value: {
     getRandomValues: (arr: number[]) =>
-      arr.forEach((v, i) => (arr[i] = Math.floor(Math.random() * 256))),
+      arr.forEach((_v, i) => (arr[i] = Math.floor(Math.random() * 256))),
     subtle: {
       generateKey: () => {},
       exportKey: () => ({ k: 'sTdLvMC_M3V8_vGa3UVRDg' })

@@ -1,3 +1,4 @@
+import React from 'react'
 // TODO barnabasmolnar/editor-redesign
 // this icon is not great
 import { getShortcutFromShortcutName } from '../actions/shortcuts'

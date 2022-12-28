@@ -1,3 +1,4 @@
+import React from 'react'
 import { isExcalidrawPlusSignedUser } from '../../constants'
 
 export const ExcalidrawPlusAppLink = () => {

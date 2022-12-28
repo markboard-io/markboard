@@ -1,3 +1,4 @@
+import React from 'react'
 import { KEYS } from '../keys'
 import { isInvisiblySmallElement } from '../element'
 import { updateActiveTool, resetCursor } from '../utils'

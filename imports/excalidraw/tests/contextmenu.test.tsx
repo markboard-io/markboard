@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactDOM from 'react-dom'
 import {
   render,
@@ -167,7 +168,7 @@ describe('contextMenu element', () => {
     expect(API.getSelectedElement().id).toBe(rect2.id)
   })
 
-  it('shows \'Group selection\' in context menu for multiple selected elements', () => {
+  it("shows 'Group selection' in context menu for multiple selected elements", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(10, 10)
@@ -211,7 +212,7 @@ describe('contextMenu element', () => {
     })
   })
 
-  it('shows \'Ungroup selection\' in context menu for group inside selected elements', () => {
+  it("shows 'Ungroup selection' in context menu for group inside selected elements", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(10, 10)
@@ -259,7 +260,7 @@ describe('contextMenu element', () => {
     })
   })
 
-  it('selecting \'Copy styles\' in context menu copies styles', () => {
+  it("selecting 'Copy styles' in context menu copies styles", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -277,7 +278,7 @@ describe('contextMenu element', () => {
     expect(element).toEqual(API.getSelectedElement())
   })
 
-  it('selecting \'Paste styles\' in context menu pastes styles', () => {
+  it("selecting 'Paste styles' in context menu pastes styles", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -337,7 +338,7 @@ describe('contextMenu element', () => {
     expect(firstRect.opacity).toBe(60)
   })
 
-  it('selecting \'Delete\' in context menu deletes element', () => {
+  it("selecting 'Delete' in context menu deletes element", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -353,7 +354,7 @@ describe('contextMenu element', () => {
     expect(h.elements[0].isDeleted).toBe(true)
   })
 
-  it('selecting \'Add to library\' in context menu adds element to library', async () => {
+  it("selecting 'Add to library' in context menu adds element to library", async () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -374,7 +375,7 @@ describe('contextMenu element', () => {
     })
   })
 
-  it('selecting \'Duplicate\' in context menu duplicates element', () => {
+  it("selecting 'Duplicate' in context menu duplicates element", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -392,7 +393,7 @@ describe('contextMenu element', () => {
     expect(rect1).toEqual(rect2)
   })
 
-  it('selecting \'Send backward\' in context menu sends element backward', () => {
+  it("selecting 'Send backward' in context menu sends element backward", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -414,7 +415,7 @@ describe('contextMenu element', () => {
     expect(elementsBefore[1].id).toEqual(h.elements[0].id)
   })
 
-  it('selecting \'Bring forward\' in context menu brings element forward', () => {
+  it("selecting 'Bring forward' in context menu brings element forward", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -436,7 +437,7 @@ describe('contextMenu element', () => {
     expect(elementsBefore[1].id).toEqual(h.elements[0].id)
   })
 
-  it('selecting \'Send to back\' in context menu sends element to back', () => {
+  it("selecting 'Send to back' in context menu sends element to back", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -457,7 +458,7 @@ describe('contextMenu element', () => {
     expect(elementsBefore[1].id).toEqual(h.elements[0].id)
   })
 
-  it('selecting \'Bring to front\' in context menu brings element to front', () => {
+  it("selecting 'Bring to front' in context menu brings element to front", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -478,7 +479,7 @@ describe('contextMenu element', () => {
     expect(elementsBefore[0].id).toEqual(h.elements[1].id)
   })
 
-  it('selecting \'Group selection\' in context menu groups selected elements', () => {
+  it("selecting 'Group selection' in context menu groups selected elements", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)
@@ -504,7 +505,7 @@ describe('contextMenu element', () => {
     expect(h.elements[1].groupIds).toEqual(selectedGroupIds)
   })
 
-  it('selecting \'Ungroup selection\' in context menu ungroups selected group', () => {
+  it("selecting 'Ungroup selection' in context menu ungroups selected group", () => {
     UI.clickTool('rectangle')
     mouse.down(10, 10)
     mouse.up(20, 20)

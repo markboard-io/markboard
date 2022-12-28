@@ -1,3 +1,4 @@
+import React from 'react'
 import { KEYS } from '../keys'
 import { t } from '../i18n'
 import { arrayToMap, getShortcutKey } from '../utils'
@@ -154,7 +155,7 @@ export const actionUngroup = register({
   },
   keyTest: event => event.shiftKey && event[KEYS.CTRL_OR_CMD] && event.key === KEYS.G.toUpperCase(),
   contextItemLabel: 'labels.ungroup',
-  contextItemPredicate: (elements, appState) => getSelectedGroupIds(appState).length > 0,
+  contextItemPredicate: (_elements, appState) => getSelectedGroupIds(appState).length > 0,
 
   PanelComponent: ({ elements, appState, updateData }) => (
     <ToolButton

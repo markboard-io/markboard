@@ -207,105 +207,105 @@ const drawElementOnCanvas = (
 ) => {
   context.globalAlpha = element.opacity / 100
   switch (element.type) {
-  case 'rectangle':
-  case 'diamond':
-  case 'ellipse': {
-    context.lineJoin = 'round'
-    context.lineCap = 'round'
-    rc.draw(getShapeForElement(element)!)
-    break
-  }
-  case 'arrow':
-  case 'line': {
-    context.lineJoin = 'round'
-    context.lineCap = 'round'
+    case 'rectangle':
+    case 'diamond':
+    case 'ellipse': {
+      context.lineJoin = 'round'
+      context.lineCap = 'round'
+      rc.draw(getShapeForElement(element)!)
+      break
+    }
+    case 'arrow':
+    case 'line': {
+      context.lineJoin = 'round'
+      context.lineCap = 'round'
 
       getShapeForElement(element)!.forEach((shape) => {
         rc.draw(shape)
       })
       break
-  }
-  case 'freedraw': {
-    // Draw directly to canvas
-    context.save()
-    context.fillStyle = element.strokeColor
-
-    const path = getFreeDrawPath2D(element) as Path2D
-    const fillShape = getShapeForElement(element)
-
-    if (fillShape) {
-      rc.draw(fillShape)
     }
-
-    context.fillStyle = element.strokeColor
-    context.fill(path)
-
-    context.restore()
-    break
-  }
-  case 'image': {
-    const img = isInitializedImageElement(element)
-      ? renderConfig.imageCache.get(element.fileId)?.image
-      : undefined
-    if (img != null && !(img instanceof Promise)) {
-      context.drawImage(
-        img,
-        0 /* hardcoded for the selection box*/,
-        0,
-        element.width,
-        element.height,
-      )
-    } else {
-      drawImagePlaceholder(element, context, renderConfig.zoom.value)
-    }
-    break
-  }
-  default: {
-    if (isTextElement(element)) {
-      const rtl = isRTL(element.text)
-      const shouldTemporarilyAttach = rtl && !context.canvas.isConnected
-      if (shouldTemporarilyAttach) {
-        // to correctly render RTL text mixed with LTR, we have to append it
-        // to the DOM
-        document.body.appendChild(context.canvas)
-      }
-      context.canvas.setAttribute('dir', rtl ? 'rtl' : 'ltr')
+    case 'freedraw': {
+      // Draw directly to canvas
       context.save()
-      context.font = getFontString(element)
       context.fillStyle = element.strokeColor
-      context.textAlign = element.textAlign as CanvasTextAlign
 
-      // Canvas does not support multiline text by default
-      const lines = element.text.replace(/\r\n?/g, '\n').split('\n')
-      const lineHeight = element.containerId
-        ? getApproxLineHeight(getFontString(element))
-        : element.height / lines.length
-      let verticalOffset = element.height - element.baseline
-      if (element.verticalAlign === VERTICAL_ALIGN.BOTTOM) {
-        verticalOffset = getBoundTextElementOffset(element)
+      const path = getFreeDrawPath2D(element) as Path2D
+      const fillShape = getShapeForElement(element)
+
+      if (fillShape) {
+        rc.draw(fillShape)
       }
 
-      const horizontalOffset =
+      context.fillStyle = element.strokeColor
+      context.fill(path)
+
+      context.restore()
+      break
+    }
+    case 'image': {
+      const img = isInitializedImageElement(element)
+        ? renderConfig.imageCache.get(element.fileId)?.image
+        : undefined
+      if (img != null && !(img instanceof Promise)) {
+        context.drawImage(
+          img,
+          0 /* hardcoded for the selection box*/,
+          0,
+          element.width,
+          element.height,
+        )
+      } else {
+        drawImagePlaceholder(element, context, renderConfig.zoom.value)
+      }
+      break
+    }
+    default: {
+      if (isTextElement(element)) {
+        const rtl = isRTL(element.text)
+        const shouldTemporarilyAttach = rtl && !context.canvas.isConnected
+        if (shouldTemporarilyAttach) {
+          // to correctly render RTL text mixed with LTR, we have to append it
+          // to the DOM
+          document.body.appendChild(context.canvas)
+        }
+        context.canvas.setAttribute('dir', rtl ? 'rtl' : 'ltr')
+        context.save()
+        context.font = getFontString(element)
+        context.fillStyle = element.strokeColor
+        context.textAlign = element.textAlign as CanvasTextAlign
+
+        // Canvas does not support multiline text by default
+        const lines = element.text.replace(/\r\n?/g, '\n').split('\n')
+        const lineHeight = element.containerId
+          ? getApproxLineHeight(getFontString(element))
+          : element.height / lines.length
+        let verticalOffset = element.height - element.baseline
+        if (element.verticalAlign === VERTICAL_ALIGN.BOTTOM) {
+          verticalOffset = getBoundTextElementOffset(element)
+        }
+
+        const horizontalOffset =
           element.textAlign === 'center'
             ? element.width / 2
             : element.textAlign === 'right'
               ? element.width
               : 0
-      for (let index = 0; index < lines.length; index++) {
-        context.fillText(
-          lines[index],
-          horizontalOffset,
-          (index + 1) * lineHeight - verticalOffset,
-        )
+        for (let index = 0; index < lines.length; index++) {
+          context.fillText(
+            lines[index],
+            horizontalOffset,
+            (index + 1) * lineHeight - verticalOffset,
+          )
+        }
+        context.restore()
+        if (shouldTemporarilyAttach) {
+          context.canvas.remove()
+        }
+      } else {
+        throw new Error(`Unimplemented type ${ element.type }`)
       }
-      context.restore()
-      if (shouldTemporarilyAttach) {
-        context.canvas.remove()
-      }
-    } else {
-      throw new Error(`Unimplemented type ${ element.type }`)
     }
-  }
   }
   context.globalAlpha = 1
 }
@@ -374,35 +374,35 @@ export const generateRoughOptions = (
   }
 
   switch (element.type) {
-  case 'rectangle':
-  case 'diamond':
-  case 'ellipse': {
-    options.fillStyle = element.fillStyle
-    options.fill =
+    case 'rectangle':
+    case 'diamond':
+    case 'ellipse': {
+      options.fillStyle = element.fillStyle
+      options.fill =
         element.backgroundColor === 'transparent'
           ? undefined
           : element.backgroundColor
-    if (element.type === 'ellipse') {
-      options.curveFitting = 1
+      if (element.type === 'ellipse') {
+        options.curveFitting = 1
+      }
+      return options
     }
-    return options
-  }
-  case 'line':
-  case 'freedraw': {
-    if (isPathALoop(element.points)) {
-      options.fillStyle = element.fillStyle
-      options.fill =
+    case 'line':
+    case 'freedraw': {
+      if (isPathALoop(element.points)) {
+        options.fillStyle = element.fillStyle
+        options.fill =
           element.backgroundColor === 'transparent'
             ? undefined
             : element.backgroundColor
+      }
+      return options
     }
-    return options
-  }
-  case 'arrow':
-    return options
-  default: {
-    throw new Error(`Unimplemented type ${ element.type }`)
-  }
+    case 'arrow':
+      return options
+    default: {
+      throw new Error(`Unimplemented type ${ element.type }`)
+    }
   }
 }
 
@@ -423,232 +423,228 @@ const generateElementShape = (
     elementWithCanvasCache.delete(element)
 
     switch (element.type) {
-    case 'rectangle':
-      if (element.roundness) {
-        const w = element.width
-        const h = element.height
-        const r = getCornerRadius(Math.min(w, h), element)
-        shape = generator.path(
-          `M ${ r } 0 L ${ w - r } 0 Q ${ w } 0, ${ w } ${ r } L ${ w } ${ h - r
-          } Q ${ w } ${ h }, ${ w - r } ${ h } L ${ r } ${ h } Q 0 ${ h }, 0 ${ h - r
-          } L 0 ${ r } Q 0 0, ${ r } 0`,
-          generateRoughOptions(element, true),
-        )
-      } else {
-        shape = generator.rectangle(
-          0,
-          0,
+      case 'rectangle':
+        if (element.roundness) {
+          const w = element.width
+          const h = element.height
+          const r = getCornerRadius(Math.min(w, h), element)
+          shape = generator.path(
+            `M ${ r } 0 L ${ w - r } 0 Q ${ w } 0, ${ w } ${ r } L ${ w } ${ h - r
+            } Q ${ w } ${ h }, ${ w - r } ${ h } L ${ r } ${ h } Q 0 ${ h }, 0 ${ h - r
+            } L 0 ${ r } Q 0 0, ${ r } 0`,
+            generateRoughOptions(element, true),
+          )
+        } else {
+          shape = generator.rectangle(
+            0,
+            0,
+            element.width,
+            element.height,
+            generateRoughOptions(element),
+          )
+        }
+        setShapeForElement(element, shape)
+
+        break
+      case 'diamond': {
+        const [topX, topY, rightX, rightY, bottomX, bottomY, leftX, leftY] =
+          getDiamondPoints(element)
+        if (element.roundness) {
+          const verticalRadius = getCornerRadius(
+            Math.abs(topX - leftX),
+            element,
+          )
+
+          const horizontalRadius = getCornerRadius(
+            Math.abs(rightY - topY),
+            element,
+          )
+
+          shape = generator.path(
+            `M ${ topX + verticalRadius } ${ topY + horizontalRadius } L ${ rightX - verticalRadius
+            } ${ rightY - horizontalRadius }
+            C ${ rightX } ${ rightY }, ${ rightX } ${ rightY }, ${ rightX - verticalRadius } ${ rightY + horizontalRadius }
+            L ${ bottomX + verticalRadius } ${ bottomY - horizontalRadius }
+            C ${ bottomX } ${ bottomY }, ${ bottomX } ${ bottomY }, ${ bottomX - verticalRadius } ${ bottomY - horizontalRadius }
+            L ${ leftX + verticalRadius } ${ leftY + horizontalRadius }
+            C ${ leftX } ${ leftY }, ${ leftX } ${ leftY }, ${ leftX + verticalRadius } ${ leftY - horizontalRadius }
+            L ${ topX - verticalRadius } ${ topY + horizontalRadius }
+            C ${ topX } ${ topY }, ${ topX } ${ topY }, ${ topX + verticalRadius } ${ topY + horizontalRadius }`,
+            generateRoughOptions(element, true),
+          )
+        } else {
+          shape = generator.polygon(
+            [
+              [topX, topY],
+              [rightX, rightY],
+              [bottomX, bottomY],
+              [leftX, leftY],
+            ],
+            generateRoughOptions(element),
+          )
+        }
+        setShapeForElement(element, shape)
+
+        break
+      }
+      case 'ellipse':
+        shape = generator.ellipse(
+          element.width / 2,
+          element.height / 2,
           element.width,
           element.height,
           generateRoughOptions(element),
         )
-      }
-      setShapeForElement(element, shape)
+        setShapeForElement(element, shape)
 
-      break
-    case 'diamond': {
-      const [topX, topY, rightX, rightY, bottomX, bottomY, leftX, leftY] =
-          getDiamondPoints(element)
-      if (element.roundness) {
-        const verticalRadius = getCornerRadius(
-          Math.abs(topX - leftX),
-          element,
-        )
+        break
+      case 'line':
+      case 'arrow': {
+        const options = generateRoughOptions(element)
 
-        const horizontalRadius = getCornerRadius(
-          Math.abs(rightY - topY),
-          element,
-        )
+        // points array can be empty in the beginning, so it is important to add
+        // initial position to it
+        const points = element.points.length ? element.points : [[0, 0]]
 
-        shape = generator.path(
-          `M ${ topX + verticalRadius } ${ topY + horizontalRadius } L ${ rightX - verticalRadius
-          } ${ rightY - horizontalRadius }
-            C ${ rightX } ${ rightY }, ${ rightX } ${ rightY }, ${ rightX - verticalRadius
-} ${ rightY + horizontalRadius }
-            L ${ bottomX + verticalRadius } ${ bottomY - horizontalRadius }
-            C ${ bottomX } ${ bottomY }, ${ bottomX } ${ bottomY }, ${ bottomX - verticalRadius
-} ${ bottomY - horizontalRadius }
-            L ${ leftX + verticalRadius } ${ leftY + horizontalRadius }
-            C ${ leftX } ${ leftY }, ${ leftX } ${ leftY }, ${ leftX + verticalRadius } ${ leftY - horizontalRadius
-}
-            L ${ topX - verticalRadius } ${ topY + horizontalRadius }
-            C ${ topX } ${ topY }, ${ topX } ${ topY }, ${ topX + verticalRadius } ${ topY + horizontalRadius
-}`,
-          generateRoughOptions(element, true),
-        )
-      } else {
-        shape = generator.polygon(
-          [
-            [topX, topY],
-            [rightX, rightY],
-            [bottomX, bottomY],
-            [leftX, leftY],
-          ],
-          generateRoughOptions(element),
-        )
-      }
-      setShapeForElement(element, shape)
-
-      break
-    }
-    case 'ellipse':
-      shape = generator.ellipse(
-        element.width / 2,
-        element.height / 2,
-        element.width,
-        element.height,
-        generateRoughOptions(element),
-      )
-      setShapeForElement(element, shape)
-
-      break
-    case 'line':
-    case 'arrow': {
-      const options = generateRoughOptions(element)
-
-      // points array can be empty in the beginning, so it is important to add
-      // initial position to it
-      const points = element.points.length ? element.points : [[0, 0]]
-
-      // curve is always the first element
-      // this simplifies finding the curve for an element
-      if (!element.roundness) {
-        if (options.fill) {
-          shape = [generator.polygon(points as [number, number][], options)]
-        } else {
-          shape = [
-            generator.linearPath(points as [number, number][], options),
-          ]
-        }
-      } else {
-        shape = [generator.curve(points as [number, number][], options)]
-      }
-
-      // add lines only in arrow
-      if (element.type === 'arrow') {
-        const { startArrowhead = null, endArrowhead = 'arrow' } = element
-
-        const getArrowheadShapes = (
-          element: ExcalidrawLinearElement,
-          shape: Drawable[],
-          position: 'start' | 'end',
-          arrowhead: Arrowhead,
-        ) => {
-          const arrowheadPoints = getArrowheadPoints(
-            element,
-            shape,
-            position,
-            arrowhead,
-          )
-
-          if (arrowheadPoints === null) {
-            return []
-          }
-
-          // Other arrowheads here...
-          if (arrowhead === 'dot') {
-            const [x, y, r] = arrowheadPoints
-
-            return [
-              generator.circle(x, y, r, {
-                ...options,
-                fill: element.strokeColor,
-                fillStyle: 'solid',
-                stroke: 'none',
-              }),
+        // curve is always the first element
+        // this simplifies finding the curve for an element
+        if (!element.roundness) {
+          if (options.fill) {
+            shape = [generator.polygon(points as [number, number][], options)]
+          } else {
+            shape = [
+              generator.linearPath(points as [number, number][], options),
             ]
           }
+        } else {
+          shape = [generator.curve(points as [number, number][], options)]
+        }
 
-          if (arrowhead === 'triangle') {
-            const [x, y, x2, y2, x3, y3] = arrowheadPoints
+        // add lines only in arrow
+        if (element.type === 'arrow') {
+          const { startArrowhead = null, endArrowhead = 'arrow' } = element
 
-            // always use solid stroke for triangle arrowhead
-            delete options.strokeLineDash
+          const getArrowheadShapes = (
+            element: ExcalidrawLinearElement,
+            shape: Drawable[],
+            position: 'start' | 'end',
+            arrowhead: Arrowhead,
+          ) => {
+            const arrowheadPoints = getArrowheadPoints(
+              element,
+              shape,
+              position,
+              arrowhead,
+            )
 
-            return [
-              generator.polygon(
-                [
-                  [x, y],
-                  [x2, y2],
-                  [x3, y3],
-                  [x, y],
-                ],
-                {
+            if (arrowheadPoints === null) {
+              return []
+            }
+
+            // Other arrowheads here...
+            if (arrowhead === 'dot') {
+              const [x, y, r] = arrowheadPoints
+
+              return [
+                generator.circle(x, y, r, {
                   ...options,
                   fill: element.strokeColor,
                   fillStyle: 'solid',
-                },
-              ),
+                  stroke: 'none',
+                }),
+              ]
+            }
+
+            if (arrowhead === 'triangle') {
+              const [x, y, x2, y2, x3, y3] = arrowheadPoints
+
+              // always use solid stroke for triangle arrowhead
+              delete options.strokeLineDash
+
+              return [
+                generator.polygon(
+                  [
+                    [x, y],
+                    [x2, y2],
+                    [x3, y3],
+                    [x, y],
+                  ],
+                  {
+                    ...options,
+                    fill: element.strokeColor,
+                    fillStyle: 'solid',
+                  },
+                ),
+              ]
+            }
+
+            // Arrow arrowheads
+            const [x2, y2, x3, y3, x4, y4] = arrowheadPoints
+
+            if (element.strokeStyle === 'dotted') {
+              // for dotted arrows caps, reduce gap to make it more legible
+              const dash = getDashArrayDotted(element.strokeWidth - 1)
+              options.strokeLineDash = [dash[0], dash[1] - 1]
+            } else {
+              // for solid/dashed, keep solid arrow cap
+              delete options.strokeLineDash
+            }
+            return [
+              generator.line(x3, y3, x2, y2, options),
+              generator.line(x4, y4, x2, y2, options),
             ]
           }
 
-          // Arrow arrowheads
-          const [x2, y2, x3, y3, x4, y4] = arrowheadPoints
-
-          if (element.strokeStyle === 'dotted') {
-            // for dotted arrows caps, reduce gap to make it more legible
-            const dash = getDashArrayDotted(element.strokeWidth - 1)
-            options.strokeLineDash = [dash[0], dash[1] - 1]
-          } else {
-            // for solid/dashed, keep solid arrow cap
-            delete options.strokeLineDash
-          }
-          return [
-            generator.line(x3, y3, x2, y2, options),
-            generator.line(x4, y4, x2, y2, options),
-          ]
-        }
-
-        if (startArrowhead !== null) {
-          const shapes = getArrowheadShapes(
-            element,
-            shape,
-            'start',
-            startArrowhead,
-          )
-          shape.push(...shapes)
-        }
-
-        if (endArrowhead !== null) {
-          if (endArrowhead === undefined) {
-            // Hey, we have an old arrow here!
+          if (startArrowhead !== null) {
+            const shapes = getArrowheadShapes(
+              element,
+              shape,
+              'start',
+              startArrowhead,
+            )
+            shape.push(...shapes)
           }
 
-          const shapes = getArrowheadShapes(
-            element,
-            shape,
-            'end',
-            endArrowhead,
-          )
-          shape.push(...shapes)
+          if (endArrowhead !== null) {
+            if (endArrowhead === undefined) {
+              // Hey, we have an old arrow here!
+            }
+
+            const shapes = getArrowheadShapes(
+              element,
+              shape,
+              'end',
+              endArrowhead,
+            )
+            shape.push(...shapes)
+          }
         }
+
+        setShapeForElement(element, shape)
+
+        break
       }
+      case 'freedraw': {
+        generateFreeDrawShape(element)
 
-      setShapeForElement(element, shape)
-
-      break
-    }
-    case 'freedraw': {
-      generateFreeDrawShape(element)
-
-      if (isPathALoop(element.points)) {
-        // generate rough polygon to fill freedraw shape
-        shape = generator.polygon(element.points as [number, number][], {
-          ...generateRoughOptions(element),
-          stroke: 'none',
-        })
-      } else {
-        shape = null
+        if (isPathALoop(element.points)) {
+          // generate rough polygon to fill freedraw shape
+          shape = generator.polygon(element.points as [number, number][], {
+            ...generateRoughOptions(element),
+            stroke: 'none',
+          })
+        } else {
+          shape = null
+        }
+        setShapeForElement(element, shape)
+        break
       }
-      setShapeForElement(element, shape)
-      break
-    }
-    case 'text':
-    case 'image': {
-      // just to ensure we don't regenerate element.canvas on rerenders
-      setShapeForElement(element, null)
-      break
-    }
+      case 'text':
+      case 'image': {
+        // just to ensure we don't regenerate element.canvas on rerenders
+        setShapeForElement(element, null)
+        break
+      }
     }
   }
 }
@@ -823,169 +819,169 @@ export const renderElement = (
 ) => {
   const generator = rc.generator
   switch (element.type) {
-  case 'selection': {
-    context.save()
-    context.translate(
-      element.x + renderConfig.scrollX,
-      element.y + renderConfig.scrollY,
-    )
-    context.fillStyle = 'rgba(0, 0, 200, 0.04)'
-
-    // render from 0.5px offset  to get 1px wide line
-    // https://stackoverflow.com/questions/7530593/html5-canvas-and-line-width/7531540#7531540
-    // TODO can be be improved by offseting to the negative when user selects
-    // from right to left
-    const offset = 0.5 / renderConfig.zoom.value
-
-    context.fillRect(offset, offset, element.width, element.height)
-    context.lineWidth = 1 / renderConfig.zoom.value
-    context.strokeStyle = 'rgb(105, 101, 219)'
-    context.strokeRect(offset, offset, element.width, element.height)
-
-    context.restore()
-    break
-  }
-  case 'freedraw': {
-    generateElementShape(element, generator)
-
-    if (renderConfig.isExporting) {
-      const [x1, y1, x2, y2] = getElementAbsoluteCoords(element)
-      const cx = (x1 + x2) / 2 + renderConfig.scrollX
-      const cy = (y1 + y2) / 2 + renderConfig.scrollY
-      const shiftX = (x2 - x1) / 2 - (element.x - x1)
-      const shiftY = (y2 - y1) / 2 - (element.y - y1)
+    case 'selection': {
       context.save()
-      context.translate(cx, cy)
-      context.rotate(element.angle)
-      context.translate(-shiftX, -shiftY)
-      drawElementOnCanvas(element, rc, context, renderConfig)
-      context.restore()
-    } else {
-      const elementWithCanvas = generateElementWithCanvas(
-        element,
-        renderConfig,
+      context.translate(
+        element.x + renderConfig.scrollX,
+        element.y + renderConfig.scrollY,
       )
-      drawElementFromCanvas(elementWithCanvas, rc, context, renderConfig)
-    }
+      context.fillStyle = 'rgba(0, 0, 200, 0.04)'
 
-    break
-  }
-  case 'rectangle':
-  case 'diamond':
-  case 'ellipse':
-  case 'line':
-  case 'arrow':
-  case 'image':
-  case 'text': {
-    generateElementShape(element, generator)
-    if (renderConfig.isExporting) {
-      const [x1, y1, x2, y2] = getElementAbsoluteCoords(element)
-      const cx = (x1 + x2) / 2 + renderConfig.scrollX
-      const cy = (y1 + y2) / 2 + renderConfig.scrollY
-      let shiftX = (x2 - x1) / 2 - (element.x - x1)
-      let shiftY = (y2 - y1) / 2 - (element.y - y1)
-      if (isTextElement(element)) {
-        const container = getContainerElement(element)
-        if (isArrowElement(container)) {
-          const boundTextCoords =
+      // render from 0.5px offset  to get 1px wide line
+      // https://stackoverflow.com/questions/7530593/html5-canvas-and-line-width/7531540#7531540
+      // TODO can be be improved by offseting to the negative when user selects
+      // from right to left
+      const offset = 0.5 / renderConfig.zoom.value
+
+      context.fillRect(offset, offset, element.width, element.height)
+      context.lineWidth = 1 / renderConfig.zoom.value
+      context.strokeStyle = 'rgb(105, 101, 219)'
+      context.strokeRect(offset, offset, element.width, element.height)
+
+      context.restore()
+      break
+    }
+    case 'freedraw': {
+      generateElementShape(element, generator)
+
+      if (renderConfig.isExporting) {
+        const [x1, y1, x2, y2] = getElementAbsoluteCoords(element)
+        const cx = (x1 + x2) / 2 + renderConfig.scrollX
+        const cy = (y1 + y2) / 2 + renderConfig.scrollY
+        const shiftX = (x2 - x1) / 2 - (element.x - x1)
+        const shiftY = (y2 - y1) / 2 - (element.y - y1)
+        context.save()
+        context.translate(cx, cy)
+        context.rotate(element.angle)
+        context.translate(-shiftX, -shiftY)
+        drawElementOnCanvas(element, rc, context, renderConfig)
+        context.restore()
+      } else {
+        const elementWithCanvas = generateElementWithCanvas(
+          element,
+          renderConfig,
+        )
+        drawElementFromCanvas(elementWithCanvas, rc, context, renderConfig)
+      }
+
+      break
+    }
+    case 'rectangle':
+    case 'diamond':
+    case 'ellipse':
+    case 'line':
+    case 'arrow':
+    case 'image':
+    case 'text': {
+      generateElementShape(element, generator)
+      if (renderConfig.isExporting) {
+        const [x1, y1, x2, y2] = getElementAbsoluteCoords(element)
+        const cx = (x1 + x2) / 2 + renderConfig.scrollX
+        const cy = (y1 + y2) / 2 + renderConfig.scrollY
+        let shiftX = (x2 - x1) / 2 - (element.x - x1)
+        let shiftY = (y2 - y1) / 2 - (element.y - y1)
+        if (isTextElement(element)) {
+          const container = getContainerElement(element)
+          if (isArrowElement(container)) {
+            const boundTextCoords =
               LinearElementEditor.getBoundTextElementPosition(
                 container,
                 element as ExcalidrawTextElementWithContainer,
               )
-          shiftX = (x2 - x1) / 2 - (boundTextCoords.x - x1)
-          shiftY = (y2 - y1) / 2 - (boundTextCoords.y - y1)
+            shiftX = (x2 - x1) / 2 - (boundTextCoords.x - x1)
+            shiftY = (y2 - y1) / 2 - (boundTextCoords.y - y1)
+          }
         }
-      }
-      context.save()
-      context.translate(cx, cy)
-      if (element.type === 'image') {
-        context.scale(element.scale[0], element.scale[1])
-      }
+        context.save()
+        context.translate(cx, cy)
+        if (element.type === 'image') {
+          context.scale(element.scale[0], element.scale[1])
+        }
 
-      if (shouldResetImageFilter(element, renderConfig)) {
-        context.filter = 'none'
-      }
-      const boundTextElement = getBoundTextElement(element)
+        if (shouldResetImageFilter(element, renderConfig)) {
+          context.filter = 'none'
+        }
+        const boundTextElement = getBoundTextElement(element)
 
-      if (isArrowElement(element) && boundTextElement) {
-        const tempCanvas = document.createElement('canvas')
+        if (isArrowElement(element) && boundTextElement) {
+          const tempCanvas = document.createElement('canvas')
 
-        const tempCanvasContext = tempCanvas.getContext('2d')!
+          const tempCanvasContext = tempCanvas.getContext('2d')!
 
-        // Take max dimensions of arrow canvas so that when canvas is rotated
-        // the arrow doesn't get clipped
-        const maxDim = Math.max(distance(x1, x2), distance(y1, y2))
-        const padding = getCanvasPadding(element)
-        tempCanvas.width =
+          // Take max dimensions of arrow canvas so that when canvas is rotated
+          // the arrow doesn't get clipped
+          const maxDim = Math.max(distance(x1, x2), distance(y1, y2))
+          const padding = getCanvasPadding(element)
+          tempCanvas.width =
             maxDim * appState.exportScale + padding * 10 * appState.exportScale
-        tempCanvas.height =
+          tempCanvas.height =
             maxDim * appState.exportScale + padding * 10 * appState.exportScale
 
-        tempCanvasContext.translate(
-          tempCanvas.width / 2,
-          tempCanvas.height / 2,
-        )
-        tempCanvasContext.scale(appState.exportScale, appState.exportScale)
+          tempCanvasContext.translate(
+            tempCanvas.width / 2,
+            tempCanvas.height / 2,
+          )
+          tempCanvasContext.scale(appState.exportScale, appState.exportScale)
 
-        // Shift the canvas to left most point of the arrow
-        shiftX = element.width / 2 - (element.x - x1)
-        shiftY = element.height / 2 - (element.y - y1)
+          // Shift the canvas to left most point of the arrow
+          shiftX = element.width / 2 - (element.x - x1)
+          shiftY = element.height / 2 - (element.y - y1)
 
-        tempCanvasContext.rotate(element.angle)
-        const tempRc = rough.canvas(tempCanvas)
+          tempCanvasContext.rotate(element.angle)
+          const tempRc = rough.canvas(tempCanvas)
 
-        tempCanvasContext.translate(-shiftX, -shiftY)
+          tempCanvasContext.translate(-shiftX, -shiftY)
 
-        drawElementOnCanvas(element, tempRc, tempCanvasContext, renderConfig)
+          drawElementOnCanvas(element, tempRc, tempCanvasContext, renderConfig)
 
-        tempCanvasContext.translate(shiftX, shiftY)
+          tempCanvasContext.translate(shiftX, shiftY)
 
-        tempCanvasContext.rotate(-element.angle)
+          tempCanvasContext.rotate(-element.angle)
 
-        // Shift the canvas to center of bound text
-        const [, , , , boundTextCx, boundTextCy] =
+          // Shift the canvas to center of bound text
+          const [, , , , boundTextCx, boundTextCy] =
             getElementAbsoluteCoords(boundTextElement)
-        const boundTextShiftX = (x1 + x2) / 2 - boundTextCx
-        const boundTextShiftY = (y1 + y2) / 2 - boundTextCy
-        tempCanvasContext.translate(-boundTextShiftX, -boundTextShiftY)
+          const boundTextShiftX = (x1 + x2) / 2 - boundTextCx
+          const boundTextShiftY = (y1 + y2) / 2 - boundTextCy
+          tempCanvasContext.translate(-boundTextShiftX, -boundTextShiftY)
 
-        // Clear the bound text area
-        tempCanvasContext.clearRect(
-          -boundTextElement.width / 2,
-          -boundTextElement.height / 2,
-          boundTextElement.width,
-          boundTextElement.height,
-        )
-        context.scale(1 / appState.exportScale, 1 / appState.exportScale)
-        context.drawImage(
-          tempCanvas,
-          -tempCanvas.width / 2,
-          -tempCanvas.height / 2,
-          tempCanvas.width,
-          tempCanvas.height,
-        )
+          // Clear the bound text area
+          tempCanvasContext.clearRect(
+            -boundTextElement.width / 2,
+            -boundTextElement.height / 2,
+            boundTextElement.width,
+            boundTextElement.height,
+          )
+          context.scale(1 / appState.exportScale, 1 / appState.exportScale)
+          context.drawImage(
+            tempCanvas,
+            -tempCanvas.width / 2,
+            -tempCanvas.height / 2,
+            tempCanvas.width,
+            tempCanvas.height,
+          )
+        } else {
+          context.rotate(element.angle)
+          context.translate(-shiftX, -shiftY)
+          drawElementOnCanvas(element, rc, context, renderConfig)
+        }
+
+        context.restore()
+        // not exporting → optimized rendering (cache & render from element
+        // canvases)
       } else {
-        context.rotate(element.angle)
-        context.translate(-shiftX, -shiftY)
-        drawElementOnCanvas(element, rc, context, renderConfig)
+        const elementWithCanvas = generateElementWithCanvas(
+          element,
+          renderConfig,
+        )
+        drawElementFromCanvas(elementWithCanvas, rc, context, renderConfig)
       }
-
-      context.restore()
-      // not exporting → optimized rendering (cache & render from element
-      // canvases)
-    } else {
-      const elementWithCanvas = generateElementWithCanvas(
-        element,
-        renderConfig,
-      )
-      drawElementFromCanvas(elementWithCanvas, rc, context, renderConfig)
+      break
     }
-    break
-  }
-  default: {
-    // @ts-ignore
-    throw new Error(`Unimplemented type ${ element.type }`)
-  }
+    default: {
+      // @ts-ignore
+      throw new Error(`Unimplemented type ${ element.type }`)
+    }
   }
 }
 
@@ -1047,86 +1043,86 @@ export const renderElementToSvg = (
   }
 
   switch (element.type) {
-  case 'selection': {
-    // Since this is used only during editing experience, which is canvas based,
-    // this should not happen
-    throw new Error('Selection rendering is not supported for SVG')
-  }
-  case 'rectangle':
-  case 'diamond':
-  case 'ellipse': {
-    generateElementShape(element, generator)
-    const node = roughSVGDrawWithPrecision(
-      rsvg,
+    case 'selection': {
+      // Since this is used only during editing experience, which is canvas based,
+      // this should not happen
+      throw new Error('Selection rendering is not supported for SVG')
+    }
+    case 'rectangle':
+    case 'diamond':
+    case 'ellipse': {
+      generateElementShape(element, generator)
+      const node = roughSVGDrawWithPrecision(
+        rsvg,
         getShapeForElement(element)!,
         MAX_DECIMALS_FOR_SVG_EXPORT,
-    )
-    const opacity = element.opacity / 100
-    if (opacity !== 1) {
-      node.setAttribute('stroke-opacity', `${ opacity }`)
-      node.setAttribute('fill-opacity', `${ opacity }`)
+      )
+      const opacity = element.opacity / 100
+      if (opacity !== 1) {
+        node.setAttribute('stroke-opacity', `${ opacity }`)
+        node.setAttribute('fill-opacity', `${ opacity }`)
+      }
+      node.setAttribute('stroke-linecap', 'round')
+      node.setAttribute(
+        'transform',
+        `translate(${ offsetX || 0 } ${ offsetY || 0
+        }) rotate(${ degree } ${ cx } ${ cy })`,
+      )
+      root.appendChild(node)
+      break
     }
-    node.setAttribute('stroke-linecap', 'round')
-    node.setAttribute(
-      'transform',
-      `translate(${ offsetX || 0 } ${ offsetY || 0
-      }) rotate(${ degree } ${ cx } ${ cy })`,
-    )
-    root.appendChild(node)
-    break
-  }
-  case 'line':
-  case 'arrow': {
-    const boundText = getBoundTextElement(element)
-    const maskPath = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'mask')
-    if (boundText) {
-      maskPath.setAttribute('id', `mask-${ element.id }`)
-      const maskRectVisible = svgRoot.ownerDocument!.createElementNS(
-        SVG_NS,
-        'rect',
-      )
-      offsetX = offsetX || 0
-      offsetY = offsetY || 0
-      maskRectVisible.setAttribute('x', '0')
-      maskRectVisible.setAttribute('y', '0')
-      maskRectVisible.setAttribute('fill', '#fff')
-      maskRectVisible.setAttribute(
-        'width',
-        `${ element.width + 100 + offsetX }`,
-      )
-      maskRectVisible.setAttribute(
-        'height',
-        `${ element.height + 100 + offsetY }`,
-      )
+    case 'line':
+    case 'arrow': {
+      const boundText = getBoundTextElement(element)
+      const maskPath = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'mask')
+      if (boundText) {
+        maskPath.setAttribute('id', `mask-${ element.id }`)
+        const maskRectVisible = svgRoot.ownerDocument!.createElementNS(
+          SVG_NS,
+          'rect',
+        )
+        offsetX = offsetX || 0
+        offsetY = offsetY || 0
+        maskRectVisible.setAttribute('x', '0')
+        maskRectVisible.setAttribute('y', '0')
+        maskRectVisible.setAttribute('fill', '#fff')
+        maskRectVisible.setAttribute(
+          'width',
+          `${ element.width + 100 + offsetX }`,
+        )
+        maskRectVisible.setAttribute(
+          'height',
+          `${ element.height + 100 + offsetY }`,
+        )
 
-      maskPath.appendChild(maskRectVisible)
-      const maskRectInvisible = svgRoot.ownerDocument!.createElementNS(
-        SVG_NS,
-        'rect',
-      )
-      const boundTextCoords = LinearElementEditor.getBoundTextElementPosition(
-        element,
-        boundText,
-      )
+        maskPath.appendChild(maskRectVisible)
+        const maskRectInvisible = svgRoot.ownerDocument!.createElementNS(
+          SVG_NS,
+          'rect',
+        )
+        const boundTextCoords = LinearElementEditor.getBoundTextElementPosition(
+          element,
+          boundText,
+        )
 
-      const maskX = offsetX + boundTextCoords.x - element.x
-      const maskY = offsetY + boundTextCoords.y - element.y
+        const maskX = offsetX + boundTextCoords.x - element.x
+        const maskY = offsetY + boundTextCoords.y - element.y
 
-      maskRectInvisible.setAttribute('x', maskX.toString())
-      maskRectInvisible.setAttribute('y', maskY.toString())
-      maskRectInvisible.setAttribute('fill', '#000')
-      maskRectInvisible.setAttribute('width', `${ boundText.width }`)
-      maskRectInvisible.setAttribute('height', `${ boundText.height }`)
-      maskRectInvisible.setAttribute('opacity', '1')
-      maskPath.appendChild(maskRectInvisible)
-    }
-    generateElementShape(element, generator)
-    const group = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'g')
-    if (boundText) {
-      group.setAttribute('mask', `url(#mask-${ element.id })`)
-    }
-    const opacity = element.opacity / 100
-    group.setAttribute('stroke-linecap', 'round')
+        maskRectInvisible.setAttribute('x', maskX.toString())
+        maskRectInvisible.setAttribute('y', maskY.toString())
+        maskRectInvisible.setAttribute('fill', '#000')
+        maskRectInvisible.setAttribute('width', `${ boundText.width }`)
+        maskRectInvisible.setAttribute('height', `${ boundText.height }`)
+        maskRectInvisible.setAttribute('opacity', '1')
+        maskPath.appendChild(maskRectInvisible)
+      }
+      generateElementShape(element, generator)
+      const group = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'g')
+      if (boundText) {
+        group.setAttribute('mask', `url(#mask-${ element.id })`)
+      }
+      const opacity = element.opacity / 100
+      group.setAttribute('stroke-linecap', 'round')
 
       getShapeForElement(element)!.forEach((shape) => {
         const node = roughSVGDrawWithPrecision(
@@ -1155,142 +1151,142 @@ export const renderElementToSvg = (
       root.appendChild(group)
       root.append(maskPath)
       break
-  }
-  case 'freedraw': {
-    generateElementShape(element, generator)
-    generateFreeDrawShape(element)
-    const opacity = element.opacity / 100
-    const shape = getShapeForElement(element)
-    const node = shape
-      ? roughSVGDrawWithPrecision(rsvg, shape, MAX_DECIMALS_FOR_SVG_EXPORT)
-      : svgRoot.ownerDocument!.createElementNS(SVG_NS, 'g')
-    if (opacity !== 1) {
-      node.setAttribute('stroke-opacity', `${ opacity }`)
-      node.setAttribute('fill-opacity', `${ opacity }`)
     }
-    node.setAttribute(
-      'transform',
-      `translate(${ offsetX || 0 } ${ offsetY || 0
-      }) rotate(${ degree } ${ cx } ${ cy })`,
-    )
-    node.setAttribute('stroke', 'none')
-    const path = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'path')
-    path.setAttribute('fill', element.strokeColor)
-    path.setAttribute('d', getFreeDrawSvgPath(element))
-    node.appendChild(path)
-    root.appendChild(node)
-    break
-  }
-  case 'image': {
-    const width = Math.round(element.width)
-    const height = Math.round(element.height)
-    const fileData =
-        isInitializedImageElement(element) && files[element.fileId]
-    if (fileData) {
-      const symbolId = `image-${ fileData.id }`
-      let symbol = svgRoot.querySelector(`#${ symbolId }`)
-      if (!symbol) {
-        symbol = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'symbol')
-        symbol.id = symbolId
-
-        const image = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'image')
-
-        image.setAttribute('width', '100%')
-        image.setAttribute('height', '100%')
-        image.setAttribute('href', fileData.dataURL)
-
-        symbol.appendChild(image)
-
-        root.prepend(symbol)
-      }
-
-      const use = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'use')
-      use.setAttribute('href', `#${ symbolId }`)
-
-      // in dark theme, revert the image color filter
-      if (exportWithDarkMode && fileData.mimeType !== MIME_TYPES.svg) {
-        use.setAttribute('filter', IMAGE_INVERT_FILTER)
-      }
-
-      use.setAttribute('width', `${ width }`)
-      use.setAttribute('height', `${ height }`)
-
-      // We first apply `scale` transforms (horizontal/vertical mirroring)
-      // on the <use> element, then apply translation and rotation
-      // on the <g> element which wraps the <use>.
-      // Doing this separately is a quick hack to to work around compositing
-      // the transformations correctly (the transform-origin was not being
-      // applied correctly).
-      if (element.scale[0] !== 1 || element.scale[1] !== 1) {
-        const translateX = element.scale[0] !== 1 ? -width : 0
-        const translateY = element.scale[1] !== 1 ? -height : 0
-        use.setAttribute(
-          'transform',
-          `scale(${ element.scale[0] }, ${ element.scale[1] }) translate(${ translateX } ${ translateY })`,
-        )
-      }
-
-      const g = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'g')
-      g.appendChild(use)
-      g.setAttribute(
-        'transform',
-        `translate(${ offsetX || 0 } ${ offsetY || 0
-        }) rotate(${ degree } ${ cx } ${ cy })`,
-      )
-
-      root.appendChild(g)
-    }
-    break
-  }
-  default: {
-    if (isTextElement(element)) {
+    case 'freedraw': {
+      generateElementShape(element, generator)
+      generateFreeDrawShape(element)
       const opacity = element.opacity / 100
-      const node = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'g')
+      const shape = getShapeForElement(element)
+      const node = shape
+        ? roughSVGDrawWithPrecision(rsvg, shape, MAX_DECIMALS_FOR_SVG_EXPORT)
+        : svgRoot.ownerDocument!.createElementNS(SVG_NS, 'g')
       if (opacity !== 1) {
         node.setAttribute('stroke-opacity', `${ opacity }`)
         node.setAttribute('fill-opacity', `${ opacity }`)
       }
-
       node.setAttribute(
         'transform',
         `translate(${ offsetX || 0 } ${ offsetY || 0
         }) rotate(${ degree } ${ cx } ${ cy })`,
       )
-      const lines = element.text.replace(/\r\n?/g, '\n').split('\n')
-      const lineHeight = element.height / lines.length
-      const verticalOffset = element.height - element.baseline
-      const horizontalOffset =
+      node.setAttribute('stroke', 'none')
+      const path = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'path')
+      path.setAttribute('fill', element.strokeColor)
+      path.setAttribute('d', getFreeDrawSvgPath(element))
+      node.appendChild(path)
+      root.appendChild(node)
+      break
+    }
+    case 'image': {
+      const width = Math.round(element.width)
+      const height = Math.round(element.height)
+      const fileData =
+        isInitializedImageElement(element) && files[element.fileId]
+      if (fileData) {
+        const symbolId = `image-${ fileData.id }`
+        let symbol = svgRoot.querySelector(`#${ symbolId }`)
+        if (!symbol) {
+          symbol = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'symbol')
+          symbol.id = symbolId
+
+          const image = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'image')
+
+          image.setAttribute('width', '100%')
+          image.setAttribute('height', '100%')
+          image.setAttribute('href', fileData.dataURL)
+
+          symbol.appendChild(image)
+
+          root.prepend(symbol)
+        }
+
+        const use = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'use')
+        use.setAttribute('href', `#${ symbolId }`)
+
+        // in dark theme, revert the image color filter
+        if (exportWithDarkMode && fileData.mimeType !== MIME_TYPES.svg) {
+          use.setAttribute('filter', IMAGE_INVERT_FILTER)
+        }
+
+        use.setAttribute('width', `${ width }`)
+        use.setAttribute('height', `${ height }`)
+
+        // We first apply `scale` transforms (horizontal/vertical mirroring)
+        // on the <use> element, then apply translation and rotation
+        // on the <g> element which wraps the <use>.
+        // Doing this separately is a quick hack to to work around compositing
+        // the transformations correctly (the transform-origin was not being
+        // applied correctly).
+        if (element.scale[0] !== 1 || element.scale[1] !== 1) {
+          const translateX = element.scale[0] !== 1 ? -width : 0
+          const translateY = element.scale[1] !== 1 ? -height : 0
+          use.setAttribute(
+            'transform',
+            `scale(${ element.scale[0] }, ${ element.scale[1] }) translate(${ translateX } ${ translateY })`,
+          )
+        }
+
+        const g = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'g')
+        g.appendChild(use)
+        g.setAttribute(
+          'transform',
+          `translate(${ offsetX || 0 } ${ offsetY || 0
+          }) rotate(${ degree } ${ cx } ${ cy })`,
+        )
+
+        root.appendChild(g)
+      }
+      break
+    }
+    default: {
+      if (isTextElement(element)) {
+        const opacity = element.opacity / 100
+        const node = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'g')
+        if (opacity !== 1) {
+          node.setAttribute('stroke-opacity', `${ opacity }`)
+          node.setAttribute('fill-opacity', `${ opacity }`)
+        }
+
+        node.setAttribute(
+          'transform',
+          `translate(${ offsetX || 0 } ${ offsetY || 0
+          }) rotate(${ degree } ${ cx } ${ cy })`,
+        )
+        const lines = element.text.replace(/\r\n?/g, '\n').split('\n')
+        const lineHeight = element.height / lines.length
+        const verticalOffset = element.height - element.baseline
+        const horizontalOffset =
           element.textAlign === 'center'
             ? element.width / 2
             : element.textAlign === 'right'
               ? element.width
               : 0
-      const direction = isRTL(element.text) ? 'rtl' : 'ltr'
-      const textAnchor =
+        const direction = isRTL(element.text) ? 'rtl' : 'ltr'
+        const textAnchor =
           element.textAlign === 'center'
             ? 'middle'
             : element.textAlign === 'right' || direction === 'rtl'
               ? 'end'
               : 'start'
-      for (let i = 0; i < lines.length; i++) {
-        const text = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'text')
-        text.textContent = lines[i]
-        text.setAttribute('x', `${ horizontalOffset }`)
-        text.setAttribute('y', `${ (i + 1) * lineHeight - verticalOffset }`)
-        text.setAttribute('font-family', getFontFamilyString(element))
-        text.setAttribute('font-size', `${ element.fontSize }px`)
-        text.setAttribute('fill', element.strokeColor)
-        text.setAttribute('text-anchor', textAnchor)
-        text.setAttribute('style', 'white-space: pre;')
-        text.setAttribute('direction', direction)
-        node.appendChild(text)
+        for (let i = 0; i < lines.length; i++) {
+          const text = svgRoot.ownerDocument!.createElementNS(SVG_NS, 'text')
+          text.textContent = lines[i]
+          text.setAttribute('x', `${ horizontalOffset }`)
+          text.setAttribute('y', `${ (i + 1) * lineHeight - verticalOffset }`)
+          text.setAttribute('font-family', getFontFamilyString(element))
+          text.setAttribute('font-size', `${ element.fontSize }px`)
+          text.setAttribute('fill', element.strokeColor)
+          text.setAttribute('text-anchor', textAnchor)
+          text.setAttribute('style', 'white-space: pre;')
+          text.setAttribute('direction', direction)
+          node.appendChild(text)
+        }
+        root.appendChild(node)
+      } else {
+        // @ts-ignore
+        throw new Error(`Unimplemented type ${ element.type }`)
       }
-      root.appendChild(node)
-    } else {
-      // @ts-ignore
-      throw new Error(`Unimplemented type ${ element.type }`)
     }
-  }
   }
 }
 

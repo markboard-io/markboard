@@ -1,3 +1,4 @@
+import React from 'react'
 import { useRef, useState, useEffect, useCallback, RefObject, forwardRef } from 'react'
 import Library, { distributeLibraryItemsOnSquareGrid, libraryItemsAtom } from '../data/library'
 import { t } from '../i18n'

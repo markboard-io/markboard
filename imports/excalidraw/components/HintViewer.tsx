@@ -1,3 +1,4 @@
+import React from 'react'
 import { t } from '../i18n'
 import { NonDeletedExcalidrawElement } from '../element/types'
 import { getSelectedElements } from '../scene'

@@ -1,3 +1,4 @@
+import React from 'react'
 import { useCallback, useEffect, useRef } from 'react'
 import { CloseIcon } from './icons'
 import './Toast.scss'

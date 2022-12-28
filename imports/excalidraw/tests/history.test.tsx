@@ -1,3 +1,4 @@
+import React from 'react'
 import { assertSelectedElements, render } from './test-utils'
 import ExcalidrawApp from '../excalidraw-app'
 import { Keyboard, Pointer, UI } from './helpers/ui'

@@ -1,3 +1,4 @@
+import React from 'react'
 import oc from 'open-color'
 import { useEffect, useRef } from 'react'
 import { t } from '../i18n'
@@ -29,7 +30,8 @@ const SingleLibraryItem = ({
     if (!node) {
       return
     }
-    (async () => {
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
+    ;(async () => {
       const svg = await exportToSvg({
         elements: libItem.elements,
         appState: {

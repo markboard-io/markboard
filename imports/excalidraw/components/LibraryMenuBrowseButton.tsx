@@ -1,3 +1,4 @@
+import React from 'react'
 import { VERSIONS } from '../constants'
 
 import { t } from '../i18n'

@@ -1,3 +1,4 @@
+import React from 'react'
 import { HelpIcon } from './icons'
 
 type HelpButtonProps = {

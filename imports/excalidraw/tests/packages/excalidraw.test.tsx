@@ -1,3 +1,4 @@
+import React from 'react'
 import { fireEvent, GlobalTestState, render } from '../test-utils'
 import { Excalidraw, Footer } from '../../packages/excalidraw/index'
 import { queryByText, queryByTestId } from '@testing-library/react'
@@ -191,7 +192,7 @@ describe('<Excalidraw/>', () => {
         expect(queryByTestId(container, 'json-export-button')).toBeNull()
       })
 
-      it('should hide \'Save as image\' button when \'saveAsImage\' is false', async () => {
+      it("should hide 'Save as image' button when 'saveAsImage' is false", async () => {
         const { container } = await render(
           <Excalidraw UIOptions={{ canvasActions: { saveAsImage: false } }} />
         )

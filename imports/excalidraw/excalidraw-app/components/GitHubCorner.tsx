@@ -1,5 +1,5 @@
-import oc from 'open-color'
 import React from 'react'
+import oc from 'open-color'
 import { THEME } from '../../constants'
 import { Theme } from '../../element/types'
 
@@ -40,3 +40,5 @@ export const GitHubCorner = React.memo(({ theme, dir }: { theme: Theme; dir: str
     </a>
   </svg>
 ))
+
+GitHubCorner.displayName = 'GitHubCorner'

@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactDOM from 'react-dom'
 import ExcalidrawApp from '../excalidraw-app'
 import { GlobalTestState, render, screen } from '../tests/test-utils'
@@ -528,7 +529,7 @@ describe('textWysiwyg', () => {
       expect(rectangle.boundElements).toStrictEqual([{ id: text.id, type: 'text' }])
     })
 
-    it('shouldn\'t bind to non-text-bindable containers', async () => {
+    it("shouldn't bind to non-text-bindable containers", async () => {
       const freedraw = API.createElement({
         type: 'freedraw',
         width: 100,
@@ -556,7 +557,6 @@ describe('textWysiwyg', () => {
       expect(h.elements[1].type).toBe('text')
       expect((h.elements[1] as ExcalidrawTextElement).containerId).toBe(null)
     })
-
     ;['freedraw', 'line'].forEach((type: any) => {
       it(`shouldn't create text element when pressing 'Enter' key on ${type} `, async () => {
         h.elements = []
@@ -570,7 +570,7 @@ describe('textWysiwyg', () => {
       })
     })
 
-    it('should\'nt bind text to container when not double clicked on center', async () => {
+    it("should'nt bind text to container when not double clicked on center", async () => {
       expect(h.elements.length).toBe(1)
       expect(h.elements[0].id).toBe(rectangle.id)
 
@@ -772,7 +772,7 @@ describe('textWysiwyg', () => {
       expect((h.elements[1] as ExcalidrawTextElement).containerId).toEqual(null)
     })
 
-    it('shouldn\'t bind to container if container has bound text', async () => {
+    it("shouldn't bind to container if container has bound text", async () => {
       expect(h.elements.length).toBe(1)
 
       Keyboard.keyPress(KEYS.ENTER)

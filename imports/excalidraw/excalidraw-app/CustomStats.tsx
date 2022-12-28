@@ -1,3 +1,4 @@
+import React from 'react'
 import { useEffect, useState } from 'react'
 import { debounce, getVersion, nFormatter } from '../utils'
 import { getElementsStorageSize, getTotalStorageSize } from './data/localStorage'

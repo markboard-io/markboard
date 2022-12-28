@@ -39,7 +39,7 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
     onLinkOpen,
     onPointerDown,
     onScrollChange,
-    children,
+    children
   } = props
 
   const canvasActions = props.UIOptions?.canvasActions
@@ -48,20 +48,16 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
     ...props.UIOptions,
     canvasActions: {
       ...DEFAULT_UI_OPTIONS.canvasActions,
-      ...canvasActions,
-    },
+      ...canvasActions
+    }
   }
 
   if (canvasActions?.export) {
     UIOptions.canvasActions.export.saveFileToDisk =
-      canvasActions.export?.saveFileToDisk ??
-      DEFAULT_UI_OPTIONS.canvasActions.export.saveFileToDisk
+      canvasActions.export?.saveFileToDisk ?? DEFAULT_UI_OPTIONS.canvasActions.export.saveFileToDisk
   }
 
-  if (
-    UIOptions.canvasActions.toggleTheme === null &&
-    typeof theme === 'undefined'
-  ) {
+  if (UIOptions.canvasActions.toggleTheme === null && typeof theme === 'undefined') {
     UIOptions.canvasActions.toggleTheme = true
   }
 
@@ -75,7 +71,7 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
     }
 
     document.addEventListener('touchmove', handleTouchMove, {
-      passive: false,
+      passive: false
     })
 
     return () => {
@@ -121,22 +117,11 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
   )
 }
 
-type PublicExcalidrawProps = Omit<ExcalidrawProps, 'forwardedRef'>;
+type PublicExcalidrawProps = Omit<ExcalidrawProps, 'forwardedRef'>
 
-const areEqual = (
-  prevProps: PublicExcalidrawProps,
-  nextProps: PublicExcalidrawProps,
-) => {
-  const {
-    initialData: prevInitialData,
-    UIOptions: prevUIOptions = {},
-    ...prev
-  } = prevProps
-  const {
-    initialData: nextInitialData,
-    UIOptions: nextUIOptions = {},
-    ...next
-  } = nextProps
+const areEqual = (prevProps: PublicExcalidrawProps, nextProps: PublicExcalidrawProps) => {
+  const { initialData: prevInitialData, UIOptions: prevUIOptions = {}, ...prev } = prevProps
+  const { initialData: nextInitialData, UIOptions: nextUIOptions = {}, ...next } = nextProps
 
   // comparing UIOptions
   const prevUIOptionsKeys = Object.keys(prevUIOptions) as (keyof Partial<
@@ -150,12 +135,12 @@ const areEqual = (
     return false
   }
 
-  const isUIOptionsSame = prevUIOptionsKeys.every((key) => {
+  const isUIOptionsSame = prevUIOptionsKeys.every(key => {
     if (key === 'canvasActions') {
-      const canvasOptionKeys = Object.keys(
-        prevUIOptions.canvasActions!,
-      ) as (keyof Partial<typeof DEFAULT_UI_OPTIONS.canvasActions>)[]
-      canvasOptionKeys.every((key) => {
+      const canvasOptionKeys = Object.keys(prevUIOptions.canvasActions!) as (keyof Partial<
+        typeof DEFAULT_UI_OPTIONS.canvasActions
+      >)[]
+      canvasOptionKeys.every(key => {
         if (
           key === 'export' &&
           prevUIOptions?.canvasActions?.export &&
@@ -166,10 +151,7 @@ const areEqual = (
             nextUIOptions.canvasActions.export.saveFileToDisk
           )
         }
-        return (
-          prevUIOptions?.canvasActions?.[key] ===
-          nextUIOptions?.canvasActions?.[key]
-        )
+        return prevUIOptions?.canvasActions?.[key] === nextUIOptions?.canvasActions?.[key]
       })
     }
     return true
@@ -180,30 +162,21 @@ const areEqual = (
   return (
     isUIOptionsSame &&
     prevKeys.length === nextKeys.length &&
-    prevKeys.every((key) => prev[key] === next[key])
+    prevKeys.every(key => prev[key] === next[key])
   )
 }
 
-const forwardedRefComp = forwardRef<
-  ExcalidrawAPIRefValue,
-  PublicExcalidrawProps
->((props, ref) => <ExcalidrawBase {...props} excalidrawRef={ref} />)
+const forwardedRefComp = forwardRef<ExcalidrawAPIRefValue, PublicExcalidrawProps>((props, ref) => (
+  <ExcalidrawBase {...props} excalidrawRef={ref} />
+))
+forwardedRefComp.displayName = 'Excalidraw'
 
 export const Excalidraw = React.memo(forwardedRefComp, areEqual)
 Excalidraw.displayName = 'Excalidraw'
 
-export {
-  getSceneVersion,
-  isInvisiblySmallElement,
-  getNonDeletedElements,
-} from '../../element'
+export { getSceneVersion, isInvisiblySmallElement, getNonDeletedElements } from '../../element'
 export { defaultLang, languages } from '../../i18n'
-export {
-  restore,
-  restoreAppState,
-  restoreElements,
-  restoreLibraryItems,
-} from '../../data/restore'
+export { restore, restoreAppState, restoreElements, restoreLibraryItems } from '../../data/restore'
 export {
   exportToCanvas,
   exportToBlob,
@@ -215,27 +188,17 @@ export {
   loadSceneOrLibraryFromBlob,
   getFreeDrawSvgPath,
   exportToClipboard,
-  mergeLibraryItems,
+  mergeLibraryItems
 } from '../../packages/utils'
 export { isLinearElement } from '../../element/typeChecks'
 
 export { FONT_FAMILY, THEME, MIME_TYPES } from '../../constants'
 
-export {
-  mutateElement,
-  newElementWith,
-  bumpVersion,
-} from '../../element/mutateElement'
+export { mutateElement, newElementWith, bumpVersion } from '../../element/mutateElement'
 
-export {
-  parseLibraryTokensFromUrl,
-  useHandleLibrary,
-} from '../../data/library'
+export { parseLibraryTokensFromUrl, useHandleLibrary } from '../../data/library'
 
-export {
-  sceneCoordsToViewportCoords,
-  viewportCoordsToSceneCoords,
-} from '../../utils'
+export { sceneCoordsToViewportCoords, viewportCoordsToSceneCoords } from '../../utils'
 
 export { Sidebar } from '../../components/Sidebar/Sidebar'
 export { Footer }

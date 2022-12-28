@@ -156,17 +156,17 @@ const restoreElement = (
   refreshDimensions = false,
 ): typeof element | null => {
   switch (element.type) {
-  case 'text':
-    let fontSize = element.fontSize
-    let fontFamily = element.fontFamily
-    if ('font' in element) {
-      const [fontPx, _fontFamily]: [string, string] = (
+    case 'text':
+      let fontSize = element.fontSize
+      let fontFamily = element.fontFamily
+      if ('font' in element) {
+        const [fontPx, _fontFamily]: [string, string] = (
           element as any
-      ).font.split(' ')
-      fontSize = parseInt(fontPx, 10)
-      fontFamily = getFontFamilyByName(_fontFamily)
-    }
-    element = restoreElementWithProperties(element, {
+        ).font.split(' ')
+        fontSize = parseInt(fontPx, 10)
+        fontFamily = getFontFamilyByName(_fontFamily)
+      }
+      element = restoreElementWithProperties(element, {
       fontSize,
       fontFamily,
       text: element.text ?? '',
@@ -177,37 +177,37 @@ const restoreElement = (
       originalText: element.originalText || element.text,
     })
 
-    if (refreshDimensions) {
-      element = { ...element, ...refreshTextDimensions(element) }
-    }
-    return element
-  case 'freedraw': {
-    return restoreElementWithProperties(element, {
+      if (refreshDimensions) {
+        element = { ...element, ...refreshTextDimensions(element) }
+      }
+      return element
+    case 'freedraw': {
+      return restoreElementWithProperties(element, {
       points: element.points,
       lastCommittedPoint: null,
       simulatePressure: element.simulatePressure,
       pressures: element.pressures,
     })
-  }
-  case 'image':
-    return restoreElementWithProperties(element, {
+    }
+    case 'image':
+      return restoreElementWithProperties(element, {
       status: element.status || 'pending',
       fileId: element.fileId,
       scale: element.scale || [1, 1],
     })
-  case 'line':
+    case 'line':
     // @ts-ignore LEGACY type
     // eslint-disable-next-line no-fallthrough
-  case 'draw':
-  case 'arrow': {
-    const {
-      startArrowhead = null,
-      endArrowhead = element.type === 'arrow' ? 'arrow' : null,
-    } = element
+    case 'draw':
+    case 'arrow': {
+      const {
+        startArrowhead = null,
+        endArrowhead = element.type === 'arrow' ? 'arrow' : null,
+      } = element
 
-    let x = element.x
-    let y = element.y
-    let points = // migrate old arrow model to new one
+      let x = element.x
+      let y = element.y
+      let points = // migrate old arrow model to new one
         !Array.isArray(element.points) || element.points.length < 2
           ? [
             [0, 0],
@@ -215,11 +215,11 @@ const restoreElement = (
           ]
           : element.points
 
-    if (points[0][0] !== 0 || points[0][1] !== 0) {
-      ({ points, x, y } = LinearElementEditor.getNormalizedPoints(element))
-    }
+      if (points[0][0] !== 0 || points[0][1] !== 0) {
+        ({ points, x, y } = LinearElementEditor.getNormalizedPoints(element))
+      }
 
-    return restoreElementWithProperties(element, {
+      return restoreElementWithProperties(element, {
       type:
           (element.type as ExcalidrawElement['type'] | 'draw') === 'draw'
             ? 'line'
@@ -233,15 +233,15 @@ const restoreElement = (
       x,
       y,
     })
-  }
+    }
 
-  // generic elements
-  case 'ellipse':
-    return restoreElementWithProperties(element, {})
-  case 'rectangle':
-    return restoreElementWithProperties(element, {})
-  case 'diamond':
-    return restoreElementWithProperties(element, {})
+    // generic elements
+    case 'ellipse':
+      return restoreElementWithProperties(element, {})
+    case 'rectangle':
+      return restoreElementWithProperties(element, {})
+    case 'diamond':
+      return restoreElementWithProperties(element, {})
 
     // Don't use default case so as to catch a missing an element type case.
     // We also don't want to throw, but instead return void so we filter

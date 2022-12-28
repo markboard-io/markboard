@@ -166,59 +166,59 @@ export class API {
       locked: rest.locked ?? false,
     }
     switch (type) {
-    case 'rectangle':
-    case 'diamond':
-    case 'ellipse':
-      element = newElement({
-        type: type as 'rectangle' | 'diamond' | 'ellipse',
-        width,
-        height,
-        ...base,
-      })
-      break
-    case 'text':
-      element = newTextElement({
-        ...base,
-        text: rest.text || 'test',
-        fontSize: rest.fontSize ?? appState.currentItemFontSize,
-        fontFamily: rest.fontFamily ?? appState.currentItemFontFamily,
-        textAlign: rest.textAlign ?? appState.currentItemTextAlign,
-        verticalAlign: rest.verticalAlign ?? DEFAULT_VERTICAL_ALIGN,
-        containerId: rest.containerId ?? undefined,
-      })
-      element.width = width
-      element.height = height
-      break
-    case 'freedraw':
-      element = newFreeDrawElement({
-        type: type as 'freedraw',
-        simulatePressure: true,
-        ...base,
-      })
-      break
-    case 'arrow':
-    case 'line':
-      element = newLinearElement({
-        ...base,
-        width,
-        height,
-        type,
-        startArrowhead: null,
-        endArrowhead: null,
-        points: rest.points ?? [],
-      })
-      break
-    case 'image':
-      element = newImageElement({
-        ...base,
-        width,
-        height,
-        type,
-        fileId: (rest.fileId as string as FileId) ?? null,
-        status: rest.status || 'saved',
-        scale: rest.scale || [1, 1],
-      })
-      break
+      case 'rectangle':
+      case 'diamond':
+      case 'ellipse':
+        element = newElement({
+          type: type as 'rectangle' | 'diamond' | 'ellipse',
+          width,
+          height,
+          ...base,
+        })
+        break
+      case 'text':
+        element = newTextElement({
+          ...base,
+          text: rest.text || 'test',
+          fontSize: rest.fontSize ?? appState.currentItemFontSize,
+          fontFamily: rest.fontFamily ?? appState.currentItemFontFamily,
+          textAlign: rest.textAlign ?? appState.currentItemTextAlign,
+          verticalAlign: rest.verticalAlign ?? DEFAULT_VERTICAL_ALIGN,
+          containerId: rest.containerId ?? undefined,
+        })
+        element.width = width
+        element.height = height
+        break
+      case 'freedraw':
+        element = newFreeDrawElement({
+          type: type as 'freedraw',
+          simulatePressure: true,
+          ...base,
+        })
+        break
+      case 'arrow':
+      case 'line':
+        element = newLinearElement({
+          ...base,
+          width,
+          height,
+          type,
+          startArrowhead: null,
+          endArrowhead: null,
+          points: rest.points ?? [],
+        })
+        break
+      case 'image':
+        element = newImageElement({
+          ...base,
+          width,
+          height,
+          type,
+          fileId: (rest.fileId as string as FileId) ?? null,
+          status: rest.status || 'saved',
+          scale: rest.scale || [1, 1],
+        })
+        break
     }
     if (id) {
       element.id = id

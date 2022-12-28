@@ -709,8 +709,7 @@ export const _renderScene = ({
       idleState = hasEmojiSupport ? '💤' : ` (${ UserIdleState.IDLE })`
     }
 
-    const usernameAndIdleState = `${ username || '' }${ idleState ? ` ${ idleState }` : ''
-    }`
+    const usernameAndIdleState = `${ username || '' }${ idleState ? ` ${ idleState }` : '' }`
 
     if (!isOutOfBounds && usernameAndIdleState) {
       const offsetX = x + width
@@ -967,43 +966,43 @@ const renderBindingHighlightForBindableElement = (
   const padding = strokeOffset / 2 + threshold / 2
 
   switch (element.type) {
-  case 'rectangle':
-  case 'text':
-  case 'image':
-    strokeRectWithRotation(
-      context,
-      x1 - padding,
-      y1 - padding,
-      width + padding * 2,
-      height + padding * 2,
-      x1 + width / 2,
-      y1 + height / 2,
-      element.angle,
-    )
-    break
-  case 'diamond':
-    const side = Math.hypot(width, height)
-    const wPadding = (padding * side) / height
-    const hPadding = (padding * side) / width
-    strokeDiamondWithRotation(
-      context,
-      width + wPadding * 2,
-      height + hPadding * 2,
-      x1 + width / 2,
-      y1 + height / 2,
-      element.angle,
-    )
-    break
-  case 'ellipse':
-    strokeEllipseWithRotation(
-      context,
-      width + padding * 2,
-      height + padding * 2,
-      x1 + width / 2,
-      y1 + height / 2,
-      element.angle,
-    )
-    break
+    case 'rectangle':
+    case 'text':
+    case 'image':
+      strokeRectWithRotation(
+        context,
+        x1 - padding,
+        y1 - padding,
+        width + padding * 2,
+        height + padding * 2,
+        x1 + width / 2,
+        y1 + height / 2,
+        element.angle,
+      )
+      break
+    case 'diamond':
+      const side = Math.hypot(width, height)
+      const wPadding = (padding * side) / height
+      const hPadding = (padding * side) / width
+      strokeDiamondWithRotation(
+        context,
+        width + wPadding * 2,
+        height + hPadding * 2,
+        x1 + width / 2,
+        y1 + height / 2,
+        element.angle,
+      )
+      break
+    case 'ellipse':
+      strokeEllipseWithRotation(
+        context,
+        width + padding * 2,
+        height + padding * 2,
+        x1 + width / 2,
+        y1 + height / 2,
+        element.angle,
+      )
+      break
   }
 }
 

@@ -1,3 +1,4 @@
+import React from 'react'
 import { DistributeHorizontallyIcon, DistributeVerticallyIcon } from '../components/icons'
 import { ToolButton } from '../components/ToolButton'
 import { distributeElements, Distribution } from '../distribute'

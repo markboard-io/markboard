@@ -1,3 +1,4 @@
+import React from 'react'
 import { queryByTestId, render, waitFor } from './test-utils'
 import ExcalidrawApp from '../excalidraw-app'
 import { API } from './helpers/api'
@@ -9,7 +10,7 @@ import { ExcalidrawTextElement } from '../element/types'
 const { h } = window
 
 describe('appState', () => {
-  it('drag&drop file doesn\'t reset non-persisted appState', async () => {
+  it("drag&drop file doesn't reset non-persisted appState", async () => {
     const defaultAppState = getDefaultAppState()
     const exportBackground = !defaultAppState.exportBackground
 

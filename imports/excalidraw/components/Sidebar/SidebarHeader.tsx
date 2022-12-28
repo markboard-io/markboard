@@ -1,3 +1,4 @@
+import React from 'react'
 import clsx from 'clsx'
 import { useContext } from 'react'
 import { t } from '../../i18n'

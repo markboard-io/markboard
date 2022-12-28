@@ -1,3 +1,4 @@
+import React from 'react'
 import polyfill from '../polyfill'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { useEffect, useRef, useState } from 'react'
@@ -181,11 +182,11 @@ const initializeScene = async (opts: {
   } else if (scene) {
     return isExternalScene && jsonBackendMatch
       ? {
-        scene,
-        isExternalScene,
-        id: jsonBackendMatch[1],
-        key: jsonBackendMatch[2]
-      }
+          scene,
+          isExternalScene,
+          id: jsonBackendMatch[1],
+          key: jsonBackendMatch[2]
+        }
       : { scene, isExternalScene: false }
   }
   return { scene: null, isExternalScene: false }

@@ -293,7 +293,7 @@ export class UI {
     return new Proxy(
       {},
       {
-        get(target, prop) {
+        get(_target, prop) {
           const currentElement = h.elements.find(
             (element) => element.id === origElement.id,
           ) as any

@@ -5,18 +5,18 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <div id="mySidebar" className={`sidebar ${open ? 'open' : ''}`}>
-        <button className="closebtn" onClick={() => setOpen(false)}>
+      <div id='mySidebar' className={`sidebar ${open ? 'open' : ''}`}>
+        <button className='closebtn' onClick={() => setOpen(false)}>
           x
         </button>
-        <div className="sidebar-links">
+        <div className='sidebar-links'>
           <button>Dummy Home</button>
           <button>Dummy About</button>{' '}
         </div>
       </div>
       <div className={`${open ? 'sidebar-open' : ''}`}>
         <button
-          className="openbtn"
+          className='openbtn'
           onClick={() => {
             setOpen(!open)
           }}

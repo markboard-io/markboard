@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactDOM from 'react-dom'
 import ExcalidrawApp from '../excalidraw-app'
 import { render } from '../tests/test-utils'
@@ -70,7 +71,7 @@ describe('element locking', () => {
     expect(lockedRectangle).toEqual(expect.objectContaining({ x: 0, y: 0 }))
   })
 
-  it('you can drag element that\'s below a locked element', () => {
+  it("you can drag element that's below a locked element", () => {
     const rectangle = API.createElement({
       type: 'rectangle',
       width: 100,
@@ -96,7 +97,7 @@ describe('element locking', () => {
     expect(API.getSelectedElement().id).toBe(rectangle.id)
   })
 
-  it('selectAll shouldn\'t select locked elements', () => {
+  it("selectAll shouldn't select locked elements", () => {
     h.elements = [
       API.createElement({ type: 'rectangle' }),
       API.createElement({ type: 'rectangle', locked: true })
@@ -316,7 +317,7 @@ describe('element locking', () => {
     ])
   })
 
-  it('bound text shouldn\'t be editable via double-click', () => {
+  it("bound text shouldn't be editable via double-click", () => {
     const container = API.createElement({
       type: 'rectangle',
       width: 100,
@@ -350,7 +351,7 @@ describe('element locking', () => {
     expect(h.state.editingElement?.id).toBe(h.elements[2].id)
   })
 
-  it('bound text shouldn\'t be editable via text tool', () => {
+  it("bound text shouldn't be editable via text tool", () => {
     const container = API.createElement({
       type: 'rectangle',
       width: 100,

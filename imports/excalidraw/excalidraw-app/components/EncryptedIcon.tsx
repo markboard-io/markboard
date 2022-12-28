@@ -1,3 +1,4 @@
+import React from 'react'
 import { shield } from '../../components/icons'
 import { Tooltip } from '../../components/Tooltip'
 import { t } from '../../i18n'

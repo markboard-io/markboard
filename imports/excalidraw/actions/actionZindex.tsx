@@ -24,7 +24,7 @@ export const actionSendBackward = register({
   contextItemLabel: 'labels.sendBackward',
   keyPriority: 40,
   keyTest: event => event[KEYS.CTRL_OR_CMD] && !event.shiftKey && event.code === CODES.BRACKET_LEFT,
-  PanelComponent: ({ updateData, appState }) => (
+  PanelComponent: ({ updateData, appState: _appState }) => (
     <button
       type='button'
       className='zIndexButton'
@@ -50,7 +50,7 @@ export const actionBringForward = register({
   keyPriority: 40,
   keyTest: event =>
     event[KEYS.CTRL_OR_CMD] && !event.shiftKey && event.code === CODES.BRACKET_RIGHT,
-  PanelComponent: ({ updateData, appState }) => (
+  PanelComponent: ({ updateData, appState: _appState }) => (
     <button
       type='button'
       className='zIndexButton'
@@ -77,7 +77,7 @@ export const actionSendToBack = register({
     isDarwin
       ? event[KEYS.CTRL_OR_CMD] && event.altKey && event.code === CODES.BRACKET_LEFT
       : event[KEYS.CTRL_OR_CMD] && event.shiftKey && event.code === CODES.BRACKET_LEFT,
-  PanelComponent: ({ updateData, appState }) => (
+  PanelComponent: ({ updateData, appState: _appState }) => (
     <button
       type='button'
       className='zIndexButton'
@@ -107,11 +107,11 @@ export const actionBringToFront = register({
     isDarwin
       ? event[KEYS.CTRL_OR_CMD] && event.altKey && event.code === CODES.BRACKET_RIGHT
       : event[KEYS.CTRL_OR_CMD] && event.shiftKey && event.code === CODES.BRACKET_RIGHT,
-  PanelComponent: ({ updateData, appState }) => (
+  PanelComponent: ({ updateData, appState: _appState }) => (
     <button
       type='button'
       className='zIndexButton'
-      onClick={event => updateData(null)}
+      onClick={_event => updateData(null)}
       title={`${t('labels.bringToFront')} — ${
         isDarwin ? getShortcutKey('CtrlOrCmd+Alt+]') : getShortcutKey('CtrlOrCmd+Shift+]')
       }`}

@@ -1,3 +1,4 @@
+import React from 'react'
 import { createIcon } from '../../components/icons'
 
 export const excalidrawPlusIcon = createIcon(
