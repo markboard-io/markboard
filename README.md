@@ -12,9 +12,16 @@
   </p>
 </div>
 
-<h1 align="center">Next-Gen Collaborative Platform built on Web3 & AI</h3>
+<h1 align="center">Next-Gen All-in-One Collaborative Workspace</h3>
 
-[BoardX](https://app.boardx.us) is an open-source evolutionary new collaborative platform built on the foundations of Web3 and AIGC. This platform is designed to facilitate collaboration and connection within teams, making it easy for users to share ideas, work on projects together, and stay up-to-date on the latest developments.
+[BoardX](https://app.boardx.us) is an **open-source** solution designed to build an all-in-one collaborative workspace for your team. The platform aims to facilitate collaboration and communication within the team, using tools like digital whiteboards, video conferencing, text channels and real-time synced documents, enabling team members to easily share ideas and work together on projects.
+
+## Core Features
+
+- **Digital Whiteboard** (Sticky Notes, Diagrams, Drawings, Generative AI Features)
+- **Video Conference** (Meetings, Screen Sharing)
+- **Block-based Markdown Documents** (Note Taking, Team Knowledge Center)
+- **Text Channels** (Send Messages, Images, Emojis)
 
 ## Try it now
 
@@ -44,9 +51,10 @@ npm start # or meteor run
 meteor shell # for debugging
 ```
 
-### References
+### Notable used tools
 
 - [Meteor](https://www.meteor.com/)
+- [Excalidraw](https://excalidraw.com/)
 
 ### License
 
