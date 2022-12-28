@@ -1,0 +1,38 @@
+.excalidraw {
+  .FixedSideContainer {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .FixedSideContainer > * {
+    pointer-events: all;
+  }
+
+  .FixedSideContainer_side_top {
+    left: 1rem;
+    top: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 2;
+  }
+
+  .FixedSideContainer_side_top.zen-mode {
+    right: 42px;
+  }
+}
+
+/* TODO: if these are used, make sure to implement RTL support
+.FixedSideContainer_side_left {
+  left: var(--space-factor);
+  top: var(--space-factor);
+  bottom: var(--space-factor);
+  z-index: 1;
+}
+
+.FixedSideContainer_side_right {
+  right: var(--space-factor);
+  top: var(--space-factor);
+  bottom: var(--space-factor);
+  z-index: 3;
+}
+*/

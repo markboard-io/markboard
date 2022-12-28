@@ -10,14 +10,31 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
+    "@sentry/browser": "^7.28.1",
+    "@sentry/integrations": "^7.28.1",
+    "@testing-library/react": "^13.4.0",
+    "@types/chai": "^4.3.4",
     "@types/fabric": "^4.5.14",
+    "@types/jest": "^29.2.4",
+    "@types/pako": "^2.0.0",
+    "@types/pica": "^9.0.1",
+    "browser-fs-access": "^0.31.1",
+    "chai": "^4.3.7",
+    "clsx": "^1.2.1",
     "fabric": "^5.3.0",
+    "jotai": "^1.12.0",
     "meteor-node-stubs": "^1.2.1",
+    "nanoid": "^4.0.0",
     "node-sass": "^4.14.1",
+    "open-color": "^1.9.1",
+    "pako": "^2.1.0",
+    "perfect-freehand": "^1.2.0",
+    "pica": "^9.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-resizable-panels": "0.0.18",
-    "react-router-dom": "^6.6.1"
+    "react-router-dom": "^6.6.1",
+    "roughjs": "^4.5.2"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
@@ -25,6 +42,7 @@
     "@types/mocha": "^8.2.3",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^18.0.10",
+    "@types/testing-library__jest-dom": "^5.14.5",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "babel-eslint": "^10.1.0",
@@ -35,6 +53,7 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-meteor": "^7.3.0",
     "eslint-plugin-react": "^7.31.11",
+    "react-scripts": "^5.0.1",
     "typescript": "^4.6.4"
   },
   "meteor": {

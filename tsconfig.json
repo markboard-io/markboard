@@ -4,7 +4,8 @@
     "module": "esNext",
     "lib": [
       "esnext",
-      "dom"
+      "dom",
+      "DOM.Iterable"
     ],
     "allowJs": true,
     "checkJs": false,
@@ -28,7 +29,7 @@
     "resolveJsonModule": true,
     "types": [
       "node",
-      "mocha",
+      "jest",
       "types/scss.d.ts",
       "types/global.d.ts"
     ],
