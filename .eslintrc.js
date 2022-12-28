@@ -52,6 +52,7 @@ module.exports = {
     'no-empty': ['off'],
     'no-constant-condition': ['error', { checkLoops: false }],
     'no-useless-catch': ['off'],
-    'react/display-name': ['off']
+    'react/display-name': ['off'],
+    'no-debugger': ['off']
   }
 }

@@ -1,3 +1,5 @@
+import oc from 'open-color'
+
 export default {
   elements: [
     {
@@ -19,7 +21,7 @@ export default {
       width: 186.47265625,
       height: 141.9765625,
       seed: 1968410350,
-      groupIds: [],
+      groupIds: []
     },
     {
       id: '-xMIs_0jIFqvpx-R9UnaG',
@@ -40,7 +42,7 @@ export default {
       seed: 957947807,
       version: 47,
       versionNonce: 1128618623,
-      isDeleted: false,
+      isDeleted: false
     },
     {
       fileId: 'rocket',
@@ -67,10 +69,10 @@ export default {
       updated: 1644914782403,
       link: null,
       status: 'pending',
-      scale: [1, 1],
-    },
+      scale: [1, 1]
+    }
   ],
-  appState: { viewBackgroundColor: '#AFEEEE', currentItemFontFamily: 1 },
+  appState: { viewBackgroundColor: oc.white, currentItemFontFamily: 1 },
   scrollToContent: true,
   libraryItems: [
     [
@@ -105,12 +107,12 @@ export default {
           [-99.89923520113778, 103.6510732374661],
           [-40.317783799181804, 79.1587107641305],
           [-39.037226329125524, 21.285677238400705],
-          [-92.28090097254909, 7.105427357601002e-15],
+          [-92.28090097254909, 7.105427357601002e-15]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
-      },
+        endArrowhead: null
+      }
     ],
     [
       {
@@ -156,11 +158,11 @@ export default {
           [20.68789182864576, -51.26396751574663],
           [3.5475921483286084, -47.099726468136254],
           [-0.2758413461535838, -43.46664538034193],
-          [-0.22814350714115691, -43.414939319563715],
+          [-0.22814350714115691, -43.414939319563715]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'line',
@@ -194,11 +196,11 @@ export default {
           [46.6269757640547, 7.193749997581346],
           [71.03526003420632, 5.930375670950649],
           [85.2899738827162, 1.3342483900732343],
-          [88.30808627974527, -2.6041666666666288],
+          [88.30808627974527, -2.6041666666666288]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'line',
@@ -232,11 +234,11 @@ export default {
           [46.6269757640547, 7.193749997581346],
           [71.03526003420632, 5.930375670950649],
           [85.2899738827162, 1.3342483900732343],
-          [88.30808627974527, -2.6041666666666288],
+          [88.30808627974527, -2.6041666666666288]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'ellipse',
@@ -259,7 +261,7 @@ export default {
         seed: 1409727409,
         groupIds: ['N2YAi9nU-wlRb0rDaDZoe'],
         strokeSharpness: 'sharp',
-        boundElementIds: ['bxuMGTzXLn7H-uBCptINx'],
+        boundElementIds: ['bxuMGTzXLn7H-uBCptINx']
       },
       {
         type: 'ellipse',
@@ -282,7 +284,7 @@ export default {
         seed: 1073094033,
         groupIds: ['N2YAi9nU-wlRb0rDaDZoe'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'ellipse',
@@ -305,7 +307,7 @@ export default {
         seed: 526271345,
         groupIds: ['N2YAi9nU-wlRb0rDaDZoe'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'ellipse',
@@ -328,8 +330,8 @@ export default {
         seed: 243707217,
         groupIds: ['N2YAi9nU-wlRb0rDaDZoe'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
-      },
+        boundElementIds: []
+      }
     ],
     [
       {
@@ -353,7 +355,7 @@ export default {
         seed: 511870335,
         groupIds: ['M6ByXuSmtHCr3RtPPKJQh'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'diamond',
@@ -376,7 +378,7 @@ export default {
         seed: 1283079231,
         groupIds: ['M6ByXuSmtHCr3RtPPKJQh'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'diamond',
@@ -399,7 +401,7 @@ export default {
         seed: 996251633,
         groupIds: ['M6ByXuSmtHCr3RtPPKJQh'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'diamond',
@@ -422,8 +424,8 @@ export default {
         seed: 1764842481,
         groupIds: ['M6ByXuSmtHCr3RtPPKJQh'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
-      },
+        boundElementIds: []
+      }
     ],
     [
       {
@@ -469,11 +471,11 @@ export default {
           [12.15685839679867, -50.825000270901],
           [1.9916746648394732, -45.171835889467935],
           [-0.2758413461535838, -40.23974757720194],
-          [-0.24755378372925183, -40.169554027464216],
+          [-0.24755378372925183, -40.169554027464216]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'line',
@@ -507,11 +509,11 @@ export default {
           [26.779003528407447, 10.093886705011586],
           [40.79727342221974, 8.456559589697127],
           [48.98410145879092, 2.500000505196364],
-          [50.7174766392476, -2.6041666666666288],
+          [50.7174766392476, -2.6041666666666288]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'line',
@@ -545,11 +547,11 @@ export default {
           [26.70244431044034, 7.574593370991538],
           [40.68063699304561, 6.262111896696538],
           [48.84405948536458, 1.4873339211608216],
-          [50.57247907260371, -2.6041666666666288],
+          [50.57247907260371, -2.6041666666666288]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'ellipse',
@@ -572,8 +574,8 @@ export default {
         seed: 1774660383,
         groupIds: ['HSrtfEf-CssQTf160Fb6R'],
         strokeSharpness: 'sharp',
-        boundElementIds: ['bxuMGTzXLn7H-uBCptINx'],
-      },
+        boundElementIds: ['bxuMGTzXLn7H-uBCptINx']
+      }
     ],
     [
       {
@@ -597,11 +599,7 @@ export default {
         seed: 371096063,
         groupIds: ['9ppmKFUbA4iKjt8FaDFox'],
         strokeSharpness: 'sharp',
-        boundElementIds: [
-          'CFu0B4Mw_1wC1Hbgx8Fs0',
-          'XIl_NhaFtRO00pX5Pq6VU',
-          'EndiSTFlx1AT7vcBVjgve',
-        ],
+        boundElementIds: ['CFu0B4Mw_1wC1Hbgx8Fs0', 'XIl_NhaFtRO00pX5Pq6VU', 'EndiSTFlx1AT7vcBVjgve']
       },
       {
         type: 'rectangle',
@@ -624,11 +622,7 @@ export default {
         seed: 685932433,
         groupIds: ['0RJwA-yKP5dqk5oMiSeot', '9ppmKFUbA4iKjt8FaDFox'],
         strokeSharpness: 'sharp',
-        boundElementIds: [
-          'CFu0B4Mw_1wC1Hbgx8Fs0',
-          'XIl_NhaFtRO00pX5Pq6VU',
-          'EndiSTFlx1AT7vcBVjgve',
-        ],
+        boundElementIds: ['CFu0B4Mw_1wC1Hbgx8Fs0', 'XIl_NhaFtRO00pX5Pq6VU', 'EndiSTFlx1AT7vcBVjgve']
       },
       {
         type: 'rectangle',
@@ -651,11 +645,7 @@ export default {
         seed: 58634943,
         groupIds: ['9ppmKFUbA4iKjt8FaDFox'],
         strokeSharpness: 'sharp',
-        boundElementIds: [
-          'CFu0B4Mw_1wC1Hbgx8Fs0',
-          'XIl_NhaFtRO00pX5Pq6VU',
-          'EndiSTFlx1AT7vcBVjgve',
-        ],
+        boundElementIds: ['CFu0B4Mw_1wC1Hbgx8Fs0', 'XIl_NhaFtRO00pX5Pq6VU', 'EndiSTFlx1AT7vcBVjgve']
       },
       {
         type: 'draw',
@@ -682,11 +672,11 @@ export default {
         points: [
           [0, 0.6014697828497827],
           [40.42449133807562, 0.7588628355182573],
-          [46.57983585730082, -2.491091008771946],
+          [46.57983585730082, -2.491091008771946]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'draw',
@@ -713,11 +703,11 @@ export default {
         points: [
           [0, 0],
           [16.832548902953302, -2.8032978840147194],
-          [45.567415680676426, -0.3275477042019195],
+          [45.567415680676426, -0.3275477042019195]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'draw',
@@ -745,11 +735,11 @@ export default {
           [0, 0],
           [26.41225578429045, -0.2552319773002338],
           [37.62000339651456, 2.3153712935189787],
-          [48.33668263438425, -1.9652862252120569],
+          [48.33668263438425, -1.9652862252120569]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'draw',
@@ -778,11 +768,11 @@ export default {
           [10.166093050596771, -1.166642430373031],
           [16.130660965377448, -0.8422655250909383],
           [46.26079588567538, 0.6125567455206506],
-          [54.40694982784246, -2.297087795702523],
+          [54.40694982784246, -2.297087795702523]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'draw',
@@ -809,11 +799,11 @@ export default {
         points: [
           [0, 0],
           [18.193786115221407, -0.5912874140789839],
-          [46.92865289294453, 1.884462765733816],
+          [46.92865289294453, 1.884462765733816]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'draw',
@@ -841,12 +831,12 @@ export default {
           [0, 0],
           [8.093938105125233, 1.4279702913643746],
           [18.193786115221407, -0.5912874140789839],
-          [46.92865289294453, 1.884462765733816],
+          [46.92865289294453, 1.884462765733816]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
-      },
+        endArrowhead: null
+      }
     ],
     [
       {
@@ -870,7 +860,7 @@ export default {
         seed: 106569279,
         groupIds: ['TC0RSM64Cxmu17MlE12-o'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'line',
@@ -898,11 +888,11 @@ export default {
         endBinding: null,
         points: [
           [0, 0],
-          [128.84193229844433, 0],
+          [128.84193229844433, 0]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'ellipse',
@@ -925,7 +915,7 @@ export default {
         seed: 387857791,
         groupIds: ['TC0RSM64Cxmu17MlE12-o'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'ellipse',
@@ -948,7 +938,7 @@ export default {
         seed: 1486370207,
         groupIds: ['TC0RSM64Cxmu17MlE12-o'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'ellipse',
@@ -971,7 +961,7 @@ export default {
         seed: 610150847,
         groupIds: ['TC0RSM64Cxmu17MlE12-o'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'ellipse',
@@ -994,7 +984,7 @@ export default {
         seed: 144280593,
         groupIds: ['TC0RSM64Cxmu17MlE12-o'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'draw',
@@ -1042,11 +1032,11 @@ export default {
           [10.393751588600717, -3.7167773257046695],
           [7.380151667177483, -3.30213874255348],
           [4.669824267311791, 1.1200945145694894],
-          [4.907524351775825, 2.043055712211473],
+          [4.907524351775825, 2.043055712211473]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'line',
@@ -1074,11 +1064,11 @@ export default {
         endBinding: null,
         points: [
           [0, 0],
-          [42.095115772272244, 0],
+          [42.095115772272244, 0]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'line',
@@ -1112,11 +1102,11 @@ export default {
           [15.480325949120388, 3.1070332647092163],
           [23.583965316012858, 2.3706131055211244],
           [28.316582284417855, -0.3084668090492442],
-          [29.31860660384862, -2.6041666666666288],
+          [29.31860660384862, -2.6041666666666288]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
+        endArrowhead: null
       },
       {
         type: 'ellipse',
@@ -1139,7 +1129,7 @@ export default {
         seed: 683572113,
         groupIds: ['TC0RSM64Cxmu17MlE12-o'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'line',
@@ -1172,12 +1162,12 @@ export default {
           [15.480325949120388, -5.625081903117008],
           [23.583965316012858, -4.8648251269605955],
           [28.316582284417855, -2.0990281379671547],
-          [29.31860660384862, 0.2709794602754383],
+          [29.31860660384862, 0.2709794602754383]
         ],
         lastCommittedPoint: null,
         startArrowhead: null,
-        endArrowhead: null,
-      },
+        endArrowhead: null
+      }
     ],
     [
       {
@@ -1201,7 +1191,7 @@ export default {
         seed: 1914896753,
         groupIds: ['GMZ-NW9lG7c1AtfBInZ0n'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'rectangle',
@@ -1224,7 +1214,7 @@ export default {
         seed: 1306468145,
         groupIds: ['GMZ-NW9lG7c1AtfBInZ0n'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'ellipse',
@@ -1247,7 +1237,7 @@ export default {
         seed: 93422161,
         groupIds: ['GMZ-NW9lG7c1AtfBInZ0n'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'rectangle',
@@ -1270,7 +1260,7 @@ export default {
         seed: 11646495,
         groupIds: ['GMZ-NW9lG7c1AtfBInZ0n'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
+        boundElementIds: []
       },
       {
         type: 'rectangle',
@@ -1293,8 +1283,8 @@ export default {
         seed: 291717649,
         groupIds: ['GMZ-NW9lG7c1AtfBInZ0n'],
         strokeSharpness: 'sharp',
-        boundElementIds: [],
-      },
-    ],
-  ],
+        boundElementIds: []
+      }
+    ]
+  ]
 }

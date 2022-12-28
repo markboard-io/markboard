@@ -95,7 +95,7 @@ export default function App() {
   const appRef = useRef<any>(null)
   const [viewModeEnabled, setViewModeEnabled] = useState(false)
   const [zenModeEnabled, setZenModeEnabled] = useState(false)
-  const [gridModeEnabled, setGridModeEnabled] = useState(false)
+  const [gridModeEnabled, setGridModeEnabled] = useState(true)
   const [blobUrl, setBlobUrl] = useState<string>('')
   const [canvasUrl, setCanvasUrl] = useState<string>('')
   const [exportWithDarkMode, setExportWithDarkMode] = useState(false)
