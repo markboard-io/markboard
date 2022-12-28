@@ -1,5 +1,5 @@
+import './MainPanel.style.scss'
 import React, { useEffect } from 'react'
-import styles from './MainPanel.module.scss'
 import { Panel } from 'react-resizable-panels'
 import { fabric } from 'fabric'
 
@@ -30,7 +30,7 @@ export function MainPanel() {
 
   return (
     <Panel>
-      <canvas id='canvas-container' className={styles.canvasContainer} height='100%' width='100%' />
+      <canvas id='canvas-container' className='canvasContainer' height='100%' width='100%' />
     </Panel>
   )
 }

@@ -1,13 +1,13 @@
-import styles from './FileExplorerPanel.module.scss'
 import React from 'react'
 import { Panel, PanelResizeHandle } from 'react-resizable-panels'
+import './FileExplorerPanel.style.scss'
 
 export function FileExplorerPanel() {
   return (
     <>
-      <Panel minSize={20} className={styles.FileExplorerPanel}></Panel>
-      <PanelResizeHandle className={styles.PanelResizeHandle}>
-        <div className={styles.Divider}></div>
+      <Panel minSize={20} className='FileExplorerPanel'></Panel>
+      <PanelResizeHandle className='PanelResizeHandle'>
+        <div className='Divider'></div>
       </PanelResizeHandle>
     </>
   )

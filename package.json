@@ -65,7 +65,7 @@
   },
   "cssModules": {
     "extensions": [
-      "scss"
+      "module.scss"
     ],
     "enableSassCompilation": [
       "scss",
