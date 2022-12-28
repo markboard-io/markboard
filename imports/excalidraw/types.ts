@@ -20,7 +20,7 @@ import { Point as RoughPoint } from 'roughjs/bin/geometry'
 import { LinearElementEditor } from './element/linearElementEditor'
 import { SuggestedBinding } from './element/binding'
 import { ImportedDataState } from './data/types'
-import type App from './components/App'
+import type ExcalidrawApp from './components/ExcalidrawApp'
 import type { ResolvablePromise, throttleRAF } from './utils'
 import { Spreadsheet } from './charts'
 import { Language } from './i18n'
@@ -412,9 +412,9 @@ export type AppClassProperties = {
     }
   >
   files: BinaryFiles
-  device: App['device']
-  scene: App['scene']
-  pasteFromClipboard: App['pasteFromClipboard']
+  device: ExcalidrawApp['device']
+  scene: ExcalidrawApp['scene']
+  pasteFromClipboard: ExcalidrawApp['pasteFromClipboard']
 }
 
 export type PointerDownState = Readonly<{
@@ -484,29 +484,29 @@ export type PointerDownState = Readonly<{
 }>
 
 export type ExcalidrawImperativeAPI = {
-  updateScene: InstanceType<typeof App>['updateScene']
+  updateScene: InstanceType<typeof ExcalidrawApp>['updateScene']
   updateLibrary: InstanceType<typeof Library>['updateLibrary']
-  resetScene: InstanceType<typeof App>['resetScene']
+  resetScene: InstanceType<typeof ExcalidrawApp>['resetScene']
   getSceneElementsIncludingDeleted: InstanceType<
-    typeof App
+    typeof ExcalidrawApp
   >['getSceneElementsIncludingDeleted']
   history: {
-    clear: InstanceType<typeof App>['resetHistory']
+    clear: InstanceType<typeof ExcalidrawApp>['resetHistory']
   }
-  scrollToContent: InstanceType<typeof App>['scrollToContent']
-  getSceneElements: InstanceType<typeof App>['getSceneElements']
-  getAppState: () => InstanceType<typeof App>['state']
-  getFiles: () => InstanceType<typeof App>['files']
-  refresh: InstanceType<typeof App>['refresh']
-  setToast: InstanceType<typeof App>['setToast']
+  scrollToContent: InstanceType<typeof ExcalidrawApp>['scrollToContent']
+  getSceneElements: InstanceType<typeof ExcalidrawApp>['getSceneElements']
+  getAppState: () => InstanceType<typeof ExcalidrawApp>['state']
+  getFiles: () => InstanceType<typeof ExcalidrawApp>['files']
+  refresh: InstanceType<typeof ExcalidrawApp>['refresh']
+  setToast: InstanceType<typeof ExcalidrawApp>['setToast']
   addFiles: (data: BinaryFileData[]) => void
   readyPromise: ResolvablePromise<ExcalidrawImperativeAPI>
   ready: true
   id: string
-  setActiveTool: InstanceType<typeof App>['setActiveTool']
-  setCursor: InstanceType<typeof App>['setCursor']
-  resetCursor: InstanceType<typeof App>['resetCursor']
-  toggleMenu: InstanceType<typeof App>['toggleMenu']
+  setActiveTool: InstanceType<typeof ExcalidrawApp>['setActiveTool']
+  setCursor: InstanceType<typeof ExcalidrawApp>['setCursor']
+  resetCursor: InstanceType<typeof ExcalidrawApp>['resetCursor']
+  toggleMenu: InstanceType<typeof ExcalidrawApp>['toggleMenu']
 }
 
 export type Device = Readonly<{

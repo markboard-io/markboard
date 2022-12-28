@@ -9,7 +9,7 @@ import { ToolButton } from './ToolButton'
 import { actionSaveFileToDisk } from '../actions/actionExport'
 import { Card } from './Card'
 
-import './ExportDialog.scss'
+import './ExportDialog.style.scss'
 import { nativeFileSystemSupported } from '../data/filesystem'
 import { trackEvent } from '../analytics'
 import { ActionManager } from '../actions/manager'

@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef, useCallback } from 'react'
 
 import ExampleSidebar from './sidebar/ExampleSidebar'
 
-import type * as TExcalidraw from '../index'
-
 import './App.style.scss'
 import initialData from './initialData'
 import { nanoid } from 'nanoid'

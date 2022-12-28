@@ -2,11 +2,15 @@ import clsx from 'clsx'
 import { Popover } from './Popover'
 import { t } from '../i18n'
 
-import './ContextMenu.scss'
+import './ContextMenu.style.scss'
 import { getShortcutFromShortcutName, ShortcutName } from '../actions/shortcuts'
 import { Action } from '../actions/types'
 import { ActionManager } from '../actions/manager'
-import { useExcalidrawAppState, useExcalidrawElements, useExcalidrawSetAppState } from './App'
+import {
+  useExcalidrawAppState,
+  useExcalidrawElements,
+  useExcalidrawSetAppState
+} from './ExcalidrawApp'
 import React from 'react'
 
 export type ContextMenuItem = typeof CONTEXT_MENU_SEPARATOR | Action

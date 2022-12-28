@@ -1,4 +1,4 @@
-import './Tooltip.scss'
+import './Tooltip.style.scss'
 
 import React, { useEffect } from 'react'
 

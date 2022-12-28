@@ -2,7 +2,7 @@ import React from 'react'
 import { t } from '../i18n'
 import { UsersIcon } from './icons'
 
-import './CollabButton.scss'
+import './CollabButton.style.scss'
 import MenuItem from './MenuItem'
 import clsx from 'clsx'
 

@@ -3,7 +3,7 @@ import { t } from '../i18n'
 import { isDarwin, isWindows, KEYS } from '../keys'
 import { Dialog } from './Dialog'
 import { getShortcutKey } from '../utils'
-import './HelpDialog.scss'
+import './HelpDialog.style.scss'
 import { ExternalLinkIcon } from './icons'
 
 const Header = () => (

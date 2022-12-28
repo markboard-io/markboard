@@ -1,17 +1,10 @@
 import React, { useRef } from 'react'
 import { copyTextToSystemClipboard } from '../../clipboard'
 import { Dialog } from '../../components/Dialog'
-import {
-  clipboard,
-  start,
-  stop,
-  share,
-  shareIOS,
-  shareWindows,
-} from '../../components/icons'
+import { clipboard, start, stop, share, shareIOS, shareWindows } from '../../components/icons'
 import { ToolButton } from '../../components/ToolButton'
 import { t } from '../../i18n'
-import './RoomDialog.scss'
+import './RoomDialog.style.scss'
 import Stack from '../../components/Stack'
 import { AppState } from '../../types'
 import { trackEvent } from '../../analytics'
@@ -40,16 +33,16 @@ const RoomDialog = ({
   onRoomCreate,
   onRoomDestroy,
   setErrorMessage,
-  theme,
+  theme
 }: {
-  handleClose: () => void;
-  activeRoomLink: string;
-  username: string;
-  onUsernameChange: (username: string) => void;
-  onRoomCreate: () => void;
-  onRoomDestroy: () => void;
-  setErrorMessage: (message: string) => void;
-  theme: AppState['theme'];
+  handleClose: () => void
+  activeRoomLink: string
+  username: string
+  onUsernameChange: (username: string) => void
+  onRoomCreate: () => void
+  onRoomDestroy: () => void
+  setErrorMessage: (message: string) => void
+  theme: AppState['theme']
 }) => {
   const roomLinkInput = useRef<HTMLInputElement>(null)
 
@@ -69,7 +62,7 @@ const RoomDialog = ({
       await navigator.share({
         title: t('roomDialog.shareTitle'),
         text: t('roomDialog.shareTitle'),
-        url: activeRoomLink,
+        url: activeRoomLink
       })
     } catch (error: any) {
       // Just ignore.
@@ -78,19 +71,19 @@ const RoomDialog = ({
 
   const selectInput = (event: React.MouseEvent<HTMLInputElement>) => {
     if (event.target !== document.activeElement) {
-      event.preventDefault();
-      (event.target as HTMLInputElement).select()
+      event.preventDefault()
+      ;(event.target as HTMLInputElement).select()
     }
   }
 
   const renderRoomDialog = () => {
     return (
-      <div className="RoomDialog-modal">
+      <div className='RoomDialog-modal'>
         {!activeRoomLink && (
           <>
             <p>{t('roomDialog.desc_intro')}</p>
             <p>{`🔒 ${t('roomDialog.desc_privacy')}`}</p>
-            <div className="RoomDialog-sessionStartButtonContainer">
+            <div className='RoomDialog-sessionStartButtonContainer'>
               <DialogActionButton
                 label={t('roomDialog.button_startSession')}
                 onClick={() => {
@@ -107,12 +100,12 @@ const RoomDialog = ({
           <>
             <p>{t('roomDialog.desc_inProgressIntro')}</p>
             <p>{t('roomDialog.desc_shareLink')}</p>
-            <div className="RoomDialog-linkContainer">
+            <div className='RoomDialog-linkContainer'>
               <Stack.Row gap={2}>
                 {'share' in navigator ? (
                   <ToolButton
-                    className="RoomDialog__button"
-                    type="button"
+                    className='RoomDialog__button'
+                    type='button'
                     icon={getShareIcon()}
                     title={t('labels.share')}
                     aria-label={t('labels.share')}
@@ -120,8 +113,8 @@ const RoomDialog = ({
                   />
                 ) : null}
                 <ToolButton
-                  className="RoomDialog__button"
-                  type="button"
+                  className='RoomDialog__button'
+                  type='button'
                   icon={clipboard}
                   title={t('labels.copy')}
                   aria-label={t('labels.copy')}
@@ -129,37 +122,37 @@ const RoomDialog = ({
                 />
               </Stack.Row>
               <input
-                type="text"
+                type='text'
                 value={activeRoomLink}
                 readOnly={true}
-                className="RoomDialog-link"
+                className='RoomDialog-link'
                 ref={roomLinkInput}
                 onPointerDown={selectInput}
               />
             </div>
-            <div className="RoomDialog-usernameContainer">
-              <label className="RoomDialog-usernameLabel" htmlFor="username">
+            <div className='RoomDialog-usernameContainer'>
+              <label className='RoomDialog-usernameLabel' htmlFor='username'>
                 {t('labels.yourName')}
               </label>
               <input
-                type="text"
-                id="username"
+                type='text'
+                id='username'
                 value={username || ''}
-                className="RoomDialog-username TextInput"
-                onChange={(event) => onUsernameChange(event.target.value)}
-                onKeyPress={(event) => event.key === 'Enter' && handleClose()}
+                className='RoomDialog-username TextInput'
+                onChange={event => onUsernameChange(event.target.value)}
+                onKeyPress={event => event.key === 'Enter' && handleClose()}
               />
             </div>
             <p>
-              <span role="img" aria-hidden="true" className="RoomDialog-emoji">
+              <span role='img' aria-hidden='true' className='RoomDialog-emoji'>
                 {'🔒'}
               </span>{' '}
               {t('roomDialog.desc_privacy')}
             </p>
             <p>{t('roomDialog.desc_exitSession')}</p>
-            <div className="RoomDialog-sessionStartButtonContainer">
+            <div className='RoomDialog-sessionStartButtonContainer'>
               <DialogActionButton
-                actionType="danger"
+                actionType='danger'
                 label={t('roomDialog.button_stopSession')}
                 onClick={() => {
                   trackEvent('share', 'room closed')
@@ -175,12 +168,7 @@ const RoomDialog = ({
     )
   }
   return (
-    <Dialog
-      small
-      onCloseRequest={handleClose}
-      title={t('labels.liveCollaboration')}
-      theme={theme}
-    >
+    <Dialog small onCloseRequest={handleClose} title={t('labels.liveCollaboration')} theme={theme}>
       {renderRoomDialog()}
     </Dialog>
   )

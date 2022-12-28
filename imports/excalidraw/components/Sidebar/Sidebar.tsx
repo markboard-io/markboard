@@ -7,9 +7,9 @@ import { SidebarPropsContext, SidebarProps, SidebarPropsContextValue } from './c
 
 import { SidebarHeaderComponents } from './SidebarHeader'
 
-import './Sidebar.scss'
+import './Sidebar.style.scss'
 import clsx from 'clsx'
-import { useExcalidrawSetAppState } from '../App'
+import { useExcalidrawSetAppState } from '../ExcalidrawApp'
 import { updateObject } from '../../utils'
 
 /** using a counter instead of boolean to handle race conditions where

@@ -1,6 +1,6 @@
 import React, { useEffect, forwardRef } from 'react'
 import { InitializeApp } from '../../components/InitializeApp'
-import App from '../../components/App'
+import ExcalidrawApp from '../../components/ExcalidrawApp'
 
 import '../../css/app.scss'
 import '../../css/styles.scss'
@@ -82,7 +82,7 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
   return (
     <InitializeApp langCode={langCode} theme={theme}>
       <Provider unstable_createStore={() => jotaiStore} scope={jotaiScope}>
-        <App
+        <ExcalidrawApp
           onChange={onChange}
           initialData={initialData}
           excalidrawRef={excalidrawRef}
@@ -111,7 +111,7 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
           renderSidebar={renderSidebar}
         >
           {children}
-        </App>
+        </ExcalidrawApp>
       </Provider>
     </InitializeApp>
   )

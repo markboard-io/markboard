@@ -6,7 +6,7 @@ import {
   LibraryItemsSource,
 } from '../types'
 import { restoreLibraryItems } from './restore'
-import type App from '../components/App'
+import type ExcalidrawApp from '../components/ExcalidrawApp'
 import { atom } from 'jotai'
 import { jotaiStore } from '../jotai'
 import { ExcalidrawElement } from '../element/types'
@@ -72,9 +72,9 @@ class Library {
    * though at least one update) */
   private isInitialized = false
 
-  private app: App
+  private app: ExcalidrawApp
 
-  constructor(app: App) {
+  constructor(app: ExcalidrawApp) {
     this.app = app
   }
 

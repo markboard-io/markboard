@@ -8,7 +8,7 @@ import { t } from '../i18n'
 import { exportToSvg } from '../scene/export'
 import { AppState, LibraryItem } from '../types'
 import { Dialog } from './Dialog'
-import './PasteChartDialog.scss'
+import './PasteChartDialog.style.scss'
 
 type OnInsertChart = (chartType: ChartType, elements: ChartElements) => void
 

@@ -1,4 +1,4 @@
-import './Stack.scss'
+import './Stack.style.scss'
 
 import React from 'react'
 import clsx from 'clsx'

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './Spinner.scss'
+import './Spinner.style.scss'
 
 const Spinner = ({
   size = '1em',

@@ -1,5 +1,5 @@
 import React from 'react'
-import './ToolIcon.scss'
+import './ToolIcon.style.scss'
 
 import clsx from 'clsx'
 import { ToolButtonSize } from './ToolButton'

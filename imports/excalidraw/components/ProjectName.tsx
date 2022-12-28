@@ -1,10 +1,10 @@
-import './TextInput.scss'
+import './TextInput.style.scss'
 
 import React, { useState } from 'react'
 import { focusNearestParent } from '../utils'
 
-import './ProjectName.scss'
-import { useExcalidrawContainer } from './App'
+import './ProjectName.style.scss'
+import { useExcalidrawContainer } from './ExcalidrawApp'
 
 type Props = {
   value: string

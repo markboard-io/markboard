@@ -1,6 +1,6 @@
 import React from 'react'
 import { t } from '../i18n'
-import { useExcalidrawContainer } from './App'
+import { useExcalidrawContainer } from './ExcalidrawApp'
 
 export const Section: React.FC<{
   heading: string

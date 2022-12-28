@@ -44,7 +44,7 @@ import {
 import CustomStats from './CustomStats'
 import { restore, restoreAppState, RestoredDataState } from '../data/restore'
 
-import './index.scss'
+import './index.style.scss'
 import { ExportToExcalidrawPlus } from './components/ExportToExcalidrawPlus'
 
 import { updateStaleImageStatuses } from './data/FileManager'

@@ -3,7 +3,7 @@ import { ActionManager } from '../actions/manager'
 import { getNonDeletedElements } from '../element'
 import { ExcalidrawElement, PointerType } from '../element/types'
 import { t } from '../i18n'
-import { useDevice } from '../components/App'
+import { useDevice } from './ExcalidrawApp'
 import {
   canChangeRoundness,
   canHaveArrowheads,
@@ -23,7 +23,7 @@ import { trackEvent } from '../analytics'
 import { hasBoundTextElement } from '../element/typeChecks'
 import clsx from 'clsx'
 import { actionToggleZenMode } from '../actions'
-import './Actions.scss'
+import './Actions.style.scss'
 import { Tooltip } from './Tooltip'
 import { shouldAllowVerticalAlign } from '../element/textElement'
 

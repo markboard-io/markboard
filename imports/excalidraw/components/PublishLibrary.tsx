@@ -9,7 +9,7 @@ import { exportToCanvas } from '../packages/utils'
 import { EXPORT_DATA_TYPES, EXPORT_SOURCE, MIME_TYPES, VERSIONS } from '../constants'
 import { ExportedLibraryData } from '../data/types'
 
-import './PublishLibrary.scss'
+import './PublishLibrary.style.scss'
 import SingleLibraryItem from './SingleLibraryItem'
 import { canvasToBlob, resizeImageFile } from '../data/blob'
 import { chunk } from '../utils'

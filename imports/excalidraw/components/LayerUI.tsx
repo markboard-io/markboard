@@ -31,11 +31,11 @@ import { LibraryButton } from './LibraryButton'
 import { isImageFileHandle } from '../data/blob'
 import { LibraryMenu } from './LibraryMenu'
 
-import './LayerUI.scss'
-import './Toolbar.scss'
+import './LayerUI.style.scss'
+import './Toolbar.style.scss'
 import { PenModeButton } from './PenModeButton'
 import { trackEvent } from '../analytics'
-import { isMenuOpenAtom, useDevice } from '../components/App'
+import { isMenuOpenAtom, useDevice } from './ExcalidrawApp'
 import { Stats } from './Stats'
 import { actionToggleStats } from '../actions/actionToggleStats'
 import Footer from './footer/Footer'
@@ -137,23 +137,23 @@ const LayerUI = ({
 
     const createExporter =
       (type: ExportType): ExportCB =>
-        async exportedElements => {
-          trackEvent('export', type, 'ui')
-          const fileHandle = await exportCanvas(type, exportedElements, appState, files, {
-            exportBackground: appState.exportBackground,
-            name: appState.name,
-            viewBackgroundColor: appState.viewBackgroundColor
+      async exportedElements => {
+        trackEvent('export', type, 'ui')
+        const fileHandle = await exportCanvas(type, exportedElements, appState, files, {
+          exportBackground: appState.exportBackground,
+          name: appState.name,
+          viewBackgroundColor: appState.viewBackgroundColor
+        })
+          .catch(muteFSAbortError)
+          .catch(error => {
+            console.error(error)
+            setAppState({ errorMessage: error.message })
           })
-            .catch(muteFSAbortError)
-            .catch(error => {
-              console.error(error)
-              setAppState({ errorMessage: error.message })
-            })
 
-          if (appState.exportEmbedScene && fileHandle && isImageFileHandle(fileHandle)) {
-            setAppState({ fileHandle })
-          }
+        if (appState.exportEmbedScene && fileHandle && isImageFileHandle(fileHandle)) {
+          setAppState({ fileHandle })
         }
+      }
 
     return (
       <ImageExportDialog

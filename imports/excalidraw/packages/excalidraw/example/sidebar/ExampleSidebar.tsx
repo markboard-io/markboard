@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './ExampleSidebar.scss'
+import './ExampleSidebar.style.scss'
 export default function Sidebar({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false)
 

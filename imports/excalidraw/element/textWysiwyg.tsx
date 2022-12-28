@@ -25,7 +25,7 @@ import {
 } from './textElement'
 import { actionDecreaseFontSize, actionIncreaseFontSize } from '../actions/actionProperties'
 import { actionZoomIn, actionZoomOut } from '../actions/actionCanvas'
-import App from '../components/App'
+import ExcalidrawApp from '../components/ExcalidrawApp'
 import { getMaxContainerHeight, getMaxContainerWidth } from './newElement'
 import { LinearElementEditor } from './linearElementEditor'
 import { parseClipboard } from '../clipboard'
@@ -95,7 +95,7 @@ export const textWysiwyg = ({
   element: ExcalidrawTextElement
   canvas: HTMLCanvasElement | null
   excalidrawContainer: HTMLDivElement | null
-  app: App
+  app: ExcalidrawApp
 }) => {
   const textPropertiesUpdated = (
     updatedTextElement: ExcalidrawTextElement,
@@ -495,9 +495,9 @@ export const textWysiwyg = ({
           startIndices.concat(
             idx
               ? // curr line index is prev line's start + prev line's length + \n
-              startIndices[idx - 1] + lines[idx - 1].length + 1
+                startIndices[idx - 1] + lines[idx - 1].length + 1
               : // first selected line
-              selectionStart
+                selectionStart
           ),
         [] as number[]
       )

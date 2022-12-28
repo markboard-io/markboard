@@ -249,30 +249,30 @@ export const MobileMenu = ({
           ) : appState.openMenu === 'shape' &&
             !appState.viewModeEnabled &&
             showSelectedShapeActions(appState, elements) ? (
-              <Section className='App-mobile-menu' heading='selectedShapeActions'>
-                <SelectedShapeActions
-                  appState={appState}
-                  elements={elements}
-                  renderAction={actionManager.renderAction}
-                />
-              </Section>
-            ) : null}
+            <Section className='App-mobile-menu' heading='selectedShapeActions'>
+              <SelectedShapeActions
+                appState={appState}
+                elements={elements}
+                renderAction={actionManager.renderAction}
+              />
+            </Section>
+          ) : null}
           <footer className='App-toolbar'>
             {renderAppToolbar()}
             {appState.scrolledOutside &&
               !appState.openMenu &&
               appState.openSidebar !== 'library' && (
-              <button
-                className='scroll-back-to-content'
-                onClick={() => {
-                  setAppState({
-                    ...calculateScrollCenter(elements, appState, canvas)
-                  })
-                }}
-              >
-                {t('buttons.scrollBackToContent')}
-              </button>
-            )}
+                <button
+                  className='scroll-back-to-content'
+                  onClick={() => {
+                    setAppState({
+                      ...calculateScrollCenter(elements, appState, canvas)
+                    })
+                  }}
+                >
+                  {t('buttons.scrollBackToContent')}
+                </button>
+              )}
           </footer>
         </Island>
       </div>

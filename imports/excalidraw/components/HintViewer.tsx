@@ -3,7 +3,7 @@ import { t } from '../i18n'
 import { NonDeletedExcalidrawElement } from '../element/types'
 import { getSelectedElements } from '../scene'
 
-import './HintViewer.scss'
+import './HintViewer.style.scss'
 import { AppState, Device } from '../types'
 import {
   isImageElement,

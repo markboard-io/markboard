@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { render } from './test-utils'
-import App from '../components/App'
+import ExcalidrawApp from '../components/ExcalidrawApp'
 import { defaultLang, setLanguage } from '../i18n'
 import { UI, Pointer } from './helpers/ui'
 import { API } from './helpers/api'
@@ -17,7 +17,7 @@ beforeEach(async () => {
   mouse.reset()
 
   await setLanguage(defaultLang)
-  await render(<App />)
+  await render(<ExcalidrawApp />)
 })
 
 const createAndSelectOneRectangle = (angle = 0) => {

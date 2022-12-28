@@ -7,7 +7,7 @@ import { arrayToMap, chunk } from '../utils'
 import { LibraryUnit } from './LibraryUnit'
 import Stack from './Stack'
 
-import './LibraryMenuItems.scss'
+import './LibraryMenuItems.style.scss'
 import { MIME_TYPES } from '../constants'
 import Spinner from './Spinner'
 import LibraryMenuBrowseButton from './LibraryMenuBrowseButton'

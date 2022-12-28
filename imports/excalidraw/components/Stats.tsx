@@ -6,7 +6,7 @@ import { getTargetElements } from '../scene'
 import { AppState, ExcalidrawProps } from '../types'
 import { CloseIcon } from './icons'
 import { Island } from './Island'
-import './Stats.scss'
+import './Stats.style.scss'
 
 export const Stats = (props: {
   appState: AppState

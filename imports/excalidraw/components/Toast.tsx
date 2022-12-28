@@ -1,7 +1,7 @@
 import React from 'react'
 import { useCallback, useEffect, useRef } from 'react'
 import { CloseIcon } from './icons'
-import './Toast.scss'
+import './Toast.style.scss'
 import { ToolButton } from './ToolButton'
 
 const DEFAULT_TOAST_TIMEOUT = 5000

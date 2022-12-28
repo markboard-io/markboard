@@ -6,7 +6,7 @@ import { exportToSvg } from '../packages/utils'
 import { AppState, LibraryItem } from '../types'
 import { CloseIcon } from './icons'
 
-import './SingleLibraryItem.scss'
+import './SingleLibraryItem.style.scss'
 import { ToolButton } from './ToolButton'
 
 const SingleLibraryItem = ({

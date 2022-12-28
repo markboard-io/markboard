@@ -1,4 +1,4 @@
-import './Avatar.scss'
+import './Avatar.style.scss'
 
 import React, { useState } from 'react'
 import { getClientInitials } from '../clients'

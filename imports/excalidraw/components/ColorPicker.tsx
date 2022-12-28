@@ -2,7 +2,7 @@ import React from 'react'
 import { Popover } from './Popover'
 import { isTransparent } from '../utils'
 
-import './ColorPicker.scss'
+import './ColorPicker.style.scss'
 import { isArrowKey, KEYS } from '../keys'
 import { t, getLanguage } from '../i18n'
 import { isWritableElement } from '../utils'

@@ -1,4 +1,4 @@
-import './FixedSideContainer.scss'
+import './FixedSideContainer.style.scss'
 
 import React from 'react'
 import clsx from 'clsx'

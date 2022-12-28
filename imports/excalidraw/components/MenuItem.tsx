@@ -1,6 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
-import './Menu.scss'
+import './Menu.style.scss'
 
 interface MenuProps {
   icon: JSX.Element

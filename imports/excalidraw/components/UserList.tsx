@@ -1,4 +1,4 @@
-import './UserList.scss'
+import './UserList.style.scss'
 
 import React from 'react'
 import clsx from 'clsx'

@@ -1,7 +1,7 @@
 import React from 'react'
 import OpenColor from 'open-color'
 
-import './Card.scss'
+import './Card.style.scss'
 
 export const Card: React.FC<{
   color: keyof OpenColor | 'primary'

@@ -2,13 +2,13 @@ import React from 'react'
 import { LoadIcon, questionCircle, saveAs } from '../components/icons'
 import { ProjectName } from '../components/ProjectName'
 import { ToolButton } from '../components/ToolButton'
-import '../components/ToolIcon.scss'
+import '../components/ToolIcon.style.scss'
 import { Tooltip } from '../components/Tooltip'
 import { DarkModeToggle } from '../components/DarkModeToggle'
 import { loadFromJSON, saveAsJSON } from '../data'
 import { resaveAsImageWithScene } from '../data/resave'
 import { t } from '../i18n'
-import { useDevice } from '../components/App'
+import { useDevice } from '../components/ExcalidrawApp'
 import { KEYS } from '../keys'
 import { register } from './register'
 import { CheckboxItem } from '../components/CheckboxItem'
@@ -133,10 +133,10 @@ export const actionSaveToActiveFile = register({
           fileHandle,
           toast: fileHandleExists
             ? {
-              message: fileHandle?.name
-                ? t('toast.fileSavedToFilename').replace('{filename}', `"${fileHandle.name}"`)
-                : t('toast.fileSaved')
-            }
+                message: fileHandle?.name
+                  ? t('toast.fileSavedToFilename').replace('{filename}', `"${fileHandle.name}"`)
+                  : t('toast.fileSaved')
+              }
             : null
         }
       }

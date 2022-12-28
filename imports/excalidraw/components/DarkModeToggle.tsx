@@ -1,5 +1,5 @@
 import React from 'react'
-import './ToolIcon.scss'
+import './ToolIcon.style.scss'
 
 import { t } from '../i18n'
 import { ToolButton } from './ToolButton'

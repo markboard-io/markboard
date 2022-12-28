@@ -1,11 +1,10 @@
-import './Modal.scss'
-
+import './Modal.style.scss'
 
 import React, { useState, useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 import { KEYS } from '../keys'
-import { useExcalidrawContainer, useDevice } from './App'
+import { useExcalidrawContainer, useDevice } from './ExcalidrawApp'
 import { AppState } from '../types'
 import { THEME } from '../constants'
 

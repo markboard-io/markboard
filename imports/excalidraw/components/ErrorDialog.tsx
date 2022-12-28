@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { t } from '../i18n'
 
 import { Dialog } from './Dialog'
-import { useExcalidrawContainer } from './App'
+import { useExcalidrawContainer } from './ExcalidrawApp'
 
 export const ErrorDialog = ({ message, onClose }: { message: string; onClose?: () => void }) => {
   const [modalIsShown, setModalIsShown] = useState(!!message)

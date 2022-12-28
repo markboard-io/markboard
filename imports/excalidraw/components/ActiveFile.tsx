@@ -5,7 +5,7 @@ import { getShortcutFromShortcutName } from '../actions/shortcuts'
 import { save } from '../components/icons'
 import { t } from '../i18n'
 
-import './ActiveFile.scss'
+import './ActiveFile.style.scss'
 import MenuItem from './MenuItem'
 
 type ActiveFileProps = {

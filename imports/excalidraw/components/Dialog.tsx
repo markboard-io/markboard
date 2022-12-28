@@ -2,15 +2,15 @@ import clsx from 'clsx'
 import React, { useEffect, useState } from 'react'
 import { useCallbackRefState } from '../hooks/useCallbackRefState'
 import { t } from '../i18n'
-import { useExcalidrawContainer, useDevice } from '../components/App'
+import { useExcalidrawContainer, useDevice } from './ExcalidrawApp'
 import { KEYS } from '../keys'
-import './Dialog.scss'
+import './Dialog.style.scss'
 import { back, CloseIcon } from './icons'
 import { Island } from './Island'
 import { Modal } from './Modal'
 import { AppState } from '../types'
 import { queryFocusableElements } from '../utils'
-import { isMenuOpenAtom, isDropdownOpenAtom } from './App'
+import { isMenuOpenAtom, isDropdownOpenAtom } from './ExcalidrawApp'
 import { useSetAtom } from 'jotai'
 
 export interface DialogProps {
@@ -38,7 +38,7 @@ export const Dialog = (props: DialogProps) => {
 
     if (focusableElements.length > 0 && props.autofocus !== false) {
       // If there's an element other than close, focus it.
-      (focusableElements[1] || focusableElements[0]).focus()
+      ;(focusableElements[1] || focusableElements[0]).focus()
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {

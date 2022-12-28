@@ -3,8 +3,8 @@ import { t } from '../i18n'
 import { AppState } from '../types'
 import { capitalizeString } from '../utils'
 import { trackEvent } from '../analytics'
-import { useDevice } from './App'
-import './LibraryButton.scss'
+import { useDevice } from './ExcalidrawApp'
+import './LibraryButton.style.scss'
 import { LibraryIcon } from './icons'
 
 export const LibraryButton: React.FC<{

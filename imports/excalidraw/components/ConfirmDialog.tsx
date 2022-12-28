@@ -2,10 +2,10 @@ import React from 'react'
 import { t } from '../i18n'
 import { Dialog, DialogProps } from './Dialog'
 
-import './ConfirmDialog.scss'
+import './ConfirmDialog.style.scss'
 import DialogActionButton from './DialogActionButton'
-import { isMenuOpenAtom } from './App'
-import { isDropdownOpenAtom } from './App'
+import { isMenuOpenAtom } from './ExcalidrawApp'
+import { isDropdownOpenAtom } from './ExcalidrawApp'
 import { useSetAtom } from 'jotai'
 
 interface Props extends Omit<DialogProps, 'onCloseRequest'> {

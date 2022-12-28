@@ -14,7 +14,7 @@ import PublishLibrary from './PublishLibrary'
 import { Dialog } from './Dialog'
 import { useOutsideClickHook } from '../hooks/useOutsideClick'
 import MenuItem from './MenuItem'
-import { isDropdownOpenAtom } from './App'
+import { isDropdownOpenAtom } from './ExcalidrawApp'
 
 const getSelectedItems = (libraryItems: LibraryItems, selectedItems: LibraryItem['id'][]) =>
   libraryItems.filter(item => selectedItems.includes(item.id))

@@ -25,9 +25,9 @@ import { getSelectedElements } from '../scene'
 import { isPointHittingElementBoundingBox } from './collision'
 import { getElementAbsoluteCoords } from './'
 
-import './Hyperlink.scss'
+import './Hyperlink.style.scss'
 import { trackEvent } from '../analytics'
-import { useExcalidrawAppState } from '../components/App'
+import { useExcalidrawAppState } from '../components/ExcalidrawApp'
 
 const CONTAINER_WIDTH = 320
 const SPACE_BOTTOM = 85

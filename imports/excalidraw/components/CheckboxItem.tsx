@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 import { checkIcon } from './icons'
 
-import './CheckboxItem.scss'
+import './CheckboxItem.style.scss'
 
 export const CheckboxItem: React.FC<{
   checked: boolean

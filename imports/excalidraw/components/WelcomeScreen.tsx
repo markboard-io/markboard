@@ -8,7 +8,7 @@ import { collabDialogShownAtom } from '../excalidraw-app/collab/Collab'
 import { t } from '../i18n'
 import { AppState } from '../types'
 import { ExcalLogo, HelpIcon, LoadIcon, PlusPromoIcon, UsersIcon } from './icons'
-import './WelcomeScreen.scss'
+import './WelcomeScreen.style.scss'
 
 const WelcomeScreenItem = ({
   label,

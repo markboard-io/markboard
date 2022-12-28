@@ -1,8 +1,8 @@
-import './ToolIcon.scss'
+import './ToolIcon.style.scss'
 
 import React, { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import { useExcalidrawContainer } from './App'
+import { useExcalidrawContainer } from './ExcalidrawApp'
 import { AbortError } from '../errors'
 import Spinner from './Spinner'
 import { PointerType } from '../element/types'

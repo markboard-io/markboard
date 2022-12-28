@@ -340,7 +340,7 @@ const gesture: Gesture = {
   initialScale: null
 }
 
-class App extends React.Component<AppProps, AppState> {
+class ExcalidrawApp extends React.Component<AppProps, AppState> {
   canvas: AppClassProperties['canvas'] = null
   rc: RoughCanvas | null = null
   unmounted = false
@@ -579,13 +579,13 @@ class App extends React.Component<AppProps, AppState> {
                   {selectedElement.length === 1 &&
                     !this.state.contextMenu &&
                     this.state.showHyperlinkPopup && (
-                    <Hyperlink
-                      key={selectedElement[0].id}
-                      element={selectedElement[0]}
-                      setAppState={this.setAppState}
-                      onLinkOpen={this.props.onLinkOpen}
-                    />
-                  )}
+                      <Hyperlink
+                        key={selectedElement[0].id}
+                        element={selectedElement[0]}
+                        setAppState={this.setAppState}
+                        onLinkOpen={this.props.onLinkOpen}
+                      />
+                    )}
                   {this.state.toast !== null && (
                     <Toast
                       message={this.state.toast.message}
@@ -743,7 +743,7 @@ class App extends React.Component<AppProps, AppState> {
 
   private initializeScene = async () => {
     if ('launchQueue' in window && 'LaunchParams' in window) {
-      (window as any).launchQueue.setConsumer(async (launchParams: { files: any[] }) => {
+      ;(window as any).launchQueue.setConsumer(async (launchParams: { files: any[] }) => {
         if (!launchParams.files.length) {
           return
         }
@@ -1299,7 +1299,7 @@ class App extends React.Component<AppProps, AppState> {
     if (!didTapTwice) {
       didTapTwice = true
       clearTimeout(tappedTwiceTimer)
-      tappedTwiceTimer = window.setTimeout(App.resetTapTwice, TAP_TWICE_TIMEOUT)
+      tappedTwiceTimer = window.setTimeout(ExcalidrawApp.resetTapTwice, TAP_TWICE_TIMEOUT)
       return
     }
     // insert text only if we tapped twice with a single finger
@@ -1434,14 +1434,14 @@ class App extends React.Component<AppProps, AppState> {
       typeof opts.position === 'object'
         ? opts.position.clientX
         : opts.position === 'cursor'
-          ? cursorX
-          : this.state.width / 2 + this.state.offsetLeft
+        ? cursorX
+        : this.state.width / 2 + this.state.offsetLeft
     const clientY =
       typeof opts.position === 'object'
         ? opts.position.clientY
         : opts.position === 'cursor'
-          ? cursorY
-          : this.state.height / 2 + this.state.offsetTop
+        ? cursorY
+        : this.state.height / 2 + this.state.offsetTop
 
     const { x, y } = viewportCoordsToSceneCoords({ clientX, clientY }, this.state)
 
@@ -1765,8 +1765,8 @@ class App extends React.Component<AppProps, AppState> {
           }
           return prop === 'key'
             ? // CapsLock inverts capitalization based on ShiftKey, so invert
-          // it back
-            event.shiftKey
+              // it back
+              event.shiftKey
               ? ev.key.toUpperCase()
               : ev.key.toLowerCase()
             : value
@@ -2248,12 +2248,12 @@ class App extends React.Component<AppProps, AppState> {
       includeBoundTextElement && includeLockedElements
         ? this.scene.getNonDeletedElements()
         : this.scene
-          .getNonDeletedElements()
-          .filter(
-            element =>
-              (includeLockedElements || !element.locked) &&
+            .getNonDeletedElements()
+            .filter(
+              element =>
+                (includeLockedElements || !element.locked) &&
                 (includeBoundTextElement || !(isTextElement(element) && element.containerId))
-          )
+            )
 
     return getElementsAtPosition(elements, element => hitTest(element, this.state, x, y))
   }
@@ -2321,25 +2321,25 @@ class App extends React.Component<AppProps, AppState> {
     const element = existingTextElement
       ? existingTextElement
       : newTextElement({
-        x: parentCenterPosition ? parentCenterPosition.elementCenterX : sceneX,
-        y: parentCenterPosition ? parentCenterPosition.elementCenterY : sceneY,
-        strokeColor: this.state.currentItemStrokeColor,
-        backgroundColor: this.state.currentItemBackgroundColor,
-        fillStyle: this.state.currentItemFillStyle,
-        strokeWidth: this.state.currentItemStrokeWidth,
-        strokeStyle: this.state.currentItemStrokeStyle,
-        roughness: this.state.currentItemRoughness,
-        opacity: this.state.currentItemOpacity,
-        roundness: null,
-        text: '',
-        fontSize: this.state.currentItemFontSize,
-        fontFamily: this.state.currentItemFontFamily,
-        textAlign: parentCenterPosition ? 'center' : this.state.currentItemTextAlign,
-        verticalAlign: parentCenterPosition ? VERTICAL_ALIGN.MIDDLE : DEFAULT_VERTICAL_ALIGN,
-        containerId: shouldBindToContainer ? container?.id : undefined,
-        groupIds: container?.groupIds ?? [],
-        locked: false
-      })
+          x: parentCenterPosition ? parentCenterPosition.elementCenterX : sceneX,
+          y: parentCenterPosition ? parentCenterPosition.elementCenterY : sceneY,
+          strokeColor: this.state.currentItemStrokeColor,
+          backgroundColor: this.state.currentItemBackgroundColor,
+          fillStyle: this.state.currentItemFillStyle,
+          strokeWidth: this.state.currentItemStrokeWidth,
+          strokeStyle: this.state.currentItemStrokeStyle,
+          roughness: this.state.currentItemRoughness,
+          opacity: this.state.currentItemOpacity,
+          roundness: null,
+          text: '',
+          fontSize: this.state.currentItemFontSize,
+          fontFamily: this.state.currentItemFontFamily,
+          textAlign: parentCenterPosition ? 'center' : this.state.currentItemTextAlign,
+          verticalAlign: parentCenterPosition ? VERTICAL_ALIGN.MIDDLE : DEFAULT_VERTICAL_ALIGN,
+          containerId: shouldBindToContainer ? container?.id : undefined,
+          groupIds: container?.groupIds ?? [],
+          locked: false
+        })
 
     if (!existingTextElement && shouldBindToContainer && container) {
       mutateElement(container, {
@@ -2706,7 +2706,7 @@ class App extends React.Component<AppProps, AppState> {
         let dyFromLastCommitted = gridY - ry - lastCommittedY
 
         if (shouldRotateWithDiscreteAngle(event)) {
-          ({ width: dxFromLastCommitted, height: dyFromLastCommitted } =
+          ;({ width: dxFromLastCommitted, height: dyFromLastCommitted } =
             getLockedLinearCursorAlignSize(
               // actual coordinate of the last committed point
               lastCommittedX + rx,
@@ -3865,10 +3865,10 @@ class App extends React.Component<AppProps, AppState> {
       roundness:
         this.state.currentItemRoundness === 'round'
           ? {
-            type: isUsingAdaptiveRadius(elementType)
-              ? ROUNDNESS.ADAPTIVE_RADIUS
-              : ROUNDNESS.PROPORTIONAL_RADIUS
-          }
+              type: isUsingAdaptiveRadius(elementType)
+                ? ROUNDNESS.ADAPTIVE_RADIUS
+                : ROUNDNESS.PROPORTIONAL_RADIUS
+            }
           : null,
       locked: false
     })
@@ -4201,7 +4201,7 @@ class App extends React.Component<AppProps, AppState> {
         let dy = gridY - draggingElement.y
 
         if (shouldRotateWithDiscreteAngle(event) && points.length === 2) {
-          ({ width: dx, height: dy } = getLockedLinearCursorAlignSize(
+          ;({ width: dx, height: dy } = getLockedLinearCursorAlignSize(
             draggingElement.x,
             draggingElement.y,
             pointerCoords.x,
@@ -4284,10 +4284,10 @@ class App extends React.Component<AppProps, AppState> {
                   ),
                   ...(pointerDownState.hit.element
                     ? {
-                      // if using ctrl/cmd, select the hitElement only if we
-                      // haven't box-selected anything else
-                      [pointerDownState.hit.element.id]: !elementsWithinSelection.length
-                    }
+                        // if using ctrl/cmd, select the hitElement only if we
+                        // haven't box-selected anything else
+                        [pointerDownState.hit.element.id]: !elementsWithinSelection.length
+                      }
                     : null)
                 },
                 showHyperlinkPopup:
@@ -4724,7 +4724,7 @@ class App extends React.Component<AppProps, AppState> {
       }
 
       if (pointerDownState.drag.hasOccurred || isResizing || isRotating) {
-        (isBindingEnabled(this.state) ? bindOrUnbindSelectedElements : unbindLinearElements)(
+        ;(isBindingEnabled(this.state) ? bindOrUnbindSelectedElements : unbindLinearElements)(
           getSelectedElements(this.scene.getNonDeletedElements(), this.state)
         )
       }
@@ -4824,7 +4824,7 @@ class App extends React.Component<AppProps, AppState> {
 
     if (!fileId) {
       console.warn(
-        'Couldn\'t generate file id or the supplied `generateIdForFile` didn\'t resolve to one.'
+        "Couldn't generate file id or the supplied `generateIdForFile` didn't resolve to one."
       )
       throw new Error(t('errors.imageInsertError'))
     }
@@ -5383,15 +5383,15 @@ class App extends React.Component<AppProps, AppState> {
       {
         ...(element && !this.state.selectedElementIds[element.id]
           ? selectGroupsForSelectedElements(
-            {
-              ...this.state,
-              selectedElementIds: { [element.id]: true },
-              selectedLinearElement: isLinearElement(element)
-                ? new LinearElementEditor(element, this.scene)
-                : null
-            },
-            this.scene.getNonDeletedElements()
-          )
+              {
+                ...this.state,
+                selectedElementIds: { [element.id]: true },
+                selectedLinearElement: isLinearElement(element)
+                  ? new LinearElementEditor(element, this.scene)
+                  : null
+              },
+              this.scene.getNonDeletedElements()
+            )
           : this.state),
         showHyperlinkPopup: false
       },
@@ -5756,7 +5756,7 @@ declare global {
       elements: readonly ExcalidrawElement[]
       state: AppState
       setState: React.Component<any, AppState>['setState']
-      app: InstanceType<typeof App>
+      app: InstanceType<typeof ExcalidrawApp>
       history: History
     }
   }
@@ -5778,4 +5778,4 @@ if (process.env.NODE_ENV === ENV.TEST || process.env.NODE_ENV === ENV.DEVELOPMEN
   })
 }
 
-export default App
+export default ExcalidrawApp
