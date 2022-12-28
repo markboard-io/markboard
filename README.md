@@ -21,7 +21,7 @@
 - **Digital Whiteboard** (Sticky Notes, Diagrams, Drawings, Generative AI Features)
 - **Video Conference** (Meetings, Screen Sharing)
 - **Block-based Markdown Documents** (Note Taking, Team Knowledge Center)
-- **Text Channels** (Send Messages, Images, Emojis)
+- **Text Channels** (Chat, Send Messages, Images, Emojis)
 
 ## Try it now
 
