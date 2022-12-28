@@ -18,7 +18,7 @@
 
 ## Core Features
 
-BoardX = Miro + Zoom + Slack + Zoom. The open source "Zoom One" alternative. We're building features for "All-in-One Workspace" using enterprise-grade open source tools.
+BoardX = Miro + Zoom + Slack + Notion. The open source "Zoom One" alternative. We're building features for "All-in-One Workspace" using enterprise-grade open source tools.
 
 - 🪧 **Digital Whiteboard** (Sticky Notes, Diagrams, Drawings, Generative AI)
 - 📹 **Video Conferencing** (Virtual Meetings, Screen Sharing)
