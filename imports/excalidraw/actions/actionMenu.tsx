@@ -55,7 +55,7 @@ export const actionToggleEditMenu = register({
 export const actionFullScreen = register({
   name: 'toggleFullScreen',
   viewMode: true,
-  trackEvent: { category: 'canvas', predicate: appState => !isFullScreen() },
+  trackEvent: { category: 'canvas', predicate: _appState => !isFullScreen() },
   perform: () => {
     if (!isFullScreen()) {
       allowFullScreen()

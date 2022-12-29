@@ -201,7 +201,7 @@ export const ShapesSwitcher = ({
   appState: AppState
 }) => (
   <>
-    {SHAPES.map(({ value, icon, key, numericKey, fillable }, index) => {
+    {SHAPES.map(({ value, icon, key, numericKey, fillable }, _index) => {
       const label = t(`toolBar.${value}`)
       const letter = key && (typeof key === 'string' ? key : key[0])
       const shortcut = letter
@@ -256,7 +256,7 @@ export const ShapesSwitcher = ({
 
 export const ZoomActions = ({
   renderAction,
-  zoom
+  zoom: _zoom
 }: {
   renderAction: ActionManager['renderAction']
   zoom: Zoom

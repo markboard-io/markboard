@@ -7,6 +7,10 @@
   |- `actions/` store all actions taking effects to canvas
 	|- `charts/` excalidraw charts support
 	|- `components/` react components
+	  |- `LayerUI` react entry point, core react components are aggregated here
+	     |- `<Island className='menu-container' />` App Menu
+		|- `MenuUtisl` MenuLinks & Menu Seperator in the App Menu
+		|- `Island` the common react components to create a floating panel, aka "island"
 	|- `css/` common stylesheets
 	|- `data/` data operation utilities
 	|- `element/` excalidraw canvas elements & helpers
