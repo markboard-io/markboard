@@ -5,6 +5,7 @@
 ```typescript
 |- `excalidraw/`
   |- `actions/` store all actions taking effects to canvas
+	|- `charts/` excalidraw charts support
 	|- `components/` react components
 	|- `css/` common stylesheets
 	|- `data/` data operation utilities
@@ -22,4 +23,5 @@
 	|- `analytics`
 	|- `appState` global app state
 	|- `bug-issue-template` excalidraw github bug issue report template
+	|- `clients` getClient Colors & getClientInitials
 ```

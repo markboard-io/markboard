@@ -45,7 +45,7 @@ const ChartPreviewBtn = (props: {
       previewNode.appendChild(svg)
 
       if (props.selected) {
-        (previewNode.parentNode as HTMLDivElement).focus()
+        ;(previewNode.parentNode as HTMLDivElement).focus()
       }
     })()
 
