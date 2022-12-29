@@ -1,6 +1,6 @@
 import React from 'react'
 import { fireEvent, render } from './test-utils'
-import ExcalidrawApp from '../app'
+import { ExcalidrawApp } from '../app'
 import { UI, Pointer, Keyboard } from './helpers/ui'
 import { getTransformHandles } from '../element/transformHandles'
 import { API } from './helpers/api'

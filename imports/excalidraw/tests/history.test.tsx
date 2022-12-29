@@ -1,6 +1,6 @@
 import React from 'react'
 import { assertSelectedElements, render } from './test-utils'
-import ExcalidrawApp from '../app'
+import { ExcalidrawApp } from '../app'
 import { Keyboard, Pointer, UI } from './helpers/ui'
 import { API } from './helpers/api'
 import { getDefaultAppState } from '../appState'

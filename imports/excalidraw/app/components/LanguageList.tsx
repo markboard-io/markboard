@@ -1,8 +1,8 @@
 import { useAtom } from 'jotai'
 import React from 'react'
-import { langCodeAtom } from '..'
-import * as i18n from  '/imports/i18n'
-import { languages } from  '/imports/i18n'
+import { langCodeAtom } from '../ExcalidrawApp'
+import * as i18n from '/imports/i18n'
+import { languages } from '/imports/i18n'
 
 export const LanguageList = ({ style }: { style?: React.CSSProperties }) => {
   const [langCode, setLangCode] = useAtom(langCodeAtom)

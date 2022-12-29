@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ExcalidrawApp from '../app'
+import { ExcalidrawApp } from '../app'
 import * as Renderer from '../renderer/renderScene'
 import { KEYS } from '../keys'
 import {

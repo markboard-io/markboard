@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ExcalidrawApp from '../app'
+import { ExcalidrawApp } from '../app'
 import { render } from '../tests/test-utils'
 import { Keyboard, Pointer, UI } from '../tests/helpers/ui'
 import { KEYS } from '../keys'
 import { API } from '../tests/helpers/api'
 import { actionSelectAll } from '../actions'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { mutateElement } from '../element/mutateElement'
 
 ReactDOM.unmountComponentAtNode(document.getElementById('root')!)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, updateSceneData, waitFor } from './test-utils'
-import ExcalidrawApp from '../app'
+import { ExcalidrawApp } from '../app'
 import { API } from './helpers/api'
 import { createUndoAction } from '../actions/actionHistory'
 const { h } = window

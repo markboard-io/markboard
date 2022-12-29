@@ -11,7 +11,7 @@ import {
   queryAllByText,
   waitFor
 } from './test-utils'
-import ExcalidrawApp from '../app'
+import { ExcalidrawApp } from '../app'
 import * as Renderer from '../renderer/renderScene'
 import { reseed } from '../random'
 import { UI, Pointer, Keyboard } from './helpers/ui'
@@ -20,7 +20,7 @@ import { ShortcutName } from '../actions/shortcuts'
 import { copiedStyles } from '../actions/actionStyles'
 import { API } from './helpers/api'
 import { setDateTimeForTests } from '../utils'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { LibraryItem } from '../types'
 
 const checkpoint = (name: string) => {
