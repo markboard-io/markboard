@@ -35,3 +35,9 @@
    .disable-zen-mode--visible {
    }
    ```
+
+5. Use excalidraw `i18n` solution to support multiple languages
+
+6. Use [Command Pattern](https://refactoring.guru/design-patterns/command) to manipulate canvas, check code under folder `/imports/excalidraw/actions`
+
+   - We have `manager.ts#ActionManager` to `registerAction`, `executeActio` and `renderAction` into the canvas.
