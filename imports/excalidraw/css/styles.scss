@@ -329,12 +329,13 @@
     height: 100%;
   }
 
-  .App-menu__left {
+  .App-attributes-island__right {
     overflow-y: auto;
     padding: 0.75rem;
     width: 202px;
     box-sizing: border-box;
     position: absolute;
+    right: 0;
   }
 
   .dropdown-select {

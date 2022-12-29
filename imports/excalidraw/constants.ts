@@ -62,7 +62,7 @@ export const ENV = {
 }
 
 export const CLASSES = {
-  SHAPE_ACTIONS_MENU: 'App-menu__left',
+  SHAPE_ACTIONS_MENU: 'App-attributes-island__right',
 }
 
 // 1-based in case we ever do `if(element.fontFamily)`
