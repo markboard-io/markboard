@@ -55,8 +55,11 @@ meteor shell # for debugging
 
 ### Notable Used Tools
 
-- [Meteor](https://www.meteor.com/)
-- [Excalidraw](https://excalidraw.com/)
+- [meteor](https://github.com/meteor/meteor) Meteor, the JavaScript App Platform.
+- [excalidraw](https://github.com/excalidraw/excalidraw) Virtual whiteboard for sketching hand-drawn like diagrams.
+- [lexical](https://github.com/facebook/lexical) Lexical is an extensible text editor framework that provides excellent reliability, accessibility and performance.
+- [yjs](https://github.com/yjs/yjs) A CRDT framework with a powerful abstraction of shared data
+- [jisti](https://github.com/jitsi) Jitsi Videobridge is a WebRTC compatible video router or SFU that lets build highly scalable video conferencing infrastructure.
 
 ### License
 
