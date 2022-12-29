@@ -1,17 +1,9 @@
-import {
-  isSyncableElement,
-  SocketUpdateData,
-  SocketUpdateDataSource,
-} from '../data'
+import { isSyncableElement, SocketUpdateData, SocketUpdateDataSource } from '../data'
 
 import { TCollabClass } from './Collab'
 
 import { ExcalidrawElement } from '../../element/types'
-import {
-  WS_EVENTS,
-  FILE_UPLOAD_TIMEOUT,
-  WS_SCENE_EVENT_TYPES,
-} from '../app_constants'
+import { WS_EVENTS, FILE_UPLOAD_TIMEOUT, WS_SCENE_EVENT_TYPES } from '../app_constants'
 import { UserIdleState } from '../../types'
 import { trackEvent } from '../../analytics'
 import throttle from 'lodash.throttle'
@@ -39,6 +31,7 @@ class Portal {
 
     // Initialize socket listeners
     this.socket.on('init-room', () => {
+      console.log('[debug] init-room')
       if (this.socket) {
         this.socket.emit('join-room', this.roomId)
         trackEvent('share', 'room joined')
@@ -48,7 +41,7 @@ class Portal {
       this.broadcastScene(
         WS_SCENE_EVENT_TYPES.INIT,
         this.collab.getSceneElementsIncludingDeleted(),
-        /* syncAll */ true,
+        /* syncAll */ true
       )
     })
     this.socket.on('room-user-change', (clients: string[]) => {
@@ -72,18 +65,10 @@ class Portal {
   }
 
   isOpen() {
-    return !!(
-      this.socketInitialized &&
-      this.socket &&
-      this.roomId &&
-      this.roomKey
-    )
+    return !!(this.socketInitialized && this.socket && this.roomId && this.roomKey)
   }
 
-  async _broadcastSocketData(
-    data: SocketUpdateData,
-    volatile = false,
-  ) {
+  async _broadcastSocketData(data: SocketUpdateData, volatile = false) {
     if (this.isOpen()) {
       const json = JSON.stringify(data)
       const encoded = new TextEncoder().encode(json)
@@ -93,7 +78,7 @@ class Portal {
         volatile ? WS_EVENTS.SERVER_VOLATILE : WS_EVENTS.SERVER,
         this.roomId,
         encryptedBuffer,
-        iv,
+        iv
       )
     }
   }
@@ -102,37 +87,35 @@ class Portal {
     try {
       await this.collab.fileManager.saveFiles({
         elements: this.collab.excalidrawAPI.getSceneElementsIncludingDeleted(),
-        files: this.collab.excalidrawAPI.getFiles(),
+        files: this.collab.excalidrawAPI.getFiles()
       })
     } catch (error: any) {
       if (error.name !== 'AbortError') {
         this.collab.excalidrawAPI.updateScene({
           appState: {
-            errorMessage: error.message,
-          },
+            errorMessage: error.message
+          }
         })
       }
     }
 
     this.collab.excalidrawAPI.updateScene({
-      elements: this.collab.excalidrawAPI
-        .getSceneElementsIncludingDeleted()
-        .map((element) => {
-          if (this.collab.fileManager.shouldUpdateImageElementStatus(element)) {
-            // this will signal collaborators to pull image data from server
-            // (using mutation instead of newElementWith otherwise it'd break
-            // in-progress dragging)
-            return newElementWith(element, { status: 'saved' })
-          }
-          return element
-        }),
+      elements: this.collab.excalidrawAPI.getSceneElementsIncludingDeleted().map(element => {
+        if (this.collab.fileManager.shouldUpdateImageElementStatus(element)) {
+          // this will signal collaborators to pull image data from server
+          // (using mutation instead of newElementWith otherwise it'd break
+          // in-progress dragging)
+          return newElementWith(element, { status: 'saved' })
+        }
+        return element
+      })
     })
   }, FILE_UPLOAD_TIMEOUT)
 
   broadcastScene = async (
     updateType: WS_SCENE_EVENT_TYPES.INIT | WS_SCENE_EVENT_TYPES.UPDATE,
     allElements: readonly ExcalidrawElement[],
-    syncAll: boolean,
+    syncAll: boolean
   ) => {
     if (updateType === WS_SCENE_EVENT_TYPES.INIT && !syncAll) {
       throw new Error('syncAll must be true when sending SCENE.INIT')
@@ -146,33 +129,29 @@ class Portal {
         if (
           (syncAll ||
             !this.broadcastedElementVersions.has(element.id) ||
-            element.version >
-              this.broadcastedElementVersions.get(element.id)!) &&
+            element.version > this.broadcastedElementVersions.get(element.id)!) &&
           isSyncableElement(element)
         ) {
           acc.push({
             ...element,
             // z-index info for the reconciler
-            [PRECEDING_ELEMENT_KEY]: idx === 0 ? '^' : elements[idx - 1]?.id,
+            [PRECEDING_ELEMENT_KEY]: idx === 0 ? '^' : elements[idx - 1]?.id
           })
         }
         return acc
       },
-      [] as BroadcastedExcalidrawElement[],
+      [] as BroadcastedExcalidrawElement[]
     )
 
     const data: SocketUpdateDataSource[typeof updateType] = {
       type: updateType,
       payload: {
-        elements: syncableElements,
-      },
+        elements: syncableElements
+      }
     }
 
     for (const syncableElement of syncableElements) {
-      this.broadcastedElementVersions.set(
-        syncableElement.id,
-        syncableElement.version,
-      )
+      this.broadcastedElementVersions.set(syncableElement.id, syncableElement.version)
     }
 
     this.queueFileUpload()
@@ -187,19 +166,19 @@ class Portal {
         payload: {
           socketId: this.socket.id,
           userState,
-          username: this.collab.state.username,
-        },
+          username: this.collab.state.username
+        }
       }
       return this._broadcastSocketData(
         data as SocketUpdateData,
-        true, // volatile
+        true // volatile
       )
     }
   }
 
   broadcastMouseLocation = (payload: {
-    pointer: SocketUpdateDataSource['MOUSE_LOCATION']['payload']['pointer'];
-    button: SocketUpdateDataSource['MOUSE_LOCATION']['payload']['button'];
+    pointer: SocketUpdateDataSource['MOUSE_LOCATION']['payload']['pointer']
+    button: SocketUpdateDataSource['MOUSE_LOCATION']['payload']['button']
   }) => {
     if (this.socket?.id) {
       const data: SocketUpdateDataSource['MOUSE_LOCATION'] = {
@@ -208,14 +187,13 @@ class Portal {
           socketId: this.socket.id,
           pointer: payload.pointer,
           button: payload.button || 'up',
-          selectedElementIds:
-            this.collab.excalidrawAPI.getAppState().selectedElementIds,
-          username: this.collab.state.username,
-        },
+          selectedElementIds: this.collab.excalidrawAPI.getAppState().selectedElementIds,
+          username: this.collab.state.username
+        }
       }
       return this._broadcastSocketData(
         data as SocketUpdateData,
-        true, // volatile
+        true // volatile
       )
     }
   }

@@ -7,7 +7,6 @@ import socketIO from 'socket.io'
  */
 export function startExcalidrawSyncService() {
   const io = socketIO(WebApp.httpServer, {
-    // path: '/excalidraw-sync',
     handlePreflightRequest: (req, res) => {
       const headers = {
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
@@ -21,14 +20,13 @@ export function startExcalidrawSyncService() {
   console.log('start sync service')
 
   const debug = (...messages: string[]) => {
-    const DEBUG = true
+    const DEBUG = false // Toogle logs with this flag
     if (DEBUG) {
       console.log(...messages)
     }
   }
 
   io.on('connection', socket => {
-    console.log('on connection')
     io.to(`${ socket.id }`).emit('init-room')
     socket.on('join-room', roomID => {
       debug(`${ socket.id } has joined ${ roomID }`)
