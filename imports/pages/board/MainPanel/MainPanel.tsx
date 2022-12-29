@@ -2,6 +2,7 @@ import './MainPanel.style.scss'
 import React, { useEffect } from 'react'
 import { Panel } from 'react-resizable-panels'
 import { fabric } from 'fabric'
+import { ExcalidrawApp } from '/imports/excalidraw'
 
 export function MainPanel() {
   useEffect(() => {
@@ -30,7 +31,7 @@ export function MainPanel() {
 
   return (
     <Panel>
-      <canvas id='canvas-container' className='canvasContainer' height='100%' width='100%' />
+      <ExcalidrawApp />
     </Panel>
   )
 }

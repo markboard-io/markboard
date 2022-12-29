@@ -1,11 +1,14 @@
 import { Meteor } from 'meteor/meteor'
-import { LinksCollection } from '/imports/apis/links'
+import { LinksCollection } from '../imports/services/links'
+import { startExcalidrawSyncService } from '/imports/services'
 
 async function insertLink({ title, url }: { title: string, url: string }) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() })
 }
 
 Meteor.startup(async () => {
+  startExcalidrawSyncService()
+
   if (await LinksCollection.find().countAsync() === 0) {
     await insertLink({
       title: 'Do the Tutorial',
