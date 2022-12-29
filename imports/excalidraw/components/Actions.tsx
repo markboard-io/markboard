@@ -2,7 +2,7 @@ import React from 'react'
 import { ActionManager } from '../actions/manager'
 import { getNonDeletedElements } from '../element'
 import { ExcalidrawElement, PointerType } from '../element/types'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { useDevice } from './ExcalidrawApp'
 import {
   canChangeRoundness,

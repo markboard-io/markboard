@@ -1,7 +1,7 @@
 import React from 'react'
 import { getCommonBounds } from '../element/bounds'
 import { NonDeletedExcalidrawElement } from '../element/types'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { getTargetElements } from '../scene'
 import { AppState, ExcalidrawProps } from '../types'
 import { CloseIcon } from './icons'

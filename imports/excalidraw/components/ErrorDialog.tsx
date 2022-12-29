@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 
 import { Dialog } from './Dialog'
 import { useExcalidrawContainer } from './ExcalidrawApp'

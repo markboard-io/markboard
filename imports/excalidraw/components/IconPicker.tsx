@@ -3,7 +3,7 @@ import { Popover } from './Popover'
 
 import './IconPicker.style.scss'
 import { isArrowKey, KEYS } from '../keys'
-import { getLanguage } from '../i18n'
+import { getLanguage } from  '/imports/i18n'
 import clsx from 'clsx'
 
 function Picker<T>({

@@ -1,5 +1,5 @@
 import React from 'react'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { isDarwin, isWindows, KEYS } from '../keys'
 import { Dialog } from './Dialog'
 import { getShortcutKey } from '../utils'

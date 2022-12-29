@@ -4,7 +4,7 @@ import { isTransparent } from '../utils'
 
 import './ColorPicker.style.scss'
 import { isArrowKey, KEYS } from '../keys'
-import { t, getLanguage } from '../i18n'
+import { t, getLanguage } from  '/imports/i18n'
 import { isWritableElement } from '../utils'
 import colors from '../colors'
 import { ExcalidrawElement } from '../element/types'

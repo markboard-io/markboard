@@ -36,7 +36,7 @@ import {
 import { importUsernameFromLocalStorage, saveUsernameToLocalStorage } from '../data/localStorage'
 import Portal from './Portal'
 import RoomDialog from './RoomDialog'
-import { t } from '../../i18n'
+import { t } from  '/imports/i18n'
 import { UserIdleState } from '../../types'
 import { IDLE_THRESHOLD, ACTIVE_THRESHOLD } from '../../constants'
 import { encodeFilesForUpload, FileManager, updateStaleImageStatuses } from '../data/FileManager'

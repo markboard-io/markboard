@@ -1,7 +1,7 @@
 import React from 'react'
 import { moveOneLeft, moveOneRight, moveAllLeft, moveAllRight } from '../zindex'
 import { KEYS, isDarwin, CODES } from '../keys'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { getShortcutKey } from '../utils'
 import { register } from './register'
 import {

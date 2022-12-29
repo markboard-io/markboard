@@ -12,7 +12,7 @@ import { jotaiStore } from '../jotai'
 import { ExcalidrawElement } from '../element/types'
 import { getCommonBoundingBox } from '../element/bounds'
 import { AbortError } from '../errors'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { useEffect, useRef } from 'react'
 import { URL_HASH_KEYS, URL_QUERY_KEYS, APP_NAME, EVENT } from '../constants'
 

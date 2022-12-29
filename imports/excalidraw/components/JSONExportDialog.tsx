@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { NonDeletedExcalidrawElement } from '../element/types'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 
 import { AppState, ExportOpts, BinaryFiles } from '../types'
 import { Dialog } from './Dialog'

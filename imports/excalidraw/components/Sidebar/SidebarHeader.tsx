@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 import { useContext } from 'react'
-import { t } from '../../i18n'
+import { t } from  '/imports/i18n'
 import { useDevice } from '../ExcalidrawApp'
 import { SidebarPropsContext } from './common'
 import { CloseIcon, PinIcon } from '../icons'

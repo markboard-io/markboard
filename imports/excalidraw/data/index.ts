@@ -4,7 +4,7 @@ import {
 } from '../clipboard'
 import { DEFAULT_EXPORT_PADDING, MIME_TYPES } from '../constants'
 import { NonDeletedExcalidrawElement } from '../element/types'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { exportToCanvas, exportToSvg } from '../scene/export'
 import { ExportType } from '../scene/types'
 import { AppState, BinaryFiles } from '../types'

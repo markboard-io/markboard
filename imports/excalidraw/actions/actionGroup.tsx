@@ -1,6 +1,6 @@
 import React from 'react'
 import { KEYS } from '../keys'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { arrayToMap, getShortcutKey } from '../utils'
 import { register } from './register'
 import { UngroupIcon, GroupIcon } from '../components/icons'

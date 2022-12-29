@@ -9,9 +9,9 @@ import { setDateTimeForTests } from '../utils'
 import { API } from './helpers/api'
 import { Keyboard, Pointer, UI } from './helpers/ui'
 import { assertSelectedElements, fireEvent, render, screen, waitFor } from './test-utils'
-import { defaultLang } from '../i18n'
+import { defaultLang } from  '/imports/i18n'
 import { FONT_FAMILY } from '../constants'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 
 const { h } = window
 

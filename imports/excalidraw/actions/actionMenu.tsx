@@ -1,7 +1,7 @@
 import React from 'react'
 import { HamburgerMenuIcon, HelpIcon, palette } from '../components/icons'
 import { ToolButton } from '../components/ToolButton'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { showSelectedShapeActions, getNonDeletedElements } from '../element'
 import { register } from './register'
 import { allowFullScreen, exitFullScreen, isFullScreen } from '../utils'

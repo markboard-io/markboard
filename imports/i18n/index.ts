@@ -1,6 +1,6 @@
 import fallbackLangData from './locales/en.json'
 import percentages from './locales/percentages.json'
-import { ENV } from './constants'
+import { ENV } from '../excalidraw/constants'
 
 const COMPLETION_THRESHOLD = 85
 

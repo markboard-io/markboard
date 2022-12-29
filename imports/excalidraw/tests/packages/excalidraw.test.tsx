@@ -3,7 +3,7 @@ import { fireEvent, GlobalTestState, render } from '../test-utils'
 import { Excalidraw, Footer } from '../../packages/excalidraw/index'
 import { queryByText, queryByTestId } from '@testing-library/react'
 import { GRID_SIZE, THEME } from '../../constants'
-import { t } from '../../i18n'
+import { t } from  '/imports/i18n'
 
 const { h } = window
 

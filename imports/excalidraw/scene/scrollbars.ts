@@ -3,7 +3,7 @@ import { getCommonBounds } from '../element'
 import { Zoom } from '../types'
 import { ScrollBars } from './types'
 import { getGlobalCSSVariable } from '../utils'
-import { getLanguage } from '../i18n'
+import { getLanguage } from  '/imports/i18n'
 
 export const SCROLLBAR_MARGIN = 4
 export const SCROLLBAR_WIDTH = 6

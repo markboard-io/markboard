@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { serializeLibraryAsJSON } from '../data/json'
 import { ExcalidrawElement, NonDeleted } from '../element/types'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { AppState, ExcalidrawProps, LibraryItem, LibraryItems } from '../types'
 import { arrayToMap, chunk } from '../utils'
 import { LibraryUnit } from './LibraryUnit'

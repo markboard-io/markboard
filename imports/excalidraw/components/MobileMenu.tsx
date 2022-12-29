@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppState, Device, ExcalidrawProps } from '../types'
 import { ActionManager } from '../actions/manager'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import Stack from './Stack'
 import { showSelectedShapeActions } from '../element'
 import { NonDeletedExcalidrawElement } from '../element/types'

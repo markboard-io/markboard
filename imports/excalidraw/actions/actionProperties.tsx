@@ -59,7 +59,7 @@ import {
   TextAlign,
   VerticalAlign
 } from '../element/types'
-import { getLanguage, t } from '../i18n'
+import { getLanguage, t } from  '/imports/i18n'
 import { KEYS } from '../keys'
 import { randomInteger } from '../random'
 import {

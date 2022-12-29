@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { saveLibraryAsJSON } from '../data/json'
 import Library, { libraryItemsAtom } from '../data/library'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { AppState, LibraryItem, LibraryItems } from '../types'
 import { DotsIcon, ExportIcon, LoadIcon, publishIcon, TrashIcon } from './icons'
 import { ToolButton } from './ToolButton'

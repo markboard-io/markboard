@@ -10,7 +10,7 @@ import { actionDeleteSelected } from './actionDeleteSelected'
 import { getSelectedElements } from '../scene/selection'
 import { exportCanvas } from '../data/index'
 import { getNonDeletedElements, isTextElement } from '../element'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 
 export const actionCopy = register({
   name: 'copy',

@@ -1,5 +1,5 @@
 import React from 'react'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { AppState } from '../types'
 import { capitalizeString } from '../utils'
 import { trackEvent } from '../analytics'

@@ -1,7 +1,7 @@
 import React from 'react'
 import { VERSIONS } from '../constants'
 
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { AppState, ExcalidrawProps } from '../types'
 
 const LibraryMenuBrowseButton = ({

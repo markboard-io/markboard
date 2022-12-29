@@ -3,7 +3,7 @@ import React from 'react'
 // this icon is not great
 import { getShortcutFromShortcutName } from '../actions/shortcuts'
 import { save } from '../components/icons'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 
 import './ActiveFile.style.scss'
 import MenuItem from './MenuItem'

@@ -1,7 +1,7 @@
 import React from 'react'
 import './ToolIcon.style.scss'
 
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { ToolButton } from './ToolButton'
 import { THEME } from '../constants'
 import { Theme } from '../element/types'

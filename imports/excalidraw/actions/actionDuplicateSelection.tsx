@@ -5,7 +5,7 @@ import { ExcalidrawElement } from '../element/types'
 import { duplicateElement, getNonDeletedElements } from '../element'
 import { getSelectedElements, isSomeElementSelected } from '../scene'
 import { ToolButton } from '../components/ToolButton'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { arrayToMap, getShortcutKey } from '../utils'
 import { LinearElementEditor } from '../element/linearElementEditor'
 import {

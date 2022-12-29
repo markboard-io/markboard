@@ -20,7 +20,7 @@ import { ShortcutName } from '../actions/shortcuts'
 import { copiedStyles } from '../actions/actionStyles'
 import { API } from './helpers/api'
 import { setDateTimeForTests } from '../utils'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { LibraryItem } from '../types'
 
 const checkpoint = (name: string) => {

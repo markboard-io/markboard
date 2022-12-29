@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { LoadingMessage } from './LoadingMessage'
-import { defaultLang, Language, languages, setLanguage } from '../i18n'
+import { defaultLang, Language, languages, setLanguage } from  '/imports/i18n'
 import { Theme } from '../element/types'
 
 interface Props {

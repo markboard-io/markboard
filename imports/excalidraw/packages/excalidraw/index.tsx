@@ -6,7 +6,7 @@ import '../../css/app.scss'
 import '../../css/styles.scss'
 
 import { AppProps, ExcalidrawAPIRefValue, ExcalidrawProps } from '../../types'
-import { defaultLang } from '../../i18n'
+import { defaultLang } from  '/imports/i18n'
 import { DEFAULT_UI_OPTIONS } from '../../constants'
 import { Provider } from 'jotai'
 import { jotaiScope, jotaiStore } from '../../jotai'
@@ -175,7 +175,7 @@ export const Excalidraw = React.memo(forwardedRefComp, areEqual)
 Excalidraw.displayName = 'Excalidraw'
 
 export { getSceneVersion, isInvisiblySmallElement, getNonDeletedElements } from '../../element'
-export { defaultLang, languages } from '../../i18n'
+export { defaultLang, languages } from '../../../i18n'
 export { restore, restoreAppState, restoreElements, restoreLibraryItems } from '../../data/restore'
 export {
   exportToCanvas,

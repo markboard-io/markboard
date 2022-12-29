@@ -4,7 +4,7 @@ import {
   redrawTextBoundingBox,
 } from '../element'
 import { CODES, KEYS } from '../keys'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { register } from './register'
 import { newElementWith } from '../element/mutateElement'
 import {

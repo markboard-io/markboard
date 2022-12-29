@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { Popover } from './Popover'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 
 import './ContextMenu.style.scss'
 import { getShortcutFromShortcutName, ShortcutName } from '../actions/shortcuts'

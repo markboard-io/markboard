@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 
 import { MIME_TYPES, SVG_NS } from '../constants'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { AppClassProperties, DataURL, BinaryFiles } from '../types'
 import { isInitializedImageElement } from './typeChecks'
 import {

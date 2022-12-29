@@ -11,7 +11,7 @@ import {
 import { ToolButton } from '../components/ToolButton'
 import { getNonDeletedElements } from '../element'
 import { ExcalidrawElement } from '../element/types'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { KEYS } from '../keys'
 import { getSelectedElements, isSomeElementSelected } from '../scene'
 import { AppState } from '../types'

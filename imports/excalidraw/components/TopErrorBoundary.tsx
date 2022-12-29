@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Sentry from '@sentry/browser'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 
 interface TopErrorBoundaryState {
   hasError: boolean

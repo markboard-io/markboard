@@ -1,7 +1,7 @@
 import React from 'react'
 import oc from 'open-color'
 import { useEffect, useRef } from 'react'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { exportToSvg } from '../packages/utils'
 import { AppState, LibraryItem } from '../types'
 import { CloseIcon } from './icons'

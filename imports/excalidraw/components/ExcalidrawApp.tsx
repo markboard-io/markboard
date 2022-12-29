@@ -158,7 +158,7 @@ import {
   selectGroupsForSelectedElements
 } from '../groups'
 import History from '../history'
-import { defaultLang, getLanguage, languages, setLanguage, t } from '../i18n'
+import { defaultLang, getLanguage, languages, setLanguage, t } from  '/imports/i18n'
 import {
   CODES,
   shouldResizeFromCenter,

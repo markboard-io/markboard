@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 import { ActionManager } from '../../actions/manager'
-import { t } from '../../i18n'
+import { t } from  '/imports/i18n'
 import { AppState } from '../../types'
 import { ExitZenModeAction, FinalizeAction, UndoRedoActions, ZoomActions } from '../Actions'
 import { useDevice } from '../ExcalidrawApp'

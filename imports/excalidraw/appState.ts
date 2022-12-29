@@ -6,7 +6,7 @@ import {
   EXPORT_SCALES,
   THEME,
 } from './constants'
-import { t } from './i18n'
+import { t } from  '/imports/i18n'
 import { AppState, NormalizedZoomValue } from './types'
 import { getDateTime } from './utils'
 

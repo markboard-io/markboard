@@ -1,5 +1,5 @@
 import React from 'react'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { useExcalidrawContainer } from './ExcalidrawApp'
 
 export const Section: React.FC<{

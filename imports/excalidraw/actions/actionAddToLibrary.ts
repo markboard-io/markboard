@@ -3,7 +3,7 @@ import { getSelectedElements } from '../scene'
 import { getNonDeletedElements } from '../element'
 import { deepCopyElement } from '../element/newElement'
 import { randomId } from '../random'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 
 export const actionAddToLibrary = register({
   name: 'addToLibrary',

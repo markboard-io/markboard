@@ -1,6 +1,6 @@
 import React from 'react'
 import ExcalidrawApp from '../excalidraw-app'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { CODES } from '../keys'
 import { API } from '../tests/helpers/api'
 import { Keyboard, Pointer, UI } from '../tests/helpers/ui'

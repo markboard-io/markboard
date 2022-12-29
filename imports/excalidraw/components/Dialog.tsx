@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React, { useEffect, useState } from 'react'
 import { useCallbackRefState } from '../hooks/useCallbackRefState'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { useExcalidrawContainer, useDevice } from './ExcalidrawApp'
 import { KEYS } from '../keys'
 import './Dialog.style.scss'

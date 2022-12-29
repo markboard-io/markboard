@@ -10,7 +10,7 @@ import { ImportedDataState } from '../../data/types'
 import { isInvisiblySmallElement } from '../../element/sizeHelpers'
 import { isInitializedImageElement } from '../../element/typeChecks'
 import { ExcalidrawElement, FileId } from '../../element/types'
-import { t } from '../../i18n'
+import { t } from  '/imports/i18n'
 import {
   AppState,
   BinaryFileData,

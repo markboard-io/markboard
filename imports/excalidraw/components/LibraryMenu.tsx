@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRef, useState, useEffect, useCallback, RefObject, forwardRef } from 'react'
 import Library, { distributeLibraryItemsOnSquareGrid, libraryItemsAtom } from '../data/library'
-import { t } from '../i18n'
+import { t } from  '/imports/i18n'
 import { randomId } from '../random'
 import { LibraryItems, LibraryItem, AppState, ExcalidrawProps } from '../types'
 
