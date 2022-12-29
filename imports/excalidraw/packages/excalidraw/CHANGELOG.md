@@ -346,7 +346,7 @@ Check out the [release notes](https://github.com/excalidraw/excalidraw/releases/
 
     ```ts
     const getSyncableElements = (elements: readonly ExcalidrawElement[]) =>
-      elements.filter((el) => el.isDeleted || !isInvisiblySmallElement(el));
+      elements.filter(el => el.isDeleted || !isInvisiblySmallElement(el))
     ```
 
 ### Build

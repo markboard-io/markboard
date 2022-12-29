@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useContext } from 'react'
 import { flushSync } from 'react-dom'
 
@@ -158,7 +159,7 @@ import {
   selectGroupsForSelectedElements
 } from '../groups'
 import History from '../history'
-import { defaultLang, getLanguage, languages, setLanguage, t } from  '/imports/i18n'
+import { defaultLang, getLanguage, languages, setLanguage, t } from '/imports/i18n'
 import {
   CODES,
   shouldResizeFromCenter,

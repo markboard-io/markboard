@@ -10,7 +10,7 @@ import { APP_NAME, EVENT, THEME, TITLE_TIMEOUT, VERSION_TIMEOUT } from '../const
 import { loadFromBlob } from '../data/blob'
 import { ExcalidrawElement, FileId, NonDeletedExcalidrawElement, Theme } from '../element/types'
 import { useCallbackRefState } from '../hooks/useCallbackRefState'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { Excalidraw, defaultLang, Footer } from '../packages/excalidraw/index'
 import {
   AppState,

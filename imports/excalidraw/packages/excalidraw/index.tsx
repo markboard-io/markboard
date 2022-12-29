@@ -6,7 +6,7 @@ import '../../css/app.scss'
 import '../../css/styles.scss'
 
 import { AppProps, ExcalidrawAPIRefValue, ExcalidrawProps } from '../../types'
-import { defaultLang } from  '/imports/i18n'
+import { defaultLang } from '/imports/i18n'
 import { DEFAULT_UI_OPTIONS } from '../../constants'
 import { Provider } from 'jotai'
 import { jotaiScope, jotaiStore } from '../../jotai'
