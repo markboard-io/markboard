@@ -19,7 +19,7 @@
     "@types/lodash.throttle": "^4.1.7",
     "@types/pako": "^2.0.0",
     "@types/pica": "^9.0.1",
-    "browser-fs-access": "^0.31.1",
+    "browser-fs-access": "^0.29.1",
     "chai": "^4.3.7",
     "clsx": "^1.2.1",
     "fabric": "^5.3.0",

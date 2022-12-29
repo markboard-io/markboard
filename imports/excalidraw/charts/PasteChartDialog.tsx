@@ -2,12 +2,12 @@ import oc from 'open-color'
 
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { trackEvent } from '../analytics'
-import { ChartElements, renderSpreadsheet, Spreadsheet } from '../charts'
+import { ChartElements, renderSpreadsheet, Spreadsheet } from './charts'
 import { ChartType } from '../element/types'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { exportToSvg } from '../scene/export'
 import { AppState, LibraryItem } from '../types'
-import { Dialog } from './Dialog'
+import { Dialog } from '../components/Dialog'
 import './PasteChartDialog.style.scss'
 
 type OnInsertChart = (chartType: ChartType, elements: ChartElements) => void

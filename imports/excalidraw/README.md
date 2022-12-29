@@ -2,4 +2,4 @@ The code under this folder is forked from [excalidraw/excalidraw](https://github
 
 ## Removed Files
 
-- `index-node.ts` It's the entry-point for Node.js maybe. Likes like testing `exportToCanvas` features.
+- `index-node.ts` It's the entry-point for Node.js maybe. Looks like testing `exportToCanvas` features.

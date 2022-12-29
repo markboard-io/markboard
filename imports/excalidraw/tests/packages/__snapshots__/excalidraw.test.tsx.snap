@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`<Excalidraw/> Test UIOptions prop Test canvasActions should not hide any UI element when canvasActions is "undefined" 1`] = `
 <section

@@ -5,7 +5,7 @@ import { CLASSES, LIBRARY_SIDEBAR_WIDTH } from '../constants'
 import { exportCanvas } from '../data'
 import { isTextElement, showSelectedShapeActions } from '../element'
 import { NonDeletedExcalidrawElement } from '../element/types'
-import { Language, t } from  '/imports/i18n'
+import { Language, t } from '/imports/i18n'
 import { calculateScrollCenter } from '../scene'
 import { ExportType } from '../scene/types'
 import { AppProps, AppState, ExcalidrawProps, BinaryFiles, UIChildrenComponents } from '../types'
@@ -20,7 +20,7 @@ import { Island } from './Island'
 import { LoadingMessage } from './LoadingMessage'
 import { LockButton } from './LockButton'
 import { MobileMenu } from './MobileMenu'
-import { PasteChartDialog } from './PasteChartDialog'
+import { PasteChartDialog } from '../charts'
 import { Section } from './Section'
 import { HelpDialog } from './HelpDialog'
 import Stack from './Stack'
@@ -136,8 +136,7 @@ const LayerUI = ({
     }
 
     const createExporter =
-      (type: ExportType): ExportCB =>
-      async exportedElements => {
+      (type: ExportType): ExportCB => async exportedElements => {
         trackEvent('export', type, 'ui')
         const fileHandle = await exportCanvas(type, exportedElements, appState, files, {
           exportBackground: appState.exportBackground,

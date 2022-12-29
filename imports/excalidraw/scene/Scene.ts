@@ -19,7 +19,7 @@ const isIdKey = (elementKey: ElementKey): elementKey is ElementIdKey => {
   return false
 }
 
-class Scene {
+export default class Scene {
   // ---------------------------------------------------------------------------
   // static methods/props
   // ---------------------------------------------------------------------------
@@ -169,5 +169,3 @@ class Scene {
     return this.elements.findIndex((element) => element.id === elementId)
   }
 }
-
-export default Scene
