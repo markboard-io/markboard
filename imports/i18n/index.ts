@@ -1,6 +1,7 @@
 import fallbackLangData from './locales/en.json'
 import percentages from './locales/percentages.json'
 import { ENV } from '../excalidraw/constants'
+import './declare-imports'
 
 const COMPLETION_THRESHOLD = 85
 
@@ -87,14 +88,11 @@ export const setLanguage = async (lang: Language) => {
   document.documentElement.dir = currentLang.rtl ? 'rtl' : 'ltr'
   document.documentElement.lang = currentLang.code
 
-  debugger
   if (lang.code.startsWith(TEST_LANG_CODE)) {
     currentLangData = {}
   } else {
     try {
-      currentLangData = await import(
-        /* webpackChunkName: "locales/[request]" */ `./locales/${ lang.code }.json`
-      )
+      currentLangData = await import(`./locales/${ lang.code }.json`)
     } catch (error: any) {
       console.error(`Failed to load language ${ lang.code }:`, error.message)
       currentLangData = fallbackLangData

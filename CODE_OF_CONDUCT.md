@@ -47,3 +47,8 @@
     - We have `manager.ts#ActionManager` to `registerAction`, `executeActio` and `renderAction` into the canvas.
 
 7.  Use [jotai](https://jotai.org/) as our state management solution. The jotai is superior to [recoil](https://recoiljs.org/), both of them are atomic-oritented state management tools. It has proven success in the Excalidraw app, we could follow this pattern to scale it across the entire project.
+
+8. Create a module “whitelist” that can be read by the build process, but does not actually run to make dynamic expressions work with import.
+
+   - See `imports/i18n/declare-imports.ts` for reference.
+   - See [Meteor - Using import() with dynamic expressions](https://docs.meteor.com/packages/dynamic-import.html#Using-import-with-dynamic-expressions)
