@@ -11,20 +11,6 @@
     margin-bottom: auto;
     margin-inline-start: auto;
   }
-
-  .encrypted-icon {
-    border-radius: var(--space-factor);
-    color: var(--color-primary);
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-inline-start: auto;
-    margin-inline-end: 0.6em;
-
-    svg {
-      width: 1.2rem;
-      height: 1.2rem;
-    }
-  }
 }
 .excalidraw-app.is-collaborating {
   [data-testid="clear-canvas-button"] {
