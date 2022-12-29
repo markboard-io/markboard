@@ -5,6 +5,7 @@
 ```typescript
 |- `excalidraw/`
   |- `actions/` store all actions taking effects to canvas
+	|- `app/` ExclidrawApp react component entry point
 	|- `charts/` excalidraw charts support
 	|- `components/` react components
 	  |- `LayerUI` react entry point, core react components are aggregated here
@@ -15,9 +16,7 @@
 	|- `css/` common stylesheets
 	|- `data/` data operation utilities
 	|- `element/` excalidraw canvas elements & helpers
-	|- `excalidraw-app/` react entry point
 	|- `hooks/` react hooks
-	|- `package/` react entry point
 	|- `renderer/` excalidraw canvas rendering implementations
 	  |- `renderElement` control details about drawing element on canvas
 		|- `renderScene` draw scene on canvas

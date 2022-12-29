@@ -1,5 +1,5 @@
 import React from 'react'
-import ExcalidrawApp from '../excalidraw-app'
+import ExcalidrawApp from '../app'
 import { t } from  '/imports/i18n'
 import { CODES } from '../keys'
 import { API } from '../tests/helpers/api'

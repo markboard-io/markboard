@@ -2,10 +2,10 @@ import React, { ReactNode, useCallback, useEffect, useState } from 'react'
 import OpenColor from 'open-color'
 
 import { Dialog } from './Dialog'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 
 import { AppState, LibraryItems, LibraryItem } from '../types'
-import { exportToCanvas } from '../packages/utils'
+import { exportToCanvas } from '../app/utils'
 import { EXPORT_DATA_TYPES, EXPORT_SOURCE, MIME_TYPES, VERSIONS } from '../constants'
 import { ExportedLibraryData } from '../data/types'
 

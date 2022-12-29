@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, waitFor } from './test-utils'
-import ExcalidrawApp from '../excalidraw-app'
+import ExcalidrawApp from '../app'
 import { API } from './helpers/api'
 import { encodePngMetadata, encodeSvgMetadata, decodeSvgMetadata } from '../data/image'
 import { serializeAsJSON } from '../data/json'

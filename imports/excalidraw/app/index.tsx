@@ -11,7 +11,7 @@ import { loadFromBlob } from '../data/blob'
 import { ExcalidrawElement, FileId, NonDeletedExcalidrawElement, Theme } from '../element/types'
 import { useCallbackRefState } from '../hooks/useCallbackRefState'
 import { t } from '/imports/i18n'
-import { Excalidraw, defaultLang, Footer } from '../packages/excalidraw/index'
+import { Excalidraw, defaultLang, Footer } from './ExcalidrawBase'
 import {
   AppState,
   LibraryItems,
@@ -597,7 +597,7 @@ const ExcalidrawWrapper = () => {
   )
 }
 
-const ExcalidrawApp = () => {
+export function ExcalidrawApp() {
   return (
     <TopErrorBoundary>
       <Provider unstable_createStore={() => jotaiStore}>
@@ -606,5 +606,3 @@ const ExcalidrawApp = () => {
     </TopErrorBoundary>
   )
 }
-
-export default ExcalidrawApp

@@ -10,7 +10,7 @@ interface Props {
   theme?: Theme
 }
 
-export const InitializeApp = (props: Props) => {
+export function InitializeApp(props: Props) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

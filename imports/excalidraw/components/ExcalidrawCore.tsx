@@ -341,7 +341,7 @@ const gesture: Gesture = {
   initialScale: null
 }
 
-class ExcalidrawApp extends React.Component<AppProps, AppState> {
+export class ExcalidrawCore extends React.Component<AppProps, AppState> {
   canvas: AppClassProperties['canvas'] = null
   rc: RoughCanvas | null = null
   unmounted = false
@@ -5778,5 +5778,3 @@ if (process.env.NODE_ENV === ENV.TEST || process.env.NODE_ENV === ENV.DEVELOPMEN
     }
   })
 }
-
-export default ExcalidrawApp

@@ -9,7 +9,7 @@ import { SidebarHeaderComponents } from './SidebarHeader'
 
 import './Sidebar.style.scss'
 import clsx from 'clsx'
-import { useExcalidrawSetAppState } from '../ExcalidrawApp'
+import { useExcalidrawSetAppState } from '../ExcalidrawCore'
 import { updateObject } from '../../utils'
 
 /** using a counter instead of boolean to handle race conditions where

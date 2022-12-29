@@ -1,5 +1,5 @@
 import React from 'react'
-import { Excalidraw, Sidebar } from '../../packages/excalidraw/index'
+import { Excalidraw, Sidebar } from '../../app/ExcalidrawBase'
 import {
   act,
   fireEvent,

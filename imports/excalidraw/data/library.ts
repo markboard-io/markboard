@@ -6,13 +6,13 @@ import {
   LibraryItemsSource,
 } from '../types'
 import { restoreLibraryItems } from './restore'
-import type ExcalidrawApp from '../components/ExcalidrawApp'
+import type { ExcalidrawCore } from '../components/ExcalidrawCore'
 import { atom } from 'jotai'
 import { jotaiStore } from '../jotai'
 import { ExcalidrawElement } from '../element/types'
 import { getCommonBoundingBox } from '../element/bounds'
 import { AbortError } from '../errors'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { useEffect, useRef } from 'react'
 import { URL_HASH_KEYS, URL_QUERY_KEYS, APP_NAME, EVENT } from '../constants'
 
@@ -72,9 +72,9 @@ class Library {
    * though at least one update) */
   private isInitialized = false
 
-  private app: ExcalidrawApp
+  private app: ExcalidrawCore
 
-  constructor(app: ExcalidrawApp) {
+  constructor(app: ExcalidrawCore) {
     this.app = app
   }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { fireEvent, GlobalTestState, render } from '../test-utils'
-import { Excalidraw, Footer } from '../../packages/excalidraw/index'
+import { Excalidraw, Footer } from '../../app/ExcalidrawBase'
 import { queryByText, queryByTestId } from '@testing-library/react'
 import { GRID_SIZE, THEME } from '../../constants'
 import { t } from  '/imports/i18n'

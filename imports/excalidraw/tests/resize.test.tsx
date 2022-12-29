@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { render } from './test-utils'
-import ExcalidrawApp from '../components/ExcalidrawApp'
 import * as Renderer from '../renderer/renderScene'
 import { reseed } from '../random'
 import { UI, Keyboard } from './helpers/ui'
 import { resize } from './utils'
 import { ExcalidrawTextElement } from '../element/types'
-import ExcalidrawApp from '../excalidraw-app'
+import { ExcalidrawCore } from '../components/ExcalidrawCore'
 import { API } from './helpers/api'
 import { KEYS } from '../keys'
 
@@ -44,7 +43,7 @@ describe('resize rectangle ellipses and diamond elements', () => {
     ${'nw'} | ${[-300, -200]} | ${[400, 300]} | ${[-300, -200]}
     ${'sw'} | ${[40, -20]}    | ${[60, 80]}   | ${[40, 0]}
   `('resizes with handle $handle', async ({ handle, move, dimensions, topLeft }) => {
-    await render(<ExcalidrawApp />)
+    await render(<ExcalidrawCore />)
     const rectangle = UI.createElement('rectangle', elemData)
     resize(rectangle, handle, move)
     const element = h.elements[0]
@@ -60,7 +59,7 @@ describe('resize rectangle ellipses and diamond elements', () => {
   `(
     'resizes with fixed side ratios on handle $handle',
     async ({ handle, move, dimensions, topLeft }) => {
-      await render(<ExcalidrawApp />)
+      await render(<ExcalidrawCore />)
       const rectangle = UI.createElement('rectangle', elemData)
       resize(rectangle, handle, move, { shift: true })
       const element = h.elements[0]
@@ -78,7 +77,7 @@ describe('resize rectangle ellipses and diamond elements', () => {
   `(
     'Flips while resizing and keeping side ratios on handle $handle',
     async ({ handle, move, dimensions, topLeft }) => {
-      await render(<ExcalidrawApp />)
+      await render(<ExcalidrawCore />)
       const rectangle = UI.createElement('rectangle', elemData)
       resize(rectangle, handle, move, { shift: true })
       const element = h.elements[0]
@@ -92,7 +91,7 @@ describe('resize rectangle ellipses and diamond elements', () => {
     ${'ne'} | ${[50, -100]} | ${[200, 300]} | ${[-50, -100]}
     ${'s'}  | ${[_, -20]}   | ${[100, 60]}  | ${[0, 20]}
   `('Resizes from center on handle $handle', async ({ handle, move, dimensions, topLeft }) => {
-    await render(<ExcalidrawApp />)
+    await render(<ExcalidrawCore />)
     const rectangle = UI.createElement('rectangle', elemData)
     resize(rectangle, handle, move, { alt: true })
     const element = h.elements[0]
@@ -107,7 +106,7 @@ describe('resize rectangle ellipses and diamond elements', () => {
   `(
     'Resizes from center, flips and keeps side rations on handle $handle',
     async ({ handle, move, dimensions, topLeft }) => {
-      await render(<ExcalidrawApp />)
+      await render(<ExcalidrawCore />)
       const rectangle = UI.createElement('rectangle', elemData)
       resize(rectangle, handle, move, { alt: true, shift: true })
       const element = h.elements[0]
@@ -119,7 +118,7 @@ describe('resize rectangle ellipses and diamond elements', () => {
 
 describe('Test text element', () => {
   it('should update font size via keyboard', async () => {
-    await render(<ExcalidrawApp />)
+    await render(<ExcalidrawCore />)
 
     const textElement = API.createElement({
       type: 'text',

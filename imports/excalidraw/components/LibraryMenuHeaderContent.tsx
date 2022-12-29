@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { saveLibraryAsJSON } from '../data/json'
 import Library, { libraryItemsAtom } from '../data/library'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { AppState, LibraryItem, LibraryItems } from '../types'
 import { DotsIcon, ExportIcon, LoadIcon, publishIcon, TrashIcon } from './icons'
 import { ToolButton } from './ToolButton'
@@ -14,7 +14,7 @@ import PublishLibrary from './PublishLibrary'
 import { Dialog } from './Dialog'
 import { useOutsideClickHook } from '../hooks/useOutsideClick'
 import MenuItem from './MenuItem'
-import { isDropdownOpenAtom } from './ExcalidrawApp'
+import { isDropdownOpenAtom } from './ExcalidrawCore'
 
 const getSelectedItems = (libraryItems: LibraryItems, selectedItems: LibraryItem['id'][]) =>
   libraryItems.filter(item => selectedItems.includes(item.id))

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { focusNearestParent } from '../utils'
 
 import './ProjectName.style.scss'
-import { useExcalidrawContainer } from './ExcalidrawApp'
+import { useExcalidrawContainer } from './ExcalidrawCore'
 
 type Props = {
   value: string

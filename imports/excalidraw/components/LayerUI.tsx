@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import clsx from 'clsx'
 import React from 'react'
 import { ActionManager } from '../actions/manager'
@@ -35,7 +36,7 @@ import './LayerUI.style.scss'
 import './Toolbar.style.scss'
 import { PenModeButton } from './PenModeButton'
 import { trackEvent } from '../analytics'
-import { isMenuOpenAtom, useDevice } from './ExcalidrawApp'
+import { isMenuOpenAtom, useDevice } from './ExcalidrawCore'
 import { Stats } from './Stats'
 import { actionToggleStats } from '../actions/actionToggleStats'
 import Footer from './footer/Footer'
@@ -51,7 +52,7 @@ import WelcomeScreen from './WelcomeScreen'
 import { hostSidebarCountersAtom } from './Sidebar/Sidebar'
 import { jotaiScope } from '../jotai'
 import { useAtom } from 'jotai'
-import { LanguageList } from '../excalidraw-app/components/LanguageList'
+import { LanguageList } from '../app/components/LanguageList'
 import WelcomeScreenDecor from './WelcomeScreenDecor'
 import { getShortcutFromShortcutName } from '../actions/shortcuts'
 import MenuItem from './MenuItem'
@@ -136,7 +137,8 @@ const LayerUI = ({
     }
 
     const createExporter =
-      (type: ExportType): ExportCB => async exportedElements => {
+      (type: ExportType): ExportCB =>
+      async exportedElements => {
         trackEvent('export', type, 'ui')
         const fileHandle = await exportCanvas(type, exportedElements, appState, files, {
           exportBackground: appState.exportBackground,

@@ -1,9 +1,9 @@
 import React from 'react'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { AppState } from '../types'
 import { capitalizeString } from '../utils'
 import { trackEvent } from '../analytics'
-import { useDevice } from './ExcalidrawApp'
+import { useDevice } from './ExcalidrawCore'
 import './LibraryButton.style.scss'
 import { LibraryIcon } from './icons'
 

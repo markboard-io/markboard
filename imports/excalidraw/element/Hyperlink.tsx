@@ -12,7 +12,7 @@ import { NonDeletedExcalidrawElement } from './types'
 import { register } from '../actions/register'
 import { ToolButton } from '../components/ToolButton'
 import { FreedrawIcon, LinkIcon, TrashIcon } from '../components/icons'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { KEYS } from '../keys'
@@ -27,7 +27,7 @@ import { getElementAbsoluteCoords } from './'
 
 import './Hyperlink.style.scss'
 import { trackEvent } from '../analytics'
-import { useExcalidrawAppState } from '../components/ExcalidrawApp'
+import { useExcalidrawAppState } from '../components/ExcalidrawCore'
 
 const CONTAINER_WIDTH = 320
 const SPACE_BOTTOM = 85

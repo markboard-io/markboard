@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { render } from './test-utils'
-import ExcalidrawApp from '../components/ExcalidrawApp'
-import { defaultLang, setLanguage } from  '/imports/i18n'
+import { ExcalidrawCore } from '../components/ExcalidrawCore'
+import { defaultLang, setLanguage } from '/imports/i18n'
 import { UI, Pointer } from './helpers/ui'
 import { API } from './helpers/api'
 import { actionFlipHorizontal, actionFlipVertical } from '../actions'
@@ -17,7 +17,7 @@ beforeEach(async () => {
   mouse.reset()
 
   await setLanguage(defaultLang)
-  await render(<ExcalidrawApp />)
+  await render(<ExcalidrawCore />)
 })
 
 const createAndSelectOneRectangle = (angle = 0) => {

@@ -1,4 +1,4 @@
-import * as utils from '../../packages/utils'
+import * as utils from '../../app/utils'
 import { diagramFactory } from '../fixtures/diagramFixture'
 import * as mockedSceneExportUtils from '../../scene/export'
 import { MIME_TYPES } from '../../constants'

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { CODES, KEYS } from '../keys'
 import { isWritableElement, getFontString, getFontFamilyString, isTestEnv } from '../utils'
 import Scene from '../scene/Scene'
@@ -25,7 +26,7 @@ import {
 } from './textElement'
 import { actionDecreaseFontSize, actionIncreaseFontSize } from '../actions/actionProperties'
 import { actionZoomIn, actionZoomOut } from '../actions/actionCanvas'
-import ExcalidrawApp from '../components/ExcalidrawApp'
+import { ExcalidrawCore } from '../components/ExcalidrawCore'
 import { getMaxContainerHeight, getMaxContainerWidth } from './newElement'
 import { LinearElementEditor } from './linearElementEditor'
 import { parseClipboard } from '../clipboard'
@@ -95,7 +96,7 @@ export const textWysiwyg = ({
   element: ExcalidrawTextElement
   canvas: HTMLCanvasElement | null
   excalidrawContainer: HTMLDivElement | null
-  app: ExcalidrawApp
+  app: ExcalidrawCore
 }) => {
   const textPropertiesUpdated = (
     updatedTextElement: ExcalidrawTextElement,

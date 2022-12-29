@@ -1,16 +1,16 @@
 import React, { useEffect, forwardRef } from 'react'
-import { InitializeApp } from '../../components/InitializeApp'
-import ExcalidrawApp from '../../components/ExcalidrawApp'
+import { InitializeApp } from '../components/InitializeApp'
+import { ExcalidrawCore } from '../components/ExcalidrawCore'
 
-import '../../css/app.scss'
-import '../../css/styles.scss'
+import '/imports/excalidraw/css/app.scss'
+import '/imports/excalidraw/css/styles.scss'
 
-import { AppProps, ExcalidrawAPIRefValue, ExcalidrawProps } from '../../types'
+import { AppProps, ExcalidrawAPIRefValue, ExcalidrawProps } from '../types'
 import { defaultLang } from '/imports/i18n'
-import { DEFAULT_UI_OPTIONS } from '../../constants'
+import { DEFAULT_UI_OPTIONS } from '../constants'
 import { Provider } from 'jotai'
-import { jotaiScope, jotaiStore } from '../../jotai'
-import Footer from '../../components/footer/FooterCenter'
+import { jotaiScope, jotaiStore } from '../jotai'
+import Footer from '../components/footer/FooterCenter'
 
 const ExcalidrawBase = (props: ExcalidrawProps) => {
   const {
@@ -82,7 +82,7 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
   return (
     <InitializeApp langCode={langCode} theme={theme}>
       <Provider unstable_createStore={() => jotaiStore} scope={jotaiScope}>
-        <ExcalidrawApp
+        <ExcalidrawCore
           onChange={onChange}
           initialData={initialData}
           excalidrawRef={excalidrawRef}
@@ -111,7 +111,7 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
           renderSidebar={renderSidebar}
         >
           {children}
-        </ExcalidrawApp>
+        </ExcalidrawCore>
       </Provider>
     </InitializeApp>
   )
@@ -174,9 +174,9 @@ forwardedRefComp.displayName = 'Excalidraw'
 export const Excalidraw = React.memo(forwardedRefComp, areEqual)
 Excalidraw.displayName = 'Excalidraw'
 
-export { getSceneVersion, isInvisiblySmallElement, getNonDeletedElements } from '../../element'
-export { defaultLang, languages } from '../../../i18n'
-export { restore, restoreAppState, restoreElements, restoreLibraryItems } from '../../data/restore'
+export { getSceneVersion, isInvisiblySmallElement, getNonDeletedElements } from '../element'
+export { defaultLang, languages } from '/imports/i18n'
+export { restore, restoreAppState, restoreElements, restoreLibraryItems } from '../data/restore'
 export {
   exportToCanvas,
   exportToBlob,
@@ -189,16 +189,16 @@ export {
   getFreeDrawSvgPath,
   exportToClipboard,
   mergeLibraryItems
-} from '../../packages/utils'
-export { isLinearElement } from '../../element/typeChecks'
+} from './utils'
+export { isLinearElement } from '../element/typeChecks'
 
-export { FONT_FAMILY, THEME, MIME_TYPES } from '../../constants'
+export { FONT_FAMILY, THEME, MIME_TYPES } from '../constants'
 
-export { mutateElement, newElementWith, bumpVersion } from '../../element/mutateElement'
+export { mutateElement, newElementWith, bumpVersion } from '../element/mutateElement'
 
-export { parseLibraryTokensFromUrl, useHandleLibrary } from '../../data/library'
+export { parseLibraryTokensFromUrl, useHandleLibrary } from '../data/library'
 
-export { sceneCoordsToViewportCoords, viewportCoordsToSceneCoords } from '../../utils'
+export { sceneCoordsToViewportCoords, viewportCoordsToSceneCoords } from '../utils'
 
-export { Sidebar } from '../../components/Sidebar/Sidebar'
+export { Sidebar } from '../components/Sidebar/Sidebar'
 export { Footer }

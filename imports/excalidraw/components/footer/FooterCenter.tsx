@@ -1,6 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
-import { useExcalidrawAppState } from '../ExcalidrawApp'
+import { useExcalidrawAppState } from '../ExcalidrawCore'
 
 const FooterCenter = ({ children }: { children?: React.ReactNode }) => {
   const appState = useExcalidrawAppState()

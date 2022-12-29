@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { render } from './test-utils'
-import ExcalidrawApp from '../excalidraw-app'
+import ExcalidrawApp from '../app'
 import { reseed } from '../random'
 import {
   actionSendBackward,

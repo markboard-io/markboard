@@ -4,7 +4,7 @@ import React, { useState, useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 import { KEYS } from '../keys'
-import { useExcalidrawContainer, useDevice } from './ExcalidrawApp'
+import { useExcalidrawContainer, useDevice } from './ExcalidrawCore'
 import { AppState } from '../types'
 import { THEME } from '../constants'
 
