@@ -17,7 +17,6 @@ export function startExcalidrawSyncService() {
       res.end()
     }
   })
-  console.log('start sync service')
 
   const debug = (...messages: string[]) => {
     const DEBUG = false // Toogle logs with this flag
