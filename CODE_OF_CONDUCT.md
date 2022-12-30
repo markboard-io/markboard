@@ -52,3 +52,5 @@
 
    - See `imports/i18n/declare-imports.ts` for reference.
    - See [Meteor - Using import() with dynamic expressions](https://docs.meteor.com/packages/dynamic-import.html#Using-import-with-dynamic-expressions)
+
+9. **Avoid** Use `Meteor.wrapAsync` to convert callback-style function call into async/await function. It might be causing performance issues. See [Rocket.Chat/Rocket.Chat#23079](https://github.com/RocketChat/Rocket.Chat/pull/23079)

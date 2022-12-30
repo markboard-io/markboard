@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { LinksCollection } from '../imports/services/links'
+import { LinksCollection } from '/imports/services/links'
 import { startExcalidrawSyncService } from '/imports/services'
 
 async function insertLink({ title, url }: { title: string, url: string }) {

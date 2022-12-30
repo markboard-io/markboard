@@ -29,3 +29,18 @@
 	|- `bug-issue-template` excalidraw github bug issue report template
 	|- `clients` getClient Colors & getClientInitials
 ```
+
+## Troubleshooting
+
+1. Failed to run `meteor run` or `meteor add accounts-password`
+
+   It probably is cased by `install request to https://github.com/kelektiv/node.bcrypt.js/releases/download/v5.0.1/bcrypt_lib-v5.0.1-napi-v3-darwin-x64-unknown.tar.gz failed, reason: connect ETIMEDOUT 20.205.243.166:443`.
+
+   You can run meteor behind a proxy to fix the problem:
+
+   ```bash
+   export HTTP_PROXY=http://user:password@1.2.3.4:5678
+   export HTTPS_PROXY=http://user:password@1.2.3.4:5678
+   ```
+
+   See: https://github.com/meteor/meteor/wiki/Using-Meteor-behind-a-proxy
