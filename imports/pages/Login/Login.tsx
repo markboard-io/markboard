@@ -19,7 +19,7 @@ export function Login() {
           </OutlineButton>
           <OutlineButton variant='secondary'>
             <img src='/images/github.svg' alt='github' />
-            Continue with Git
+            Continue with GitHub
           </OutlineButton>
           <hr className='seperator' />
           <Form>
