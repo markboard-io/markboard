@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { SiteLayout } from '/imports/layouts'
 import './Login.style.scss'
 import Form from 'react-bootstrap/Form'
 import { OutlineButton, LinkText } from '/imports/components'
+import { useDocumentTitle } from '/imports/hooks'
 
 export function Login() {
-  useEffect(() => {
-    const prevDocumentTitle = document.title
-    document.title = 'BoardX - Log in'
-    return () => {
-      document.title = prevDocumentTitle
-    }
-  }, [])
+  useDocumentTitle('BoardX - Log in')
 
   return (
     <SiteLayout>

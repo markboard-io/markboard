@@ -3,9 +3,12 @@ import './NotFound.style.scss'
 import { SiteLayout } from '/imports/layouts'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
+import { useDocumentTitle } from '/imports/hooks'
 
 export function NotFound() {
   const navigate = useNavigate()
+  useDocumentTitle('BoardX - Page Not Found')
+
   return (
     <SiteLayout>
       <div className='error-page'>
