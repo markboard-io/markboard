@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import polyfill from '../polyfill'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { useEffect, useRef, useState } from 'react'
@@ -11,7 +11,7 @@ import { loadFromBlob } from '../data/blob'
 import { ExcalidrawElement, FileId, NonDeletedExcalidrawElement, Theme } from '../element/types'
 import { useCallbackRefState } from '../hooks/useCallbackRefState'
 import { t } from '/imports/i18n'
-import { Excalidraw, defaultLang, Footer } from './ExcalidrawBase'
+import { Excalidraw, defaultLang } from './ExcalidrawBase'
 import {
   AppState,
   LibraryItems,
@@ -545,9 +545,9 @@ const ExcalidrawWrapper = () => {
     >
       <Excalidraw
         ref={excalidrawRefCallback}
-        onChange={onChange}
+        onChange={useCallback(onChange, [])}
         initialData={initialStatePromiseRef.current.promise}
-        onCollabButtonClick={() => setCollabDialogShown(true)}
+        onCollabButtonClick={useCallback(() => setCollabDialogShown(true), [])}
         isCollaborating={isCollaborating}
         onPointerUpdate={collabAPI?.onPointerUpdate}
         UIOptions={{
@@ -575,17 +575,13 @@ const ExcalidrawWrapper = () => {
           }
         }}
         langCode={langCode}
-        renderCustomStats={renderCustomStats}
+        renderCustomStats={useCallback(renderCustomStats, [])}
         detectScroll={false}
         handleKeyboardGlobally={true}
-        onLibraryChange={onLibraryChange}
+        onLibraryChange={useCallback(onLibraryChange, [])}
         autoFocus={true}
         theme={theme}
-      >
-        <Footer>
-          <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}></div>
-        </Footer>
-      </Excalidraw>
+      />
       {excalidrawAPI && <Collab excalidrawAPI={excalidrawAPI} />}
       {errorMessage && <ErrorDialog message={errorMessage} onClose={() => setErrorMessage('')} />}
     </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { Board } from './Board'
+import { NotFound } from './NotFound'
 
 export const router = createBrowserRouter([
   {
@@ -8,7 +9,7 @@ export const router = createBrowserRouter([
     element: <Board />
   },
   {
-    path: '/404'
-    // element: <NotFound />
+    path: '*',
+    element: <NotFound />
   }
 ])

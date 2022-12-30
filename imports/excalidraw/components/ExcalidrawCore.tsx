@@ -1131,6 +1131,23 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     this.renderScene()
     this.history.record(this.state, this.scene.getElementsIncludingDeleted())
 
+    // Debug rerender problems
+    // Fix "Uncaught Error: Maximum update depth exceeded." issues
+    const DEBUG_RERENDER = false
+    if (DEBUG_RERENDER) {
+      console.log('----- render ----------------------')
+      Object.entries(this.props).forEach(
+        ([key, val]) =>
+          (prevProps as Record<string, any>)[key] !== val && console.log(`Prop '${key}' changed`)
+      )
+      if (this.state) {
+        Object.entries(this.state).forEach(
+          ([key, val]) =>
+            (prevState as Record<string, any>)[key] !== val && console.log(`State '${key}' changed`)
+        )
+      }
+    }
+
     // Do not notify consumers if we're still loading the scene. Among other
     // potential issues, this fixes a case where the tab isn't focused during
     // init, which would trigger onChange with empty elements, which would then
@@ -1300,7 +1317,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     if (!didTapTwice) {
       didTapTwice = true
       clearTimeout(tappedTwiceTimer)
-      tappedTwiceTimer = window.setTimeout(ExcalidrawApp.resetTapTwice, TAP_TWICE_TIMEOUT)
+      tappedTwiceTimer = window.setTimeout(ExcalidrawCore.resetTapTwice, TAP_TWICE_TIMEOUT)
       return
     }
     // insert text only if we tapped twice with a single finger
@@ -5757,7 +5774,7 @@ declare global {
       elements: readonly ExcalidrawElement[]
       state: AppState
       setState: React.Component<any, AppState>['setState']
-      app: InstanceType<typeof ExcalidrawApp>
+      app: InstanceType<typeof ExcalidrawCore>
       history: History
     }
   }
