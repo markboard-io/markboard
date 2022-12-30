@@ -10,7 +10,7 @@ export const WebsiteLayout: React.FC<{ children: React.ReactNode }> = ({ childre
           <img className='logo' src='/images/logo.svg' alt='logo' />
         </Link>
       </div>
-      <div>{children}</div>
+      <div className='container'>{children}</div>
     </div>
   )
 }

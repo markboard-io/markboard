@@ -1,0 +1,19 @@
+.error-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 100px;
+	.title {
+		color: var(--title-text-color);
+		font-size: 48px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	.description {
+		color: var(--description-text-color);
+		font-size: 18px;
+	}
+	.back-to-home {
+		margin-top: 30px;
+	}
+}

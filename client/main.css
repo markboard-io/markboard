@@ -3,6 +3,18 @@ body {
   font-family: sans-serif;
 }
 
+@media (prefers-color-scheme: light) {
+  html {
+    --main-bg-color: #000000;
+    --card-shadow-color: #333333;
+    --primary-text-color: #ffffff;
+    --secondry-text-color: #cfcfcf;
+    --sidebar-background-color: #f5f6f9;
+    --title-text-color: #3f434a;
+    --description-text-color: #5e646e;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     --main-bg-color: #000000;
@@ -11,16 +23,6 @@ body {
     --secondry-text-color: #cfcfcf;
     --sidebar-background-color: #f5f6f9;
     --resize-handle-hover-color: #dedfe1;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  html {
-    --main-bg-color: #000000;
-    --card-shadow-color: #333333;
-    --primary-text-color: #ffffff;
-    --secondry-text-color: #cfcfcf;
-    --sidebar-background-color: #f5f6f9;
   }
 }
 
