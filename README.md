@@ -1,6 +1,6 @@
 <div align="center" style="display:flex;flex-direction:column;">
   <a href="https://app.boardx.us">
-    <img width="540" src="./public/logo.svg" alt="BoardX Logo" />
+    <img width="540" src="./public/images/logo.svg" alt="BoardX Logo" />
   </a>
   <p>
     <a href="https://twitter.com/intent/follow?screen_name=boardxus" target="_blank">
