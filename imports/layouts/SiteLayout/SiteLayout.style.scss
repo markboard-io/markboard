@@ -1,15 +1,16 @@
-.website-layout {
+.site-layout {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background-color: rgb(255, 254, 252);
 	.logo {
 		height: 40px;
 	}
 	.nav {
 		width: 100vw;
-		max-width: 1300px;
+		max-width: 1600px;
 		height: 80px;
 		display: flex;
 		align-items: center;

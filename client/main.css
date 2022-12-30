@@ -10,8 +10,9 @@ body {
     --primary-text-color: #ffffff;
     --secondry-text-color: #cfcfcf;
     --sidebar-background-color: #f5f6f9;
-    --title-text-color: #3f434a;
+    --title-text-color: rgb(4, 4, 4);
     --description-text-color: #5e646e;
+    --button-text-color: rgb(17, 17, 17);
   }
 }
 

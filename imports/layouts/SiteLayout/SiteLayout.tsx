@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './WebsiteLayout.style.scss'
+import './SiteLayout.style.scss'
 
-export const WebsiteLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const SiteLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className='website-layout'>
+    <div className='site-layout'>
       <div className='nav'>
         <Link to='/'>
           <img className='logo' src='/images/logo.svg' alt='logo' />

@@ -1,13 +1,13 @@
 import React from 'react'
 import './NotFound.style.scss'
-import { WebsiteLayout } from '/imports/layouts'
+import { SiteLayout } from '/imports/layouts'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
 
 export function NotFound() {
   const navigate = useNavigate()
   return (
-    <WebsiteLayout>
+    <SiteLayout>
       <div className='error-page'>
         <div className='title'>Oops! We can't find that page.</div>
         <div className='description'>Please verify you have the right link.</div>
@@ -15,6 +15,6 @@ export function NotFound() {
           Back to Home
         </Button>
       </div>
-    </WebsiteLayout>
+    </SiteLayout>
   )
 }

@@ -1,0 +1,21 @@
+.boardx-outline-btn {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 25px;
+	box-shadow: 0px 1px rgba(235, 87, 87, 0.05);
+	border: 1px solid rgba(235, 87, 87, 0.5);
+	border-radius: 6px;
+	background: rgb(253, 245, 242);
+	color: rgb(235, 87, 87);
+	padding: 6px 12px;
+	img {
+		height: 14px;
+		width: 14px;
+		margin-right: 6px;
+	}
+	&:active {
+		box-shadow: none;
+	}
+}
