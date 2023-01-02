@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react'
 import polyfill from '../polyfill'
-import LanguageDetector from 'i18next-browser-languagedetector'
 import { useEffect, useRef, useState } from 'react'
 import { trackEvent } from '../analytics'
 import { getDefaultAppState } from '../appState'
@@ -61,11 +60,6 @@ import { parseLibraryTokensFromUrl, useHandleLibrary } from '../data/library'
 
 polyfill()
 window.EXCALIDRAW_THROTTLE_RENDER = true
-
-const languageDetector = new LanguageDetector()
-languageDetector.init({
-  languageUtils: {}
-})
 
 const initializeScene = async (opts: {
   collabAPI: CollabAPI
@@ -190,7 +184,7 @@ const initializeScene = async (opts: {
   return { scene: null, isExternalScene: false }
 }
 
-const currentLangCode = languageDetector.detect() || defaultLang.code
+const currentLangCode = defaultLang.code
 
 export const langCodeAtom = atom(
   Array.isArray(currentLangCode) ? currentLangCode[0] : currentLangCode
@@ -336,11 +330,7 @@ const ExcalidrawWrapper = () => {
         if (isBrowserStorageStateNewer(STORAGE_KEYS.VERSION_DATA_STATE)) {
           const localDataState = importFromLocalStorage()
           const username = importUsernameFromLocalStorage()
-          let langCode = languageDetector.detect() || defaultLang.code
-          if (Array.isArray(langCode)) {
-            langCode = langCode[0]
-          }
-          setLangCode(langCode)
+          setLangCode(currentLangCode)
           excalidrawAPI.updateScene({
             ...localDataState
           })
@@ -424,10 +414,6 @@ const ExcalidrawWrapper = () => {
       window.removeEventListener(EVENT.BEFORE_UNLOAD, unloadHandler)
     }
   }, [excalidrawAPI])
-
-  useEffect(() => {
-    languageDetector.cacheUserLanguage(langCode)
-  }, [langCode])
 
   const [theme, setTheme] = useState<Theme>(
     () =>
@@ -581,6 +567,7 @@ const ExcalidrawWrapper = () => {
         onLibraryChange={useCallback(onLibraryChange, [])}
         autoFocus={true}
         theme={theme}
+        gridModeEnabled={true}
       />
       {excalidrawAPI && <Collab excalidrawAPI={excalidrawAPI} />}
       {errorMessage && <ErrorDialog message={errorMessage} onClose={() => setErrorMessage('')} />}

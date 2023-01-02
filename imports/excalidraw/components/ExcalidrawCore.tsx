@@ -384,7 +384,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
       excalidrawRef,
       viewModeEnabled = false,
       zenModeEnabled = false,
-      gridModeEnabled = false,
+      gridModeEnabled = true,
       theme = defaultAppState.theme,
       name = defaultAppState.name
     } = props
