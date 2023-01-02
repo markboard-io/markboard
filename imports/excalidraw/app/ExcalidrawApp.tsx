@@ -545,7 +545,7 @@ const ExcalidrawWrapper = () => {
     >
       <Excalidraw
         ref={excalidrawRefCallback}
-        onChange={useCallback(onChange, [])}
+        onChange={useCallback(onChange, [excalidrawAPI, collabAPI])}
         initialData={initialStatePromiseRef.current.promise}
         onCollabButtonClick={useCallback(() => setCollabDialogShown(true), [])}
         isCollaborating={isCollaborating}
