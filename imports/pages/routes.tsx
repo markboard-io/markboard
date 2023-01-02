@@ -2,6 +2,7 @@ import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { Board } from './Board'
 import { Login } from './Login'
+import { Signup } from './Signup'
 import { NotFound } from './NotFound'
 import { Meteor } from 'meteor/meteor'
 import { Navigate } from 'react-router-dom'
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/signup',
+    element: <Signup />
   },
   {
     path: '*',

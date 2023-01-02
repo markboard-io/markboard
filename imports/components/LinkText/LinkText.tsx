@@ -1,6 +1,15 @@
 import React from 'react'
 import './LinkText.style.scss'
 
-export const LinkText: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <span className='boardx-link'>{children}</span>
+interface ILinkTextProps {
+  children: React.ReactNode
+  onClick?: () => void
+}
+
+export const LinkText: React.FC<ILinkTextProps> = ({ children, onClick = () => {} }) => {
+  return (
+    <span className='boardx-link' onClick={onClick}>
+      {children}
+    </span>
+  )
 }

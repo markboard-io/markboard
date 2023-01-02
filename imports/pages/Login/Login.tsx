@@ -4,8 +4,10 @@ import './Login.style.scss'
 import Form from 'react-bootstrap/Form'
 import { OutlineButton, LinkText } from '/imports/components'
 import { useDocumentTitle } from '/imports/hooks'
+import { useNavigate } from 'react-router-dom'
 
 export function Login() {
+  const navigate = useNavigate()
   useDocumentTitle('BoardX - Log in')
 
   return (
@@ -36,7 +38,7 @@ export function Login() {
           </Form>
           <div className='links'>
             <LinkText>Forgot Password?</LinkText>
-            <LinkText>Sign Up</LinkText>
+            <LinkText onClick={() => navigate('/signup')}>Sign Up</LinkText>
           </div>
         </div>
       </div>
