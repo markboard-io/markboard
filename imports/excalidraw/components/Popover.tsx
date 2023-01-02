@@ -100,7 +100,7 @@ export const Popover = ({
   }, [onCloseRequest])
 
   return (
-    <div className='popover' style={{ top, left }} ref={popoverRef}>
+    <div className='excalidraw-popover' style={{ top, left }} ref={popoverRef}>
       {children}
     </div>
   )
