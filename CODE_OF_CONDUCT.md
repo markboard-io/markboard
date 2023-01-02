@@ -48,9 +48,11 @@
 
 7.  Use [jotai](https://jotai.org/) as our state management solution. The jotai is superior to [recoil](https://recoiljs.org/), both of them are atomic-oritented state management tools. It has proven success in the Excalidraw app, we could follow this pattern to scale it across the entire project.
 
-8. Create a module “whitelist” that can be read by the build process, but does not actually run to make dynamic expressions work with import.
+8.  Create a module “whitelist” that can be read by the build process, but does not actually run to make dynamic expressions work with import.
 
-   - See `imports/i18n/declare-imports.ts` for reference.
-   - See [Meteor - Using import() with dynamic expressions](https://docs.meteor.com/packages/dynamic-import.html#Using-import-with-dynamic-expressions)
+    - See `imports/i18n/declare-imports.ts` for reference.
+    - See [Meteor - Using import() with dynamic expressions](https://docs.meteor.com/packages/dynamic-import.html#Using-import-with-dynamic-expressions)
 
-9. **Avoid** Use `Meteor.wrapAsync` to convert callback-style function call into async/await function. It might be causing performance issues. See [Rocket.Chat/Rocket.Chat#23079](https://github.com/RocketChat/Rocket.Chat/pull/23079)
+9.  **Avoid** Use `Meteor.wrapAsync` to convert callback-style function call into async/await function. It might be causing performance issues. See [Rocket.Chat/Rocket.Chat#23079](https://github.com/RocketChat/Rocket.Chat/pull/23079)
+
+10. Use `/imports/excalidraw/components/icons.tsx` to declare SVG icons and customize them.
