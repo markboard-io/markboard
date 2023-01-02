@@ -3,18 +3,6 @@
     font-family: "Virgil";
   }
 
-  .WelcomeScreen-logo {
-    display: flex;
-    align-items: center;
-    column-gap: 0.75rem;
-    font-size: 2.25rem;
-
-    svg {
-      width: 1.625rem;
-      height: auto;
-    }
-  }
-
   .WelcomeScreen-decor {
     pointer-events: none;
 
@@ -110,119 +98,6 @@
     top: 1rem;
     right: 1rem;
     bottom: 1rem;
-  }
-
-  .WelcomeScreen-items {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .WelcomeScreen-item {
-    box-sizing: border-box;
-
-    pointer-events: all;
-
-    color: var(--color-gray-50);
-    font-size: 0.875rem;
-
-    min-width: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background: none;
-    border: none;
-
-    padding: 0.75rem;
-
-    border-radius: var(--border-radius-md);
-
-    &__label {
-      display: flex;
-      align-items: center;
-      column-gap: 0.5rem;
-
-      svg {
-        width: var(--default-icon-size);
-        height: var(--default-icon-size);
-      }
-    }
-
-    &__shortcut {
-      color: var(--color-gray-40);
-      font-size: 0.75rem;
-    }
-  }
-
-  &:not(:active) .WelcomeScreen-item:hover {
-    text-decoration: none;
-    background: var(--color-gray-10);
-
-    .WelcomeScreen-item__shortcut {
-      color: var(--color-gray-50);
-    }
-
-    .WelcomeScreen-item__label {
-      color: var(--color-gray-100);
-    }
-  }
-
-  .WelcomeScreen-item:active {
-    background: var(--color-gray-20);
-
-    .WelcomeScreen-item__shortcut {
-      color: var(--color-gray-50);
-    }
-
-    .WelcomeScreen-item__label {
-      color: var(--color-gray-100);
-    }
-
-    &--promo {
-      color: var(--color-promo) !important;
-
-      &:hover {
-        .WelcomeScreen-item__label {
-          color: var(--color-promo) !important;
-        }
-      }
-    }
-  }
-
-  &.theme--dark {
-    .WelcomeScreen-decor {
-      color: var(--color-gray-60);
-    }
-
-    .WelcomeScreen-item {
-      color: var(--color-gray-60);
-
-      &__shortcut {
-        color: var(--color-gray-60);
-      }
-    }
-
-    &:not(:active) .WelcomeScreen-item:hover {
-      background: var(--color-gray-85);
-
-      .WelcomeScreen-item__shortcut {
-        color: var(--color-gray-50);
-      }
-
-      .WelcomeScreen-item__label {
-        color: var(--color-gray-10);
-      }
-    }
-
-    .WelcomeScreen-item:active {
-      background-color: var(--color-gray-90);
-      .WelcomeScreen-item__label {
-        color: var(--color-gray-10);
-      }
-    }
   }
 
   // Can tweak these values but for an initial effort, it looks OK to me
