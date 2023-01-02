@@ -20,6 +20,7 @@
 	|- `renderer/` excalidraw canvas rendering implementations
 	  |- `renderElement` control details about drawing element on canvas
 		|- `renderScene` draw scene on canvas
+		  |- `strokeGrid` controls the implementation of grid rendering
 		|- `roundRect` draw round rectangle on canvas
 	|- `scene/` excalidraw scene related code
 	|- `tests/` unit tests and e2e tests

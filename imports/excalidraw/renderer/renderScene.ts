@@ -143,15 +143,13 @@ const strokeGrid = (
   height: number,
 ) => {
   context.save()
-  context.strokeStyle = 'rgba(0,0,0,0.1)'
+  context.fillStyle = 'rgb(232,232,232)'
   context.beginPath()
+
   for (let x = offsetX; x < offsetX + width + gridSize * 2; x += gridSize) {
-    context.moveTo(x, offsetY - gridSize)
-    context.lineTo(x, offsetY + height + gridSize * 2)
-  }
-  for (let y = offsetY; y < offsetY + height + gridSize * 2; y += gridSize) {
-    context.moveTo(offsetX - gridSize, y)
-    context.lineTo(offsetX + width + gridSize * 2, y)
+    for (let y = offsetY; y < offsetY + height + gridSize * 2; y += gridSize) {
+      context.fillRect(x - 1, y - 1, 2, 2)
+    }
   }
   context.stroke()
   context.restore()
@@ -379,7 +377,8 @@ export const _renderScene = ({
   context.scale(renderConfig.zoom.value, renderConfig.zoom.value)
 
   // Grid
-  if (renderGrid && appState.gridSize) {
+  const avoidRenderOnTinyZoom = renderConfig.zoom.value > 0.4 // performance consideration
+  if (renderGrid && appState.gridSize && avoidRenderOnTinyZoom) {
     strokeGrid(
       context,
       appState.gridSize,
