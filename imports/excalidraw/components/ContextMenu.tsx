@@ -43,6 +43,11 @@ export const ContextMenu = React.memo(({ actionManager, items, top, left }: Cont
     return acc
   }, [])
 
+  const renderShortcutName = (actionName: string) => {
+    const shortcutName = actionName ? getShortcutFromShortcutName(actionName as ShortcutName) : ''
+    return shortcutName ? <kbd className='context-menu-item__shortcut'>{shortcutName}</kbd> : null
+  }
+
   return (
     <Popover
       onCloseRequest={() => setAppState({ contextMenu: null })}
@@ -93,9 +98,7 @@ export const ContextMenu = React.memo(({ actionManager, items, top, left }: Cont
                 })}
               >
                 <div className='context-menu-item__label'>{label}</div>
-                <kbd className='context-menu-item__shortcut'>
-                  {actionName ? getShortcutFromShortcutName(actionName as ShortcutName) : ''}
-                </kbd>
+                {renderShortcutName(actionName)}
               </button>
             </li>
           )
