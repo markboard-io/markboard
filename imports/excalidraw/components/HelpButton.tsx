@@ -1,5 +1,6 @@
 import React from 'react'
 import { HelpIcon } from './icons'
+import './HelpButton.style.scss'
 
 type HelpButtonProps = {
   title?: string

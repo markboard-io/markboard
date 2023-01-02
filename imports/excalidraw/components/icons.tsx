@@ -413,13 +413,14 @@ export const ExportIcon = createIcon(
 )
 
 export const HelpIcon = createIcon(
-  <g strokeWidth='1.5'>
-    <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-    <circle cx='12' cy='12' r='9'></circle>
-    <line x1='12' y1='17' x2='12' y2='17.01'></line>
-    <path d='M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4'></path>
+  <g>
+    <path
+      fillRule='evenodd'
+      strokeWidth='0'
+      d='M12 17.7a1.3 1.3 0 110 2.6 1.3 1.3 0 010-2.6zm0-14.6A4.9 4.9 0 0116.9 8c0 1.34-.393 2.295-1.398 3.425-.312.352-.7.673-1.162.965a3.1 3.1 0 00-1.434 2.42l-.006.194c0 1.161-1.674 1.203-1.793.128L11.1 15l.006-.23a4.9 4.9 0 012.072-3.768l.199-.133c.326-.206.585-.42.78-.64.722-.812.943-1.348.943-2.229a3.1 3.1 0 00-6.2 0 .9.9 0 01-1.8 0A4.9 4.9 0 0112 3.1z'
+    ></path>
   </g>,
-  tablerIconProps
+  { ...tablerIconProps, fill: 'currentColor' }
 )
 
 export const ExternalLinkIcon = createIcon(

@@ -1,0 +1,20 @@
+.help-icon {
+	width: 40px;
+	height: 40px;
+	position: relative;
+	z-index: 99;
+	box-shadow: 0 0 0 0.5px #e4e4e4, 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+	border-radius: 50%;
+	cursor: pointer;
+	opacity: 1;
+	transition: opacity 0.3s;
+	background: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+
+	svg {
+		color: #333333;
+	}
+}
