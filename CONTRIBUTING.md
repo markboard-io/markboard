@@ -6,6 +6,8 @@
 |- `excalidraw/`
   |- `actions/` store all actions taking effects to canvas
 	|- `app/` ExclidrawApp react component entry point
+	  |- `ExclidrawApp` react entrypoint for excalidraw
+		  |- `onChange` drives `CollabAPI.syncElements` to help realtime synchronization work
 	|- `charts/` excalidraw charts support
 	|- `components/` react components
 	  |- `LayerUI` react entry point, core react components are aggregated here
