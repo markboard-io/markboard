@@ -15,6 +15,7 @@
 		|- `MenuUtisl` MenuLinks & Menu Seperator in the App Menu
 		|- `Island` the common react components to create a floating panel, aka "island"
 		|- `InitializeApp` The loading wrapper for <ExclidrawApp />. Presents <LoadingMessage /> if `i18n` is not ready.
+		|- `ContextMenu` context menu for excalidraw, wrapped with `<Popover />`.
 	|- `css/` common stylesheets
 	|- `data/` data operation utilities
 	|- `element/` excalidraw canvas elements & helpers
