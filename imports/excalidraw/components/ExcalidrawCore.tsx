@@ -674,16 +674,12 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
         zenModeEnabled = this.props.zenModeEnabled
       }
 
-      if (typeof this.props.gridModeEnabled !== 'undefined') {
-        gridSize = this.props.gridModeEnabled ? GRID_SIZE : null
-      }
-
       if (typeof this.props.name !== 'undefined') {
         name = this.props.name
       }
 
       this.setState(
-        state => {
+        () => {
           // using Object.assign instead of spread to fool TS 4.2.2+ into
           // regarding the resulting type as not containing undefined
           // (which the following expression will never contain)

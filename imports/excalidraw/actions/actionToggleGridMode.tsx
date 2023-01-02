@@ -20,9 +20,6 @@ export const actionToggleGridMode = register({
     }
   },
   checked: (appState: AppState) => appState.gridSize !== null,
-  contextItemPredicate: (_element, _appState, props) => {
-    return typeof props.gridModeEnabled === 'undefined'
-  },
   contextItemLabel: 'labels.showGrid',
   keyTest: event => event[KEYS.CTRL_OR_CMD] && event.code === CODES.QUOTE
 })

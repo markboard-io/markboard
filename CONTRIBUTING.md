@@ -5,6 +5,14 @@
 ```typescript
 |- `excalidraw/`
   |- `actions/` store all actions taking effects to canvas
+	  |- `register` register a new action
+		|- `manager` `actionManager` that manages all actions
+		  |- `executeAction` execute action
+			|- `updater` update `appState` by the result of `action.perform`
+		|- `types` declare all types for actions related
+		  |- `Action` the `Action` type definition
+			  |- `contextItemPredicate` the assert condition for action to be displayed on context menu
+				|- `checked` whether enabled this feature on context menu
 	|- `app/` ExclidrawApp react component entry point
 	  |- `ExclidrawApp` react entrypoint for excalidraw
 		  |- `onChange` drives `CollabAPI.syncElements` to help realtime synchronization work
@@ -16,6 +24,8 @@
 		|- `Island` the common react components to create a floating panel, aka "island"
 		|- `InitializeApp` The loading wrapper for <ExclidrawApp />. Presents <LoadingMessage /> if `i18n` is not ready.
 		|- `ContextMenu` context menu for excalidraw, wrapped with `<Popover />`.
+		|- `ExclidrawCore` core of excalidraw
+		  |- `syncActionResult` sync `appState` to react after execute actions
 	|- `css/` common stylesheets
 	|- `data/` data operation utilities
 	|- `element/` excalidraw canvas elements & helpers
