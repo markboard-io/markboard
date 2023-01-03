@@ -47,6 +47,7 @@
 	|- `bug-issue-template` excalidraw github bug issue report template
 	|- `clients` getClient Colors & getClientInitials
 	|- `shapes` declare all shape constants in `<ShapesSwitcher />`
+	|- `keys` declare all key constants for shortcuts etc.
 ```
 
 ## Troubleshooting
