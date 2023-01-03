@@ -29,6 +29,7 @@
 		|- `ExclidrawCore` core of excalidraw
 		  |- `syncActionResult` sync `appState` to react after execute actions
 		|- `icons` declare all SVG icons here
+		|- `Stats` show current scene & selected element information
 	|- `css/` common stylesheets
 	|- `data/` data operation utilities
 	|- `element/` excalidraw canvas elements & helpers

@@ -1,7 +1,7 @@
 import React from 'react'
 import { getCommonBounds } from '../element/bounds'
 import { NonDeletedExcalidrawElement } from '../element/types'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { getTargetElements } from '../scene'
 import { AppState, ExcalidrawProps } from '../types'
 import { CloseIcon } from './icons'
@@ -63,6 +63,10 @@ export const Stats = (props: {
             )}
             {selectedElements.length > 0 && (
               <>
+                <tr>
+                  <td>{t('stats.type')}</td>
+                  <td>{t(`toolBar.${selectedElements[0].type}`)}</td>
+                </tr>
                 <tr>
                   <td>{'x'}</td>
                   <td>{Math.round(selectedBoundingBox[0])}</td>

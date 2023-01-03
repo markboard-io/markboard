@@ -371,6 +371,7 @@
     "link": "Blog post on end-to-end encryption in Excalidraw"
   },
   "stats": {
+    "type": "Type",
     "angle": "Angle",
     "element": "Element",
     "elements": "Elements",

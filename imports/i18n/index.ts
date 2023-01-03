@@ -1,6 +1,5 @@
 import fallbackLangData from './locales/en.json'
 import percentages from './locales/percentages.json'
-import { ENV } from '../excalidraw/constants'
 import './declare-imports'
 
 const COMPLETION_THRESHOLD = 85
@@ -68,18 +67,6 @@ export const languages: Language[] = allLanguages
       COMPLETION_THRESHOLD,
   )
 
-const TEST_LANG_CODE = '__test__'
-if (process.env.NODE_ENV === ENV.DEVELOPMENT) {
-  languages.unshift(
-    { code: TEST_LANG_CODE, label: 'test language' },
-    {
-      code: `${ TEST_LANG_CODE }.rtl`,
-      label: '\u{202a}test language (rtl)\u{202c}',
-      rtl: true,
-    },
-  )
-}
-
 let currentLang: Language = defaultLang
 let currentLangData = {}
 
@@ -88,15 +75,11 @@ export const setLanguage = async (lang: Language) => {
   document.documentElement.dir = currentLang.rtl ? 'rtl' : 'ltr'
   document.documentElement.lang = currentLang.code
 
-  if (lang.code.startsWith(TEST_LANG_CODE)) {
-    currentLangData = {}
-  } else {
-    try {
-      currentLangData = await import(`./locales/${ lang.code }.json`)
-    } catch (error: any) {
-      console.error(`Failed to load language ${ lang.code }:`, error.message)
-      currentLangData = fallbackLangData
-    }
+  try {
+    currentLangData = await import(`./locales/${ lang.code }.json`)
+  } catch (error: any) {
+    console.error(`Failed to load language ${ lang.code }:`, error.message)
+    currentLangData = fallbackLangData
   }
 }
 
@@ -120,13 +103,6 @@ export const t = (
   path: string,
   replacement?: { [key: string]: string | number },
 ) => {
-  if (currentLang.code.startsWith(TEST_LANG_CODE)) {
-    const name = replacement
-      ? `${ path }(${ JSON.stringify(replacement).slice(1, -1) })`
-      : path
-    return `\u{202a}[[${ name }]]\u{202c}`
-  }
-
   const parts = path.split('.')
   let translation =
     findPartsForData(currentLangData, parts) ||
