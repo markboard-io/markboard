@@ -156,6 +156,7 @@ export type ExcalidrawTextContainer =
   | ExcalidrawEllipseElement
   | ExcalidrawImageElement
   | ExcalidrawArrowElement
+  | ExcalidrawStickyNoteElement
 
 export type ExcalidrawTextElementWithContainer = {
   containerId: ExcalidrawTextContainer['id']

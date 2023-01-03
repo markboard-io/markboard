@@ -119,6 +119,7 @@ export const isTextBindableContainer = (
       element.type === 'diamond' ||
       element.type === 'ellipse' ||
       element.type === 'image' ||
+      element.type === 'stickynote' ||
       isArrowElement(element))
   )
 }

@@ -207,7 +207,15 @@ const drawElementOnCanvas = (
 ) => {
   context.globalAlpha = element.opacity / 100
   switch (element.type) {
-    case 'stickynote':
+    case 'stickynote': {
+      context.lineJoin = 'round'
+      context.lineCap = 'round'
+      context.shadowBlur = 20
+      context.shadowColor = 'rgba(0,0,0,0.1)'
+
+      rc.draw(getShapeForElement(element)!)
+      break
+    }
     case 'rectangle':
     case 'diamond':
     case 'ellipse': {
@@ -360,10 +368,9 @@ export const generateRoughOptions = (
     disableMultiStroke: element.strokeStyle !== 'solid',
     // for non-solid strokes, increase the width a bit to make it visually
     // similar to solid strokes, because we're also disabling multiStroke
-    strokeWidth:
-      element.strokeStyle !== 'solid'
-        ? element.strokeWidth + 0.5
-        : element.strokeWidth,
+    strokeWidth: element.strokeStyle !== 'solid'
+      ? element.strokeWidth + 0.5
+      : element.strokeWidth,
     // when increasing strokeWidth, we must explicitly set fillWeight and
     // hachureGap because if not specified, roughjs uses strokeWidth to
     // calculate them (and we don't want the fills to be modified)
@@ -386,6 +393,9 @@ export const generateRoughOptions = (
           : element.backgroundColor
       if (element.type === 'ellipse') {
         options.curveFitting = 1
+      }
+      if (element.type === 'stickynote') {
+        options.stroke = 'transparent'
       }
       return options
     }
