@@ -4,6 +4,7 @@ import {
   DEFAULT_FONT_SIZE,
   DEFAULT_TEXT_ALIGN,
   EXPORT_SCALES,
+  GRID_SIZE,
   THEME,
 } from './constants'
 import { t } from  '/imports/i18n'
@@ -23,7 +24,7 @@ export const getDefaultAppState = (): Omit<
     theme: THEME.LIGHT,
     collaborators: new Map(),
     currentChartType: 'bar',
-    currentItemBackgroundColor: 'transparent',
+    currentItemBackgroundColor: '#ced4da',
     currentItemEndArrowhead: 'arrow',
     currentItemFillStyle: 'hachure',
     currentItemFontFamily: DEFAULT_FONT_FAMILY,
@@ -55,7 +56,7 @@ export const getDefaultAppState = (): Omit<
     exportEmbedScene: false,
     exportWithDarkMode: false,
     fileHandle: null,
-    gridSize: null,
+    gridSize: GRID_SIZE,
     isBindingEnabled: true,
     isSidebarDocked: false,
     isLoading: false,

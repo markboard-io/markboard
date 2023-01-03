@@ -18,6 +18,8 @@
 		  |- `onChange` drives `CollabAPI.syncElements` to help realtime synchronization work
 	|- `charts/` excalidraw charts support
 	|- `components/` react components
+		|- `Actions` actions related components
+		  |- `<ShapesSwitcher />` group shapes related widgets
 	  |- `LayerUI` react entry point, core react components are aggregated here
 	     |- `<Island className='menu-container' />` App Menu
 		|- `MenuUtisl` MenuLinks & Menu Seperator in the App Menu
@@ -26,6 +28,7 @@
 		|- `ContextMenu` context menu for excalidraw, wrapped with `<Popover />`.
 		|- `ExclidrawCore` core of excalidraw
 		  |- `syncActionResult` sync `appState` to react after execute actions
+		|- `icons` declare all SVG icons here
 	|- `css/` common stylesheets
 	|- `data/` data operation utilities
 	|- `element/` excalidraw canvas elements & helpers
@@ -40,8 +43,10 @@
 	|- `align`
 	|- `analytics`
 	|- `appState` global app state
+	  |- `currentItemBackgroundColor` shape background color
 	|- `bug-issue-template` excalidraw github bug issue report template
 	|- `clients` getClient Colors & getClientInitials
+	|- `shapes` declare all shape constants in `<ShapesSwitcher />`
 ```
 
 ## Troubleshooting

@@ -86,7 +86,7 @@ export const SHAPES = [
 ] as const
 
 export const findShapeByKey = (key: string) => {
-  const shape = SHAPES.find((shape, index) => {
+  const shape = SHAPES.find((shape, _idx) => {
     return (
       (shape.numericKey != null && key === shape.numericKey.toString()) ||
       (shape.key &&

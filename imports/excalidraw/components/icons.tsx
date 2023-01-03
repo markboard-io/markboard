@@ -318,14 +318,15 @@ export const FreedrawIcon = createIcon(
 // tabler-icons: typography
 export const TextIcon = createIcon(
   <g strokeWidth='1.5'>
-    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
-    <line x1='4' y1='20' x2='7' y2='20' />
-    <line x1='14' y1='20' x2='21' y2='20' />
-    <line x1='6.9' y1='15' x2='13.8' y2='15' />
-    <line x1='10.2' y1='6.3' x2='16' y2='20' />
-    <polyline points='5 20 11 4 13 4 20 20'></polyline>
+    <path
+      fillRule='evenodd'
+      clipRule='evenodd'
+      strokeWidth='0'
+      fill='currentColor'
+      d='M2.25 3.75C2.25 3.33579 2.58579 3 3 3H17C17.4142 3 17.75 3.33579 17.75 3.75C17.75 4.16421 17.4142 4.5 17 4.5H10.75V16.75C10.75 17.1642 10.4142 17.5 10 17.5C9.58579 17.5 9.25 17.1642 9.25 16.75V4.5H3C2.58579 4.5 2.25 4.16421 2.25 3.75Z'
+    ></path>
   </g>,
-  tablerIconProps
+  { ...tablerIconProps, style: { marginTop: 3.5 } }
 )
 
 // modified tabler-icons: photo
