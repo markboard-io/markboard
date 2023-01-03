@@ -74,6 +74,10 @@ export type ExcalidrawRectangleElement = _ExcalidrawElementBase & {
   type: 'rectangle'
 }
 
+export type ExcalidrawStickyNoteElement = _ExcalidrawElementBase & {
+  type: 'stickynote'
+}
+
 export type ExcalidrawDiamondElement = _ExcalidrawElementBase & {
   type: 'diamond'
 }
@@ -102,6 +106,7 @@ export type InitializedExcalidrawImageElement = MarkNonNullable<
  */
 export type ExcalidrawGenericElement =
   | ExcalidrawSelectionElement
+  | ExcalidrawStickyNoteElement
   | ExcalidrawRectangleElement
   | ExcalidrawDiamondElement
   | ExcalidrawEllipseElement
@@ -138,6 +143,7 @@ export type ExcalidrawTextElement = _ExcalidrawElementBase &
   }>
 
 export type ExcalidrawBindableElement =
+  | ExcalidrawStickyNoteElement
   | ExcalidrawRectangleElement
   | ExcalidrawDiamondElement
   | ExcalidrawEllipseElement

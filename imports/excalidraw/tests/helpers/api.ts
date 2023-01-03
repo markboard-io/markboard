@@ -166,6 +166,7 @@ export class API {
       locked: rest.locked ?? false,
     }
     switch (type) {
+      case 'stickynote':
       case 'rectangle':
       case 'diamond':
       case 'ellipse':

@@ -84,15 +84,15 @@ const restoreElementWithProperties = <
   },
   K extends Pick<T, keyof Omit<Required<T>, keyof ExcalidrawElement>>,
 >(
-    element: T,
-    extra: Pick<
+  element: T,
+  extra: Pick<
     T,
     // This extra Pick<T, keyof K> ensure no excess properties are passed.
     // @ts-ignore TS complains here but type checks the call sites fine.
     keyof K
   > &
     Partial<Pick<ExcalidrawElement, 'type' | 'x' | 'y'>>,
-  ): T => {
+): T => {
   const base: Pick<T, keyof ExcalidrawElement> & {
     [PRECEDING_ELEMENT_KEY]?: string
   } = {
@@ -167,15 +167,15 @@ const restoreElement = (
         fontFamily = getFontFamilyByName(_fontFamily)
       }
       element = restoreElementWithProperties(element, {
-      fontSize,
-      fontFamily,
-      text: element.text ?? '',
-      baseline: element.baseline,
-      textAlign: element.textAlign || DEFAULT_TEXT_ALIGN,
-      verticalAlign: element.verticalAlign || DEFAULT_VERTICAL_ALIGN,
-      containerId: element.containerId ?? null,
-      originalText: element.originalText || element.text,
-    })
+        fontSize,
+        fontFamily,
+        text: element.text ?? '',
+        baseline: element.baseline,
+        textAlign: element.textAlign || DEFAULT_TEXT_ALIGN,
+        verticalAlign: element.verticalAlign || DEFAULT_VERTICAL_ALIGN,
+        containerId: element.containerId ?? null,
+        originalText: element.originalText || element.text,
+      })
 
       if (refreshDimensions) {
         element = { ...element, ...refreshTextDimensions(element) }
@@ -183,18 +183,18 @@ const restoreElement = (
       return element
     case 'freedraw': {
       return restoreElementWithProperties(element, {
-      points: element.points,
-      lastCommittedPoint: null,
-      simulatePressure: element.simulatePressure,
-      pressures: element.pressures,
-    })
+        points: element.points,
+        lastCommittedPoint: null,
+        simulatePressure: element.simulatePressure,
+        pressures: element.pressures,
+      })
     }
     case 'image':
       return restoreElementWithProperties(element, {
-      status: element.status || 'pending',
-      fileId: element.fileId,
-      scale: element.scale || [1, 1],
-    })
+        status: element.status || 'pending',
+        fileId: element.fileId,
+        scale: element.scale || [1, 1],
+      })
     case 'line':
     // @ts-ignore LEGACY type
     // eslint-disable-next-line no-fallthrough
@@ -220,26 +220,25 @@ const restoreElement = (
       }
 
       return restoreElementWithProperties(element, {
-      type:
+        type:
           (element.type as ExcalidrawElement['type'] | 'draw') === 'draw'
             ? 'line'
             : element.type,
-      startBinding: element.startBinding,
-      endBinding: element.endBinding,
-      lastCommittedPoint: null,
-      startArrowhead,
-      endArrowhead,
-      points,
-      x,
-      y,
-    })
+        startBinding: element.startBinding,
+        endBinding: element.endBinding,
+        lastCommittedPoint: null,
+        startArrowhead,
+        endArrowhead,
+        points,
+        x,
+        y,
+      })
     }
 
     // generic elements
-    case 'ellipse':
-      return restoreElementWithProperties(element, {})
+    case 'stickynote':
     case 'rectangle':
-      return restoreElementWithProperties(element, {})
+    case 'ellipse':
     case 'diamond':
       return restoreElementWithProperties(element, {})
 
@@ -375,11 +374,7 @@ export const restoreElements = (
 
 const coalesceAppStateValue = <
   T extends keyof ReturnType<typeof getDefaultAppState>,
->(
-    key: T,
-    appState: Exclude<ImportedDataState['appState'], null | undefined>,
-    defaultAppState: ReturnType<typeof getDefaultAppState>,
-  ) => {
+>(key: T, appState: Exclude<ImportedDataState['appState'], null | undefined>, defaultAppState: ReturnType<typeof getDefaultAppState>) => {
   const value = appState[key]
   // NOTE the value! assertion is needed in TS 4.5.5 (fixed in newer versions)
   return value !== undefined ? value! : defaultAppState[key]

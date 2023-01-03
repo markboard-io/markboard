@@ -26,6 +26,7 @@ import {
   ExcalidrawImageElement,
   ExcalidrawLinearElement,
   StrokeRoundness,
+  ExcalidrawStickyNoteElement,
 } from './types'
 
 import { getElementAbsoluteCoords, getCurvePathOps, Bounds } from './bounds'
@@ -38,6 +39,7 @@ import { isTextElement } from '.'
 import { isTransparent } from '../utils'
 import { shouldShowBoundingBox } from './transformHandles'
 import { getBoundTextElement } from './textElement'
+import { Excalidraw } from '../app/ExcalidrawBase'
 
 const isElementDraggableFromInside = (
   element: NonDeletedExcalidrawElement,
@@ -180,6 +182,7 @@ type HitTestArgs = {
 
 const hitTestPointAgainstElement = (args: HitTestArgs): boolean => {
   switch (args.element.type) {
+    case 'stickynote':
     case 'rectangle':
     case 'image':
     case 'text':
@@ -207,6 +210,8 @@ const hitTestPointAgainstElement = (args: HitTestArgs): boolean => {
         'This should not happen, we need to investigate why it does.',
       )
       return false
+    default:
+      return true
   }
 }
 
@@ -215,6 +220,7 @@ export const distanceToBindableElement = (
   point: Point,
 ): number => {
   switch (element.type) {
+    case 'stickynote':
     case 'rectangle':
     case 'image':
     case 'text':
@@ -247,7 +253,8 @@ const distanceToRectangle = (
     | ExcalidrawRectangleElement
     | ExcalidrawTextElement
     | ExcalidrawFreeDrawElement
-    | ExcalidrawImageElement,
+    | ExcalidrawImageElement
+    | ExcalidrawStickyNoteElement,
   point: Point,
 ): number => {
   const [, pointRel, hwidth, hheight] = pointRelativeToElement(element, point)
@@ -527,6 +534,7 @@ export const determineFocusDistance = (
   const mabs = Math.abs(m)
   const nabs = Math.abs(n)
   switch (element.type) {
+    case 'stickynote':
     case 'rectangle':
     case 'image':
     case 'text':
@@ -558,6 +566,7 @@ export const determineFocusPoint = (
   const reverseRelateToCenter = GA.reverse(relateToCenter)
   let point
   switch (element.type) {
+    case 'stickynote':
     case 'rectangle':
     case 'image':
     case 'text':
@@ -608,6 +617,7 @@ const getSortedElementLineIntersections = (
 ): GA.Point[] => {
   let intersections: GA.Point[]
   switch (element.type) {
+    case 'stickynote':
     case 'rectangle':
     case 'image':
     case 'text':
@@ -642,6 +652,7 @@ const getSortedElementLineIntersections = (
 
 const getCorners = (
   element:
+    | ExcalidrawStickyNoteElement
     | ExcalidrawRectangleElement
     | ExcalidrawImageElement
     | ExcalidrawDiamondElement
@@ -796,7 +807,8 @@ export const findFocusPointForRectangulars = (
     | ExcalidrawRectangleElement
     | ExcalidrawImageElement
     | ExcalidrawDiamondElement
-    | ExcalidrawTextElement,
+    | ExcalidrawTextElement
+    | ExcalidrawStickyNoteElement,
   // Between -1 and 1 for how far away should the focus point be relative
   // to the size of the element. Sign determines orientation.
   relativeDistance: number,

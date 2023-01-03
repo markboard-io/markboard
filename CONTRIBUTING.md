@@ -35,8 +35,10 @@
 	|- `hooks/` react hooks
 	|- `renderer/` excalidraw canvas rendering implementations
 	  |- `renderElement` control details about drawing element on canvas
+		  |- `renderElement` renderElement by type
 		|- `renderScene` draw scene on canvas
 		  |- `strokeGrid` controls the implementation of grid rendering
+			|- `editingLinearElement` add or editing linear element on canvas
 		|- `roundRect` draw round rectangle on canvas
 	|- `scene/` excalidraw scene related code
 	|- `tests/` unit tests and e2e tests

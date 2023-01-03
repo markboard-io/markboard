@@ -965,6 +965,7 @@ const renderBindingHighlightForBindableElement = (
   const padding = strokeOffset / 2 + threshold / 2
 
   switch (element.type) {
+    case 'stickynote':
     case 'rectangle':
     case 'text':
     case 'image':
