@@ -74,6 +74,9 @@ export const KEYS = {
   7: '7',
   8: '8',
   9: '9',
+
+  HYPHEN: '-',
+  EQUAL: '='
 } as const
 
 export type Key = keyof typeof KEYS

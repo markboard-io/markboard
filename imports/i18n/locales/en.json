@@ -119,7 +119,6 @@
       "edit": "Edit line",
       "exit": "Exit line editor"
     },
-
     "elementLock": {
       "lock": "Lock",
       "unlock": "Unlock",
@@ -207,6 +206,7 @@
   "toolBar": {
     "selection": "Selection",
     "image": "Insert image",
+    "stickynote": "StickyNote",
     "rectangle": "Rectangle",
     "diamond": "Diamond",
     "ellipse": "Ellipse",

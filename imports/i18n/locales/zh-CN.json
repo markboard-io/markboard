@@ -205,6 +205,7 @@
   "toolBar": {
     "selection": "选择",
     "image": "插入图像",
+    "stickynote": "便利贴",
     "rectangle": "矩形",
     "diamond": "菱形",
     "ellipse": "椭圆",

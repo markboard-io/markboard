@@ -246,6 +246,19 @@ export const SelectionIcon = createIcon(
   { fill: 'none', width: 22, height: 22, strokeWidth: 1.25 }
 )
 
+export const StickyNoteIcon = createIcon(
+  <g strokeWidth='1.5'>
+    <path
+      fillRule='evenodd'
+      clipRule='evenodd'
+      strokeWidth='0'
+      fill='currentColor'
+      d='M11 19.5H3C1.89543 19.5 1 18.6046 1 17.5V3C1 1.89543 1.89543 1 3 1H17C18.1046 1 19 1.89543 19 3V11.25L11 19.5ZM17.5 10.5V3C17.5 2.72386 17.2761 2.5 17 2.5H3C2.72386 2.5 2.5 2.72386 2.5 3V17.5C2.5 17.7761 2.72386 18 3 18H10.25V13.25C10.25 11.7312 11.4812 10.5 13 10.5H17.5ZM11.75 16.5718V13.25C11.75 12.5596 12.3096 12 13 12H16.1833L11.75 16.5718Z'
+    ></path>
+  </g>,
+  { ...tablerIconProps, style: { marginLeft: 5, marginTop: 3.5 } }
+)
+
 // tabler-icons: square
 export const RectangleIcon = createIcon(
   <g strokeWidth='1.5'>
