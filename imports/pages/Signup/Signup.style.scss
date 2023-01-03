@@ -28,6 +28,11 @@
 			padding: 10px 40px;
 			display: flex;
 			justify-content: space-around;
+			.login-link {
+				color: rgba(55, 53, 47, 0.65);
+				font-size: 14px;
+				cursor: pointer;
+			}
 		}
 	}
 }

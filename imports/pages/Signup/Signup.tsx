@@ -54,7 +54,10 @@ export function Signup() {
             <OutlineButton className='signup-button'>Sign Up with email</OutlineButton>
           </Form>
           <div className='links'>
-            <LinkText onClick={() => navigate('/login')}>Aready have an account?</LinkText>
+            <span className='login-link'>
+              Aready have an account?{' '}
+              <LinkText onClick={() => navigate('/login')}>Log in</LinkText>
+            </span>
           </div>
         </div>
       </div>
