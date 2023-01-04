@@ -25,7 +25,13 @@ export function Signup() {
       ev.preventDefault()
       return
     }
-    alert('submit')
+    const { elements } = ev.currentTarget
+    const email = (elements.namedItem('email') as HTMLInputElement).value
+    const username = (elements.namedItem('username') as HTMLInputElement).value
+    const password = (elements.namedItem('password') as HTMLInputElement).value
+    const confirmPassword = (elements.namedItem('confirmPassword') as HTMLInputElement).value
+    console.log('submit', { username, email, password, confirmPassword })
+    ev.preventDefault()
   }
 
   return (
@@ -55,8 +61,7 @@ export function Signup() {
           </Form>
           <div className='links'>
             <span className='login-link'>
-              Aready have an account?{' '}
-              <LinkText onClick={() => navigate('/login')}>Log in</LinkText>
+              Aready have an account? <LinkText onClick={() => navigate('/login')}>Log in</LinkText>
             </span>
           </div>
         </div>

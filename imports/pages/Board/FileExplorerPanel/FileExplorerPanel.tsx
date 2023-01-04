@@ -11,9 +11,7 @@ export function FileExplorerPanel() {
   }
 
   useEffect(() => {
-    const onMouseUp = () => {
-      setIsDragging(false)
-    }
+    const onMouseUp = () => setIsDragging(false)
     window.addEventListener('mouseup', onMouseUp)
     return () => window.removeEventListener('mouseup', onMouseUp)
   }, [])
