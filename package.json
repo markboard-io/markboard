@@ -24,6 +24,8 @@
     "browser-fs-access": "^0.29.1",
     "chai": "^4.3.7",
     "clsx": "^1.2.1",
+    "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
     "fabric": "^5.3.0",
     "firebase": "^8.3.3",
     "i18next-browser-languagedetector": "^7.0.1",
@@ -49,6 +51,7 @@
     "react-router-dom": "^6.6.1",
     "react-toastify": "^9.1.1",
     "roughjs": "^4.5.2",
+    "simpl-schema": "^3.4.0",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",
     "ts-jest": "^29.0.3"
