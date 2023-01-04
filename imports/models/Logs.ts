@@ -10,7 +10,7 @@ export interface ILog {
 
 export class LogsCollection extends BaseCollection<ILog> {
   constructor() {
-    super('Logs')
+    super('logs')
     this.attachSchema(new SimpleSchema({
       type: String,
       content: String,

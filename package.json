@@ -1,7 +1,7 @@
 {
   "name": "@boardx/boardx-core",
   "scripts": {
-    "start": "meteor run",
+    "start": "export $(cat .env | xargs) && meteor run",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer",
     "lint": "meteor npx eslint server client imports",
