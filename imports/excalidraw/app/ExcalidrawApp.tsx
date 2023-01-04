@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import polyfill from '../polyfill'
+import polyfill from '/imports/utils/polyfill'
 import { useEffect, useRef, useState } from 'react'
 import { trackEvent } from '../analytics'
 import { getDefaultAppState } from '../appState'

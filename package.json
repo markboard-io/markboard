@@ -1,17 +1,17 @@
 {
-  "name": "simple-todos-react",
-  "private": true,
+  "name": "@boardx/boardx-core",
   "scripts": {
     "start": "meteor run",
-    "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer",
-    "lint": "meteor npx eslint server client imports"
+    "lint": "meteor npx eslint server client imports",
+    "test": "meteor npx jest"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
     "@sentry/browser": "^7.28.1",
     "@sentry/integrations": "^7.28.1",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/chai": "^4.3.4",
     "@types/fabric": "^4.5.14",
@@ -29,6 +29,7 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "idb-keyval": "^6.2.0",
     "image-blob-reduce": "^4.1.0",
+    "jest": "^29.3.1",
     "jotai": "^1.12.0",
     "lodash.throttle": "^4.1.1",
     "meteor-node-stubs": "^1.2.1",
@@ -49,7 +50,8 @@
     "react-toastify": "^9.1.1",
     "roughjs": "^4.5.2",
     "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.1"
+    "socket.io-client": "^2.3.1",
+    "ts-jest": "^29.0.3"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
@@ -70,7 +72,11 @@
     "eslint-plugin-meteor": "^7.3.0",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-canvas-mock": "^2.4.0",
+    "jest-environment-jsdom": "^29.3.1",
     "react-scripts": "^5.0.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.6.4"
   },
   "meteor": {

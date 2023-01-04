@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import 'jest-canvas-mock'
 import dotenv from 'dotenv'
-import polyfill from './polyfill'
+import polyfill from '../utils/polyfill'
 
 require('fake-indexeddb/auto')
 

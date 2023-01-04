@@ -1,4 +1,4 @@
-const polyfill = () => {
+export default function polyfill() {
   if (!Array.prototype.at) {
     // Taken from https://github.com/tc39/proposal-relative-indexing-method#polyfill so that it works in tests
     /* eslint-disable */
@@ -23,4 +23,3 @@ const polyfill = () => {
     })
   }
 }
-export default polyfill

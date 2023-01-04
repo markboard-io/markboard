@@ -9,7 +9,7 @@
     ],
     "allowJs": true,
     "checkJs": false,
-    "jsx": "preserve",
+    "jsx": "react",
     "incremental": true,
     "noEmit": true,
     "strict": true,
