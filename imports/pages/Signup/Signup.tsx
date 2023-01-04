@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import { LinkText, OutlineButton } from '/imports/components'
 import { useDocumentTitle } from '/imports/hooks'
 import { useNavigate } from 'react-router-dom'
+import { Toast } from '/imports/utils'
 
 interface IValidation {
   errorMsg: string
@@ -21,17 +22,19 @@ export function Signup() {
     !emailValidation.errorMsg && !usernameValidation.errorMsg && !confirmPassValidation.errorMsg
 
   const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
-    if (!isValidationPass) {
-      ev.preventDefault()
-      return
-    }
+    ev.preventDefault()
     const { elements } = ev.currentTarget
     const email = (elements.namedItem('email') as HTMLInputElement).value
     const username = (elements.namedItem('username') as HTMLInputElement).value
     const password = (elements.namedItem('password') as HTMLInputElement).value
     const confirmPassword = (elements.namedItem('confirmPassword') as HTMLInputElement).value
-    console.log('submit', { username, email, password, confirmPassword })
-    ev.preventDefault()
+    console.log({
+      email,
+      username,
+      password,
+      confirmPassword
+    })
+    Toast.success('test error')
   }
 
   return (

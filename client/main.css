@@ -14,6 +14,7 @@ body {
     --description-text-color: #5e646e;
     --button-text-color: rgb(17, 17, 17);
     --background-primary: #1668e3;
+    --shadow-primary: 0 0 0 0.5px #e4e4e4, 0 4px 12px 0 rgb(0 0 0 / 8%);
   }
 }
 
@@ -41,4 +42,40 @@ html[data-theme="dark"] {
   --card-shadow-color: #333333;
   --primary-text-color: #ffffff;
   --secondry-text-color: #cfcfcf;
+}
+
+/* animations declarations */
+
+.wbBounceIn {
+  animation: wbBounceIn 0.2s forwards;
+}
+
+.wbBounceOut {
+  animation: wbBounceOut 0.2s forwards;
+}
+
+@keyframes wbBounceIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wbBounceOut {
+  100% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(1.03);
+  }
+  0% {
+    transform: scale(1);
+  }
 }
