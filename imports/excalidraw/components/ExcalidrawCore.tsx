@@ -2924,7 +2924,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     pointerDownState.lastCoords.y = scenePointer.y
   }
   // set touch moving for mobile context menu
-  private handleTouchMove = (event: React.TouchEvent<HTMLCanvasElement>) => {
+  private handleTouchMove = (_event: React.TouchEvent<HTMLCanvasElement>) => {
     invalidateContextMenu = true
   }
 
@@ -3031,11 +3031,9 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     //fires only once, if pen is detected, penMode is enabled
     //the user can disable this by toggling the penMode button
     if (!this.state.penDetected && event.pointerType === 'pen') {
-      this.setState(prevState => {
-        return {
-          penMode: true,
-          penDetected: true
-        }
+      this.setState({
+        penMode: true,
+        penDetected: true
       })
     }
 
@@ -3754,7 +3752,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
   }
 
   private handleLinearElementOnPointerDown = (
-    event: React.PointerEvent<HTMLCanvasElement>,
+    _event: React.PointerEvent<HTMLCanvasElement>,
     elementType: ExcalidrawLinearElement['type'],
     pointerDownState: PointerDownState
   ): void => {
@@ -4523,9 +4521,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
               selectedLinearElement: new LinearElementEditor(draggingElement, this.scene)
             }))
           } else {
-            this.setState(prevState => ({
-              draggingElement: null
-            }))
+            this.setState({ draggingElement: null })
           }
         }
         return
