@@ -26,7 +26,7 @@ const jestConfig: JestConfigWithTsJest = {
   },
   transformIgnorePatterns: [`node_modules/(?!(${ ESM_MODULES.join('|') })/)`],
   setupFilesAfterEnv: ['./tests/setupTests.ts'],
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
 }
 
 export default jestConfig
