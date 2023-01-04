@@ -2,15 +2,16 @@
 	width: 100%;
 	height: 100vh;
 	background-color: var(--sidebar-background-color);
+	min-width: 250px;
 }
 .PanelResizeHandle {
 	width: 4px;
 	background-color: var(--sidebar-background-color);
 	.Divider {
-		width: 2px;
+		width: 3px;
 		height: 100%;
 	}
 	&:hover .Divider {
-		border-right: 1px solid #dedfe1;
+		border-right: 2px solid var(--background-primary);
 	}
 }

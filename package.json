@@ -5,7 +5,8 @@
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer",
     "lint": "meteor npx eslint server client imports",
-    "test": "meteor npx jest"
+    "test": "meteor npx jest",
+    "postinstall": "cp .env.example .env"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
@@ -47,7 +48,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
-    "react-resizable-panels": "0.0.18",
+    "react-resizable-panels": "0.0.28",
     "react-router-dom": "^6.6.1",
     "react-toastify": "^9.1.1",
     "roughjs": "^4.5.2",
