@@ -44,6 +44,7 @@ export const AllowedExcalidrawActiveTools: Record<
   AppState['activeTool']['type'],
   boolean
 > = {
+  stickynote: true,
   selection: true,
   text: true,
   rectangle: true,
@@ -84,15 +85,15 @@ const restoreElementWithProperties = <
   },
   K extends Pick<T, keyof Omit<Required<T>, keyof ExcalidrawElement>>,
 >(
-  element: T,
-  extra: Pick<
+    element: T,
+    extra: Pick<
     T,
     // This extra Pick<T, keyof K> ensure no excess properties are passed.
     // @ts-ignore TS complains here but type checks the call sites fine.
     keyof K
   > &
     Partial<Pick<ExcalidrawElement, 'type' | 'x' | 'y'>>,
-): T => {
+  ): T => {
   const base: Pick<T, keyof ExcalidrawElement> & {
     [PRECEDING_ELEMENT_KEY]?: string
   } = {
