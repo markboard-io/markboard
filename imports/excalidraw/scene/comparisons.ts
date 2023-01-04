@@ -2,6 +2,7 @@ import { NonDeletedExcalidrawElement } from '../element/types'
 
 export const hasBackground = (type: string) =>
   type === 'rectangle' ||
+  type === 'stickynote' ||
   type === 'ellipse' ||
   type === 'diamond' ||
   type === 'line' ||
@@ -11,6 +12,7 @@ export const hasStrokeColor = (type: string) => type !== 'image'
 
 export const hasStrokeWidth = (type: string) =>
   type === 'rectangle' ||
+  type === 'stickynote' ||
   type === 'ellipse' ||
   type === 'diamond' ||
   type === 'freedraw' ||
@@ -19,6 +21,7 @@ export const hasStrokeWidth = (type: string) =>
 
 export const hasStrokeStyle = (type: string) =>
   type === 'rectangle' ||
+  type === 'stickynote' ||
   type === 'ellipse' ||
   type === 'diamond' ||
   type === 'arrow' ||
