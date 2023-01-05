@@ -6,12 +6,14 @@ export interface IOutlineButtonProps {
   children: React.ReactNode
   variant?: 'primary' | 'secondary'
   className?: string
+  onFocus?: () => void
 }
 
 export const OutlineButton: React.FC<IOutlineButtonProps> = ({
   children,
   variant = 'primary',
-  className = ''
+  className = '',
+  onFocus = () => {}
 }) => {
   let style = {} as React.CSSProperties
   if (variant === 'secondary') {
@@ -23,7 +25,7 @@ export const OutlineButton: React.FC<IOutlineButtonProps> = ({
     }
   }
   return (
-    <button style={style} className={cx('boardx-outline-btn', className)}>
+    <button style={style} className={cx('boardx-outline-btn', className)} onFocus={onFocus}>
       {children}
     </button>
   )

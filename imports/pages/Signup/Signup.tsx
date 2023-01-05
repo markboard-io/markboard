@@ -2,61 +2,86 @@ import React, { useState } from 'react'
 import { SiteLayout } from '/imports/layouts'
 import './Signup.style.scss'
 import Form from 'react-bootstrap/Form'
-import { LinkText, OutlineButton } from '/imports/components'
-import { useDocumentTitle } from '/imports/hooks'
+import { LinkText, OutlineButton, ValidatedInput } from '/imports/components'
+import { useDocumentTitle, useUsernameValidator, useEmailValidator } from '/imports/hooks'
 import { useNavigate } from 'react-router-dom'
-import { Services } from '/imports/services/client'
+import { useRef } from 'react'
 
-interface IValidation {
-  errorMsg: string
+function useFormValues() {
+  const ref = useRef<HTMLFormElement | null>(null)
+
+  const getFormValues = () => {
+    const { elements } = ref.current as HTMLFormElement
+    const email = (elements.namedItem('email') as HTMLInputElement).value
+    const username = (elements.namedItem('username') as HTMLInputElement).value
+    const password = (elements.namedItem('password') as HTMLInputElement).value
+    const confirmPassword = (elements.namedItem('confirmPassword') as HTMLInputElement).value
+    return { email, username, password, confirmPassword }
+  }
+
+  return [ref, getFormValues] as const
 }
 
 export function Signup() {
   const navigate = useNavigate()
   useDocumentTitle('BoardX - Sign Up')
 
-  const [emailValidation, setEmailValidation] = useState<IValidation>({ errorMsg: '' })
-  const [usernameValidation, setUsernameValidation] = useState<IValidation>({ errorMsg: '' })
-  const [confirmPassValidation, setConfirmPassValidation] = useState<IValidation>({ errorMsg: '' })
+  const [emailError, validateEmail] = useEmailValidator()
+  const [usernameError, validateUsername] = useUsernameValidator()
+  const [passwordError, setPasswordError] = useState('')
+  const [confirmPassError, setConfirmPassError] = useState('')
+  const [ref, getFormValues] = useFormValues()
+
+  const onFocus = () => {
+    const { username, email, password } = getFormValues()
+    validateEmail(email)
+    validateUsername(username)
+    validatePassword(password)
+    validateConfirmPass()
+  }
 
   const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
-    const isValidationPass =
-      !emailValidation.errorMsg && !usernameValidation.errorMsg && !confirmPassValidation.errorMsg
+    const isValidationPass = !emailError && !usernameError && !passwordError && !confirmPassError
     if (!isValidationPass) return
 
-    const { elements } = ev.currentTarget
-    const email = (elements.namedItem('email') as HTMLInputElement).value
-    const username = (elements.namedItem('username') as HTMLInputElement).value
-    const password = (elements.namedItem('password') as HTMLInputElement).value
-    const confirmPassword = (elements.namedItem('confirmPassword') as HTMLInputElement).value
+    const { email, username, password, confirmPassword } = getFormValues()
     console.log({
       email,
       username,
       password,
       confirmPassword
     })
-    const isUsernameAvailable = await Services.get('account').checkUsernameAvailability(username)
-    console.log({ isUsernameAvailable })
   }
 
-  const validateUsername = (username: string) => {
-    if (!username) return setUsernameValidation({ errorMsg: 'Username cannot be left empty' })
-    if (!/^[a-z][a-z0-9.]*$/.test(username)) {
-      return setUsernameValidation({
-        errorMsg:
-          'Invalid Username. ' +
-          'Usernames can contain letters (a-z), numbers (0-9), and periods (.) ' +
-          'and should start with letters(a-z)'
-      })
+  const validatePassword = async (password: string) => {
+    if (!password) return setPasswordError('Password cannot be left empty')
+    if (!/^[A-Za-z0-9._-]*$/.test(password)) {
+      return setPasswordError(
+        'Invalid Password. ' +
+          'Password can contain letters (A-Z, a-z), numbers (0-9), periods (.), hyphen (-) ' +
+          'and underscore (_)'
+      )
     }
-    const MAX_USERNAME_LENGTH = 20
-    if (username.length > MAX_USERNAME_LENGTH) {
-      return setUsernameValidation({
-        errorMsg: "Username's length cannot be over 20 characters"
-      })
+    const MIN_PASSWORD_LENGTH = 6
+    const MAX_PASSWORD_LENGTH = 20
+    if (password.length < MIN_PASSWORD_LENGTH || password.length > MAX_PASSWORD_LENGTH) {
+      return setPasswordError(
+        "Password's length doesn't meet requirements " +
+          `should be over ${MIN_PASSWORD_LENGTH} and below ${MAX_PASSWORD_LENGTH} ` +
+          'characters'
+      )
     }
-    return setUsernameValidation({ errorMsg: '' })
+    return setPasswordError('')
+  }
+
+  const validateConfirmPass = async () => {
+    const { password, confirmPassword } = getFormValues()
+    if (!confirmPassword) return setConfirmPassError('Password cannot be left empty')
+    if (password !== confirmPassword) {
+      return setConfirmPassError('Passwords do not match')
+    }
+    return setConfirmPassError('')
   }
 
   return (
@@ -64,36 +89,40 @@ export function Signup() {
       <div className='signup-page'>
         <div className='title'>Sign Up</div>
         <div className='signup-form'>
-          <Form validated={false} onSubmit={onSubmit}>
-            <Form.Group className='mb-3' controlId='email'>
-              <Form.Label className='label'>Email address</Form.Label>
-              <Form.Control type='email' placeholder='Enter email' isValid={true} />
-              <Form.Control.Feedback type='invalid'>invalid email</Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className='mb-3' controlId='username'>
-              <Form.Label className='label'>Username</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Username'
-                isValid={!usernameValidation.errorMsg}
-                isInvalid={!!usernameValidation.errorMsg}
-                onChange={ev => validateUsername(ev.target.value)}
-              />
-              {usernameValidation.errorMsg ? (
-                <Form.Control.Feedback type='invalid'>
-                  {usernameValidation.errorMsg}
-                </Form.Control.Feedback>
-              ) : null}
-            </Form.Group>
-            <Form.Group className='mb-3' controlId='password'>
-              <Form.Label className='label'>Password</Form.Label>
-              <Form.Control type='password' placeholder='Password' />
-            </Form.Group>
-            <Form.Group className='mb-3' controlId='confirmPassword'>
-              <Form.Label className='label'>Confirm password</Form.Label>
-              <Form.Control type='password' placeholder='Password' />
-            </Form.Group>
-            <OutlineButton className='signup-button'>Sign Up with email</OutlineButton>
+          <Form onSubmit={onSubmit} ref={ref}>
+            <ValidatedInput
+              id='email'
+              label='Email Address'
+              placeholder='Enter Email'
+              error={emailError}
+              validator={validateEmail}
+            />
+            <ValidatedInput
+              id='username'
+              type='text'
+              label='Username'
+              placeholder='Enter Username'
+              error={usernameError}
+              validator={validateUsername}
+            />
+            <ValidatedInput
+              id='password'
+              label='Password'
+              placeholder='Enter Password'
+              error={passwordError}
+              validator={validatePassword}
+            />
+            <ValidatedInput
+              id='confirmPassword'
+              type='password'
+              label='Confirm Password'
+              placeholder='Enter Password'
+              error={confirmPassError}
+              validator={validateConfirmPass}
+            />
+            <OutlineButton className='signup-button' onFocus={onFocus}>
+              Sign Up with email
+            </OutlineButton>
           </Form>
           <div className='links'>
             <span className='login-link'>
