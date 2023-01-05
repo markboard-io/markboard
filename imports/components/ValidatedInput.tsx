@@ -24,7 +24,6 @@ function ValidatedInputComponent({
   const onFocus = () => {
     const input = ref.current as HTMLInputElement
     setIsEdited(true)
-    console.log('validate pass', input.value)
     validator(input.value)
   }
   const onChange = debounce(ev => validator(ev.target.value), 200)

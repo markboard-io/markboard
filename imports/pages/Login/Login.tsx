@@ -1,14 +1,41 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { SiteLayout } from '/imports/layouts'
 import './Login.style.scss'
 import Form from 'react-bootstrap/Form'
 import { OutlineButton, LinkText } from '/imports/components'
 import { useDocumentTitle } from '/imports/hooks'
 import { useNavigate } from 'react-router-dom'
+import { Meteor } from 'meteor/meteor'
+import { Toast } from '/imports/utils'
+
+function useFormValues() {
+  const ref = useRef<HTMLFormElement | null>(null)
+
+  const getFormValues = () => {
+    const { elements } = ref.current as HTMLFormElement
+    const username = (elements.namedItem('username') as HTMLInputElement).value
+    const password = (elements.namedItem('password') as HTMLInputElement).value
+    return { username, password }
+  }
+
+  return [ref, getFormValues] as const
+}
 
 export function Login() {
   const navigate = useNavigate()
+  const [ref, getFormValues] = useFormValues()
+
   useDocumentTitle('BoardX - Log in')
+
+  const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault()
+
+    const { username, password } = getFormValues()
+    Meteor.loginWithPassword(username, password, error => {
+      if (error) return Toast.error(error.message)
+      Toast.success('Log In Success!')
+    })
+  }
 
   return (
     <SiteLayout>
@@ -24,15 +51,15 @@ export function Login() {
             Continue with GitHub
           </OutlineButton>
           <hr className='seperator' />
-          <Form>
-            <Form.Group className='mb-3' controlId='formBasicEmail'>
-              <Form.Label className='label'>Email address</Form.Label>
-              <Form.Control type='email' placeholder='Enter email' />
+          <Form ref={ref} onSubmit={onSubmit}>
+            <Form.Group className='mb-3' controlId='username'>
+              <Form.Label className='label'>Username</Form.Label>
+              <Form.Control type='text' placeholder='Enter Username' />
             </Form.Group>
 
-            <Form.Group className='mb-3' controlId='formBasicPassword'>
+            <Form.Group className='mb-3' controlId='password'>
               <Form.Label className='label'>Password</Form.Label>
-              <Form.Control type='password' placeholder='Password' />
+              <Form.Control type='password' placeholder='Enter Password' />
             </Form.Group>
             <OutlineButton className='login-button'>Continue with email</OutlineButton>
           </Form>

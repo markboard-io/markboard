@@ -3,9 +3,12 @@ import { SiteLayout } from '/imports/layouts'
 import './Signup.style.scss'
 import Form from 'react-bootstrap/Form'
 import { LinkText, OutlineButton, ValidatedInput } from '/imports/components'
-import { useDocumentTitle, useUsernameValidator, useEmailValidator } from '/imports/hooks'
+import { useDocumentTitle } from '/imports/hooks'
+import { useUsernameValidator, useEmailValidator } from './hooks'
 import { useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
+import { Accounts } from 'meteor/accounts-base'
+import { Toast } from '/imports/utils/toast'
 
 function useFormValues() {
   const ref = useRef<HTMLFormElement | null>(null)
@@ -42,15 +45,14 @@ export function Signup() {
 
   const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
-    const isValidationPass = !emailError && !usernameError && !passwordError && !confirmPassError
-    if (!isValidationPass) return
+    const isValidationsPass = !emailError && !usernameError && !passwordError && !confirmPassError
+    if (!isValidationsPass) return
 
-    const { email, username, password, confirmPassword } = getFormValues()
-    console.log({
-      email,
-      username,
-      password,
-      confirmPassword
+    const { email, username, password } = getFormValues()
+    Accounts.createUser({ username, email, password }, error => {
+      if (error) return Toast.error(error.message)
+      Toast.success('Sign Up Success!')
+      setTimeout(() => navigate('/login'), 1500)
     })
   }
 
