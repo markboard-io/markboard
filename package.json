@@ -2,11 +2,13 @@
   "name": "@boardx/boardx-core",
   "scripts": {
     "start": "export $(cat .env | xargs) && meteor run",
+    "debug": "export $(cat .env | xargs) && meteor run --inspect",
+    "debug:brk": "export $(cat .env | xargs) && meteor --inspect-brk",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer",
     "lint": "meteor npx eslint server client imports",
     "test": "meteor npx jest",
-    "postinstall": "cp .env.example .env"
+    "postinstall": "meteor node scripts/postinstall.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
