@@ -27,7 +27,23 @@ export function Login() {
 
   useDocumentTitle('BoardX - Log in')
 
-  const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+  const loginWithGoogle = () => {
+    Meteor.loginWithGoogle({}, error => {
+      console.log('loginWithGoogle', error)
+      if (error) return Toast.error(error.message)
+      Toast.success('Log In Success')
+      console.log(Meteor.user())
+    })
+  }
+
+  const loginWithGitHub = () => {
+    Meteor.loginWithGithub({}, error => {
+      if (error) return Toast.error(error.message)
+      Toast.success('Log In Success')
+    })
+  }
+
+  const loginWithPassword = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
 
     const { username, password } = getFormValues()
@@ -42,16 +58,16 @@ export function Login() {
       <div className='login-page'>
         <div className='title'>Log in</div>
         <div className='login-form'>
-          <OutlineButton variant='secondary'>
+          <OutlineButton variant='secondary' onClick={loginWithGoogle}>
             <img src='/images/google.svg' alt='google' />
             Continue with Google
           </OutlineButton>
-          <OutlineButton variant='secondary'>
+          <OutlineButton variant='secondary' onClick={loginWithGitHub}>
             <img src='/images/github.svg' alt='github' />
             Continue with GitHub
           </OutlineButton>
           <hr className='seperator' />
-          <Form ref={ref} onSubmit={onSubmit}>
+          <Form ref={ref} onSubmit={loginWithPassword}>
             <Form.Group className='mb-3' controlId='username'>
               <Form.Label className='label'>Username</Form.Label>
               <Form.Control type='text' placeholder='Enter Username' />

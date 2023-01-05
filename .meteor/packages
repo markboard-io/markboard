@@ -24,3 +24,6 @@ fourseven:scss
 accounts-password@2.3.3
 accounts-base@2.2.6
 aldeed:collection2
+accounts-github
+service-configuration
+accounts-google
