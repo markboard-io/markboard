@@ -1,5 +1,4 @@
-import { BaseCollection } from './Base'
-import SimpleSchema from 'simpl-schema'
+import { BaseCollection } from './BaseCollection'
 import dayjs from 'dayjs'
 
 export interface ILog {
@@ -11,11 +10,11 @@ export interface ILog {
 export class LogsCollection extends BaseCollection<ILog> {
   constructor() {
     super('logs')
-    this.attachSchema(new SimpleSchema({
+    this.attachSchema({
       type: String,
       content: String,
       timestamp: Number
-    }))
+    })
   }
 
   public appendStartupLog() {
