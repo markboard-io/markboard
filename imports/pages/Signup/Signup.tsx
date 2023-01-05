@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import { Meteor } from 'meteor/meteor'
 import { SiteLayout } from '/imports/layouts'
 import './Signup.style.scss'
 import Form from 'react-bootstrap/Form'
 import { LinkText, OutlineButton } from '/imports/components'
 import { useDocumentTitle } from '/imports/hooks'
 import { useNavigate } from 'react-router-dom'
-import { Toast } from '/imports/utils'
 
 interface IValidation {
   errorMsg: string
@@ -21,7 +21,7 @@ export function Signup() {
   const isValidationPass =
     !emailValidation.errorMsg && !usernameValidation.errorMsg && !confirmPassValidation.errorMsg
 
-  const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
     const { elements } = ev.currentTarget
     const email = (elements.namedItem('email') as HTMLInputElement).value
@@ -34,7 +34,12 @@ export function Signup() {
       password,
       confirmPassword
     })
-    Toast.success('test error')
+    // Services.get('account').checkEmailAvailability()
+    const isUsernameAvailable: boolean = await Meteor.callAsync(
+      'account.checkUsernameAvailability',
+      username
+    )
+    console.log({ isUsernameAvailable })
   }
 
   return (

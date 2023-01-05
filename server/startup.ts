@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor'
-import { startExcalidrawSyncService } from '/imports/services'
 import { Logs } from '/imports/models'
+import { ServiceManagerServer } from '/imports/services'
 
 export function startup() {
   Meteor.startup(async () => {
-    startExcalidrawSyncService()
+    ServiceManagerServer.startup()
     Logs.appendStartupLog()
   })
 }

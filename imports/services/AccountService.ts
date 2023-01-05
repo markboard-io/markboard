@@ -1,25 +1,18 @@
-import { Meteor } from 'meteor/meteor'
-import type { IUserCreation } from '/imports/models'
-import { Accounts } from '/imports/models'
-import { IMeteorCallResp } from './types'
+import { BaseService } from './BaseService'
+import { AccountModel } from '../models'
 
-export interface IUserCreationResp extends IMeteorCallResp {
-  field?: 'email' | 'username' | 'confirm-password'
-}
+export class AccountService extends BaseService {
+  constructor() {
+    super('account')
+  }
 
-export function startAccountService() {
-  Meteor.methods({
-    'accounts.createUser': async (user: IUserCreation): Promise<IUserCreationResp> => {
-      const isUsernameAvailable = Accounts.checkUsernameAvailability(user.username)
-      if (!isUsernameAvailable) {
-        return { field: 'username', error: 'Username is unavailable, please type a different one.' }
-      }
-      try {
-        await Accounts.createUser(user)
-      } catch (error) {
-        // TODO handle error here
-      }
-      return { error: '' }
-    }
-  })
+  public startup(): void {}
+
+  public checkUsernameAvailability(username: string) {
+    return AccountModel.checkUsernameAvailability(username)
+  }
+
+  public checkEmailAvailability(email: string) {
+    return AccountModel.checkEmailAvailability(email)
+  }
 }
