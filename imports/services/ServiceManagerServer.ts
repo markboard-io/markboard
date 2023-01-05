@@ -1,17 +1,17 @@
 import { AccountService } from './AccountService'
 import { BaseService } from './BaseService'
 import { ExcalidrawSyncService } from './ExcalidrawSyncService'
-import { IServices } from './types'
+import { ServerServices } from './types'
 
 class ServiceManagerServerClass {
-  private _services = {} as IServices
+  private _services = {} as ServerServices
 
   constructor() {
     this._services['account'] = new AccountService()
     this._services['excalidrawSync'] = new ExcalidrawSyncService()
   }
 
-  public getService<T extends keyof IServices>(service: T): IServices[T] {
+  public getService<T extends keyof ServerServices>(service: T): ServerServices[T] {
     return this._services[service]
   }
 

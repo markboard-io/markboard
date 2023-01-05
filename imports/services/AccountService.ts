@@ -12,7 +12,7 @@ export class AccountService extends BaseService {
     return AccountModel.checkUsernameAvailability(username)
   }
 
-  public checkEmailAvailability(email: string) {
+  public checkEmailAvailability(email: string): boolean {
     return AccountModel.checkEmailAvailability(email)
   }
 }
