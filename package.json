@@ -1,7 +1,7 @@
 {
   "name": "@boardx/boardx-core",
   "scripts": {
-    "start": "npm run dev",
+    "start": "npm run dev -- --port=1234",
     "debug": "export $(cat .env | xargs) && meteor run --inspect",
     "debug:brk": "export $(cat .env | xargs) && meteor --inspect-brk",
     "dev": "export $(cat .env | xargs) && meteor run",
