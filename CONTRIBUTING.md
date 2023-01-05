@@ -67,3 +67,9 @@
    ```
 
    See: https://github.com/meteor/meteor/wiki/Using-Meteor-behind-a-proxy
+
+## Notable Debugging Tools
+
+- [Meteor DevTools Evolved](https://chrome.google.com/webstore/detail/meteor-devtools-evolved/ibniinmoafhgbifjojidlagmggecmpgf?hl=en)
+- [React Devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+- `npm run debug:brk` with Chrome Devtools to debug code
