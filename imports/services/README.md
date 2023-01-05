@@ -10,3 +10,7 @@ async function foo() {
   console.log({ isEmailAvilable })
 }
 ```
+
+## How to add a new Service?
+
+// TODO
