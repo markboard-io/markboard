@@ -16,7 +16,10 @@
 
 [BoardX](https://app.boardx.us) is a Digital Whiteboard, Video Conferencing, Team Chat and Documents all-in-one collaborative workspace for your team. It aims to facilitate collaboration and communication within the team, enabling team members to easily share ideas and work together on projects.
 
+
 ## Core Features
+
+[Website](https://www.boardx.us) • [Live Demo](https://app.boardx.us) • [Open Server](https://open.boardx.us) • [Docs](https://docs.boardx.us) • [Blog](https://share.boardx.us/)
 
 BoardX = Miro + Zoom + Slack + Notion. The open source "Zoom One" alternative. We're building features for "All-in-One Workspace" using enterprise-grade open source tools.
 
