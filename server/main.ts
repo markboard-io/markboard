@@ -28,7 +28,7 @@ ServiceConfiguration.configurations.upsert(
   { service: 'google' },
   {
     $set: {
-      loginStyle: 'redirect',
+      loginStyle: 'popup',
       clientId: process.env.OAUTH_GOOGLE_CLIENT_ID,
       secret: process.env.OAUTH_GOOGLE_CLIENT_SECRET
     }
