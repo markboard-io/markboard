@@ -1,57 +1,58 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { SiteLayout } from '/imports/layouts'
-import './Signup.style.scss'
+import './ResetPassword.style.scss'
 import Form from 'react-bootstrap/Form'
-import { LinkText, OutlineButton, ValidatedInput } from '/imports/components'
+import { OutlineButton, LinkText, ValidatedInput } from '/imports/components'
 import { useDocumentTitle } from '/imports/hooks'
-import { useUsernameValidator, useEmailValidator, usePasswordValidator } from './hooks'
-import { useNavigate } from 'react-router-dom'
-import { useRef } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Accounts } from 'meteor/accounts-base'
-import { Toast } from '/imports/utils/toast'
+import { Toast } from '/imports/utils'
+import { usePasswordValidator } from '/imports/pages/Signup/hooks'
+import { UNKNOWN_ERROR } from '/imports/utils/constants'
 
 function useFormValues() {
   const ref = useRef<HTMLFormElement | null>(null)
 
   const getFormValues = () => {
     const { elements } = ref.current as HTMLFormElement
-    const email = (elements.namedItem('email') as HTMLInputElement).value
-    const username = (elements.namedItem('username') as HTMLInputElement).value
     const password = (elements.namedItem('password') as HTMLInputElement).value
     const confirmPassword = (elements.namedItem('confirmPassword') as HTMLInputElement).value
-    return { email, username, password, confirmPassword }
+    return { password, confirmPassword }
   }
 
   return [ref, getFormValues] as const
 }
 
-export function Signup() {
-  const navigate = useNavigate()
-  useDocumentTitle('BoardX - Sign Up')
+interface IResetPasswordParams {
+  token: string
+}
 
-  const [emailError, validateEmail] = useEmailValidator()
-  const [usernameError, validateUsername] = useUsernameValidator()
+export function ResetPassword() {
+  const navigate = useNavigate()
+  const [ref, getFormValues] = useFormValues()
   const [passwordError, validatePassword] = usePasswordValidator()
   const [confirmPassError, setConfirmPassError] = useState('')
-  const [ref, getFormValues] = useFormValues()
+  const params = useParams() as unknown as IResetPasswordParams
+
+  useDocumentTitle('BoardX - Reset Password')
 
   const onFocus = () => {
-    const { username, email, password } = getFormValues()
-    validateEmail(email)
-    validateUsername(username)
+    const { password } = getFormValues()
     validatePassword(password)
     validateConfirmPass()
   }
 
-  const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+  const resetPassword = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
-    const isValidationsPass = !emailError && !usernameError && !passwordError && !confirmPassError
+    const isValidationsPass = !passwordError && !confirmPassError
     if (!isValidationsPass) return
+    const { token } = params
+    const { password } = getFormValues()
 
-    const { email, username, password } = getFormValues()
-    Accounts.createUser({ username, email, password }, error => {
-      if (error) return Toast.error(error.message)
-      Toast.success('Sign Up Success!')
+    Accounts.resetPassword(token, password, error => {
+      const msg = error?.message.replace(/\[.+\]/, '') ?? UNKNOWN_ERROR
+      if (error) return Toast.error(msg)
+      Toast.success('Reset Password Successfully!')
       setTimeout(() => navigate('/login'), 500)
     })
   }
@@ -67,25 +68,10 @@ export function Signup() {
 
   return (
     <SiteLayout>
-      <div className='signup-page'>
-        <div className='title'>Sign Up</div>
-        <div className='signup-form'>
-          <Form onSubmit={onSubmit} ref={ref}>
-            <ValidatedInput
-              id='email'
-              label='Email Address'
-              placeholder='Enter Email'
-              error={emailError}
-              validator={validateEmail}
-            />
-            <ValidatedInput
-              id='username'
-              type='text'
-              label='Username'
-              placeholder='Enter Username'
-              error={usernameError}
-              validator={validateUsername}
-            />
+      <div className='reset-password-page'>
+        <div className='title'>Reset Password</div>
+        <div className='form'>
+          <Form ref={ref} onSubmit={resetPassword}>
             <ValidatedInput
               id='password'
               label='Password'
@@ -101,14 +87,15 @@ export function Signup() {
               error={confirmPassError}
               validator={validateConfirmPass}
             />
-            <OutlineButton className='signup-button' onFocus={onFocus}>
-              Sign Up with email
+            <OutlineButton className='reset-button' onClick={onFocus}>
+              Reset password
             </OutlineButton>
           </Form>
           <div className='links'>
             <span className='login-link' onClick={() => navigate('/login')}>
               Aready have an account? <LinkText>Log in</LinkText>
             </span>
+            <LinkText onClick={() => navigate('/signup')}>Sign Up</LinkText>
           </div>
         </div>
       </div>

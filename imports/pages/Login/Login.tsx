@@ -80,7 +80,7 @@ export function Login() {
             <OutlineButton className='login-button'>Continue with email</OutlineButton>
           </Form>
           <div className='links'>
-            <LinkText>Forgot Password?</LinkText>
+            <LinkText onClick={() => navigate('/forgot-password')}>Forgot Password?</LinkText>
             <LinkText onClick={() => navigate('/signup')}>Sign Up</LinkText>
           </div>
         </div>

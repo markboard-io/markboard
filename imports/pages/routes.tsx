@@ -5,6 +5,8 @@ import { Login } from './Login'
 import { Signup } from './Signup'
 import { NotFound } from './NotFound'
 import { Navigate } from 'react-router-dom'
+import { ForgotPassword } from './ForgotPassword'
+import { ResetPassword } from './ResetPassword'
 
 export interface IRouteRequirements {
   needLogin: boolean
@@ -44,6 +46,14 @@ export const router = createBrowserRouter([
   {
     path: '/signup',
     element: <Signup />
+  },
+  {
+    path: '/forgot-password',
+    element: <ForgotPassword />
+  },
+  {
+    path: '/reset-password/:token',
+    element: <ResetPassword />
   },
   {
     path: '*',

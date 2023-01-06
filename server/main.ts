@@ -1,6 +1,9 @@
 import { startup } from './startup'
 import { ServiceConfiguration } from 'meteor/service-configuration'
+import { Accounts } from 'meteor/accounts-base'
 import dotenv from 'dotenv'
+import { Meteor } from 'meteor/meteor'
+import { SITE_NAME } from '/imports/utils/constants'
 
 // Setup proxy in dev environment, or Google OAuth will
 // be not working in China, since it uses node-fetch which
@@ -12,6 +15,13 @@ if (process.env.NODE_ENV === 'development') {
 
 dotenv.config()
 startup()
+
+Accounts.emailTemplates.siteName = SITE_NAME
+Accounts.emailTemplates.from = process.env.SMTP_MAIL ?? 'noreply@example.com'
+Accounts.emailTemplates.resetPassword.subject = () => `Reset Your Password on ${SITE_NAME}`
+Accounts.urls.resetPassword = token => {
+  return Meteor.absoluteUrl(`reset-password/${token}`)
+}
 
 ServiceConfiguration.configurations.upsert(
   { service: 'github' },
