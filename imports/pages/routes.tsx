@@ -7,6 +7,7 @@ import { NotFound } from './NotFound'
 import { Navigate } from 'react-router-dom'
 import { ForgotPassword } from './ForgotPassword'
 import { ResetPassword } from './ResetPassword'
+import { Meteor } from 'meteor/meteor'
 
 export interface IRouteRequirements {
   needLogin: boolean
@@ -18,8 +19,7 @@ const withRouteProtected = (
   requirements: IRouteRequirements = { needLogin: true, permissions: [] }
 ) => {
   const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    // const isLogged = Meteor.userId() != null
-    const isLogged = true // TODO uncomment above line, to make route protection actually work
+    const isLogged = Meteor.userId() != null
 
     if (requirements.needLogin && !isLogged) {
       return <Navigate to='/login' />
