@@ -33,7 +33,7 @@
     border-width: 0 9px 10px;
     border-color: transparent transparent var(--popup-bg-color);
     position: absolute;
-    top: 10px;
+    top: var(--triangle-top);
     transform: rotate(90deg);
     right: -14px;
   }

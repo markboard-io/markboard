@@ -27,9 +27,7 @@ export const actionHelp = register({
     const [isMenuOpen, setIsMenuOpen] = useAtom(isMenuOpenAtom)
 
     const openHelpMenu = () => {
-      console.log({ isMenuOpen })
-      if (isMenuOpen) return
-      setIsMenuOpen(true)
+      setIsMenuOpen(() => !isMenuOpen)
     }
 
     return isInHamburgerMenu ? (

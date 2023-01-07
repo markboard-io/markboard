@@ -184,7 +184,7 @@ export const MobileMenu = ({
             onClick={onCollabButtonClick}
           />
         )}
-        {actionManager.renderAction('toggleShortcuts', undefined, true)}
+        {actionManager.renderAction('toggleHelpIsland', undefined, true)}
         {!appState.viewModeEnabled && actionManager.renderAction('clearCanvas')}
         <Separator />
         <MenuLinks />

@@ -11,6 +11,7 @@ type HelpButtonProps = {
 
 export const HelpButton = (props: HelpButtonProps) => (
   <button
+    data-prevent-outside-click
     className='help-icon'
     onClick={props.onClick}
     type='button'

@@ -1,34 +1,26 @@
 import React from 'react'
 import { ExcalidrawElement } from '../element/types'
-import {
-  AppClassProperties,
-  AppState,
-  ExcalidrawProps,
-  BinaryFiles,
-} from '../types'
+import { AppClassProperties, AppState, ExcalidrawProps, BinaryFiles } from '../types'
 
 export type ActionSource = 'ui' | 'keyboard' | 'contextMenu' | 'api'
 
 /** if false, the action should be prevented */
 export type ActionResult =
   | {
-    elements?: readonly ExcalidrawElement[] | null
-    appState?: MarkOptional<
-      AppState,
-      'offsetTop' | 'offsetLeft' | 'width' | 'height'
-    > | null
-    files?: BinaryFiles | null
-    commitToHistory: boolean
-    syncHistory?: boolean
-    replaceFiles?: boolean
-  }
+      elements?: readonly ExcalidrawElement[] | null
+      appState?: MarkOptional<AppState, 'offsetTop' | 'offsetLeft' | 'width' | 'height'> | null
+      files?: BinaryFiles | null
+      commitToHistory: boolean
+      syncHistory?: boolean
+      replaceFiles?: boolean
+    }
   | false
 
 type ActionFn = (
   elements: readonly ExcalidrawElement[],
   appState: Readonly<AppState>,
   formData: any,
-  app: AppClassProperties,
+  app: AppClassProperties
 ) => ActionResult | Promise<ActionResult>
 
 export type UpdaterFn = (res: ActionResult) => void
@@ -125,47 +117,46 @@ export type PanelComponentProps = {
 export interface Action {
   name: ActionName
   PanelComponent?: React.FC<
-    PanelComponentProps & { isInHamburgerMenu: boolean }
+    PanelComponentProps & {
+      isInHamburgerMenu: boolean
+    }
   >
   perform: ActionFn
   keyPriority?: number
   keyTest?: (
     event: React.KeyboardEvent | KeyboardEvent,
     appState: AppState,
-    elements: readonly ExcalidrawElement[],
+    elements: readonly ExcalidrawElement[]
   ) => boolean
   contextItemLabel?:
-  | string
-  | ((
-    elements: readonly ExcalidrawElement[],
-    appState: Readonly<AppState>,
-  ) => string)
+    | string
+    | ((elements: readonly ExcalidrawElement[], appState: Readonly<AppState>) => string)
   contextItemPredicate?: (
     elements: readonly ExcalidrawElement[],
     appState: AppState,
     appProps: ExcalidrawProps,
-    app: AppClassProperties,
+    app: AppClassProperties
   ) => boolean
   checked?: (appState: Readonly<AppState>) => boolean
   trackEvent:
-  | false
-  | {
-    category:
-    | 'toolbar'
-    | 'element'
-    | 'canvas'
-    | 'export'
-    | 'history'
-    | 'menu'
-    | 'collab'
-    | 'hyperlink'
-    action?: string
-    predicate?: (
-      appState: Readonly<AppState>,
-      elements: readonly ExcalidrawElement[],
-      value: any,
-    ) => boolean
-  }
+    | false
+    | {
+        category:
+          | 'toolbar'
+          | 'element'
+          | 'canvas'
+          | 'export'
+          | 'history'
+          | 'menu'
+          | 'collab'
+          | 'hyperlink'
+        action?: string
+        predicate?: (
+          appState: Readonly<AppState>,
+          elements: readonly ExcalidrawElement[],
+          value: any
+        ) => boolean
+      }
   /** if set to `true`, allow action to be performed in viewMode.
    *  Defaults to `false` */
   viewMode?: boolean

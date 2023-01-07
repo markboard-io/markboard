@@ -127,7 +127,7 @@ export class ActionManager {
   /**
    * @param data additional data sent to the PanelComponent
    */
-  renderAction = (
+  public renderAction = (
     name: ActionName,
     data?: PanelComponentProps['data'],
     isInHamburgerMenu = false

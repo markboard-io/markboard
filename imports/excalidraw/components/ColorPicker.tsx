@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { Popover } from './Popover'
 import { isTransparent } from '../utils'
 
 import './ColorPicker.style.scss'
 import { isArrowKey, KEYS } from '../keys'
-import { t, getLanguage } from  '/imports/i18n'
+import { t, getLanguage } from '/imports/i18n'
 import { isWritableElement } from '../utils'
 import colors from '../colors'
 import { ExcalidrawElement } from '../element/types'
@@ -148,12 +148,12 @@ const Picker = ({
           event.key === (isRTL ? KEYS.ARROW_LEFT : KEYS.ARROW_RIGHT)
             ? (index + 1) % length
             : event.key === (isRTL ? KEYS.ARROW_RIGHT : KEYS.ARROW_LEFT)
-              ? (length + index - 1) % length
-              : !isCustom && event.key === KEYS.ARROW_DOWN
-                ? (index + 5) % length
-                : !isCustom && event.key === KEYS.ARROW_UP
-                  ? (length + index - 5) % length
-                  : index
+            ? (length + index - 1) % length
+            : !isCustom && event.key === KEYS.ARROW_DOWN
+            ? (index + 5) % length
+            : !isCustom && event.key === KEYS.ARROW_UP
+            ? (length + index - 5) % length
+            : index
         ;(parentElement.children[nextIndex] as HTMLElement | undefined)?.focus()
       }
       event.preventDefault()
@@ -193,7 +193,7 @@ const Picker = ({
         <button
           className='color-picker-swatch'
           onClick={event => {
-            (event.currentTarget as HTMLButtonElement).focus()
+            ;(event.currentTarget as HTMLButtonElement).focus()
             onChange(_color)
           }}
           title={`${label}${
@@ -320,16 +320,7 @@ const ColorInput = React.forwardRef(
 
 ColorInput.displayName = 'ColorInput'
 
-export const ColorPicker = ({
-  type,
-  color,
-  onChange,
-  label,
-  isActive,
-  setActive,
-  elements,
-  appState
-}: {
+export interface IColorPickerProps {
   type: 'canvasBackground' | 'elementBackground' | 'elementStroke'
   color: string | null
   onChange: (color: string) => void
@@ -338,9 +329,23 @@ export const ColorPicker = ({
   setActive: (active: boolean) => void
   elements: readonly ExcalidrawElement[]
   appState: AppState
-}) => {
+  data?: Record<string, any>
+}
+
+export const ColorPicker = ({
+  type,
+  color,
+  onChange,
+  label,
+  isActive,
+  setActive,
+  elements,
+  appState,
+  data = {}
+}: IColorPickerProps) => {
   const pickerButton = React.useRef<HTMLButtonElement>(null)
   const coords = pickerButton.current?.getBoundingClientRect()
+  const verticalOffset = data.verticalOffset ?? 0
 
   return (
     <div>
@@ -366,12 +371,15 @@ export const ColorPicker = ({
         {isActive ? (
           <div
             className='color-picker-popover-container'
-            style={{
-              position: 'fixed',
-              top: coords?.top,
-              left: coords?.right,
-              zIndex: 1
-            }}
+            style={
+              {
+                position: 'fixed',
+                top: coords?.top && coords.top + verticalOffset,
+                left: coords?.right,
+                zIndex: 1,
+                '--triangle-top': (10 - verticalOffset) + 'px'
+              } as unknown as CSSProperties
+            }
           >
             <Popover
               onCloseRequest={event => event.target !== pickerButton.current && setActive(false)}

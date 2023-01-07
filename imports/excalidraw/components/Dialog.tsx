@@ -10,7 +10,7 @@ import { Island } from './Island'
 import { Modal } from './Modal'
 import { AppState } from '../types'
 import { queryFocusableElements } from '../utils'
-import { isMenuOpenAtom, isDropdownOpenAtom } from './ExcalidrawCore'
+import { isDropdownOpenAtom } from './ExcalidrawCore'
 import { useSetAtom } from 'jotai'
 
 export interface DialogProps {
@@ -62,11 +62,9 @@ export const Dialog = (props: DialogProps) => {
     return () => islandNode.removeEventListener('keydown', handleKeyDown)
   }, [islandNode, props.autofocus])
 
-  const setIsMenuOpen = useSetAtom(isMenuOpenAtom)
   const setIsDropdownOpen = useSetAtom(isDropdownOpenAtom)
 
   const onClose = () => {
-    setIsMenuOpen(false)
     setIsDropdownOpen(false)
     ;(lastActiveElement as HTMLElement).focus()
     props.onCloseRequest()
@@ -85,6 +83,7 @@ export const Dialog = (props: DialogProps) => {
         <h2 id={`${id}-dialog-title`} className='Dialog__title'>
           <span className='Dialog__titleContent'>{props.title}</span>
           <button
+            data-prevent-outside-click
             className='Modal__close'
             onClick={onClose}
             title={t('buttons.close')}

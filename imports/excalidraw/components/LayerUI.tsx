@@ -170,76 +170,16 @@ const LayerUI = ({
 
   const renderCanvasActions = () => (
     <div style={{ position: 'relative' }}>
-      {/* <button
+      <button
         data-prevent-outside-click
         className={clsx('menu-button', 'zen-mode-transition', {
           'transition-left': appState.zenModeEnabled
         })}
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
         type='button'
         data-testid='menu-button'
       >
         {HamburgerMenuIcon}
-      </button> */}
-
-      {isMenuOpen && (
-        <div ref={menuRef} style={{ position: 'absolute', top: '100%', marginTop: '.25rem' }}>
-          <Section heading='canvasActions'>
-            {/* the zIndex ensures this menu has higher stacking order,
-         see https://github.com/excalidraw/excalidraw/pull/1445 */}
-            <Island className='menu-container' padding={2} style={{ zIndex: 1 }}>
-              {!appState.viewModeEnabled && actionManager.renderAction('loadScene')}
-              {/* // TODO barnabasmolnar/editor-redesign  */}
-              {/* is this fine here? */}
-              {appState.fileHandle && actionManager.renderAction('saveToActiveFile')}
-              {renderJSONExportDialog()}
-              {UIOptions.canvasActions.saveAsImage && (
-                <MenuItem
-                  label={t('buttons.exportImage')}
-                  icon={ExportImageIcon}
-                  dataTestId='image-export-button'
-                  onClick={() => setAppState({ openDialog: 'imageExport' })}
-                  shortcut={getShortcutFromShortcutName('imageExport')}
-                />
-              )}
-              {onCollabButtonClick && (
-                <CollabButton
-                  isCollaborating={isCollaborating}
-                  collaboratorCount={appState.collaborators.size}
-                  onClick={onCollabButtonClick}
-                />
-              )}
-              {actionManager.renderAction('toggleHelpIsland', undefined, true)}
-              {!appState.viewModeEnabled && actionManager.renderAction('clearCanvas')}
-              <Separator />
-              <MenuLinks />
-              <Separator />
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  rowGap: '.5rem'
-                }}
-              >
-                <div>{actionManager.renderAction('toggleTheme')}</div>
-                <div style={{ padding: '0 0.625rem' }}>
-                  <LanguageList style={{ width: '100%' }} />
-                </div>
-                {!appState.viewModeEnabled && (
-                  <div>
-                    <div style={{ fontSize: '.75rem', marginBottom: '.5rem' }}>
-                      {t('labels.canvasBackground')}
-                    </div>
-                    <div style={{ padding: '0 0.625rem' }}>
-                      {actionManager.renderAction('changeViewBackgroundColor')}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </Island>
-          </Section>
-        </div>
-      )}
+      </button>
     </div>
   )
 
@@ -372,6 +312,48 @@ const LayerUI = ({
             )}
           </div>
         </div>
+        {isMenuOpen && (
+          <div
+            ref={menuRef}
+            style={{ position: 'absolute', bottom: 50, marginTop: '.25rem', right: 0 }}
+          >
+            <Section heading='canvasActions'>
+              {/* the zIndex ensures this menu has higher stacking order,
+         see https://github.com/excalidraw/excalidraw/pull/1445 */}
+              <Island className='menu-container' padding={2} style={{ zIndex: 1 }}>
+                {actionManager.renderAction('toggleHelpIsland', undefined, true)}
+                {!appState.viewModeEnabled && actionManager.renderAction('clearCanvas')}
+                <Separator />
+                <MenuLinks />
+                <Separator />
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    rowGap: '.5rem'
+                  }}
+                >
+                  <div>{actionManager.renderAction('toggleTheme')}</div>
+                  <div style={{ padding: '10px 0.625rem' }}>
+                    <LanguageList style={{ width: '100%' }} />
+                  </div>
+                  {!appState.viewModeEnabled && (
+                    <div>
+                      <div style={{ fontSize: '.75rem', marginBottom: '.5rem' }}>
+                        {t('labels.canvasBackground')}
+                      </div>
+                      <div style={{ padding: '0 0.625rem' }}>
+                        {actionManager.renderAction('changeViewBackgroundColor', {
+                          verticalOffset: -40
+                        })}{' '}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Island>
+            </Section>
+          </div>
+        )}
       </FixedSideContainer>
     )
   }
