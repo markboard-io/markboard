@@ -11,10 +11,14 @@ import './Sidebar.style.scss'
 import clsx from 'clsx'
 import { useExcalidrawSetAppState } from '../ExcalidrawCore'
 import { updateObject } from '../../utils'
+import { attachDebugLabel } from '/imports/store'
 
 /** using a counter instead of boolean to handle race conditions where
  * the host app may render (mount/unmount) multiple different sidebar */
-export const hostSidebarCountersAtom = atom({ rendered: 0, docked: 0 })
+export const hostSidebarCountersAtom = attachDebugLabel(
+  atom({ rendered: 0, docked: 0 }),
+  'hostSidebarCountersAtom'
+)
 
 export const Sidebar = Object.assign(
   forwardRef(

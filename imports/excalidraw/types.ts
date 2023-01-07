@@ -13,7 +13,7 @@ import {
   FileId,
   ExcalidrawImageElement,
   Theme,
-  StrokeRoundness,
+  StrokeRoundness
 } from './element/types'
 import { SHAPES } from './shapes'
 import { Point as RoughPoint } from 'roughjs/bin/geometry'
@@ -58,9 +58,9 @@ export type DataURL = string & { _brand: 'DataURL' }
 
 export type BinaryFileData = {
   mimeType:
-  | typeof ALLOWED_IMAGE_MIME_TYPES[number]
-  // future user or unknown file type
-  | typeof MIME_TYPES.binary
+    | typeof ALLOWED_IMAGE_MIME_TYPES[number]
+    // future user or unknown file type
+    | typeof MIME_TYPES.binary
   id: FileId
   dataURL: DataURL
   /**
@@ -83,13 +83,13 @@ export type BinaryFiles = Record<ExcalidrawElement['id'], BinaryFileData>
 
 export type LastActiveToolBeforeEraser =
   | {
-    type: typeof SHAPES[number]['value'] | 'eraser'
-    customType: null
-  }
+      type: typeof SHAPES[number]['value'] | 'eraser'
+      customType: null
+    }
   | {
-    type: 'custom'
-    customType: string
-  }
+      type: 'custom'
+      customType: string
+    }
   | null
 
 export type AppState = {
@@ -113,18 +113,18 @@ export type AppState = {
   editingElement: NonDeletedExcalidrawElement | null
   editingLinearElement: LinearElementEditor | null
   activeTool:
-  | {
-    type: typeof SHAPES[number]['value'] | 'eraser'
-    lastActiveToolBeforeEraser: LastActiveToolBeforeEraser
-    locked: boolean
-    customType: null
-  }
-  | {
-    type: 'custom'
-    customType: string
-    lastActiveToolBeforeEraser: LastActiveToolBeforeEraser
-    locked: boolean
-  }
+    | {
+        type: typeof SHAPES[number]['value'] | 'eraser'
+        lastActiveToolBeforeEraser: LastActiveToolBeforeEraser
+        locked: boolean
+        customType: null
+      }
+    | {
+        type: 'custom'
+        customType: string
+        lastActiveToolBeforeEraser: LastActiveToolBeforeEraser
+        locked: boolean
+      }
   penMode: boolean
   penDetected: boolean
   exportBackground: boolean
@@ -155,11 +155,7 @@ export type AppState = {
   zoom: Zoom
   // mobile-only
   openMenu: 'canvas' | 'shape' | null
-  openPopup:
-  | 'canvasColorPicker'
-  | 'backgroundColorPicker'
-  | 'strokeColorPicker'
-  | null
+  openPopup: 'canvasColorPicker' | 'backgroundColorPicker' | 'strokeColorPicker' | null
   openSidebar: 'library' | 'customSidebar' | null
   openDialog: 'imageExport' | 'help' | null
   isSidebarDocked: boolean
@@ -189,14 +185,14 @@ export type AppState = {
   showStats: boolean
   currentChartType: ChartType
   pasteDialog:
-  | {
-    shown: false
-    data: null
-  }
-  | {
-    shown: true
-    data: Spreadsheet
-  }
+    | {
+        shown: false
+        data: null
+      }
+    | {
+        shown: true
+        data: Spreadsheet
+      }
   /** imageElement waiting to be placed on canvas */
   pendingImageElementId: ExcalidrawImageElement['id'] | null
   showHyperlinkPopup: false | 'info' | 'editor'
@@ -248,11 +244,8 @@ export type LibraryItems_anyVersion = LibraryItems | LibraryItems_v1
 
 export type LibraryItemsSource =
   | ((
-    currentLibraryItems: LibraryItems,
-  ) =>
-    | Blob
-    | LibraryItems_anyVersion
-    | Promise<LibraryItems_anyVersion | Blob>)
+      currentLibraryItems: LibraryItems
+    ) => Blob | LibraryItems_anyVersion | Promise<LibraryItems_anyVersion | Blob>)
   | Blob
   | LibraryItems_anyVersion
   | Promise<LibraryItems_anyVersion | Blob>
@@ -263,16 +256,16 @@ export type LibraryItemsSource =
 export type ExcalidrawAPIRefValue =
   | ExcalidrawImperativeAPI
   | {
-    readyPromise?: ResolvablePromise<ExcalidrawImperativeAPI>
-    ready?: false
-  }
+      readyPromise?: ResolvablePromise<ExcalidrawImperativeAPI>
+      ready?: false
+    }
 
 export type ExcalidrawInitialDataState = Merge<
   ImportedDataState,
   {
     libraryItems?:
-    | Required<ImportedDataState>['libraryItems']
-    | Promise<Required<ImportedDataState>['libraryItems']>
+      | Required<ImportedDataState>['libraryItems']
+      | Promise<Required<ImportedDataState>['libraryItems']>
   }
 >
 
@@ -280,12 +273,9 @@ export interface ExcalidrawProps {
   onChange?: (
     elements: readonly ExcalidrawElement[],
     appState: AppState,
-    files: BinaryFiles,
+    files: BinaryFiles
   ) => void
-  initialData?:
-  | ExcalidrawInitialDataState
-  | null
-  | Promise<ExcalidrawInitialDataState | null>
+  initialData?: ExcalidrawInitialDataState | null | Promise<ExcalidrawInitialDataState | null>
   excalidrawRef?: ForwardRef<ExcalidrawAPIRefValue>
   onCollabButtonClick?: () => void
   isCollaborating?: boolean
@@ -294,14 +284,8 @@ export interface ExcalidrawProps {
     button: 'down' | 'up'
     pointersMap: Gesture['pointers']
   }) => void
-  onPaste?: (
-    data: ClipboardData,
-    event: ClipboardEvent | null,
-  ) => Promise<boolean> | boolean
-  renderTopRightUI?: (
-    isMobile: boolean,
-    appState: AppState,
-  ) => JSX.Element | null
+  onPaste?: (data: ClipboardData, event: ClipboardEvent | null) => Promise<boolean> | boolean
+  renderTopRightUI?: (isMobile: boolean, appState: AppState) => JSX.Element | null
   langCode?: Language['code']
   viewModeEnabled?: boolean
   zenModeEnabled?: boolean
@@ -311,7 +295,7 @@ export interface ExcalidrawProps {
   name?: string
   renderCustomStats?: (
     elements: readonly NonDeletedExcalidrawElement[],
-    appState: AppState,
+    appState: AppState
   ) => JSX.Element
   UIOptions?: {
     dockedSidebarBreakpoint?: number
@@ -326,12 +310,9 @@ export interface ExcalidrawProps {
     element: NonDeletedExcalidrawElement,
     event: CustomEvent<{
       nativeEvent: MouseEvent | React.PointerEvent<HTMLCanvasElement>
-    }>,
+    }>
   ) => void
-  onPointerDown?: (
-    activeTool: AppState['activeTool'],
-    pointerDownState: PointerDownState,
-  ) => void
+  onPointerDown?: (activeTool: AppState['activeTool'], pointerDownState: PointerDownState) => void
   onScrollChange?: (scrollX: number, scrollY: number) => void
   /**
    * Render function that renders custom <Sidebar /> component.
@@ -350,7 +331,7 @@ export type SceneData = {
 export enum UserIdleState {
   ACTIVE = 'active',
   AWAY = 'away',
-  IDLE = 'idle',
+  IDLE = 'idle'
 }
 
 export type ExportOpts = {
@@ -359,13 +340,13 @@ export type ExportOpts = {
     exportedElements: readonly NonDeletedExcalidrawElement[],
     appState: AppState,
     files: BinaryFiles,
-    canvas: HTMLCanvasElement | null,
+    canvas: HTMLCanvasElement | null
   ) => void
   renderCustomUI?: (
     exportedElements: readonly NonDeletedExcalidrawElement[],
     appState: AppState,
     files: BinaryFiles,
-    canvas: HTMLCanvasElement | null,
+    canvas: HTMLCanvasElement | null
   ) => JSX.Element
 }
 
@@ -518,6 +499,6 @@ export type Device = Readonly<{
 
 export type UIChildrenComponents = {
   [k in 'FooterCenter']?:
-  | React.ReactPortal
-  | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>
+    | React.ReactPortal
+    | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>
 }

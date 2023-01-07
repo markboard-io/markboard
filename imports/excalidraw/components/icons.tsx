@@ -162,31 +162,6 @@ export const LockedIcon = createIcon(
 )
 
 // custom
-export const WelcomeScreenMenuArrow = createIcon(
-  <>
-    <path
-      d='M38.5 83.5c-14-2-17.833-10.473-21-22.5C14.333 48.984 12 22 12 12.5'
-      stroke='currentColor'
-      strokeWidth={2}
-      strokeLinecap='round'
-    />
-    <path
-      fillRule='evenodd'
-      clipRule='evenodd'
-      d='m12.005 10.478 7.905 14.423L6 25.75l6.005-15.273Z'
-      fill='currentColor'
-    />
-    <path
-      d='M12.005 10.478c1.92 3.495 3.838 7 7.905 14.423m-7.905-14.423c3.11 5.683 6.23 11.368 7.905 14.423m0 0c-3.68.226-7.35.455-13.91.85m13.91-.85c-5.279.33-10.566.647-13.91.85m0 0c1.936-4.931 3.882-9.86 6.005-15.273M6 25.75c2.069-5.257 4.135-10.505 6.005-15.272'
-      stroke='currentColor'
-      strokeWidth={2}
-      strokeLinecap='round'
-    />
-  </>,
-  { width: 41, height: 94, fill: 'none' }
-)
-
-// custom
 export const WelcomeScreenHelpArrow = createIcon(
   <>
     <path
@@ -435,6 +410,28 @@ export const HelpIcon = createIcon(
     ></path>
   </g>,
   { ...tablerIconProps, fill: 'currentColor' }
+)
+
+export const ShortcutIcon = (
+  <svg
+    viewBox='0 0 1024 1024'
+    version='1.1'
+    xmlns='http://www.w3.org/2000/svg'
+    width='22'
+    height='24'
+  >
+    <path
+      d='M938.28 195.12h-852a80.09 80.09 0 0 0-80 80v473a80.09 80.09 0 0 0 80 80h852a80.09 80.09 0 0 0 80-80v-473a80.09 80.09 0 0 0-80-80z m20 553a20 20 0 0 1-20 20h-852a20 20 0 0 1-20-20v-473a20 20 0 0 1 20-20h852a20 20 0 0 1 20 20z'
+      fill='currentColor'
+    ></path>
+    <path d='M198.28 374.12l100 0 0 80-100 0 0-80Z' fill='currentColor'></path>
+    <path d='M198.28 570.12l100 0 0 80-100 0 0-80Z' fill='currentColor'></path>
+    <path d='M374.28 374.12l100 0 0 80-100 0 0-80Z' fill='currentColor'></path>
+    <path d='M374.28 570.12l276 0 0 80-276 0 0-80Z' fill='currentColor'></path>
+    <path d='M551.28 374.12l100 0 0 80-100 0 0-80Z' fill='currentColor'></path>
+    <path d='M727.28 374.12l100 0 0 80-100 0 0-80Z' fill='currentColor'></path>
+    <path d='M727.28 570.12l100 0 0 80-100 0 0-80Z' fill='currentColor'></path>
+  </svg>
 )
 
 export const ExternalLinkIcon = createIcon(

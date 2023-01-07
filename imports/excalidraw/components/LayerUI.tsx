@@ -23,7 +23,7 @@ import { LockButton } from './LockButton'
 import { MobileMenu } from './MobileMenu'
 import { PasteChartDialog } from '../charts'
 import { Section } from './Section'
-import { HelpDialog } from './HelpDialog'
+import { ShortcutsDialog } from './ShortcutsDialog'
 import Stack from './Stack'
 import { UserList } from './UserList'
 import Library from '../data/library'
@@ -40,12 +40,7 @@ import { isMenuOpenAtom, useDevice } from './ExcalidrawCore'
 import { Stats } from './Stats'
 import { actionToggleStats } from '../actions/actionToggleStats'
 import Footer from './footer/Footer'
-import {
-  ExportImageIcon,
-  HamburgerMenuIcon,
-  WelcomeScreenMenuArrow,
-  WelcomeScreenTopToolbarArrow
-} from './icons'
+import { ExportImageIcon, HamburgerMenuIcon, WelcomeScreenTopToolbarArrow } from './icons'
 import { MenuLinks, Separator } from './MenuUtils'
 import { useOutsideClickHook } from '../hooks/useOutsideClick'
 import WelcomeScreen from './WelcomeScreen'
@@ -175,14 +170,7 @@ const LayerUI = ({
 
   const renderCanvasActions = () => (
     <div style={{ position: 'relative' }}>
-      <WelcomeScreenDecor shouldRender={renderWelcomeScreen && !appState.isLoading}>
-        <div className='virgil WelcomeScreen-decor WelcomeScreen-decor--menu-pointer'>
-          {WelcomeScreenMenuArrow}
-          <div>{t('welcomeScreen.menuHints')}</div>
-        </div>
-      </WelcomeScreenDecor>
-
-      <button
+      {/* <button
         data-prevent-outside-click
         className={clsx('menu-button', 'zen-mode-transition', {
           'transition-left': appState.zenModeEnabled
@@ -192,7 +180,7 @@ const LayerUI = ({
         data-testid='menu-button'
       >
         {HamburgerMenuIcon}
-      </button>
+      </button> */}
 
       {isMenuOpen && (
         <div ref={menuRef} style={{ position: 'absolute', top: '100%', marginTop: '.25rem' }}>
@@ -221,7 +209,7 @@ const LayerUI = ({
                   onClick={onCollabButtonClick}
                 />
               )}
-              {actionManager.renderAction('toggleShortcuts', undefined, true)}
+              {actionManager.renderAction('toggleHelpIsland', undefined, true)}
               {!appState.viewModeEnabled && actionManager.renderAction('clearCanvas')}
               <Separator />
               <MenuLinks />
@@ -415,7 +403,7 @@ const LayerUI = ({
         />
       )}
       {appState.openDialog === 'help' && (
-        <HelpDialog
+        <ShortcutsDialog
           onClose={() => {
             setAppState({ openDialog: null })
           }}

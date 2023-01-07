@@ -1,47 +1,14 @@
 import React from 'react'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { isDarwin, isWindows, KEYS } from '../keys'
 import { Dialog } from './Dialog'
 import { getShortcutKey } from '../utils'
-import './HelpDialog.style.scss'
-import { ExternalLinkIcon } from './icons'
+import './ShortcutsDialog.style.scss'
 
-const Header = () => (
-  <div className='HelpDialog__header'>
-    <a
-      className='HelpDialog__btn'
-      href='https://github.com/excalidraw/excalidraw#documentation'
-      target='_blank'
-      rel='noopener noreferrer'
-    >
-      {t('helpDialog.documentation')}
-      <div className='HelpDialog__link-icon'>{ExternalLinkIcon}</div>
-    </a>
-    <a
-      className='HelpDialog__btn'
-      href='https://blog.excalidraw.com'
-      target='_blank'
-      rel='noopener noreferrer'
-    >
-      {t('helpDialog.blog')}
-      <div className='HelpDialog__link-icon'>{ExternalLinkIcon}</div>
-    </a>
-    <a
-      className='HelpDialog__btn'
-      href='https://github.com/excalidraw/excalidraw/issues'
-      target='_blank'
-      rel='noopener noreferrer'
-    >
-      {t('helpDialog.github')}
-      <div className='HelpDialog__link-icon'>{ExternalLinkIcon}</div>
-    </a>
-  </div>
-)
-
-const Section = (props: { title: string; children: React.ReactNode }) => (
+const Section = (props: { title?: string; children: React.ReactNode }) => (
   <>
-    <h3>{props.title}</h3>
-    <div className='HelpDialog__islands-container'>{props.children}</div>
+    {props.title ? <h3>{props.title}</h3> : null}
+    <div className='ShortcutsDialog__islands-container'>{props.children}</div>
   </>
 )
 
@@ -50,9 +17,9 @@ const ShortcutIsland = (props: {
   children: React.ReactNode
   className?: string
 }) => (
-  <div className={`HelpDialog__island ${props.className}`}>
-    <h4 className='HelpDialog__island-title'>{props.caption}</h4>
-    <div className='HelpDialog__island-content'>{props.children}</div>
+  <div className={`ShortcutsDialog__island ${props.className}`}>
+    <h4 className='ShortcutsDialog__island-title'>{props.caption}</h4>
+    <div className='ShortcutsDialog__island-content'>{props.children}</div>
   </div>
 )
 
@@ -85,9 +52,9 @@ const Shortcut = ({
   })
 
   return (
-    <div className='HelpDialog__shortcut'>
+    <div className='ShortcutsDialog__shortcut'>
       <div>{label}</div>
-      <div className='HelpDialog__key-container'>
+      <div className='ShortcutsDialog__key-container'>
         {[...intersperse(splitShortcutKeys, isOr ? t('helpDialog.or') : null)]}
       </div>
     </div>
@@ -95,10 +62,10 @@ const Shortcut = ({
 }
 
 const ShortcutKey = (props: { children: React.ReactNode }) => (
-  <kbd className='HelpDialog__key' {...props} />
+  <kbd className='ShortcutsDialog__key' {...props} />
 )
 
-export const HelpDialog = ({ onClose }: { onClose?: () => void }) => {
+export const ShortcutsDialog = ({ onClose }: { onClose?: () => void }) => {
   const handleClose = React.useCallback(() => {
     if (onClose) {
       onClose()
@@ -107,10 +74,13 @@ export const HelpDialog = ({ onClose }: { onClose?: () => void }) => {
 
   return (
     <>
-      <Dialog onCloseRequest={handleClose} title={t('helpDialog.title')} className={'HelpDialog'}>
-        <Header />
-        <Section title={t('helpDialog.shortcuts')}>
-          <ShortcutIsland className='HelpDialog__island--tools' caption={t('helpDialog.tools')}>
+      <Dialog
+        onCloseRequest={handleClose}
+        title={t('helpDialog.shortcuts')}
+        className={'ShortcutsDialog'}
+      >
+        <Section>
+          <ShortcutIsland className='ShortcutsDialog__island--tools' caption={t('helpDialog.tools')}>
             <Shortcut label={t('toolBar.selection')} shortcuts={[KEYS.V, KEYS['1']]} />
             <Shortcut label={t('toolBar.rectangle')} shortcuts={[KEYS.R, KEYS['2']]} />
             <Shortcut label={t('toolBar.diamond')} shortcuts={[KEYS.D, KEYS['3']]} />
@@ -153,7 +123,7 @@ export const HelpDialog = ({ onClose }: { onClose?: () => void }) => {
             />
             <Shortcut label={t('toolBar.link')} shortcuts={[getShortcutKey('CtrlOrCmd+K')]} />
           </ShortcutIsland>
-          <ShortcutIsland className='HelpDialog__island--view' caption={t('helpDialog.view')}>
+          <ShortcutIsland className='ShortcutsDialog__island--view' caption={t('helpDialog.view')}>
             <Shortcut label={t('buttons.zoomIn')} shortcuts={[getShortcutKey('CtrlOrCmd++')]} />
             <Shortcut label={t('buttons.zoomOut')} shortcuts={[getShortcutKey('CtrlOrCmd+-')]} />
             <Shortcut label={t('buttons.resetZoom')} shortcuts={[getShortcutKey('CtrlOrCmd+0')]} />
@@ -161,12 +131,12 @@ export const HelpDialog = ({ onClose }: { onClose?: () => void }) => {
             <Shortcut label={t('helpDialog.zoomToSelection')} shortcuts={['Shift+2']} />
             <Shortcut label={t('buttons.fullScreen')} shortcuts={['F']} />
             <Shortcut label={t('buttons.zenMode')} shortcuts={[getShortcutKey('Alt+Z')]} />
-            <Shortcut label={t('labels.showGrid')} shortcuts={[getShortcutKey('CtrlOrCmd+\'')]} />
+            <Shortcut label={t('labels.showGrid')} shortcuts={[getShortcutKey("CtrlOrCmd+'")]} />
             <Shortcut label={t('labels.viewMode')} shortcuts={[getShortcutKey('Alt+R')]} />
             <Shortcut label={t('labels.toggleTheme')} shortcuts={[getShortcutKey('Alt+Shift+D')]} />
             <Shortcut label={t('stats.title')} shortcuts={[getShortcutKey('Alt+/')]} />
           </ShortcutIsland>
-          <ShortcutIsland className='HelpDialog__island--editor' caption={t('helpDialog.editor')}>
+          <ShortcutIsland className='ShortcutsDialog__island--editor' caption={t('helpDialog.editor')}>
             <Shortcut label={t('labels.selectAll')} shortcuts={[getShortcutKey('CtrlOrCmd+A')]} />
             <Shortcut
               label={t('labels.multiSelect')}

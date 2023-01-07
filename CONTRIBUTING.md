@@ -9,6 +9,7 @@
 		|- `manager` `actionManager` that manages all actions
 		  |- `executeAction` execute action
 			|- `updater` update `appState` by the result of `action.perform`
+			|- `renderAction` `actionManager.renderAction('toggleShortcuts')` render react components defined in action PanelComponent
 		|- `types` declare all types for actions related
 		  |- `Action` the `Action` type definition
 			  |- `contextItemPredicate` the assert condition for action to be displayed on context menu

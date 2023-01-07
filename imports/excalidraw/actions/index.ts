@@ -3,7 +3,7 @@ export {
   actionBringForward,
   actionBringToFront,
   actionSendBackward,
-  actionSendToBack,
+  actionSendToBack
 } from './actionZindex'
 export { actionSelectAll } from './actionSelectAll'
 export { actionDuplicateSelection } from './actionDuplicateSelection'
@@ -17,7 +17,7 @@ export {
   actionChangeFontSize,
   actionChangeFontFamily,
   actionChangeTextAlign,
-  actionChangeVerticalAlign,
+  actionChangeVerticalAlign
 } from './actionProperties'
 
 export {
@@ -27,7 +27,7 @@ export {
   actionZoomOut,
   actionResetZoom,
   actionZoomToFit,
-  actionToggleTheme,
+  actionToggleTheme
 } from './actionCanvas'
 
 export { actionFinalize } from './actionFinalize'
@@ -37,16 +37,12 @@ export {
   actionChangeExportBackground,
   actionSaveToActiveFile,
   actionSaveFileToDisk,
-  actionLoadScene,
+  actionLoadScene
 } from './actionExport'
 
 export { actionCopyStyles, actionPasteStyles } from './actionStyles'
-export {
-  actionToggleCanvasMenu,
-  actionToggleEditMenu,
-  actionFullScreen,
-  actionShortcuts,
-} from './actionMenu'
+export { actionToggleCanvasMenu, actionToggleEditMenu, actionFullScreen } from './actionMenu'
+export { actionHelp } from './actionHelp'
 
 export { actionGroup, actionUngroup } from './actionGroup'
 
@@ -60,13 +56,10 @@ export {
   actionAlignLeft,
   actionAlignRight,
   actionAlignVerticallyCentered,
-  actionAlignHorizontallyCentered,
+  actionAlignHorizontallyCentered
 } from './actionAlign'
 
-export {
-  distributeHorizontally,
-  distributeVertically,
-} from './actionDistribute'
+export { distributeHorizontally, distributeVertically } from './actionDistribute'
 
 export { actionFlipHorizontal, actionFlipVertical } from './actionFlip'
 
@@ -75,7 +68,7 @@ export {
   actionCut,
   actionCopyAsPng,
   actionCopyAsSvg,
-  copyText,
+  copyText
 } from './actionClipboard'
 
 export { actionToggleGridMode } from './actionToggleGridMode'

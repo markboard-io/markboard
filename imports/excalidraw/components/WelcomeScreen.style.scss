@@ -16,8 +16,8 @@
     &--help-pointer {
       display: flex;
       position: absolute;
-      right: 0;
-      bottom: 100%;
+      right: -5px;
+      bottom: 120%;
 
       :root[dir="rtl"] & {
         left: 0;

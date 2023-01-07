@@ -54,9 +54,11 @@ import { LocalData } from './data/LocalData'
 import { isBrowserStorageStateNewer } from './data/tabSync'
 import clsx from 'clsx'
 import { atom, Provider, useAtom } from 'jotai'
+import { useAtomsDebugValue } from 'jotai/devtools'
 import { jotaiStore, useAtomWithInitialValue } from '../jotai'
 import { reconcileElements } from './collab/reconciliation'
 import { parseLibraryTokensFromUrl, useHandleLibrary } from '../data/library'
+import { attachDebugLabel } from '/imports/store'
 
 polyfill()
 window.EXCALIDRAW_THROTTLE_RENDER = true
@@ -186,8 +188,9 @@ const initializeScene = async (opts: {
 
 const currentLangCode = defaultLang.code
 
-export const langCodeAtom = atom(
-  Array.isArray(currentLangCode) ? currentLangCode[0] : currentLangCode
+export const langCodeAtom = attachDebugLabel(
+  atom(Array.isArray(currentLangCode) ? currentLangCode[0] : currentLangCode),
+  'langCodeAtom'
 )
 
 const ExcalidrawWrapper = () => {
@@ -576,9 +579,15 @@ const ExcalidrawWrapper = () => {
 }
 
 export function ExcalidrawApp() {
+  const DebugAtoms = () => {
+    useAtomsDebugValue()
+    return null
+  }
+
   return (
     <TopErrorBoundary>
       <Provider unstable_createStore={() => jotaiStore}>
+        <DebugAtoms />
         <ExcalidrawWrapper />
       </Provider>
     </TopErrorBoundary>

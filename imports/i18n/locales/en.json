@@ -305,7 +305,7 @@
     "or": "or",
     "preventBinding": "Prevent arrow binding",
     "tools": "Tools",
-    "shortcuts": "Keyboard shortcuts",
+    "shortcuts": "Keyboard Shortcuts",
     "textFinish": "Finish editing (text editor)",
     "textNewLine": "Add new line (text editor)",
     "title": "Help",
@@ -447,8 +447,7 @@
   "welcomeScreen": {
     "data": "All your data is saved locally in your browser.",
     "switchToPlusApp": "Did you want to go to the Excalidraw+ instead?",
-    "menuHints": "Export, preferences, languages, ...",
     "toolbarHints": "Pick a tool & Start drawing!",
-    "helpHints": "Shortcuts & help"
+    "helpHints": "Help"
   }
 }

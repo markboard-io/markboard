@@ -1,10 +1,5 @@
 import { loadLibraryFromBlob } from './blob'
-import {
-  LibraryItems,
-  LibraryItem,
-  ExcalidrawImperativeAPI,
-  LibraryItemsSource,
-} from '../types'
+import { LibraryItems, LibraryItem, ExcalidrawImperativeAPI, LibraryItemsSource } from '../types'
 import { restoreLibraryItems } from './restore'
 import type { ExcalidrawCore } from '../components/ExcalidrawCore'
 import { atom } from 'jotai'
@@ -15,12 +10,16 @@ import { AbortError } from '../errors'
 import { t } from '/imports/i18n'
 import { useEffect, useRef } from 'react'
 import { URL_HASH_KEYS, URL_QUERY_KEYS, APP_NAME, EVENT } from '../constants'
+import { attachDebugLabel } from '/imports/store'
 
-export const libraryItemsAtom = atom<{
-  status: 'loading' | 'loaded'
-  isInitialized: boolean
-  libraryItems: LibraryItems
-}>({ status: 'loaded', isInitialized: true, libraryItems: [] })
+export const libraryItemsAtom = attachDebugLabel(
+  atom<{
+    status: 'loading' | 'loaded'
+    isInitialized: boolean
+    libraryItems: LibraryItems
+  }>({ status: 'loaded', isInitialized: true, libraryItems: [] }),
+  'libItemExcalidrawItem'
+)
 
 const cloneLibraryItems = (libraryItems: LibraryItems): LibraryItems =>
   JSON.parse(JSON.stringify(libraryItems))
@@ -28,11 +27,8 @@ const cloneLibraryItems = (libraryItems: LibraryItems): LibraryItems =>
 /**
  * checks if library item does not exist already in current library
  */
-const isUniqueItem = (
-  existingLibraryItems: LibraryItems,
-  targetLibraryItem: LibraryItem,
-) => {
-  return !existingLibraryItems.find((libraryItem) => {
+const isUniqueItem = (existingLibraryItems: LibraryItems, targetLibraryItem: LibraryItem) => {
+  return !existingLibraryItems.find(libraryItem => {
     if (libraryItem.elements.length !== targetLibraryItem.elements.length) {
       return false
     }
@@ -42,8 +38,7 @@ const isUniqueItem = (
     return libraryItem.elements.every((libItemExcalidrawItem, idx) => {
       return (
         libItemExcalidrawItem.id === targetLibraryItem.elements[idx].id &&
-        libItemExcalidrawItem.versionNonce ===
-        targetLibraryItem.elements[idx].versionNonce
+        libItemExcalidrawItem.versionNonce === targetLibraryItem.elements[idx].versionNonce
       )
     })
   })
@@ -53,7 +48,7 @@ const isUniqueItem = (
     sorted first. */
 export const mergeLibraryItems = (
   localItems: LibraryItems,
-  otherItems: LibraryItems,
+  otherItems: LibraryItems
 ): LibraryItems => {
   const newItems = []
   for (const item of otherItems) {
@@ -89,19 +84,17 @@ class Library {
       jotaiStore.set(libraryItemsAtom, {
         status: 'loading',
         libraryItems: this.lastLibraryItems,
-        isInitialized: this.isInitialized,
+        isInitialized: this.isInitialized
       })
     } else {
       this.isInitialized = true
       jotaiStore.set(libraryItemsAtom, {
         status: 'loaded',
         libraryItems: this.lastLibraryItems,
-        isInitialized: this.isInitialized,
+        isInitialized: this.isInitialized
       })
       try {
-        this.app.props.onLibraryChange?.(
-          cloneLibraryItems(this.lastLibraryItems),
-        )
+        this.app.props.onLibraryChange?.(cloneLibraryItems(this.lastLibraryItems))
       } catch (error) {
         console.error(error)
       }
@@ -116,10 +109,9 @@ class Library {
    * @returns latest cloned libraryItems. Awaits all in-progress updates first.
    */
   getLatestLibrary = (): Promise<LibraryItems> => {
-    return new Promise(async (resolve) => {
+    return new Promise(async resolve => {
       try {
-        const libraryItems = await (this.getLastUpdateTask() ||
-          this.lastLibraryItems)
+        const libraryItems = await (this.getLastUpdateTask() || this.lastLibraryItems)
         if (this.updateQueue.length > 0) {
           resolve(this.getLatestLibrary())
         } else {
@@ -139,7 +131,7 @@ class Library {
     prompt = false,
     merge = false,
     openLibraryMenu = false,
-    defaultStatus = 'unpublished',
+    defaultStatus = 'unpublished'
   }: {
     libraryItems: LibraryItemsSource
     merge?: boolean
@@ -155,7 +147,7 @@ class Library {
       return new Promise<LibraryItems>(async (resolve, reject) => {
         try {
           const source = await (typeof libraryItems === 'function' &&
-            !(libraryItems instanceof Blob)
+          !(libraryItems instanceof Blob)
             ? libraryItems(this.lastLibraryItems)
             : libraryItems)
 
@@ -170,8 +162,8 @@ class Library {
             !prompt ||
             window.confirm(
               t('alerts.confirmAddLibrary', {
-                numShapes: nextItems.length,
-              }),
+                numShapes: nextItems.length
+              })
             )
           ) {
             if (merge) {
@@ -205,9 +197,7 @@ class Library {
     libraryItems:
       | LibraryItems
       | Promise<LibraryItems>
-      | ((
-        latestLibraryItems: LibraryItems,
-      ) => LibraryItems | Promise<LibraryItems>),
+      | ((latestLibraryItems: LibraryItems) => LibraryItems | Promise<LibraryItems>)
   ): Promise<LibraryItems> => {
     const task = new Promise<LibraryItems>(async (resolve, reject) => {
       try {
@@ -224,7 +214,7 @@ class Library {
         reject(error)
       }
     })
-      .catch((error) => {
+      .catch(error => {
         if (error.name === 'AbortError') {
           console.warn('Library update aborted by user')
           return this.lastLibraryItems
@@ -232,7 +222,7 @@ class Library {
         throw error
       })
       .finally(() => {
-        this.updateQueue = this.updateQueue.filter((_task) => _task !== task)
+        this.updateQueue = this.updateQueue.filter(_task => _task !== task)
         this.notifyListeners()
       })
 
@@ -245,9 +235,7 @@ class Library {
 
 export default Library
 
-export const distributeLibraryItemsOnSquareGrid = (
-  libraryItems: LibraryItems,
-) => {
+export const distributeLibraryItemsOnSquareGrid = (libraryItems: LibraryItems) => {
   const PADDING = 50
   const ITEMS_PER_ROW = Math.ceil(Math.sqrt(libraryItems.length))
 
@@ -309,7 +297,7 @@ export const distributeLibraryItemsOnSquareGrid = (
     const offsetCenterY = (maxHeightCurrRow - height) / 2
     resElements.push(
       // eslint-disable-next-line no-loop-func
-      ...item.elements.map((element) => ({
+      ...item.elements.map(element => ({
         ...element,
         x:
           element.x +
@@ -326,8 +314,8 @@ export const distributeLibraryItemsOnSquareGrid = (
           // offset to center in given square grid
           offsetCenterY -
           // subtract minY so that given item starts at 0 coord
-          minY,
-      })),
+          minY
+      }))
     )
     colOffsetX += maxWidthCurrCol + PADDING
     index++
@@ -340,9 +328,7 @@ export const distributeLibraryItemsOnSquareGrid = (
 export const parseLibraryTokensFromUrl = () => {
   const libraryUrl =
     // current
-    new URLSearchParams(window.location.hash.slice(1)).get(
-      URL_HASH_KEYS.addLibrary,
-    ) ||
+    new URLSearchParams(window.location.hash.slice(1)).get(URL_HASH_KEYS.addLibrary) ||
     // legacy, kept for compat reasons
     new URLSearchParams(window.location.search).get(URL_QUERY_KEYS.addLibrary)
   const idToken = libraryUrl
@@ -354,7 +340,7 @@ export const parseLibraryTokensFromUrl = () => {
 
 export const useHandleLibrary = ({
   excalidrawAPI,
-  getInitialLibraryItems,
+  getInitialLibraryItems
 }: {
   excalidrawAPI: ExcalidrawImperativeAPI | null
   getInitialLibraryItems?: () => LibraryItemsSource
@@ -368,7 +354,7 @@ export const useHandleLibrary = ({
 
     const importLibraryFromURL = async ({
       libraryUrl,
-      idToken,
+      idToken
     }: {
       libraryUrl: string
       idToken: string | null
@@ -388,11 +374,11 @@ export const useHandleLibrary = ({
       // wait for the tab to be focused before continuing in case we'll prompt
       // for confirmation
       await (shouldPrompt && document.hidden
-        ? new Promise<void>((resolve) => {
-          window.addEventListener('focus', () => resolve(), {
-            once: true,
+        ? new Promise<void>(resolve => {
+            window.addEventListener('focus', () => resolve(), {
+              once: true
+            })
           })
-        })
         : null)
 
       try {
@@ -401,7 +387,7 @@ export const useHandleLibrary = ({
           prompt: shouldPrompt,
           merge: true,
           defaultStatus: 'published',
-          openLibraryMenu: true,
+          openLibraryMenu: true
         })
       } catch (error) {
         throw error
@@ -409,11 +395,11 @@ export const useHandleLibrary = ({
         if (window.location.hash.includes(URL_HASH_KEYS.addLibrary)) {
           const hash = new URLSearchParams(window.location.hash.slice(1))
           hash.delete(URL_HASH_KEYS.addLibrary)
-          window.history.replaceState({}, APP_NAME, `#${ hash.toString() }`)
+          window.history.replaceState({}, APP_NAME, `#${hash.toString()}`)
         } else if (window.location.search.includes(URL_QUERY_KEYS.addLibrary)) {
           const query = new URLSearchParams(window.location.search)
           query.delete(URL_QUERY_KEYS.addLibrary)
-          window.history.replaceState({}, APP_NAME, `?${ query.toString() }`)
+          window.history.replaceState({}, APP_NAME, `?${query.toString()}`)
         }
       }
     }
@@ -436,7 +422,7 @@ export const useHandleLibrary = ({
     // ------ init load --------------------------------------------------------
     if (getInitialLibraryRef.current) {
       excalidrawAPI.updateLibrary({
-        libraryItems: getInitialLibraryRef.current(),
+        libraryItems: getInitialLibraryRef.current()
       })
     }
 

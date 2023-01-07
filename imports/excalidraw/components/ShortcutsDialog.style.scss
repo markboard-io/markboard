@@ -1,7 +1,7 @@
 @import "../css/variables.module";
 
 .excalidraw {
-  .HelpDialog {
+  .ShortcutsDialog {
     .Modal__content {
       max-width: 960px;
     }
@@ -103,9 +103,13 @@
       display: flex;
       box-sizing: border-box;
       font-size: 0.625rem;
-      background-color: var(--color-primary-light);
+      color: #444d56;
+      background-color: #fafbfc;
+      border: solid 1px #d1d5da;
+      border-bottom-color: #c6cbd1;
       border-radius: var(--border-radius-md);
-      padding: 0.5rem;
+      box-shadow: inset 0 -1px 0 #c6cbd1;
+      padding: 0.3rem 0.5rem;
       word-break: keep-all;
       align-items: center;
       font-family: inherit;

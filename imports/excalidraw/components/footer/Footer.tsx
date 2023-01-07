@@ -71,7 +71,7 @@ const Footer = ({
             </div>
           </WelcomeScreenDecor>
 
-          {actionManager.renderAction('toggleShortcuts')}
+          {actionManager.renderAction('toggleHelpIsland')}
         </div>
       </div>
       <ExitZenModeAction actionManager={actionManager} showExitZenModeBtn={showExitZenModeBtn} />

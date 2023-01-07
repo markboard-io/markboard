@@ -48,10 +48,11 @@ import { resetBrowserStateVersions } from '../data/tabSync'
 import { LocalData } from '../data/LocalData'
 import { atom, useAtom } from 'jotai'
 import { jotaiStore } from '../../jotai'
+import { attachDebugLabel } from '/imports/store'
 
-export const collabAPIAtom = atom<CollabAPI | null>(null)
-export const collabDialogShownAtom = atom(false)
-export const isCollaboratingAtom = atom(false)
+export const collabAPIAtom = attachDebugLabel(atom<CollabAPI | null>(null), 'collabAPIAtom')
+export const collabDialogShownAtom = attachDebugLabel(atom(false), 'collabDialogShownAtom')
+export const isCollaboratingAtom = attachDebugLabel(atom(false), 'isCollaboratingAtom')
 
 interface CollabState {
   errorMessage: string

@@ -68,9 +68,7 @@ export const MobileMenu = ({
   const renderToolbar = () => {
     return (
       <FixedSideContainer side='top' className='App-top-bar'>
-        {renderWelcomeScreen && !appState.isLoading && (
-          <WelcomeScreen appState={appState} actionManager={actionManager} />
-        )}
+        {renderWelcomeScreen && !appState.isLoading && <WelcomeScreen />}
         <Section heading='shapes'>
           {(heading: React.ReactNode) => (
             <Stack.Col gap={4} align='center'>

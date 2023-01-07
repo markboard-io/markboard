@@ -272,9 +272,10 @@ import { shouldShowBoundingBox } from '../element/transformHandles'
 import { atom } from 'jotai'
 import { Fonts } from '../scene/Fonts'
 import { actionPaste } from '../actions/actionClipboard'
+import { attachDebugLabel } from '/imports/store'
 
-export const isMenuOpenAtom = atom(false)
-export const isDropdownOpenAtom = atom(false)
+export const isMenuOpenAtom = attachDebugLabel(atom(false), 'isMenuOpenAtom')
+export const isDropdownOpenAtom = attachDebugLabel(atom(false), 'isDropdownOpenAtom')
 
 const deviceContextInitialValue = {
   isSmScreen: false,
