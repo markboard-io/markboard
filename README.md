@@ -16,7 +16,7 @@
 
 [BoardX](https://app.boardx.us) is an open-source **Digital Whiteboard, Documents, Video Conferencing, Team Chat** all-in-one collaborative workspace designed for your team. It aims to facilitate collaboration and communication within the team, enabling team members to easily share ideas and work together on projects.
 
-For personal use, BoardX is a **Notion Open Source Alternative** for you to do Note Taking, Tasks Management, Whiteboard Sketching and more. You can host BoardX as a personal knowledge database on your own server, while notion stores your data on their cloud.
+For personal use, BoardX is a **Notion Open Source Alternative** for you to do Note Taking, Tasks Management, Whiteboard Sketching and more. You can host BoardX as a personal knowledge database on your own server, while notion stores your data on its cloud.
 
 ## Core Features
 

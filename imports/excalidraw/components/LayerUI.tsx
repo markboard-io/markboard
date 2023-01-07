@@ -285,9 +285,7 @@ const LayerUI = ({
 
     return (
       <FixedSideContainer side='top'>
-        {renderWelcomeScreen && !appState.isLoading && (
-          <WelcomeScreen appState={appState} actionManager={actionManager} />
-        )}
+        {renderWelcomeScreen && <WelcomeScreen />}
         <div className='App-menu App-menu_top'>
           <Stack.Col
             gap={6}
@@ -358,9 +356,6 @@ const LayerUI = ({
                               })
                             }}
                           />
-                          {/* {actionManager.renderAction("eraser", {
-                          // size: "small",
-                        })} */}
                         </Stack.Row>
                       </Island>
                     </Stack.Row>
