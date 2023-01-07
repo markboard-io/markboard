@@ -1,6 +1,6 @@
 <div align="center" style="display:flex;flex-direction:column;">
   <a href="https://app.boardx.us">
-    <img width="540" src="./public/images/logo.svg" alt="BoardX Logo" />
+    <img height="100" src="./public/images/logo.svg" alt="BoardX Logo" />
   </a>
   <p>
     <a href="https://twitter.com/intent/follow?screen_name=boardxus" target="_blank">
@@ -16,13 +16,13 @@
 
 [BoardX](https://app.boardx.us) is an open-source **Digital Whiteboard, Documents, Video Conferencing, Team Chat** all-in-one collaborative workspace designed for your team. It aims to facilitate collaboration and communication within the team, enabling team members to easily share ideas and work together on projects.
 
-For personal use, it's a **Notion Open Source Alternative** for you to do Note Taking, Tasks management, Whiteboard Sketching and more. You can host BoardX as a personal knowledge database on your own server, while notion stores your data on their cloud.
+For personal use, BoardX is a **Notion Open Source Alternative** for you to do Note Taking, Tasks Management, Whiteboard Sketching and more. You can host BoardX as a personal knowledge database on your own server, while notion stores your data on their cloud.
 
 ## Core Features
 
 [Website](https://www.boardx.us) • [Live Demo](https://app.boardx.us) • [Open Server](https://open.boardx.us) • [Docs](https://docs.boardx.us) • [Blog](https://share.boardx.us/)
 
-BoardX = Miro + Notion + Zoom + Slack. The open source "Zoom One" alternative. We're building features for "All-in-One Workspace" using enterprise-grade open source tools.
+BoardX = Miro + Notion + Zoom + Slack. The open source Zoom One alternative. We're building features for "All-in-One Workspace" using enterprise-grade open source tools.
 
 - 🪧 **Digital Whiteboard** (Sticky Notes, Diagrams, Drawings, Generative AI)
 - 📝 **Real-time Synced Documents** (Note Taking, Team Knowledge Center)
