@@ -14,19 +14,20 @@
 
 <h1 align="center">Next-Gen All-in-One Collaborative Workspace</h3>
 
-[BoardX](https://app.boardx.us) is a Digital Whiteboard, Video Conferencing, Team Chat and Documents all-in-one collaborative workspace for your team. It aims to facilitate collaboration and communication within the team, enabling team members to easily share ideas and work together on projects.
+[BoardX](https://app.boardx.us) is an open-source **Digital Whiteboard, Documents, Video Conferencing, Team Chat** all-in-one collaborative workspace designed for your team. It aims to facilitate collaboration and communication within the team, enabling team members to easily share ideas and work together on projects.
 
+For personal use, it's a **Notion Open Source Alternative** for you to do Note Taking, Tasks management, Whiteboard Sketching and more. You can host BoardX as a personal knowledge database on your own server, while notion stores your data on their cloud.
 
 ## Core Features
 
 [Website](https://www.boardx.us) • [Live Demo](https://app.boardx.us) • [Open Server](https://open.boardx.us) • [Docs](https://docs.boardx.us) • [Blog](https://share.boardx.us/)
 
-BoardX = Miro + Zoom + Slack + Notion. The open source "Zoom One" alternative. We're building features for "All-in-One Workspace" using enterprise-grade open source tools.
+BoardX = Miro + Notion + Zoom + Slack. The open source "Zoom One" alternative. We're building features for "All-in-One Workspace" using enterprise-grade open source tools.
 
 - 🪧 **Digital Whiteboard** (Sticky Notes, Diagrams, Drawings, Generative AI)
+- 📝 **Real-time Synced Documents** (Note Taking, Team Knowledge Center)
 - 📹 **Video Conferencing** (Virtual Meetings, Screen Sharing)
 - 💬 **Team Chat** (Send Text Messages, Images, Emojis)
-- 📝 **Real-time Synced Documents** (Note Taking, Team Knowledge Center)
 
 ## Try it now
 
