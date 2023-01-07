@@ -1,5 +1,5 @@
 <div align="center" style="display:flex;flex-direction:column;">
-  <a href="https://app.boardx.us">
+  <a href="https://app.boardx.us" target="_blank">
     <img height="100" src="./public/images/logo.svg" alt="BoardX Logo" />
   </a>
   <p>
