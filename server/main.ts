@@ -14,8 +14,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 dotenv.config()
-startup()
 
+// Reset password configuration
 Accounts.emailTemplates.siteName = SITE_NAME
 Accounts.emailTemplates.from = process.env.SMTP_MAIL ?? 'noreply@example.com'
 Accounts.emailTemplates.resetPassword.subject = () => `Reset Your Password on ${SITE_NAME}`
@@ -23,6 +23,7 @@ Accounts.urls.resetPassword = token => {
   return Meteor.absoluteUrl(`reset-password/${token}`)
 }
 
+// OAuth login configuration
 ServiceConfiguration.configurations.upsert(
   { service: 'github' },
   {
@@ -33,7 +34,6 @@ ServiceConfiguration.configurations.upsert(
     }
   }
 )
-
 ServiceConfiguration.configurations.upsert(
   { service: 'google' },
   {
@@ -44,3 +44,5 @@ ServiceConfiguration.configurations.upsert(
     }
   }
 )
+
+startup()
