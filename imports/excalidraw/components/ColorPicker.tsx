@@ -148,12 +148,12 @@ const Picker = ({
           event.key === (isRTL ? KEYS.ARROW_LEFT : KEYS.ARROW_RIGHT)
             ? (index + 1) % length
             : event.key === (isRTL ? KEYS.ARROW_RIGHT : KEYS.ARROW_LEFT)
-            ? (length + index - 1) % length
-            : !isCustom && event.key === KEYS.ARROW_DOWN
-            ? (index + 5) % length
-            : !isCustom && event.key === KEYS.ARROW_UP
-            ? (length + index - 5) % length
-            : index
+              ? (length + index - 1) % length
+              : !isCustom && event.key === KEYS.ARROW_DOWN
+                ? (index + 5) % length
+                : !isCustom && event.key === KEYS.ARROW_UP
+                  ? (length + index - 5) % length
+                  : index
         ;(parentElement.children[nextIndex] as HTMLElement | undefined)?.focus()
       }
       event.preventDefault()
@@ -340,7 +340,6 @@ export const ColorPicker = ({
   isActive,
   setActive,
   elements,
-  appState,
   data = {}
 }: IColorPickerProps) => {
   const pickerButton = React.useRef<HTMLButtonElement>(null)
