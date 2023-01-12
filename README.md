@@ -7,7 +7,7 @@
       <img alt="Follow InnoDeck on Twitter" src="https://img.shields.io/twitter/follow/InnoDeckapp.svg?label=follow+InnoDeck&style=for-the-badge&logo=twitter">
     </a>
 <a href="https://discord.gg/5Ny6UuNKVD" target="_blank">
-      <img alt="Join Discord" style="margin-left:5px;" src="https://img.shields.io/discord/1052420232704184350?style=for-the-badge&label=Join+Discord">
+      <img alt="Join Discord" style="margin-left:5px;" src="https://img.shields.io/discord/1063090582890758175?style=for-the-badge&label=Join+Discord">
     </a>
   </p>
 </div>
