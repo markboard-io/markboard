@@ -8,7 +8,7 @@ interface ILinkTextProps {
 
 export const LinkText: React.FC<ILinkTextProps> = ({ children, onClick = () => {} }) => {
   return (
-    <span className='boardx-link' onClick={onClick}>
+    <span className='innodeck-link' onClick={onClick}>
       {children}
     </span>
   )

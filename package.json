@@ -1,5 +1,5 @@
 {
-  "name": "@boardx/boardx-core",
+  "name": "@innodeck/innodeck",
   "scripts": {
     "local": "export MONGO_URL= && meteor run",
     "start": "npm run dev",

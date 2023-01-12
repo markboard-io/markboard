@@ -2,7 +2,7 @@ import cssVariables from './css/variables.module.scss'
 import { AppProps } from './types'
 import { FontFamilyValues } from './element/types'
 
-export const APP_NAME = 'BoardX'
+export const APP_NAME = 'InnoDeck'
 
 export const DRAGGING_THRESHOLD = 10 // px
 export const LINE_CONFIRM_THRESHOLD = 8 // px

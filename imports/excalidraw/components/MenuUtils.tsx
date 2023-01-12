@@ -5,7 +5,7 @@ export const MenuLinks = () => (
   <>
     <a
       className='menu-item'
-      href='https://github.com/boardx/boardx-core'
+      href='https://github.com/InnoDeck/InnoDeck'
       target='_blank'
       rel='noopener noreferrer'
     >
@@ -15,7 +15,7 @@ export const MenuLinks = () => (
     <a
       className='menu-item'
       target='_blank'
-      href='https://discord.gg/RBs5kHC8cS'
+      href='https://discord.gg/5Ny6UuNKVD'
       rel='noopener noreferrer'
     >
       <div className='menu-item__icon'>{DiscordIcon}</div>
@@ -24,7 +24,7 @@ export const MenuLinks = () => (
     <a
       className='menu-item'
       target='_blank'
-      href='https://twitter.com/BoardXUs'
+      href='https://twitter.com/InnoDeckapp'
       rel='noopener noreferrer'
     >
       <div className='menu-item__icon'>{TwitterIcon}</div>

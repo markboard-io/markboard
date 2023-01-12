@@ -27,7 +27,7 @@ function useFormValues() {
 
 export function Signup() {
   const navigate = useNavigate()
-  useDocumentTitle('BoardX - Sign Up')
+  useDocumentTitle('InnoDeck - Sign Up')
 
   const [emailError, validateEmail] = useEmailValidator()
   const [usernameError, validateUsername] = useUsernameValidator()
