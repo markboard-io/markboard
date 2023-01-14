@@ -36,7 +36,6 @@
     "clsx": "^1.2.1",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
-    "fabric": "^5.3.0",
     "firebase": "^8.3.3",
     "global-agent": "^3.0.0",
     "i18next-browser-languagedetector": "^7.0.1",
