@@ -33,7 +33,29 @@ InnoDeck = Miro + Notion + Zoom + Slack. The open source Zoom One alternative. W
 
 InnoDeck is open-source forever, you can deploy InnoDeck on your own server freely, or you can use our SaaS version by visiting [InnoDeck.app](https://InnoDeck.app).
 
-> Not Public Yet
+We officially provide 3 ways of deployment: Digital Ocean, Docker Images and Manual Installation.
+
+### Deploy via DigitalOcean
+
+Deploying InnoDeck with [DigitalOcean](digitalocean.com) is the recommended way to have your own instance running, especially if you are not an expert in linux server or tired of typing a set of commands manually.
+
+Click the folloying button to get your first InnoDeck instance running in minutes:
+
+<p>
+  <a href="https://cloud.digitalocean.com/apps/new?repo=https://github.com/InnoDeck/InnoDeck/tree/main">
+  <img src="https://www.deploytodo.com/do-btn-blue.svg" alt="Deploy to DO">
+  </a>
+</p>
+
+The cost of DigitalOcean's deployment is super low, starting from $5 per instance per month. Our official server [InnoDeck.app](https://InnoDeck.app) is deployed on DigitalOcean too.
+
+### Deploy via docker
+
+> TODO
+
+### Deploy via manual installation
+
+> TODO
 
 ## Local Development
 

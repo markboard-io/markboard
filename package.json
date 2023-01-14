@@ -11,7 +11,7 @@
     "lint": "meteor npx eslint server client imports",
     "test": "meteor npx jest",
     "postinstall": "meteor node scripts/postinstall.js",
-    "build": "meteor build --directory --server-only dist"
+    "build": "node scripts/build.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
