@@ -15,3 +15,5 @@ RUN npm run build
 WORKDIR /app/dist/bundle
 
 CMD ["node", "main.js"]
+
+EXPOSE 3000
