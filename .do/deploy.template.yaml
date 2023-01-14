@@ -17,5 +17,3 @@ spec:
   envs:
     - key: ROOT_URL
       value: ${APP_URL}
-    - key: PORT
-      value: 3000
