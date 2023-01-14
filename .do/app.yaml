@@ -10,8 +10,10 @@ spec:
         branch: main
         repo: InnoDeck/InnoDeck
         deploy_on_push: true
-      build_command: npm run build
-      run_command: node main.js
+      dockerfile_path: Dockerfile
+      http_port: 3000
+      instance_count: 1
+      instance_size_slug: basic-s
   envs:
     - key: DIGITAL_OCEAN
     - value: 1
