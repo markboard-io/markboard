@@ -12,3 +12,6 @@ spec:
         deploy_on_push: true
       build_command: npm run build
       run_command: node main.js
+  envs:
+    - key: DIGITAL_OCEAN
+    - value: 1
