@@ -1,19 +1,18 @@
-spec:
-  name: inno-deck
-  region: sfo
-  alerts:
-    - rule: DEPLOYMENT_FAILED
-    - rule: DOMAIN_FAILED
-  services:
-    - name: inno-deck
-      github:
-        branch: main
-        repo: InnoDeck/InnoDeck
-        deploy_on_push: true
-      dockerfile_path: Dockerfile
-      http_port: 3000
-      instance_count: 1
-      instance_size_slug: basic-s
-  envs:
-    - key: DIGITAL_OCEAN
-    - value: 1
+name: inno-deck
+region: sfo
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+services:
+  - name: inno-deck
+    github:
+      branch: main
+      repo: InnoDeck/InnoDeck
+      deploy_on_push: true
+    dockerfile_path: Dockerfile
+    http_port: 3000
+    instance_count: 1
+    instance_size_slug: basic-xxs
+envs:
+  - key: DIGITAL_OCEAN
+  - value: 1
