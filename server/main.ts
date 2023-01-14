@@ -1,4 +1,4 @@
-import { startup } from './startup'
+import { startupServer } from './startupServer'
 import { ServiceConfiguration } from 'meteor/service-configuration'
 import { Accounts } from 'meteor/accounts-base'
 import dotenv from 'dotenv'
@@ -45,4 +45,4 @@ ServiceConfiguration.configurations.upsert(
   }
 )
 
-startup()
+startupServer()
