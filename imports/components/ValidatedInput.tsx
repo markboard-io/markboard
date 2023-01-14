@@ -1,5 +1,5 @@
 import React, { memo, useRef, useState } from 'react'
-import { Form } from 'react-bootstrap'
+import Form from 'react-bootstrap/Form'
 import debounce from 'lodash/debounce'
 
 interface IValidatedInputProps {

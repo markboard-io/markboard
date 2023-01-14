@@ -1,17 +1,14 @@
 import React from 'react'
-import * as Sentry from '@sentry/browser'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 
 interface TopErrorBoundaryState {
   hasError: boolean
-  sentryEventId: string
   localStorage: string
 }
 
 export class TopErrorBoundary extends React.Component<any, TopErrorBoundaryState> {
   state: TopErrorBoundaryState = {
     hasError: false,
-    sentryEventId: '',
     localStorage: ''
   }
 
@@ -28,17 +25,6 @@ export class TopErrorBoundary extends React.Component<any, TopErrorBoundaryState
         _localStorage[key] = value
       }
     }
-
-    Sentry.withScope(scope => {
-      scope.setExtras(errorInfo)
-      const eventId = Sentry.captureException(error)
-
-      this.setState(_state => ({
-        hasError: true,
-        sentryEventId: eventId,
-        localStorage: JSON.stringify(_localStorage)
-      }))
-    })
   }
 
   private selectTextArea(event: React.MouseEvent<HTMLTextAreaElement>) {
@@ -54,7 +40,7 @@ export class TopErrorBoundary extends React.Component<any, TopErrorBoundaryState
       const templateStrFn = (
         await import(/* webpackChunkName: "bug-issue-template" */ '../bug-issue-template')
       ).default
-      body = encodeURIComponent(templateStrFn(this.state.sentryEventId))
+      body = encodeURIComponent(templateStrFn(this.state))
     } catch (error: any) {
       console.error(error)
     }
@@ -98,11 +84,6 @@ export class TopErrorBoundary extends React.Component<any, TopErrorBoundaryState
             </div>
           </div>
           <div>
-            <div className='ErrorSplash-paragraph'>
-              {t('errorSplash.trackedToSentry_pre')}
-              {this.state.sentryEventId}
-              {t('errorSplash.trackedToSentry_post')}
-            </div>
             <div className='ErrorSplash-paragraph'>
               {t('errorSplash.openIssueMessage_pre')}
               <button onClick={() => this.createGithubIssue()}>

@@ -58,3 +58,12 @@
 10. Use `/imports/excalidraw/components/icons.tsx` to declare SVG icons and customize them.
 
 11. **Avoid** using `Meteor.call`, use `Meteor.callAsync` instead
+
+12 **Make use of Tree-Shaking** Import the component only you need
+
+    ```typescript
+    // ✅ Good
+    import Form from 'react-bootstrap/Form'
+    // ❌ Bad
+    import { Form } from 'react-bootstrap'
+    ```
