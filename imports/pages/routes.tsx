@@ -1,21 +1,30 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import { Board } from './Board'
-import { Login } from './Login'
-import { Signup } from './Signup'
-import { NotFound } from './NotFound'
 import { Navigate } from 'react-router-dom'
-import { ForgotPassword } from './ForgotPassword'
-import { ResetPassword } from './ResetPassword'
 import { Meteor } from 'meteor/meteor'
+
+const Board = lazy(() => import('./Board'))
+const Login = lazy(() => import('./Login'))
+const Signup = lazy(() => import('./Signup'))
+const NotFound = lazy(() => import('./NotFound'))
+const ForgotPassword = lazy(() => import('./ForgotPassword'))
+const ResetPassword = lazy(() => import('./ResetPassword'))
 
 export interface IRouteRequirements {
   needLogin: boolean
   permissions: [] /* TODO: update it when role-based permission is introduced */
 }
 
+const suspense = (LazyComponent: React.LazyExoticComponent<() => JSX.Element>) => {
+  return (
+    <Suspense fallback={null}>
+      <LazyComponent />
+    </Suspense>
+  )
+}
+
 const withRouteProtected = (
-  Component: React.ComponentType,
+  element: JSX.Element,
   requirements: IRouteRequirements = { needLogin: true, permissions: [] }
 ) => {
   const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -27,36 +36,32 @@ const withRouteProtected = (
     return <>{children}</>
   }
 
-  return (
-    <ProtectedRoute>
-      <Component />
-    </ProtectedRoute>
-  )
+  return <ProtectedRoute>{element}</ProtectedRoute>
 }
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: withRouteProtected(Board)
+    element: withRouteProtected(suspense(Board))
   },
   {
     path: '/login',
-    element: <Login />
+    element: suspense(Login)
   },
   {
     path: '/signup',
-    element: <Signup />
+    element: suspense(Signup)
   },
   {
     path: '/forgot-password',
-    element: <ForgotPassword />
+    element: suspense(ForgotPassword)
   },
   {
     path: '/reset-password/:token',
-    element: <ResetPassword />
+    element: suspense(ResetPassword)
   },
   {
     path: '*',
-    element: <NotFound />
+    element: suspense(NotFound)
   }
 ])
