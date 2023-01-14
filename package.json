@@ -1,5 +1,8 @@
 {
   "name": "@innodeck/innodeck",
+  "engines": {
+    "node": "14.21.2"
+  },
   "scripts": {
     "local": "export MONGO_URL= && meteor run",
     "start": "npm run dev",
