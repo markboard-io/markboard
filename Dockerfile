@@ -6,6 +6,8 @@ WORKDIR /app
 
 COPY . .
 
+ENV METEOR_ALLOW_SUPERUSER=1
+
 RUN meteor npm install
 
 RUN npm run build
