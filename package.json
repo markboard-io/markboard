@@ -13,6 +13,7 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer",
     "lint": "meteor npx eslint server client imports",
     "test": "meteor npx jest",
+    "preinstall": "node scripts/preinstall.js",
     "postinstall": "meteor node scripts/postinstall.js",
     "build": "node scripts/build.js"
   },
