@@ -4,10 +4,12 @@ RUN curl https://install.meteor.com/ | sh
 
 WORKDIR /app
 
+COPY . .
+
 RUN meteor npm install
 
 RUN npm run build
 
-# COPY dist/bundle /app
+WORKDIR /app/dist/bundle
 
 CMD ["node", "main.js"]
