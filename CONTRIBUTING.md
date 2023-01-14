@@ -71,6 +71,7 @@
 
 ## Notable Debugging Tools
 
-- [Meteor DevTools Evolved](https://chrome.google.com/webstore/detail/meteor-devtools-evolved/ibniinmoafhgbifjojidlagmggecmpgf?hl=en)
-- [React Devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-- `npm run debug:brk` with Chrome Devtools to debug code
+1. [Meteor DevTools Evolved](https://chrome.google.com/webstore/detail/meteor-devtools-evolved/ibniinmoafhgbifjojidlagmggecmpgf?hl=en)
+2. [React Devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+3. `npm run debug:brk` with Chrome Devtools to debug code
+4. `npm run visualize` visualize bundle sizes to help remove unnecessary deps
