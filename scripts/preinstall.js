@@ -1,4 +1,4 @@
-const { sh } = require('sh')
+const { sh } = require('./sh')
 
 function deployOnDigitalOcean() {
   sh('curl https://install.meteor.com/ | sh') // install meteor
