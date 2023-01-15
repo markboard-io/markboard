@@ -1,9 +1,9 @@
 import React from 'react'
 import { KEYS } from '../keys'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { arrayToMap, getShortcutKey } from '../utils'
 import { register } from './register'
-import { UngroupIcon, GroupIcon } from '../components/icons'
+import { UngroupIcon, GroupIcon } from '/imports/components/icons'
 import { newElementWith } from '../element/mutateElement'
 import { getSelectedElements, isSomeElementSelected } from '../scene'
 import {

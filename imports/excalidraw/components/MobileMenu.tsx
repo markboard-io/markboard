@@ -23,7 +23,7 @@ import { actionToggleStats } from '../actions'
 import { MenuLinks, Separator } from './MenuUtils'
 import WelcomeScreen from './WelcomeScreen'
 import MenuItem from './MenuItem'
-import { ExportImageIcon } from './icons'
+import { ExportImageIcon } from '/imports/components/icons'
 
 type MobileMenuProps = {
   appState: AppState

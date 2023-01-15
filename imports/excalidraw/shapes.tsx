@@ -10,7 +10,7 @@ import {
   SelectionIcon,
   StickyNoteIcon,
   TextIcon
-} from './components/icons'
+} from '/imports/components/icons'
 import { KEYS } from './keys'
 
 export const SHAPES = [

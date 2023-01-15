@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { t } from '/imports/i18n'
 import { useDevice } from '../ExcalidrawCore'
 import { SidebarPropsContext } from './common'
-import { CloseIcon, PinIcon } from '../icons'
+import { CloseIcon, PinIcon } from '/imports/components/icons'
 import { withUpstreamOverride } from '../hoc/withUpstreamOverride'
 import { Tooltip } from '../Tooltip'
 

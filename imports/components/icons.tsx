@@ -10,8 +10,8 @@ import React from 'react'
 
 import oc from 'open-color'
 import clsx from 'clsx'
-import { Theme } from '../element/types'
-import { THEME } from '../constants'
+import { Theme } from '../excalidraw/element/types'
+import { THEME } from '../excalidraw/constants'
 
 const iconFillColor = (_theme: Theme) => 'var(--icon-fill-color)'
 
@@ -444,6 +444,16 @@ export const SidebarIcon = (
       fillRule='evenodd'
       clipRule='evenodd'
       d='M3.75 2C2.23122 2 1 3.23122 1 4.75V15.25C1 16.7688 2.23122 18 3.75 18H16.25C17.7688 18 19 16.7688 19 15.25V4.75C19 3.23122 17.7688 2 16.25 2H3.75ZM7.5 3.5H3.75C3.05964 3.5 2.5 4.05964 2.5 4.75V15.25C2.5 15.9404 3.05964 16.5 3.75 16.5H7.5V3.5ZM9 16.5V3.5H16.25C16.9404 3.5 17.5 4.05964 17.5 4.75V15.25C17.5 15.9404 16.9404 16.5 16.25 16.5H9Z'
+    ></path>
+  </svg>
+)
+
+export const ArrowDownIcon = (
+  <svg viewBox='0 0 20 20'>
+    <path
+      fillRule='evenodd'
+      clipRule='evenodd'
+      d='M14.5303 8.53033L10.5303 12.5303C10.2374 12.8232 9.76256 12.8232 9.46967 12.5303L5.46967 8.53033L6.53033 7.46967L10 10.9393L13.4697 7.46967L14.5303 8.53033Z'
     ></path>
   </svg>
 )

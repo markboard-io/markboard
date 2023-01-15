@@ -4,7 +4,7 @@ import { t } from  '/imports/i18n'
 
 import { AppState, ExportOpts, BinaryFiles } from '../types'
 import { Dialog } from './Dialog'
-import { ExportIcon, exportToFileIcon, LinkIcon } from './icons'
+import { ExportIcon, exportToFileIcon, LinkIcon } from '/imports/components/icons'
 import { ToolButton } from './ToolButton'
 import { actionSaveFileToDisk } from '../actions/actionExport'
 import { Card } from './Card'

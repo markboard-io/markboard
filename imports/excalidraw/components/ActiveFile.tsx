@@ -2,8 +2,8 @@ import React from 'react'
 // TODO barnabasmolnar/editor-redesign
 // this icon is not great
 import { getShortcutFromShortcutName } from '../actions/shortcuts'
-import { save } from '../components/icons'
-import { t } from  '/imports/i18n'
+import { save } from '/imports/components/icons'
+import { t } from '/imports/i18n'
 
 import './ActiveFile.style.scss'
 import MenuItem from './MenuItem'

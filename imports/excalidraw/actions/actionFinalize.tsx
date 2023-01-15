@@ -3,8 +3,8 @@ import { KEYS } from '../keys'
 import { isInvisiblySmallElement } from '../element'
 import { updateActiveTool, resetCursor } from '../utils'
 import { ToolButton } from '../components/ToolButton'
-import { done } from '../components/icons'
-import { t } from  '/imports/i18n'
+import { done } from '/imports/components/icons'
+import { t } from '/imports/i18n'
 import { register } from './register'
 import { mutateElement } from '../element/mutateElement'
 import { isPathALoop } from '../math'
@@ -57,8 +57,8 @@ export const actionFinalize = register({
     const multiPointElement = appState.multiElement
       ? appState.multiElement
       : appState.editingElement?.type === 'freedraw'
-        ? appState.editingElement
-        : null
+      ? appState.editingElement
+      : null
 
     if (multiPointElement) {
       // pen and mouse have hover
@@ -144,9 +144,9 @@ export const actionFinalize = register({
           !appState.activeTool.locked &&
           appState.activeTool.type !== 'freedraw'
             ? {
-              ...appState.selectedElementIds,
-              [multiPointElement.id]: true
-            }
+                ...appState.selectedElementIds,
+                [multiPointElement.id]: true
+              }
             : appState.selectedElementIds,
         // To select the linear element when user has finished mutipoint editing
         selectedLinearElement:

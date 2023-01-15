@@ -1,6 +1,6 @@
 import React from 'react'
 import { t } from  '/imports/i18n'
-import { UsersIcon } from './icons'
+import { UsersIcon } from '/imports/components/icons'
 
 import './CollabButton.style.scss'
 import MenuItem from './MenuItem'

@@ -5,7 +5,7 @@ import { ExcalidrawElement } from '../element/types'
 import { duplicateElement, getNonDeletedElements } from '../element'
 import { getSelectedElements, isSomeElementSelected } from '../scene'
 import { ToolButton } from '../components/ToolButton'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { arrayToMap, getShortcutKey } from '../utils'
 import { LinearElementEditor } from '../element/linearElementEditor'
 import {
@@ -19,7 +19,7 @@ import { ActionResult } from './types'
 import { GRID_SIZE } from '../constants'
 import { bindTextToShapeAfterDuplication } from '../element/textElement'
 import { isBoundToContainer } from '../element/typeChecks'
-import { DuplicateIcon } from '../components/icons'
+import { DuplicateIcon } from '/imports/components/icons'
 
 export const actionDuplicateSelection = register({
   name: 'duplicateSelection',

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { t } from  '/imports/i18n'
-import { TrashIcon } from './icons'
+import { t } from '/imports/i18n'
+import { TrashIcon } from '/imports/components/icons'
 
 import ConfirmDialog from './ConfirmDialog'
 import MenuItem from './MenuItem'

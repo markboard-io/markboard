@@ -5,7 +5,7 @@ import { capitalizeString } from '../utils'
 import { trackEvent } from '../analytics'
 import { useDevice } from './ExcalidrawCore'
 import './LibraryButton.style.scss'
-import { LibraryIcon } from './icons'
+import { LibraryIcon } from '/imports/components/icons'
 
 export const LibraryButton: React.FC<{
   appState: AppState

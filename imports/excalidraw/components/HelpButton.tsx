@@ -1,5 +1,5 @@
 import React from 'react'
-import { HelpIcon } from './icons'
+import { HelpIcon } from '/imports/components/icons'
 import './HelpButton.style.scss'
 
 type HelpButtonProps = {

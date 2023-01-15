@@ -9,7 +9,7 @@ import {
   BringToFrontIcon,
   SendBackwardIcon,
   SendToBackIcon
-} from '../components/icons'
+} from '/imports/components/icons'
 
 export const actionSendBackward = register({
   name: 'sendBackward',

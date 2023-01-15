@@ -2,7 +2,7 @@ import React from 'react'
 import { isSomeElementSelected } from '../scene'
 import { KEYS } from '../keys'
 import { ToolButton } from '../components/ToolButton'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { register } from './register'
 import { getNonDeletedElements } from '../element'
 import { ExcalidrawElement } from '../element/types'
@@ -13,7 +13,7 @@ import { LinearElementEditor } from '../element/linearElementEditor'
 import { fixBindingsAfterDeletion } from '../element/binding'
 import { isBoundToContainer } from '../element/typeChecks'
 import { updateActiveTool } from '../utils'
-import { TrashIcon } from '../components/icons'
+import { TrashIcon } from '/imports/components/icons'
 
 const deleteSelectedElements = (elements: readonly ExcalidrawElement[], appState: AppState) => {
   return {

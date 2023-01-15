@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCallback, useEffect, useRef } from 'react'
-import { CloseIcon } from './icons'
+import { CloseIcon } from '/imports/components/icons'
 import './Toast.style.scss'
 import { ToolButton } from './ToolButton'
 

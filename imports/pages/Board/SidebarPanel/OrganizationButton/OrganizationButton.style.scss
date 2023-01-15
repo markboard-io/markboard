@@ -1,0 +1,28 @@
+.OrganizationButton {
+	margin: 6px 12px;
+	padding: 8px;
+	display: inline-flex;
+	cursor: pointer;
+	border-radius: 4px;
+	&:hover {
+		background: rgba(0, 0, 0, 0.05);
+	}
+	.OrganizationAvatar {
+		width: 24px;
+		height: 24px;
+		border-radius: 4px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.OrganizationName {
+		margin-left: 8px;
+		font-weight: bold;
+		color: var(--button-text-color);
+	}
+	svg {
+		margin-left: 4px;
+		height: 24px;
+		width: 24px;
+	}
+}

@@ -1,13 +1,17 @@
-import colors from './colors'
-import { AppState } from './types'
+import colors from '../excalidraw/colors'
+import { AppState } from '/imports/excalidraw/types'
 
-export const getClientColors = (clientId: string, appState: AppState) => {
+export const getClientColorsWithAppState = (clientId: string, appState: AppState) => {
   if (appState?.collaborators) {
     const currentUser = appState.collaborators.get(clientId)
     if (currentUser?.color) {
       return currentUser.color
     }
   }
+  return getClientColors(clientId)
+}
+
+export const getClientColors = (clientId: string) => {
   // Naive way of getting an integer out of the clientId
   const sum = clientId.split('').reduce((a, str) => a + str.charCodeAt(0), 0)
 
@@ -16,7 +20,7 @@ export const getClientColors = (clientId: string, appState: AppState) => {
   const strokes = colors.elementStroke.slice(3)
   return {
     background: backgrounds[sum % backgrounds.length],
-    stroke: strokes[sum % strokes.length],
+    stroke: strokes[sum % strokes.length]
   }
 }
 

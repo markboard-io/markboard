@@ -38,7 +38,7 @@ import {
   TextAlignLeftIcon,
   TextAlignCenterIcon,
   TextAlignRightIcon
-} from '../components/icons'
+} from '/imports/components/icons'
 import {
   DEFAULT_FONT_FAMILY,
   DEFAULT_FONT_SIZE,
@@ -59,7 +59,7 @@ import {
   TextAlign,
   VerticalAlign
 } from '../element/types'
-import { getLanguage, t } from  '/imports/i18n'
+import { getLanguage, t } from '/imports/i18n'
 import { KEYS } from '../keys'
 import { randomInteger } from '../random'
 import {
@@ -189,8 +189,8 @@ export const actionChangeStrokeColor = register({
           el => {
             return hasStrokeColor(el.type)
               ? newElementWith(el, {
-                strokeColor: value.currentItemStrokeColor
-              })
+                  strokeColor: value.currentItemStrokeColor
+                })
               : el
           },
           true
@@ -830,10 +830,10 @@ export const actionChangeRoundness = register({
           roundness:
             value === 'round'
               ? {
-                type: isUsingAdaptiveRadius(el.type)
-                  ? ROUNDNESS.ADAPTIVE_RADIUS
-                  : ROUNDNESS.PROPORTIONAL_RADIUS
-              }
+                  type: isUsingAdaptiveRadius(el.type)
+                    ? ROUNDNESS.ADAPTIVE_RADIUS
+                    : ROUNDNESS.PROPORTIONAL_RADIUS
+                }
               : null
         })
       ),

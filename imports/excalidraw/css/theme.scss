@@ -1,7 +1,7 @@
 @import "../css/open-color.scss";
 @import "./variables.module.scss";
 
-.excalidraw {
+:root {
   --theme-filter: none;
   --button-destructive-bg-color: #{$oc-red-1};
   --button-destructive-color: #{$oc-red-9};

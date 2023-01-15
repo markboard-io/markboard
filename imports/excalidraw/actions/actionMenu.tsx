@@ -1,5 +1,5 @@
 import React from 'react'
-import { HamburgerMenuIcon, palette } from '../components/icons'
+import { HamburgerMenuIcon, palette } from '/imports/components/icons'
 import { ToolButton } from '../components/ToolButton'
 import { t } from '/imports/i18n'
 import { showSelectedShapeActions, getNonDeletedElements } from '../element'

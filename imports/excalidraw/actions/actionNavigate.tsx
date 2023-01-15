@@ -1,6 +1,6 @@
 import React from 'react'
-import { getClientColors } from '../clients'
-import { Avatar } from '../components/Avatar'
+import { getClientColorsWithAppState } from '/imports/utils/clients'
+import { Avatar } from '/imports/components/Avatar'
 import { centerScrollOn } from '../scene/scroll'
 import { Collaborator } from '../types'
 import { register } from './register'
@@ -35,7 +35,7 @@ export const actionGoToCollaborator = register({
   PanelComponent: ({ appState, updateData, data }) => {
     const [clientId, collaborator] = data as [string, Collaborator]
 
-    const { background, stroke } = getClientColors(clientId, appState)
+    const { background, stroke } = getClientColorsWithAppState(clientId, appState)
 
     return (
       <Avatar

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { copyTextToSystemClipboard } from '../../clipboard'
 import { Dialog } from '../../components/Dialog'
-import { clipboard, start, stop, share, shareIOS, shareWindows } from '../../components/icons'
+import { clipboard, start, stop, share, shareIOS, shareWindows } from '/imports/components/icons'
 import { ToolButton } from '../../components/ToolButton'
 import { t } from  '/imports/i18n'
 import './RoomDialog.style.scss'

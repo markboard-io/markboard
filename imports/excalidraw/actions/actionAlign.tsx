@@ -7,7 +7,7 @@ import {
   AlignTopIcon,
   CenterHorizontallyIcon,
   CenterVerticallyIcon
-} from '../components/icons'
+} from '/imports/components/icons'
 import { ToolButton } from '../components/ToolButton'
 import { getNonDeletedElements } from '../element'
 import { ExcalidrawElement } from '../element/types'

@@ -3,7 +3,7 @@ import './ToolIcon.style.scss'
 
 import clsx from 'clsx'
 import { ToolButtonSize } from './ToolButton'
-import { LockedIcon, UnlockedIcon } from './icons'
+import { LockedIcon, UnlockedIcon } from '/imports/components/icons'
 
 type LockIconProps = {
   title?: string

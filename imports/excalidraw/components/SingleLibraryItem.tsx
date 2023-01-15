@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { t } from '/imports/i18n'
 import { exportToSvg } from '../app/utils'
 import { AppState, LibraryItem } from '../types'
-import { CloseIcon } from './icons'
+import { CloseIcon } from '/imports/components/icons'
 
 import './SingleLibraryItem.style.scss'
 import { ToolButton } from './ToolButton'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { GithubIcon, DiscordIcon, TwitterIcon } from './icons'
+import { GithubIcon, DiscordIcon, TwitterIcon } from '/imports/components/icons'
 
 export const MenuLinks = () => (
   <>

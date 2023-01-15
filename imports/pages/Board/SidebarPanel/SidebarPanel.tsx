@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { Panel, PanelResizeHandle } from 'react-resizable-panels'
-import './FileExplorerPanel.style.scss'
+import { OrganizationButton } from './OrganizationButton'
 import { useEffect } from 'react'
+
+import './SidebarPanel.style.scss'
 
 export interface ISidebarProps {
   isOpen: boolean
 }
 
-export const FileExplorerPanel: React.FC<ISidebarProps> = props => {
+export const SidebarPanel: React.FC<ISidebarProps> = props => {
   const [isDragging, setIsDragging] = useState(false)
   const isOpen = props?.isOpen ?? true
 
@@ -26,7 +28,9 @@ export const FileExplorerPanel: React.FC<ISidebarProps> = props => {
 
   return (
     <>
-      <Panel style={panelStyle} defaultSize={15} minSize={15} className='FileExplorerPanel'></Panel>
+      <Panel style={panelStyle} defaultSize={15} minSize={15} className='FileExplorerPanel'>
+        <OrganizationButton />
+      </Panel>
       {isOpen ? (
         <PanelResizeHandle className='PanelResizeHandle'>
           <div

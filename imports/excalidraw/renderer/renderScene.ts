@@ -30,7 +30,7 @@ import {
 import { getSelectedElements } from '../scene/selection'
 
 import { renderElement, renderElementToSvg } from './renderElement'
-import { getClientColors } from '../clients'
+import { getClientColorsWithAppState } from '../../utils/clients'
 import { LinearElementEditor } from '../element/linearElementEditor'
 import {
   isSelectedViaGroup,
@@ -526,7 +526,7 @@ export const _renderScene = ({
           selectionColors.push(
             ...renderConfig.remoteSelectedElementIds[element.id].map(
               (socketId) => {
-                const { background } = getClientColors(socketId, appState)
+                const { background } = getClientColorsWithAppState(socketId, appState)
                 return background
               },
             ),
@@ -660,7 +660,7 @@ export const _renderScene = ({
     y = Math.max(y, 0)
     y = Math.min(y, normalizedCanvasHeight - height)
 
-    const { background, stroke } = getClientColors(clientId, appState)
+    const { background, stroke } = getClientColorsWithAppState(clientId, appState)
 
     context.save()
     context.strokeStyle = stroke

@@ -3,7 +3,7 @@ import './ToolIcon.style.scss'
 
 import clsx from 'clsx'
 import { ToolButtonSize } from './ToolButton'
-import { PenModeIcon } from './icons'
+import { PenModeIcon } from '/imports/components/icons'
 
 type PenModeIconProps = {
   title?: string

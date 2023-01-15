@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoadIcon, questionCircle, saveAs } from '../components/icons'
+import { LoadIcon, questionCircle, saveAs } from '/imports/components/icons'
 import { ProjectName } from '../components/ProjectName'
 import { ToolButton } from '../components/ToolButton'
 import '../components/ToolIcon.style.scss'

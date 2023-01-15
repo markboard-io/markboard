@@ -1,5 +1,5 @@
 import React from 'react'
-import { createIcon } from '../../components/icons'
+import { createIcon } from '/imports/components/icons'
 
 export const excalidrawPlusIcon = createIcon(
   <>

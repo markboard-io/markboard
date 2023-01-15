@@ -8,7 +8,7 @@ import { exportToSvg } from '../scene/export'
 import { LibraryItem } from '../types'
 import './LibraryUnit.style.scss'
 import { CheckboxItem } from './CheckboxItem'
-import { PlusIcon } from './icons'
+import { PlusIcon } from '/imports/components/icons'
 
 export const LibraryUnit = ({
   id,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { PanelGroup } from 'react-resizable-panels'
-import { FileExplorerPanel } from './FileExplorerPanel'
+import { SidebarPanel } from './SidebarPanel'
 import { MainPanel } from './MainPanel'
 import './Board.style.scss'
 import { useAtomValue } from 'jotai'
@@ -11,7 +11,7 @@ export function Board() {
 
   return (
     <PanelGroup className='Board' direction='horizontal' autoSaveId='primary-panel-layouts'>
-      <FileExplorerPanel isOpen={isSidebarOpen} />
+      <SidebarPanel isOpen={isSidebarOpen} />
       <MainPanel />
     </PanelGroup>
   )
