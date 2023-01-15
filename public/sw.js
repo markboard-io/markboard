@@ -85,7 +85,7 @@ self.addEventListener('fetch', event => {
           // Only for sockjs
           return new Response('No connection to the server', {
             status: 503,
-            statusText: 'No connection to the server',
+            statusText: '',
             headers: new Headers({ 'Content-Type': 'text/plain' })
           })
         })

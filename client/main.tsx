@@ -5,13 +5,13 @@ import { router } from '/imports/pages/routes'
 import { RouterProvider } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { startupClient } from './startupClient'
-
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'react-toastify/dist/ReactToastify.css'
 import { TopErrorBoundary } from '/imports/components/TopErrorBoundary'
 import { Provider } from 'jotai'
 import { useAtomsDebugValue } from 'jotai/devtools'
 import { jotaiStore } from '/imports/store/jotai'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Launcher = () => {
   const DebugAtoms = () => {
