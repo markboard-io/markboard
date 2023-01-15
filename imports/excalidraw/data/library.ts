@@ -3,7 +3,7 @@ import { LibraryItems, LibraryItem, ExcalidrawImperativeAPI, LibraryItemsSource 
 import { restoreLibraryItems } from './restore'
 import type { ExcalidrawCore } from '../components/ExcalidrawCore'
 import { atom } from 'jotai'
-import { jotaiStore } from '../jotai'
+import { jotaiStore } from '../../store/jotai'
 import { ExcalidrawElement } from '../element/types'
 import { getCommonBoundingBox } from '../element/bounds'
 import { AbortError } from '../errors'
@@ -375,8 +375,8 @@ export const useHandleLibrary = ({
       // for confirmation
       await (shouldPrompt && document.hidden
         ? new Promise<void>(resolve => {
-          window.addEventListener('focus', () => resolve(), { once: true })
-        })
+            window.addEventListener('focus', () => resolve(), { once: true })
+          })
         : null)
 
       try {

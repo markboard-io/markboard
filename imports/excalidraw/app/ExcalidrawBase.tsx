@@ -9,7 +9,7 @@ import { AppProps, ExcalidrawAPIRefValue, ExcalidrawProps } from '../types'
 import { defaultLang } from '/imports/i18n'
 import { DEFAULT_UI_OPTIONS } from '../constants'
 import { Provider } from 'jotai'
-import { jotaiScope, jotaiStore } from '../jotai'
+import { jotaiScope, jotaiStore } from '../../store/jotai'
 import Footer from '../components/footer/FooterCenter'
 
 const ExcalidrawBase = (props: ExcalidrawProps) => {

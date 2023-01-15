@@ -4,10 +4,10 @@ import { useLayoutEffect } from 'react'
 export const jotaiScope = Symbol()
 export const jotaiStore = unstable_createStore()
 
-export const useAtomWithInitialValue = <
-  T extends unknown,
-  A extends WritableAtom<T, T>,
->(atom: A, initialValue: T | (() => T),) => {
+export const useAtomWithInitialValue = <T extends unknown, A extends WritableAtom<T, T>>(
+  atom: A,
+  initialValue: T | (() => T)
+) => {
   const [value, setValue] = useAtom(atom)
 
   useLayoutEffect(() => {

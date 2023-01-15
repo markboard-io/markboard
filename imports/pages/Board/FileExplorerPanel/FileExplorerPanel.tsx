@@ -3,9 +3,17 @@ import { Panel, PanelResizeHandle } from 'react-resizable-panels'
 import './FileExplorerPanel.style.scss'
 import { useEffect } from 'react'
 
-export function FileExplorerPanel() {
-  const [isDragging, setIsDragging] = useState(false)
+export interface ISidebarProps {
+  isOpen: boolean
+}
 
+export const FileExplorerPanel: React.FC<ISidebarProps> = props => {
+  const [isDragging, setIsDragging] = useState(false)
+  const isOpen = props?.isOpen ?? true
+
+  const panelStyle: React.CSSProperties = {
+    display: isOpen ? '' : 'none'
+  }
   const dividerStyle: React.CSSProperties = {
     borderRight: isDragging ? '2px solid var(--background-primary)' : ''
   }
@@ -18,10 +26,16 @@ export function FileExplorerPanel() {
 
   return (
     <>
-      <Panel defaultSize={15} minSize={15} className='FileExplorerPanel'></Panel>
-      <PanelResizeHandle className='PanelResizeHandle'>
-        <div className='Divider' style={dividerStyle} onMouseDown={() => setIsDragging(true)}></div>
-      </PanelResizeHandle>
+      <Panel style={panelStyle} defaultSize={15} minSize={15} className='FileExplorerPanel'></Panel>
+      {isOpen ? (
+        <PanelResizeHandle className='PanelResizeHandle'>
+          <div
+            className='Divider'
+            style={dividerStyle}
+            onMouseDown={() => setIsDragging(true)}
+          ></div>
+        </PanelResizeHandle>
+      ) : null}
     </>
   )
 }

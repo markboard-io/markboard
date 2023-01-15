@@ -9,6 +9,7 @@ import { Meteor } from 'meteor/meteor'
 import { Toast } from '/imports/utils'
 
 function useFormValues() {
+  const navigate = useNavigate()
   const ref = useRef<HTMLFormElement | null>(null)
 
   const getFormValues = () => {
@@ -29,10 +30,8 @@ export function Login() {
 
   const loginWithGoogle = () => {
     Meteor.loginWithGoogle({}, error => {
-      console.log('loginWithGoogle', error)
       if (error) return Toast.error(error.message)
       Toast.success('Log In Success')
-      console.log(Meteor.user())
     })
   }
 
@@ -49,7 +48,7 @@ export function Login() {
     const { username, password } = getFormValues()
     Meteor.loginWithPassword(username, password, error => {
       if (error) return Toast.error(error.message)
-      Toast.success('Log In Success!')
+      return navigate('/')
     })
   }
 

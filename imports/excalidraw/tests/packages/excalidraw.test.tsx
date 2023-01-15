@@ -103,7 +103,7 @@ describe('<Excalidraw/>', () => {
 
       expect(h.state.theme).toBe(THEME.LIGHT)
 
-      queryByTestId(container, 'menu-button')!.click()
+      queryByTestId(container, 'sidebar-button')!.click()
       const darkModeToggle = queryByTestId(container, 'toggle-dark-mode')
       expect(darkModeToggle).toBeTruthy()
     })

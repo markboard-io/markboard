@@ -7,11 +7,12 @@
     overflow-y: auto;
   }
 
-  .menu-button {
+  .sidebar-button {
     @include outlineButtonStyles;
     background-color: var(--island-bg-color);
     width: var(--lg-button-size);
     height: var(--lg-button-size);
+    border: none;
 
     svg {
       width: var(--lg-icon-size);

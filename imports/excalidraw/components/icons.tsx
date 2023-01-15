@@ -434,6 +434,20 @@ export const ShortcutIcon = (
   </svg>
 )
 
+export const SidebarIcon = (
+  <svg viewBox='0 0 20 20'>
+    <path
+      d='M1.75 4.75C1.75 3.64543 2.64543 2.75 3.75 2.75H8.25V17.25H3.75C2.64543 17.25 1.75 16.3546 1.75 15.25V4.75Z'
+      fillOpacity='0.1'
+    ></path>
+    <path
+      fillRule='evenodd'
+      clipRule='evenodd'
+      d='M3.75 2C2.23122 2 1 3.23122 1 4.75V15.25C1 16.7688 2.23122 18 3.75 18H16.25C17.7688 18 19 16.7688 19 15.25V4.75C19 3.23122 17.7688 2 16.25 2H3.75ZM7.5 3.5H3.75C3.05964 3.5 2.5 4.05964 2.5 4.75V15.25C2.5 15.9404 3.05964 16.5 3.75 16.5H7.5V3.5ZM9 16.5V3.5H16.25C16.9404 3.5 17.5 4.05964 17.5 4.75V15.25C17.5 15.9404 16.9404 16.5 16.25 16.5H9Z'
+    ></path>
+  </svg>
+)
+
 export const ExternalLinkIcon = createIcon(
   <path
     strokeWidth='1.25'

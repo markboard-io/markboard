@@ -40,17 +40,16 @@ import { isMenuOpenAtom, useDevice } from './ExcalidrawCore'
 import { Stats } from './Stats'
 import { actionToggleStats } from '../actions/actionToggleStats'
 import Footer from './footer/Footer'
-import { ExportImageIcon, HamburgerMenuIcon, WelcomeScreenTopToolbarArrow } from './icons'
+import { SidebarIcon, WelcomeScreenTopToolbarArrow } from './icons'
 import { MenuLinks, Separator } from './MenuUtils'
 import { useOutsideClickHook } from '../hooks/useOutsideClick'
 import WelcomeScreen from './WelcomeScreen'
 import { hostSidebarCountersAtom } from './Sidebar/Sidebar'
-import { jotaiScope } from '../jotai'
-import { useAtom } from 'jotai'
+import { jotaiScope } from '../../store/jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import { LanguageList } from '../app/components/LanguageList'
 import WelcomeScreenDecor from './WelcomeScreenDecor'
-import { getShortcutFromShortcutName } from '../actions/shortcuts'
-import MenuItem from './MenuItem'
+import { isSidebarOpenAtom } from '/imports/store/atomSidebar'
 
 interface LayerUIProps {
   actionManager: ActionManager
@@ -167,18 +166,20 @@ const LayerUI = ({
 
   const [isMenuOpen, setIsMenuOpen] = useAtom(isMenuOpenAtom)
   const menuRef = useOutsideClickHook(() => setIsMenuOpen(false))
+  const setIsSidebarOpen = useSetAtom(isSidebarOpenAtom)
 
   const renderCanvasActions = () => (
     <div style={{ position: 'relative' }}>
       <button
         data-prevent-outside-click
-        className={clsx('menu-button', 'zen-mode-transition', {
+        className={clsx('sidebar-button', 'zen-mode-transition', {
           'transition-left': appState.zenModeEnabled
         })}
         type='button'
-        data-testid='menu-button'
+        data-testid='sidebar-button'
+        onClick={() => setIsSidebarOpen(isOpen => !isOpen)}
       >
-        {HamburgerMenuIcon}
+        {SidebarIcon}
       </button>
     </div>
   )
@@ -216,7 +217,6 @@ const LayerUI = ({
         {renderWelcomeScreen && <WelcomeScreen />}
         <div className='App-menu App-menu_top'>
           <Stack.Col
-            gap={6}
             className={clsx('App-menu_top__left', {
               'disable-pointerEvents': appState.zenModeEnabled
             })}
@@ -244,8 +244,7 @@ const LayerUI = ({
                         'zen-mode': appState.zenModeEnabled
                       })}
                     >
-                      <Island
-                        padding={1}
+                      <div
                         className={clsx('App-toolbar', {
                           'zen-mode': appState.zenModeEnabled
                         })}
@@ -285,7 +284,7 @@ const LayerUI = ({
                             }}
                           />
                         </Stack.Row>
-                      </Island>
+                      </div>
                     </Stack.Row>
                   </Stack.Col>
                 </div>

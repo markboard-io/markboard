@@ -8,14 +8,30 @@ import { startupClient } from './startupClient'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'
+import { TopErrorBoundary } from '/imports/components/TopErrorBoundary'
+import { Provider } from 'jotai'
+import { useAtomsDebugValue } from 'jotai/devtools'
+import { jotaiStore } from '/imports/store/jotai'
+
+const Launcher = () => {
+  const DebugAtoms = () => {
+    useAtomsDebugValue()
+    return null
+  }
+
+  return (
+    <TopErrorBoundary>
+      <Provider unstable_createStore={() => jotaiStore}>
+        <DebugAtoms />
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </Provider>
+    </TopErrorBoundary>
+  )
+}
 
 Meteor.startup(() => {
   const root = document.getElementById('root') as HTMLDivElement
   startupClient()
-  createRoot(root).render(
-    <>
-      <RouterProvider router={router} />
-      <ToastContainer />
-    </>
-  )
+  createRoot(root).render(<Launcher />)
 })

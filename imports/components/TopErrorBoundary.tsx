@@ -34,20 +34,6 @@ export class TopErrorBoundary extends React.Component<any, TopErrorBoundaryState
     }
   }
 
-  private async createGithubIssue() {
-    let body = ''
-    try {
-      const templateStrFn = (
-        await import(/* webpackChunkName: "bug-issue-template" */ '../bug-issue-template')
-      ).default
-      body = encodeURIComponent(templateStrFn(this.state))
-    } catch (error: any) {
-      console.error(error)
-    }
-
-    window.open(`https://github.com/excalidraw/excalidraw/issues/new?body=${body}`)
-  }
-
   private errorSplash() {
     return (
       <div className='ErrorSplash excalidraw'>
@@ -86,7 +72,7 @@ export class TopErrorBoundary extends React.Component<any, TopErrorBoundaryState
           <div>
             <div className='ErrorSplash-paragraph'>
               {t('errorSplash.openIssueMessage_pre')}
-              <button onClick={() => this.createGithubIssue()}>
+              <button>
                 {t('errorSplash.openIssueMessage_button')}
               </button>
               {t('errorSplash.openIssueMessage_post')}

@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useLayoutEffect, useRef, useState, forwardRef } from 'react'
 import { Island } from '.././Island'
 import { atom, useAtom } from 'jotai'
-import { jotaiScope } from '../../jotai'
+import { jotaiScope } from '../../../store/jotai'
 import { SidebarPropsContext, SidebarProps, SidebarPropsContextValue } from './common'
 
 import { SidebarHeaderComponents } from './SidebarHeader'

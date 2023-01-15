@@ -47,7 +47,7 @@ import { decryptData } from '../../data/encryption'
 import { resetBrowserStateVersions } from '../data/tabSync'
 import { LocalData } from '../data/LocalData'
 import { atom, useAtom } from 'jotai'
-import { jotaiStore } from '../../jotai'
+import { jotaiStore } from '../../../store/jotai'
 import { attachDebugLabel } from '/imports/store'
 
 export const collabAPIAtom = attachDebugLabel(atom<CollabAPI | null>(null), 'collabAPIAtom')

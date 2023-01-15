@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import { trackEvent } from '../analytics'
 import { getDefaultAppState } from '../appState'
 import { ErrorDialog } from '../components/ErrorDialog'
-import { TopErrorBoundary } from '../components/TopErrorBoundary'
 import { APP_NAME, EVENT, THEME, TITLE_TIMEOUT, VERSION_TIMEOUT } from '../constants'
 import { loadFromBlob } from '../data/blob'
 import { ExcalidrawElement, FileId, NonDeletedExcalidrawElement, Theme } from '../element/types'
@@ -55,7 +54,7 @@ import { isBrowserStorageStateNewer } from './data/tabSync'
 import clsx from 'clsx'
 import { atom, Provider, useAtom } from 'jotai'
 import { useAtomsDebugValue } from 'jotai/devtools'
-import { jotaiStore, useAtomWithInitialValue } from '../jotai'
+import { jotaiStore, useAtomWithInitialValue } from '../../store/jotai'
 import { reconcileElements } from './collab/reconciliation'
 import { parseLibraryTokensFromUrl, useHandleLibrary } from '../data/library'
 import { attachDebugLabel } from '/imports/store'
@@ -579,17 +578,5 @@ const ExcalidrawWrapper = () => {
 }
 
 export function ExcalidrawApp() {
-  const DebugAtoms = () => {
-    useAtomsDebugValue()
-    return null
-  }
-
-  return (
-    <TopErrorBoundary>
-      <Provider unstable_createStore={() => jotaiStore}>
-        <DebugAtoms />
-        <ExcalidrawWrapper />
-      </Provider>
-    </TopErrorBoundary>
-  )
+  return <ExcalidrawWrapper />
 }

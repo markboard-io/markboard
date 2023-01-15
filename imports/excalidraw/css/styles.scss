@@ -270,6 +270,9 @@
     align-items: flex-start;
     cursor: default;
     pointer-events: none !important;
+    background-color: white;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    padding: 6px 12px;
 
     @media (min-width: 1536px) {
       grid-template-columns: 1fr 1fr 1fr;
@@ -335,8 +338,8 @@
     width: 202px;
     box-sizing: border-box;
     position: absolute;
-    right: 0;
-    top: 50px;
+    right: 12px;
+    top: 75px;
   }
 
   .dropdown-select {
