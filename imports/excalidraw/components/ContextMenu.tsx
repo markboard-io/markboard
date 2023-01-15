@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { Popover } from './Popover'
+import { Popover } from '/imports/components/Popover'
 import { t } from '/imports/i18n'
 
 import './ContextMenu.style.scss'

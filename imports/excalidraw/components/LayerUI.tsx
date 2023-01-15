@@ -17,7 +17,7 @@ import { ErrorDialog } from './ErrorDialog'
 import { ExportCB, ImageExportDialog } from './ImageExportDialog'
 import { FixedSideContainer } from './FixedSideContainer'
 import { HintViewer } from './HintViewer'
-import { Island } from './Island'
+import { Island } from '/imports/components/Island'
 import { LoadingMessage } from './LoadingMessage'
 import { LockButton } from './LockButton'
 import { MobileMenu } from './MobileMenu'
@@ -314,7 +314,7 @@ const LayerUI = ({
         {isMenuOpen && (
           <div
             ref={menuRef}
-            style={{ position: 'absolute', bottom: 50, marginTop: '.25rem', right: 0 }}
+            style={{ position: 'absolute', bottom: 75, marginTop: '.25rem', right: 12 }}
           >
             <Section heading='canvasActions'>
               {/* the zIndex ensures this menu has higher stacking order,

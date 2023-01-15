@@ -5,7 +5,7 @@ import { t } from '/imports/i18n'
 import { getTargetElements } from '../scene'
 import { AppState, ExcalidrawProps } from '../types'
 import { CloseIcon } from '/imports/components/icons'
-import { Island } from './Island'
+import { Island } from '/imports/components/Island'
 import './Stats.style.scss'
 
 export const Stats = (props: {

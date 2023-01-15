@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import { Popover } from './Popover'
+import { Popover } from '/imports/components/Popover'
 import { isTransparent } from '../utils'
 
 import './ColorPicker.style.scss'

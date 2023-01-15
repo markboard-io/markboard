@@ -1,9 +1,9 @@
 import React from 'react'
-import { Popover } from './Popover'
+import { Popover } from '/imports/components/Popover'
 
 import './IconPicker.style.scss'
 import { isArrowKey, KEYS } from '../keys'
-import { getLanguage } from  '/imports/i18n'
+import { getLanguage } from '/imports/i18n'
 import clsx from 'clsx'
 
 function Picker<T>({
@@ -61,7 +61,7 @@ function Picker<T>({
         let nextIndex = index
 
         switch (event.key) {
-        // Select the next option
+          // Select the next option
           case isRTL ? KEYS.ARROW_LEFT : KEYS.ARROW_RIGHT:
           case KEYS.ARROW_DOWN: {
             nextIndex = (index + 1) % length
@@ -75,7 +75,7 @@ function Picker<T>({
           }
         }
 
-        (rGallery.current!.children![nextIndex] as any).focus()
+        ;(rGallery.current!.children![nextIndex] as any).focus()
       }
       event.preventDefault()
     } else if (event.key === KEYS.ESCAPE || event.key === KEYS.ENTER) {
@@ -102,7 +102,7 @@ function Picker<T>({
               active: value === option.value
             })}
             onClick={event => {
-              (event.currentTarget as HTMLButtonElement).focus()
+              ;(event.currentTarget as HTMLButtonElement).focus()
               onChange(option.value)
             }}
             title={`${option.text} — ${option.keyBinding.toUpperCase()}`}
