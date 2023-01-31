@@ -27,7 +27,7 @@ it('clones arrow element', () => {
     strokeStyle: 'solid',
     roundness: { type: ROUNDNESS.PROPORTIONAL_RADIUS },
     roughness: 1,
-    opacity: 100,
+    opacity: 100
   })
 
   // @ts-ignore
@@ -36,8 +36,8 @@ it('clones arrow element', () => {
   mutateElement(element, {
     points: [
       [1, 2],
-      [3, 4],
-    ],
+      [3, 4]
+    ]
   })
 
   const copy = duplicateElement(null, new Map(), element)
@@ -57,7 +57,7 @@ it('clones arrow element', () => {
   expect(copy).toEqual({
     ...element,
     id: copy.id,
-    seed: copy.seed,
+    seed: copy.seed
   })
 })
 
@@ -76,9 +76,9 @@ it('clones text element', () => {
     opacity: 100,
     text: 'hello',
     fontSize: 20,
-    fontFamily: FONT_FAMILY.Virgil,
+    fontFamily: FONT_FAMILY['"Kose", "Virgil"'],
     textAlign: 'left',
-    verticalAlign: 'top',
+    verticalAlign: 'top'
   })
 
   const copy = duplicateElement(null, new Map(), element)

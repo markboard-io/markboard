@@ -607,7 +607,7 @@ describe('textWysiwyg', () => {
       await new Promise(r => setTimeout(r, 0))
       fireEvent.change(editor, { target: { value: 'Hello World!' } })
       editor.blur()
-      expect(text.fontFamily).toEqual(FONT_FAMILY.Virgil)
+      expect(text.fontFamily).toEqual(FONT_FAMILY."Kose", "Virgil")
       UI.clickTool('text')
 
       mouse.clickAt(rectangle.x + rectangle.width / 2, rectangle.y + rectangle.height / 2)
@@ -630,7 +630,7 @@ describe('textWysiwyg', () => {
         Keyboard.keyPress(KEYS.Z)
       })
       expect((h.elements[1] as ExcalidrawTextElementWithContainer).fontFamily).toEqual(
-        FONT_FAMILY.Virgil
+        FONT_FAMILY."Kose", "Virgil"
       )
 
       //redo

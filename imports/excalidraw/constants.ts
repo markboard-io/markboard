@@ -17,13 +17,13 @@ export const CURSOR_TYPE = {
   GRAB: 'grab',
   POINTER: 'pointer',
   MOVE: 'move',
-  AUTO: '',
+  AUTO: ''
 }
 export const POINTER_BUTTON = {
   MAIN: 0,
   WHEEL: 1,
   SECONDARY: 2,
-  TOUCH: -1,
+  TOUCH: -1
 } as const
 
 export enum EVENT {
@@ -53,34 +53,34 @@ export enum EVENT {
   VISIBILITY_CHANGE = 'visibilitychange',
   SCROLL = 'scroll',
   // custom events
-  EXCALIDRAW_LINK = 'excalidraw-link',
+  EXCALIDRAW_LINK = 'excalidraw-link'
 }
 
 export const ENV = {
   TEST: 'test',
-  DEVELOPMENT: 'development',
+  DEVELOPMENT: 'development'
 }
 
 export const CLASSES = {
-  SHAPE_ACTIONS_MENU: 'App-attributes-island__right',
+  SHAPE_ACTIONS_MENU: 'App-attributes-island__right'
 }
 
 // 1-based in case we ever do `if(element.fontFamily)`
 export const FONT_FAMILY = {
-  Virgil: 1,
+  '"Kose", "Virgil"': 1,
   Helvetica: 2,
-  Cascadia: 3,
+  Cascadia: 3
 }
 
 export const THEME = {
   LIGHT: 'light',
-  DARK: 'dark',
+  DARK: 'dark'
 }
 
 export const WINDOWS_EMOJI_FALLBACK_FONT = 'Segoe UI Emoji'
 
 export const DEFAULT_FONT_SIZE = 20
-export const DEFAULT_FONT_FAMILY: FontFamilyValues = FONT_FAMILY.Virgil
+export const DEFAULT_FONT_FAMILY: FontFamilyValues = FONT_FAMILY['"Kose", "Virgil"']
 export const DEFAULT_TEXT_ALIGN = 'left'
 export const DEFAULT_VERTICAL_ALIGN = 'top'
 export const DEFAULT_VERSION = '{version}'
@@ -102,17 +102,16 @@ export const MIME_TYPES = {
   webp: 'image/webp',
   bmp: 'image/bmp',
   ico: 'image/x-icon',
-  binary: 'application/octet-stream',
+  binary: 'application/octet-stream'
 } as const
 
 export const EXPORT_DATA_TYPES = {
   excalidraw: 'excalidraw',
   excalidrawClipboard: 'excalidraw/clipboard',
-  excalidrawLibrary: 'excalidrawlib',
+  excalidrawLibrary: 'excalidrawlib'
 } as const
 
-export const EXPORT_SOURCE =
-  window.EXCALIDRAW_EXPORT_SOURCE || window.location.origin
+export const EXPORT_SOURCE = window.EXCALIDRAW_EXPORT_SOURCE || window.location.origin
 
 // time in milliseconds
 export const IMAGE_RENDER_TIMEOUT = 500
@@ -133,11 +132,11 @@ export const ACTIVE_THRESHOLD = 3_000
 export const THEME_FILTER = cssVariables.themeFilter
 
 export const URL_QUERY_KEYS = {
-  addLibrary: 'addLibrary',
+  addLibrary: 'addLibrary'
 } as const
 
 export const URL_HASH_KEYS = {
-  addLibrary: 'addLibrary',
+  addLibrary: 'addLibrary'
 } as const
 
 export const DEFAULT_UI_OPTIONS: AppProps['UIOptions'] = {
@@ -148,8 +147,8 @@ export const DEFAULT_UI_OPTIONS: AppProps['UIOptions'] = {
     loadScene: true,
     saveToActiveFile: true,
     toggleTheme: null,
-    saveAsImage: true,
-  },
+    saveAsImage: true
+  }
 }
 
 // breakpoints
@@ -180,7 +179,7 @@ export const ALLOWED_IMAGE_MIME_TYPES = [
   MIME_TYPES.gif,
   MIME_TYPES.webp,
   MIME_TYPES.bmp,
-  MIME_TYPES.ico,
+  MIME_TYPES.ico
 ] as const
 
 export const MAX_ALLOWED_FILE_BYTES = 2 * 1024 * 1024
@@ -191,7 +190,7 @@ export const ENCRYPTION_KEY_BITS = 128
 
 export const VERSIONS = {
   excalidraw: 2,
-  excalidrawLibrary: 2,
+  excalidrawLibrary: 2
 } as const
 
 export const BOUND_TEXT_PADDING = 5
@@ -199,13 +198,13 @@ export const BOUND_TEXT_PADDING = 5
 export const VERTICAL_ALIGN = {
   TOP: 'top',
   MIDDLE: 'middle',
-  BOTTOM: 'bottom',
+  BOTTOM: 'bottom'
 }
 
 export const TEXT_ALIGN = {
   LEFT: 'left',
   CENTER: 'center',
-  RIGHT: 'right',
+  RIGHT: 'right'
 }
 
 export const ELEMENT_READY_TO_ERASE_OPACITY = 20
@@ -233,7 +232,7 @@ export const ROUNDNESS = {
   //
   // NOTE right now we don't allow configuration and use a constant radius
   // (see DEFAULT_ADAPTIVE_RADIUS constant)
-  ADAPTIVE_RADIUS: 3,
+  ADAPTIVE_RADIUS: 3
 } as const
 
 /** key containt id of precedeing elemnt id we use in reconciliation during

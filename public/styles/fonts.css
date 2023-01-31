@@ -5,6 +5,13 @@
 	font-display: swap;
 }
 
+/* https://github.com/lxgw/kose-font */
+@font-face {
+	font-family: "Kose";
+	src: url("/fonts/kose.ttf");
+	font-display: swap;
+}
+
 /* https://github.com/microsoft/cascadia-code */
 @font-face {
 	font-family: "Cascadia";
