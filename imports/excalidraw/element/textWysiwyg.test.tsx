@@ -607,7 +607,7 @@ describe('textWysiwyg', () => {
       await new Promise(r => setTimeout(r, 0))
       fireEvent.change(editor, { target: { value: 'Hello World!' } })
       editor.blur()
-      expect(text.fontFamily).toEqual(FONT_FAMILY."Kose", "Virgil")
+      expect(text.fontFamily).toEqual(FONT_FAMILY['"Kose", "Virgil"'])
       UI.clickTool('text')
 
       mouse.clickAt(rectangle.x + rectangle.width / 2, rectangle.y + rectangle.height / 2)

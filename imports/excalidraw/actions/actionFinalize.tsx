@@ -57,8 +57,8 @@ export const actionFinalize = register({
     const multiPointElement = appState.multiElement
       ? appState.multiElement
       : appState.editingElement?.type === 'freedraw'
-      ? appState.editingElement
-      : null
+        ? appState.editingElement
+        : null
 
     if (multiPointElement) {
       // pen and mouse have hover

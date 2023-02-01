@@ -375,8 +375,8 @@ export const useHandleLibrary = ({
       // for confirmation
       await (shouldPrompt && document.hidden
         ? new Promise<void>(resolve => {
-            window.addEventListener('focus', () => resolve(), { once: true })
-          })
+          window.addEventListener('focus', () => resolve(), { once: true })
+        })
         : null)
 
       try {
