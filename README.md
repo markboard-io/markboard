@@ -4,34 +4,26 @@
   </a>
   <p>
     <a href="https://twitter.com/intent/follow?screen_name=InnoDeckapp" target="_blank">
-      <img alt="Follow InnoDeck on Twitter" src="https://img.shields.io/twitter/follow/InnoDeckapp.svg?label=follow+InnoDeck&style=for-the-badge&logo=twitter">
-    </a>
-<a href="https://discord.gg/5Ny6UuNKVD" target="_blank">
-      <img alt="Join Discord" style="margin-left:5px;" src="https://img.shields.io/discord/1063090582890758175?style=for-the-badge&label=Join+Discord">
+      <img alt="Follow InnoDeck on Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fimg.shields.io%2Ftwitter%2Ffollow%2FInnoDeckapp">
     </a>
   </p>
 </div>
 
-<h1 align="center">Next-Gen All-in-One Collaborative Workspace</h3>
+<h1 align="center">InnoDeck: Capture. Retrieve. Publish.</h3>
 
-[InnoDeck](https://InnoDeck.app) is an open-source **Digital Whiteboard, Documents, Video Conferencing, Team Chat** all-in-one collaborative workspace designed for your team. It aims to facilitate collaboration and communication within the team, enabling team members to easily share ideas and work together on projects.
-
-For personal use, InnoDeck is a **Notion Open Source Alternative** for you to do Note Taking, Tasks Management, Whiteboard Sketching and more. You can host InnoDeck as a personal knowledge database on your own server, while notion stores your data on its cloud.
+[InnoDeck](https://InnoDeck.app) is an open-source free-form note-taking app for memo storage, retrieval and share.
 
 ## Core Features
 
 [Website](https://InnoDeck.app) • [Live Demo](https://InnoDeck.app) • [Open Server](https://InnoDeck.app) • [Docs](https://InnoDeck.app/docs) • [Blog](https://InnoDeck.app/blog)
 
-InnoDeck = Miro + Notion + Zoom + Slack. The open source Zoom One alternative. We're building features for "All-in-One Workspace" using enterprise-grade open source tools.
-
-- 🪧 **Digital Whiteboard** (Sticky Notes, Diagrams, Drawings, Generative AI)
-- 📝 **Real-time Synced Documents** (Note Taking, Team Knowledge Center)
-- 📹 **Video Conferencing** (Virtual Meetings, Screen Sharing)
-- 💬 **Team Chat** (Send Text Messages, Images, Emojis)
+- Whiteboard & Markdown
+- Cocreate with AI
+- Collaborative & Sharable
 
 ## Installation Guide
 
-InnoDeck is open-source forever, you can deploy InnoDeck on your own server freely, or you can use our SaaS version by visiting [InnoDeck.app](https://InnoDeck.app).
+InnoDeck is an open-source software, you can deploy InnoDeck on your own server without any concern, or you can use our SaaS version by visiting [InnoDeck.app](https://InnoDeck.app).
 
 We officially provide 3 ways of deployment: Digital Ocean, Docker Images and Manual Installation.
 
