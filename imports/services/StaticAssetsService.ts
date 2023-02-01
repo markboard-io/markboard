@@ -6,7 +6,7 @@ export class StaticAssetsService extends BaseService {
     super('staticAssets')
   }
 
-  public startup(): void {
+  public startup() {
     WebApp.rawConnectHandlers.use((req, res, next) => {
       if (req.url?.startsWith('/fonts/')) {
         res.setHeader('Cache-Control', 'max-age=31536000')
