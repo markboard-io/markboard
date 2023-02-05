@@ -45,7 +45,6 @@
     "lodash.throttle": "^4.1.1",
     "meteor-node-stubs": "^1.2.1",
     "nanoid": "^4.0.0",
-    "node-sass": "^4.14.1",
     "open-color": "^1.9.1",
     "pako": "^2.1.0",
     "perfect-freehand": "^1.2.0",
