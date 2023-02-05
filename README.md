@@ -1,12 +1,7 @@
 <div align="center" style="display:flex;flex-direction:column;">
   <a href="https://InnoDeck.app" target="_blank">
-    <img height="100" src="./public/images/logo.svg" alt="InnoDeck Logo" />
+    <img src="./public/images/preview.png" alt="InnoDeck Logo" />
   </a>
-  <p>
-    <a href="https://twitter.com/intent/follow?screen_name=InnoDeckapp" target="_blank">
-      <img alt="Follow InnoDeck on Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fimg.shields.io%2Ftwitter%2Ffollow%2FInnoDeckapp">
-    </a>
-  </p>
 </div>
 
 <h1 align="center">InnoDeck: Capture. Retrieve. Publish.</h3>
