@@ -6,7 +6,7 @@
 
 <h1 align="center">InnoDeck: Capture. Retrieve. Publish.</h3>
 
-[InnoDeck](https://InnoDeck.app) is an open-source alternative to Microsoft OneNote, offering a free-form note-taking solution for memo storage, retrieval and sharing.
+[InnoDeck](https://InnoDeck.app) is an open-source alternative to Microsoft OneNote, offering both markdown and whitboard note-taking features for memo storage, retrieval and sharing.
 
 ## Core Features
 
