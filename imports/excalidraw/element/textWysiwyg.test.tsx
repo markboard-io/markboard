@@ -630,7 +630,7 @@ describe('textWysiwyg', () => {
         Keyboard.keyPress(KEYS.Z)
       })
       expect((h.elements[1] as ExcalidrawTextElementWithContainer).fontFamily).toEqual(
-        FONT_FAMILY."Kose", "Virgil"
+        FONT_FAMILY['"Kose", "Virgil"']
       )
 
       //redo
