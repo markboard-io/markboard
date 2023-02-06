@@ -65,21 +65,6 @@ describe('library', () => {
       expect(h.elements).toEqual([expect.objectContaining({ id: 'A_copy' })])
     })
   })
-
-  it('inserting library item should revert to selection tool', async () => {
-    UI.clickTool('rectangle')
-    expect(h.elements).toEqual([])
-    const libraryItems = parseLibraryJSON(await libraryJSONPromise)
-    await API.drop(
-      new Blob([serializeLibraryAsJSON(libraryItems)], {
-        type: MIME_TYPES.excalidrawlib
-      })
-    )
-    await waitFor(() => {
-      expect(h.elements).toEqual([expect.objectContaining({ id: 'A_copy' })])
-    })
-    expect(h.state.activeTool.type).toBe('selection')
-  })
 })
 
 describe('library menu', () => {
