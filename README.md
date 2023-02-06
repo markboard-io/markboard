@@ -1,12 +1,8 @@
-<div align="center" style="display:flex;flex-direction:column;">
-  <a href="https://InnoDeck.app" target="_blank">
-    <img src="./public/images/preview.png" alt="InnoDeck Logo" />
-  </a>
-</div>
+![InnoDeck Preview](./public/images/preview.png)
 
-<h1 align="center">InnoDeck: Next-Gen Wysiwyg Markdown Whiteboard</h3>
+<h1 align="center">Next-Gen Wysiwyg Markdown Whiteboard</h3>
 
-[InnoDeck](https://InnoDeck.app) is an open-source alternative to Microsoft OneNote, offering a markdown whiteboard note-taking experience for memo storage, retrieval and sharing.
+[InnoDeck](https://InnoDeck.app) is an open-source note-taking app offering the next-gen wysiwyg markdown-whiteboard for memo storage, retrieval and sharing.
 
 ## Core Features
 
@@ -60,7 +56,6 @@ meteor shell # debugging
 - [excalidraw](https://github.com/excalidraw/excalidraw) Virtual whiteboard for sketching hand-drawn like diagrams.
 - [lexical](https://github.com/facebook/lexical) Lexical is an extensible text editor framework that provides excellent reliability, accessibility and performance.
 - [yjs](https://github.com/yjs/yjs) A CRDT framework with a powerful abstraction of shared data
-- [jisti](https://github.com/jitsi) Jitsi Videobridge is a WebRTC compatible video router or SFU that lets build highly scalable video conferencing infrastructure.
 
 ### License
 
