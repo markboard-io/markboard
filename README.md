@@ -1,16 +1,17 @@
 ![InnoDeck Preview](./public/images/preview.png)
 
-<h1 align="center">Next-Gen Wysiwyg Markdown Whiteboard</h3>
+<h1 align="center">Wysiwyg Markdown Whiteboard</h3>
 
-[InnoDeck](https://InnoDeck.app) is an open-source note-taking app offering the next-gen wysiwyg markdown-whiteboard for memo storage, retrieval and sharing.
+[InnoDeck](https://InnoDeck.app) is an open-source wysiwyg markdown whiteboard for note-taking and building team knowledge base.
 
 ## Core Features
 
 [Website](https://InnoDeck.app) • [Live Demo](https://InnoDeck.app) • [Open Server](https://InnoDeck.app) • [Docs](https://InnoDeck.app/docs) • [Blog](https://InnoDeck.app/blog)
 
-- Capture: Whiteboard + Markdown, Cocreate with AI
-- Retrieve: Search Anything
-- Share: Collaborative & Publish
+- Collaborative whiteboard
+- Wysiwyg markdown
+- Cocreate with AI
+- Easy to share and publish
 
 ## Installation Guide
 
