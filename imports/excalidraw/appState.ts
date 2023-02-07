@@ -4,7 +4,6 @@ import {
   DEFAULT_FONT_SIZE,
   DEFAULT_TEXT_ALIGN,
   EXPORT_SCALES,
-  GRID_SIZE,
   THEME,
 } from './constants'
 import { t } from  '/imports/i18n'
@@ -56,7 +55,7 @@ export const getDefaultAppState = (): Omit<
     exportEmbedScene: false,
     exportWithDarkMode: false,
     fileHandle: null,
-    gridSize: GRID_SIZE,
+    gridSize: null,
     isBindingEnabled: true,
     isSidebarDocked: false,
     isLoading: false,

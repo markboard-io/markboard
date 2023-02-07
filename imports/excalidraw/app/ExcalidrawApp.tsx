@@ -52,9 +52,8 @@ import { loadFilesFromFirebase } from './data/firebase'
 import { LocalData } from './data/LocalData'
 import { isBrowserStorageStateNewer } from './data/tabSync'
 import clsx from 'clsx'
-import { atom, Provider, useAtom } from 'jotai'
-import { useAtomsDebugValue } from 'jotai/devtools'
-import { jotaiStore, useAtomWithInitialValue } from '../../store/jotai'
+import { atom, useAtom } from 'jotai'
+import { useAtomWithInitialValue } from '../../store/jotai'
 import { reconcileElements } from './collab/reconciliation'
 import { parseLibraryTokensFromUrl, useHandleLibrary } from '../data/library'
 import { attachDebugLabel } from '/imports/store'
@@ -569,7 +568,7 @@ const ExcalidrawWrapper = () => {
         onLibraryChange={useCallback(onLibraryChange, [])}
         autoFocus={true}
         theme={theme}
-        gridModeEnabled={true}
+        gridModeEnabled={false}
       />
       {excalidrawAPI && <Collab excalidrawAPI={excalidrawAPI} />}
       {errorMessage && <ErrorDialog message={errorMessage} onClose={() => setErrorMessage('')} />}
