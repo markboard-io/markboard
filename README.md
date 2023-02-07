@@ -1,6 +1,6 @@
 ![InnoDeck Preview](./public/images/preview.png)
 
-<h1 align="center">Wysiwyg Markdown Whiteboard</h3>
+<h1 align="center">InnoDeck: Wysiwyg Markdown Whiteboard</h3>
 
 [InnoDeck](https://InnoDeck.app) is an open-source wysiwyg markdown whiteboard for note-taking and building team knowledge base.
 
