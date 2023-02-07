@@ -3,6 +3,7 @@
 .library-button {
   @include outlineButtonStyles;
 
+  border-style: none;
   background-color: var(--island-bg-color);
 
   width: auto;
@@ -20,13 +21,5 @@
   svg {
     width: var(--lg-icon-size);
     height: var(--lg-icon-size);
-  }
-
-  &__label {
-    display: none;
-
-    @media screen and (min-width: 1024px) {
-      display: block;
-    }
   }
 }

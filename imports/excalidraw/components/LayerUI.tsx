@@ -271,7 +271,6 @@ const LayerUI = ({
                             title={t('toolBar.lock')}
                           />
                           <div className='App-toolbar__divider'></div>
-
                           <ShapesSwitcher
                             appState={appState}
                             canvas={canvas}
@@ -283,6 +282,10 @@ const LayerUI = ({
                               })
                             }}
                           />
+                          <div className='App-toolbar__divider'></div>
+                          {!appState.viewModeEnabled && (
+                            <LibraryButton appState={appState} setAppState={setAppState} />
+                          )}
                         </Stack.Row>
                       </div>
                     </Stack.Row>
@@ -306,9 +309,6 @@ const LayerUI = ({
               />
             )}
             {renderTopRightUI?.(device.isMobile, appState)}
-            {!appState.viewModeEnabled && (
-              <LibraryButton appState={appState} setAppState={setAppState} />
-            )}
           </div>
         </div>
         {isMenuOpen && (

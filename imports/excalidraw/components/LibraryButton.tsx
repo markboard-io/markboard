@@ -11,9 +11,8 @@ export const LibraryButton: React.FC<{
   appState: AppState
   setAppState: React.Component<any, AppState>['setState']
   isMobile?: boolean
-}> = ({ appState, setAppState, isMobile }) => {
+}> = ({ appState, setAppState }) => {
   const device = useDevice()
-  const showLabel = !isMobile
 
   // TODO barnabasmolnar/redesign
   // not great, toolbar jumps in a jarring manner
@@ -46,7 +45,6 @@ export const LibraryButton: React.FC<{
       />
       <div className='library-button'>
         <div>{LibraryIcon}</div>
-        {showLabel && <div className='library-button__label'>{t('toolBar.library')}</div>}
       </div>
     </label>
   )
