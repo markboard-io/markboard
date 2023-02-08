@@ -8,7 +8,7 @@ import {
   FONT_FAMILY,
   MIME_TYPES,
   THEME,
-  WINDOWS_EMOJI_FALLBACK_FONT,
+  WINDOWS_EMOJI_FALLBACK_FONT
 } from './constants'
 import { FontFamilyValues, FontString } from './element/types'
 import { AppState, DataURL, LastActiveToolBeforeEraser, Zoom } from './types'
@@ -30,24 +30,21 @@ export const getDateTime = () => {
 
   const date = new Date()
   const year = date.getFullYear()
-  const month = `${ date.getMonth() + 1 }`.padStart(2, '0')
-  const day = `${ date.getDate() }`.padStart(2, '0')
-  const hr = `${ date.getHours() }`.padStart(2, '0')
-  const min = `${ date.getMinutes() }`.padStart(2, '0')
+  const month = `${date.getMonth() + 1}`.padStart(2, '0')
+  const day = `${date.getDate()}`.padStart(2, '0')
+  const hr = `${date.getHours()}`.padStart(2, '0')
+  const min = `${date.getMinutes()}`.padStart(2, '0')
 
-  return `${ year }-${ month }-${ day }-${ hr }${ min }`
+  return `${year}-${month}-${day}-${hr}${min}`
 }
 
-export const capitalizeString = (str: string) =>
-  str.charAt(0).toUpperCase() + str.slice(1)
+export const capitalizeString = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
 
-export const isToolIcon = (
-  target: Element | EventTarget | null,
-): target is HTMLElement =>
+export const isToolIcon = (target: Element | EventTarget | null): target is HTMLElement =>
   target instanceof HTMLElement && target.className.includes('ToolIcon')
 
 export const isInputLike = (
-  target: Element | EventTarget | null,
+  target: Element | EventTarget | null
 ): target is
   | HTMLInputElement
   | HTMLTextAreaElement
@@ -61,26 +58,17 @@ export const isInputLike = (
   target instanceof HTMLSelectElement
 
 export const isWritableElement = (
-  target: Element | EventTarget | null,
-): target is
-  | HTMLInputElement
-  | HTMLTextAreaElement
-  | HTMLBRElement
-  | HTMLDivElement =>
+  target: Element | EventTarget | null
+): target is HTMLInputElement | HTMLTextAreaElement | HTMLBRElement | HTMLDivElement =>
   (target instanceof HTMLElement && target.dataset.type === 'wysiwyg') ||
   target instanceof HTMLBRElement || // newline in wysiwyg
   target instanceof HTMLTextAreaElement ||
-  (target instanceof HTMLInputElement &&
-    (target.type === 'text' || target.type === 'number'))
+  (target instanceof HTMLInputElement && (target.type === 'text' || target.type === 'number'))
 
-export const getFontFamilyString = ({
-  fontFamily,
-}: {
-  fontFamily: FontFamilyValues
-}) => {
+export const getFontFamilyString = ({ fontFamily }: { fontFamily: FontFamilyValues }) => {
   for (const [fontFamilyString, id] of Object.entries(FONT_FAMILY)) {
     if (id === fontFamily) {
-      return `${ fontFamilyString }, ${ WINDOWS_EMOJI_FALLBACK_FONT }`
+      return `${fontFamilyString}, ${WINDOWS_EMOJI_FALLBACK_FONT}`
     }
   }
   return WINDOWS_EMOJI_FALLBACK_FONT
@@ -89,18 +77,15 @@ export const getFontFamilyString = ({
 /** returns fontSize+fontFamily string for assignment to DOM elements */
 export const getFontString = ({
   fontSize,
-  fontFamily,
+  fontFamily
 }: {
   fontSize: number
   fontFamily: FontFamilyValues
 }) => {
-  return `${ fontSize }px ${ getFontFamilyString({ fontFamily }) }` as FontString
+  return `${fontSize}px ${getFontFamilyString({ fontFamily })}` as FontString
 }
 
-export const debounce = <T extends any[]>(
-  fn: (...args: T) => void,
-  timeout: number,
-) => {
+export const debounce = <T extends any[]>(fn: (...args: T) => void, timeout: number) => {
   let handle = 0
   let lastArgs: T | null = null
   const ret = (...args: T) => {
@@ -129,7 +114,7 @@ export const debounce = <T extends any[]>(
 // throttle callback to execute once per animation frame
 export const throttleRAF = <T extends any[]>(
   fn: (...args: T) => void,
-  opts?: { trailing?: boolean },
+  opts?: { trailing?: boolean }
 ) => {
   let timerId: number | null = null
   let lastArgs: T | null = null
@@ -181,10 +166,7 @@ export const throttleRAF = <T extends any[]>(
 }
 
 // https://github.com/lodash/lodash/blob/es/chunk.js
-export const chunk = <T extends any>(
-  array: readonly T[],
-  size: number,
-): T[][] => {
+export const chunk = <T extends any>(array: readonly T[], size: number): T[][] => {
   if (!array.length || size < 1) {
     return []
   }
@@ -221,13 +203,13 @@ export const updateActiveTool = (
   data: (
     | { type: typeof SHAPES[number]['value'] | 'eraser' }
     | { type: 'custom'; customType: string }
-  ) & { lastActiveToolBeforeEraser?: LastActiveToolBeforeEraser },
+  ) & { lastActiveToolBeforeEraser?: LastActiveToolBeforeEraser }
 ): AppState['activeTool'] => {
   if (data.type === 'custom') {
     return {
       ...appState.activeTool,
       type: 'custom',
-      customType: data.customType,
+      customType: data.customType
     }
   }
 
@@ -238,7 +220,7 @@ export const updateActiveTool = (
         ? appState.activeTool.lastActiveToolBeforeEraser
         : data.lastActiveToolBeforeEraser,
     type: data.type,
-    customType: null,
+    customType: null
   }
 }
 
@@ -256,10 +238,7 @@ export const setCursor = (canvas: HTMLCanvasElement | null, cursor: string) => {
 
 let eraserCanvasCache: any
 let previewDataURL: string
-export const setEraserCursor = (
-  canvas: HTMLCanvasElement | null,
-  theme: AppState['theme'],
-) => {
+export const setEraserCursor = (canvas: HTMLCanvasElement | null, theme: AppState['theme']) => {
   const cursorImageSizePx = 20
 
   const drawCanvas = () => {
@@ -271,13 +250,7 @@ export const setEraserCursor = (
     const context = eraserCanvasCache.getContext('2d')!
     context.lineWidth = 1
     context.beginPath()
-    context.arc(
-      eraserCanvasCache.width / 2,
-      eraserCanvasCache.height / 2,
-      5,
-      0,
-      2 * Math.PI,
-    )
+    context.arc(eraserCanvasCache.width / 2, eraserCanvasCache.height / 2, 5, 0, 2 * Math.PI)
     context.fillStyle = isDarkTheme ? oc.black : oc.white
     context.fill()
     context.strokeStyle = isDarkTheme ? oc.white : oc.black
@@ -290,15 +263,11 @@ export const setEraserCursor = (
 
   setCursor(
     canvas,
-    `url(${ previewDataURL }) ${ cursorImageSizePx / 2 } ${ cursorImageSizePx / 2
-    }, auto`,
+    `url(${previewDataURL}) ${cursorImageSizePx / 2} ${cursorImageSizePx / 2}, auto`
   )
 }
 
-export const setCursorForShape = (
-  canvas: HTMLCanvasElement | null,
-  appState: AppState,
-) => {
+export const setCursorForShape = (canvas: HTMLCanvasElement | null, appState: AppState) => {
   if (!canvas) {
     return
   }
@@ -314,11 +283,9 @@ export const setCursorForShape = (
   }
 }
 
-export const isFullScreen = () =>
-  document.fullscreenElement?.nodeName === 'HTML'
+export const isFullScreen = () => document.fullscreenElement?.nodeName === 'HTML'
 
-export const allowFullScreen = () =>
-  document.documentElement.requestFullscreen()
+export const allowFullScreen = () => document.documentElement.requestFullscreen()
 
 export const exitFullScreen = () => document.exitFullscreen()
 
@@ -328,9 +295,7 @@ export const getShortcutKey = (shortcut: string): string => {
     .replace(/\bShift\b/i, 'Shift')
     .replace(/\b(Enter|Return)\b/i, 'Enter')
   if (isDarwin) {
-    return shortcut
-      .replace(/\bCtrlOrCmd\b/gi, 'Cmd')
-      .replace(/\bAlt\b/i, 'Option')
+    return shortcut.replace(/\bCtrlOrCmd\b/gi, 'Cmd').replace(/\bAlt\b/i, 'Option')
   }
   return shortcut.replace(/\bCtrlOrCmd\b/gi, 'Ctrl')
 }
@@ -342,14 +307,14 @@ export const viewportCoordsToSceneCoords = (
     offsetLeft,
     offsetTop,
     scrollX,
-    scrollY,
+    scrollY
   }: {
     zoom: Zoom
     offsetLeft: number
     offsetTop: number
     scrollX: number
     scrollY: number
-  },
+  }
 ) => {
   const invScale = 1 / zoom.value
   const x = (clientX - offsetLeft) * invScale - scrollX
@@ -365,14 +330,14 @@ export const sceneCoordsToViewportCoords = (
     offsetLeft,
     offsetTop,
     scrollX,
-    scrollY,
+    scrollY
   }: {
     zoom: Zoom
     offsetLeft: number
     offsetTop: number
     scrollX: number
     scrollY: number
-  },
+  }
 ) => {
   const x = (sceneX + scrollX) * zoom.value + offsetLeft
   const y = (sceneY + scrollY) * zoom.value + offsetTop
@@ -380,13 +345,13 @@ export const sceneCoordsToViewportCoords = (
 }
 
 export const getGlobalCSSVariable = (name: string) =>
-  getComputedStyle(document.documentElement).getPropertyValue(`--${ name }`)
+  getComputedStyle(document.documentElement).getPropertyValue(`--${name}`)
 
 const RS_LTR_CHARS =
   'A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF' +
   '\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF'
 const RS_RTL_CHARS = '\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC'
-const RE_RTL_CHECK = new RegExp(`^[^${ RS_LTR_CHARS }]*[${ RS_RTL_CHARS }]`)
+const RE_RTL_CHECK = new RegExp(`^[^${RS_LTR_CHARS}]*[${RS_RTL_CHARS}]`)
 /**
  * Checks whether first directional character is RTL. Meaning whether it starts
  *  with RTL characters, or indeterminate (numbers etc.) characters followed by
@@ -395,9 +360,7 @@ const RE_RTL_CHECK = new RegExp(`^[^${ RS_LTR_CHARS }]*[${ RS_RTL_CHARS }]`)
  */
 export const isRTL = (text: string) => RE_RTL_CHECK.test(text)
 
-export const tupleToCoors = (
-  xyTuple: readonly [number, number],
-): { x: number; y: number } => {
+export const tupleToCoors = (xyTuple: readonly [number, number]): { x: number; y: number } => {
   const [x, y] = xyTuple
   return { x, y }
 }
@@ -414,7 +377,7 @@ export const muteFSAbortError = (error?: Error) => {
 export const findIndex = <T>(
   array: readonly T[],
   cb: (element: T, index: number, array: readonly T[]) => boolean,
-  fromIndex = 0,
+  fromIndex = 0
 ) => {
   if (fromIndex < 0) {
     fromIndex = array.length + fromIndex
@@ -432,7 +395,7 @@ export const findIndex = <T>(
 export const findLastIndex = <T>(
   array: readonly T[],
   cb: (element: T, index: number, array: readonly T[]) => boolean,
-  fromIndex: number = array.length - 1,
+  fromIndex: number = array.length - 1
 ) => {
   if (fromIndex < 0) {
     fromIndex = array.length + fromIndex
@@ -450,11 +413,7 @@ export const findLastIndex = <T>(
 export const isTransparent = (color: string) => {
   const isRGBTransparent = color.length === 5 && color.substr(4, 1) === '0'
   const isRRGGBBTransparent = color.length === 9 && color.substr(7, 2) === '00'
-  return (
-    isRGBTransparent ||
-    isRRGGBBTransparent ||
-    color === colors.elementBackground[0]
-  )
+  return isRGBTransparent || isRRGGBBTransparent || color === colors.elementBackground[0]
 }
 
 export type ResolvablePromise<T> = Promise<T> & {
@@ -467,19 +426,19 @@ export const resolvablePromise = <T>() => {
   const promise = new Promise((_resolve, _reject) => {
     resolve = _resolve
     reject = _reject
-  });
-  (promise as any).resolve = resolve;
-  (promise as any).reject = reject
+  })
+  ;(promise as any).resolve = resolve
+  ;(promise as any).reject = reject
   return promise as ResolvablePromise<T>
 }
 
 /**
  * @param func handler taking at most single parameter (event).
  */
-export const withBatchedUpdates = <
-  TFunction extends ((event: any) => void) | (() => void),
->(func: Parameters<TFunction>['length'] extends 0 | 1 ? TFunction : never) =>
-  ((event) => {
+export const withBatchedUpdates = <TFunction extends ((event: any) => void) | (() => void)>(
+  func: Parameters<TFunction>['length'] extends 0 | 1 ? TFunction : never
+) =>
+  (event => {
     unstable_batchedUpdates(func as TFunction, event)
   }) as TFunction
 
@@ -488,10 +447,12 @@ export const withBatchedUpdates = <
  * animation frame
  */
 export const withBatchedUpdatesThrottled = <
-  TFunction extends ((event: any) => void) | (() => void),
->(func: Parameters<TFunction>['length'] extends 0 | 1 ? TFunction : never,) => {
+  TFunction extends ((event: any) => void) | (() => void)
+>(
+    func: Parameters<TFunction>['length'] extends 0 | 1 ? TFunction : never
+  ) => {
   // @ts-ignore
-  return throttleRAF<Parameters<TFunction>>(((event) => {
+  return throttleRAF<Parameters<TFunction>>((event => {
     unstable_batchedUpdates(func, event)
   }) as TFunction)
 }
@@ -502,7 +463,7 @@ export const nFormatter = (num: number, digits: number): string => {
     { value: 1, symbol: 'b' },
     { value: 1e3, symbol: 'k' },
     { value: 1e6, symbol: 'M' },
-    { value: 1e9, symbol: 'G' },
+    { value: 1e9, symbol: 'G' }
   ]
   const rx = /\.0+$|(\.[0-9]*[1-9])0+$/
   let index
@@ -511,16 +472,11 @@ export const nFormatter = (num: number, digits: number): string => {
       break
     }
   }
-  return (
-    (num / si[index].value).toFixed(digits).replace(rx, '$1') + si[index].symbol
-  )
+  return (num / si[index].value).toFixed(digits).replace(rx, '$1') + si[index].symbol
 }
 
 export const getVersion = () => {
-  return (
-    document.querySelector<HTMLMetaElement>('meta[name="version"]')?.content ||
-    DEFAULT_VERSION
-  )
+  return document.querySelector<HTMLMetaElement>('meta[name="version"]')?.content || DEFAULT_VERSION
 }
 
 // Adapted from https://github.com/Modernizr/Modernizr/blob/master/feature-detects/emoji.js
@@ -540,9 +496,7 @@ export const supportsEmoji = () => {
   return ctx.getImageData(offset, offset, 1, 1).data[0] !== 0
 }
 
-export const getNearestScrollableContainer = (
-  element: HTMLElement,
-): HTMLElement | Document => {
+export const getNearestScrollableContainer = (element: HTMLElement): HTMLElement | Document => {
   let parent = element.parentElement
   while (parent) {
     if (parent === document.body) {
@@ -552,9 +506,7 @@ export const getNearestScrollableContainer = (
     const hasScrollableContent = parent.scrollHeight > parent.clientHeight
     if (
       hasScrollableContent &&
-      (overflowY === 'auto' ||
-        overflowY === 'scroll' ||
-        overflowY === 'overlay')
+      (overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay')
     ) {
       return parent
     }
@@ -582,7 +534,7 @@ export const preventUnload = (event: BeforeUnloadEvent) => {
 
 export const bytesToHexString = (bytes: Uint8Array) => {
   return Array.from(bytes)
-    .map((byte) => `0${ byte.toString(16) }`.slice(-2))
+    .map(byte => `0${byte.toString(16)}`.slice(-2))
     .join('')
 }
 
@@ -592,17 +544,14 @@ export const getUpdatedTimestamp = () => (isTestEnv() ? 1 : Date.now())
  * Transforms array of objects containing `id` attribute,
  * or array of ids (strings), into a Map, keyd by `id`.
  */
-export const arrayToMap = <T extends { id: string } | string>(
-  items: readonly T[],
-) => {
+export const arrayToMap = <T extends { id: string } | string>(items: readonly T[]) => {
   return items.reduce((acc: Map<string, T>, element) => {
     acc.set(typeof element === 'string' ? element : element.id, element)
     return acc
   }, new Map())
 }
 
-export const isTestEnv = () =>
-  typeof process !== 'undefined' && process.env?.NODE_ENV === 'test'
+export const isTestEnv = () => typeof process !== 'undefined' && process.env?.NODE_ENV === 'test'
 
 export const isProdEnv = () =>
   typeof process !== 'undefined' && process.env?.NODE_ENV === 'production'
@@ -610,16 +559,13 @@ export const isProdEnv = () =>
 export const wrapEvent = <T extends Event>(name: EVENT, nativeEvent: T) => {
   return new CustomEvent(name, {
     detail: {
-      nativeEvent,
+      nativeEvent
     },
-    cancelable: true,
+    cancelable: true
   })
 }
 
-export const updateObject = <T extends Record<string, any>>(
-  obj: T,
-  updates: Partial<T>,
-): T => {
+export const updateObject = <T extends Record<string, any>>(obj: T, updates: Partial<T>): T => {
   let didChange = false
   for (const key in updates) {
     const value = (updates as any)[key]
@@ -641,7 +587,7 @@ export const updateObject = <T extends Record<string, any>>(
 
   return {
     ...obj,
-    ...updates,
+    ...updates
   }
 }
 
@@ -658,9 +604,7 @@ export const getFrame = () => {
   }
 }
 
-export const isPromiseLike = (
-  value: any,
-): value is Promise<ResolutionType<typeof value>> => {
+export const isPromiseLike = (value: any): value is Promise<ResolutionType<typeof value>> => {
   return (
     !!value &&
     typeof value === 'object' &&
@@ -672,13 +616,12 @@ export const isPromiseLike = (
 
 export const queryFocusableElements = (container: HTMLElement | null) => {
   const focusableElements = container?.querySelectorAll<HTMLElement>(
-    'button, a, input, select, textarea, div[tabindex], label[tabindex]',
+    'button, a, input, select, textarea, div[tabindex], label[tabindex]'
   )
 
   return focusableElements
     ? Array.from(focusableElements).filter(
-      (element) =>
-        element.tabIndex > -1 && !(element as HTMLInputElement).disabled,
+      element => element.tabIndex > -1 && !(element as HTMLInputElement).disabled
     )
     : []
 }
@@ -686,10 +629,12 @@ export const queryFocusableElements = (container: HTMLElement | null) => {
 export const ReactChildrenToObject = <
   T extends {
     [k in string]?:
-    | React.ReactPortal
-    | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>
-  },
->(children: React.ReactNode) => {
+      | React.ReactPortal
+      | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>
+  }
+>(
+    children: React.ReactNode
+  ) => {
   return React.Children.toArray(children).reduce((acc, child) => {
     if (
       React.isValidElement(child) &&

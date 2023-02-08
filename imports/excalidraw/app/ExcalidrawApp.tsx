@@ -323,9 +323,7 @@ const ExcalidrawWrapper = () => {
     const titleTimeout = setTimeout(() => (document.title = APP_NAME), TITLE_TIMEOUT)
 
     const syncData = debounce(() => {
-      if (isTestEnv()) {
-        return
-      }
+      if (isTestEnv()) { return }
       if (!document.hidden && !collabAPI.isCollaborating()) {
         // don't sync if local state is newer or identical to browser state
         if (isBrowserStorageStateNewer(STORAGE_KEYS.VERSION_DATA_STATE)) {
