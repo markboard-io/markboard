@@ -1,16 +1,5 @@
-import * as GA from '../ga'
-import * as GAPoint from '../gapoints'
-import * as GADirection from '../gadirections'
-import * as GALine from '../galines'
-import * as GATransform from '../gatransforms'
-
-import {
-  distance2d,
-  rotatePoint,
-  isPathALoop,
-  isPointInPolygon,
-  rotate,
-} from '../math'
+import { GA, GAPoint, GADirection, GALine, GATransform } from '../ga'
+import { distance2d, rotatePoint, isPathALoop, isPointInPolygon, rotate } from '../math'
 import { pointsOnBezierCurves } from 'points-on-curve'
 
 import {
@@ -26,7 +15,7 @@ import {
   ExcalidrawImageElement,
   ExcalidrawLinearElement,
   StrokeRoundness,
-  ExcalidrawStickyNoteElement,
+  ExcalidrawStickyNoteElement
 } from './types'
 
 import { getElementAbsoluteCoords, getCurvePathOps, Bounds } from './bounds'
@@ -39,11 +28,8 @@ import { isTextElement } from '.'
 import { isTransparent } from '../utils'
 import { shouldShowBoundingBox } from './transformHandles'
 import { getBoundTextElement } from './textElement'
-import { Excalidraw } from '../app/ExcalidrawBase'
 
-const isElementDraggableFromInside = (
-  element: NonDeletedExcalidrawElement,
-): boolean => {
+const isElementDraggableFromInside = (element: NonDeletedExcalidrawElement): boolean => {
   if (element.type === 'arrow') {
     return false
   }
@@ -63,16 +49,13 @@ export const hitTest = (
   element: NonDeletedExcalidrawElement,
   appState: AppState,
   x: number,
-  y: number,
+  y: number
 ): boolean => {
   // How many pixels off the shape boundary we still consider a hit
   const threshold = 10 / appState.zoom.value
   const point: Point = [x, y]
 
-  if (
-    isElementSelected(appState, element) &&
-    shouldShowBoundingBox([element], appState)
-  ) {
+  if (isElementSelected(appState, element) && shouldShowBoundingBox([element], appState)) {
     return isPointHittingElementBoundingBox(element, point, threshold)
   }
 
@@ -90,7 +73,7 @@ export const isHittingElementBoundingBoxWithoutHittingElement = (
   element: NonDeletedExcalidrawElement,
   appState: AppState,
   x: number,
-  y: number,
+  y: number
 ): boolean => {
   const threshold = 10 / appState.zoom.value
 
@@ -110,38 +93,30 @@ export const isHittingElementBoundingBoxWithoutHittingElement = (
 export const isHittingElementNotConsideringBoundingBox = (
   element: NonDeletedExcalidrawElement,
   appState: AppState,
-  point: Point,
+  point: Point
 ): boolean => {
   const threshold = 10 / appState.zoom.value
   const check = isTextElement(element)
     ? isStrictlyInside
     : isElementDraggableFromInside(element)
-      ? isInsideCheck
-      : isNearCheck
+    ? isInsideCheck
+    : isNearCheck
   return hitTestPointAgainstElement({ element, point, threshold, check })
 }
 
-const isElementSelected = (
-  appState: AppState,
-  element: NonDeleted<ExcalidrawElement>,
-) => appState.selectedElementIds[element.id]
+const isElementSelected = (appState: AppState, element: NonDeleted<ExcalidrawElement>) =>
+  appState.selectedElementIds[element.id]
 
 export const isPointHittingElementBoundingBox = (
   element: NonDeleted<ExcalidrawElement>,
   [x, y]: Point,
-  threshold: number,
+  threshold: number
 ) => {
   const [x1, y1, x2, y2] = getElementAbsoluteCoords(element)
   const elementCenterX = (x1 + x2) / 2
   const elementCenterY = (y1 + y2) / 2
   // reverse rotate to take element's angle into account.
-  const [rotatedX, rotatedY] = rotate(
-    x,
-    y,
-    elementCenterX,
-    elementCenterY,
-    -element.angle,
-  )
+  const [rotatedX, rotatedY] = rotate(x, y, elementCenterX, elementCenterY, -element.angle)
 
   return (
     rotatedX > x1 - threshold &&
@@ -153,7 +128,7 @@ export const isPointHittingElementBoundingBox = (
 
 export const bindingBorderTest = (
   element: NonDeleted<ExcalidrawBindableElement>,
-  { x, y }: { x: number; y: number },
+  { x, y }: { x: number; y: number }
 ): boolean => {
   const threshold = maxBindingGap(element, element.width, element.height)
   const check = isOutsideCheck
@@ -164,7 +139,7 @@ export const bindingBorderTest = (
 export const maxBindingGap = (
   element: ExcalidrawElement,
   elementWidth: number,
-  elementHeight: number,
+  elementHeight: number
 ): number => {
   // Aligns diamonds with rectangles
   const shapeRatio = element.type === 'diamond' ? 1 / Math.sqrt(2) : 1
@@ -191,12 +166,7 @@ const hitTestPointAgainstElement = (args: HitTestArgs): boolean => {
       const distance = distanceToBindableElement(args.element, args.point)
       return args.check(distance, args.threshold)
     case 'freedraw': {
-      if (
-        !args.check(
-          distanceToRectangle(args.element, args.point),
-          args.threshold,
-        )
-      ) {
+      if (!args.check(distanceToRectangle(args.element, args.point), args.threshold)) {
         return false
       }
 
@@ -206,9 +176,7 @@ const hitTestPointAgainstElement = (args: HitTestArgs): boolean => {
     case 'line':
       return hitTestLinear(args)
     case 'selection':
-      console.warn(
-        'This should not happen, we need to investigate why it does.',
-      )
+      console.warn('This should not happen, we need to investigate why it does.')
       return false
     default:
       return true
@@ -217,7 +185,7 @@ const hitTestPointAgainstElement = (args: HitTestArgs): boolean => {
 
 export const distanceToBindableElement = (
   element: ExcalidrawBindableElement,
-  point: Point,
+  point: Point
 ): number => {
   switch (element.type) {
     case 'stickynote':
@@ -232,7 +200,7 @@ export const distanceToBindableElement = (
   }
 }
 
-const isStrictlyInside = (distance: number, threshold: number): boolean => {
+const isStrictlyInside = (distance: number, _threshold: number): boolean => {
   return distance < 0
 }
 
@@ -255,35 +223,29 @@ const distanceToRectangle = (
     | ExcalidrawFreeDrawElement
     | ExcalidrawImageElement
     | ExcalidrawStickyNoteElement,
-  point: Point,
+  point: Point
 ): number => {
   const [, pointRel, hwidth, hheight] = pointRelativeToElement(element, point)
   return Math.max(
     GAPoint.distanceToLine(pointRel, GALine.equation(0, 1, -hheight)),
-    GAPoint.distanceToLine(pointRel, GALine.equation(1, 0, -hwidth)),
+    GAPoint.distanceToLine(pointRel, GALine.equation(1, 0, -hwidth))
   )
 }
 
-const distanceToDiamond = (
-  element: ExcalidrawDiamondElement,
-  point: Point,
-): number => {
+const distanceToDiamond = (element: ExcalidrawDiamondElement, point: Point): number => {
   const [, pointRel, hwidth, hheight] = pointRelativeToElement(element, point)
   const side = GALine.equation(hheight, hwidth, -hheight * hwidth)
   return GAPoint.distanceToLine(pointRel, side)
 }
 
-const distanceToEllipse = (
-  element: ExcalidrawEllipseElement,
-  point: Point,
-): number => {
+const distanceToEllipse = (element: ExcalidrawEllipseElement, point: Point): number => {
   const [pointRel, tangent] = ellipseParamsForTest(element, point)
   return -GALine.sign(tangent) * GAPoint.distanceToLine(pointRel, tangent)
 }
 
 const ellipseParamsForTest = (
   element: ExcalidrawEllipseElement,
-  point: Point,
+  point: Point
 ): [GA.Point, GA.Line] => {
   const [, pointRel, hwidth, hheight] = pointRelativeToElement(element, point)
   const [px, py] = GAPoint.toTuple(pointRel)
@@ -293,11 +255,11 @@ const ellipseParamsForTest = (
   let ty = 0.707
 
   const a = hwidth
-  const b = hheight;
+  const b = hheight
 
   // This is a numerical method to find the params tx, ty at which
   // the ellipse has the closest point to the given point
-  [0, 1, 2, 3].forEach((_) => {
+  ;[0, 1, 2, 3].forEach(_ => {
     const xx = a * tx
     const yy = b * ty
 
@@ -329,7 +291,7 @@ const ellipseParamsForTest = (
 const hitTestFreeDrawElement = (
   element: ExcalidrawFreeDrawElement,
   point: Point,
-  threshold: number,
+  threshold: number
 ): boolean => {
   // Check point-distance-to-line-segment for every segment in the
   // element's points (its input points, not its outline points).
@@ -348,7 +310,7 @@ const hitTestFreeDrawElement = (
     const rotatedPoint = rotatePoint(
       point,
       [minX + (maxX - minX) / 2, minY + (maxY - minY) / 2],
-      -element.angle,
+      -element.angle
     )
     x = rotatedPoint[0] - element.x
     y = rotatedPoint[1] - element.y
@@ -358,10 +320,7 @@ const hitTestFreeDrawElement = (
   let P: readonly [number, number]
 
   // For freedraw dots
-  if (
-    distance2d(A[0], A[1], x, y) < threshold ||
-    distance2d(B[0], B[1], x, y) < threshold
-  ) {
+  if (distance2d(A[0], A[1], x, y) < threshold || distance2d(B[0], B[1], x, y) < threshold) {
     return true
   }
 
@@ -405,10 +364,7 @@ const hitTestLinear = (args: HitTestArgs): boolean => {
     return false
   }
 
-  const [point, pointAbs, hwidth, hheight] = pointRelativeToElement(
-    args.element,
-    args.point,
-  )
+  const [point, pointAbs, hwidth, hheight] = pointRelativeToElement(args.element, args.point)
   const side1 = GALine.equation(0, 1, -hheight)
   const side2 = GALine.equation(1, 0, -hwidth)
   if (
@@ -426,13 +382,8 @@ const hitTestLinear = (args: HitTestArgs): boolean => {
   }
 
   if (args.check === isInsideCheck) {
-    const hit = shape.some((subshape) =>
-      hitTestCurveInside(
-        subshape,
-        relX,
-        relY,
-        element.roundness ? 'round' : 'sharp',
-      ),
+    const hit = shape.some(subshape =>
+      hitTestCurveInside(subshape, relX, relY, element.roundness ? 'round' : 'sharp')
     )
     if (hit) {
       return true
@@ -440,9 +391,7 @@ const hitTestLinear = (args: HitTestArgs): boolean => {
   }
 
   // hit test all "subshapes" of the linear element
-  return shape.some((subshape) =>
-    hitTestRoughShape(subshape, relX, relY, threshold),
-  )
+  return shape.some(subshape => hitTestRoughShape(subshape, relX, relY, threshold))
 }
 
 // Returns:
@@ -459,7 +408,7 @@ const hitTestLinear = (args: HitTestArgs): boolean => {
 // so we only need to perform hit tests for the positive quadrant.
 const pointRelativeToElement = (
   element: ExcalidrawElement,
-  pointTuple: Point,
+  pointTuple: Point
 ): [GA.Point, GA.Point, number, number] => {
   const point = GAPoint.from(pointTuple)
   const [x1, y1, x2, y2] = getElementAbsoluteCoords(element)
@@ -482,7 +431,7 @@ const pointRelativeToElement = (
 export const pointInAbsoluteCoords = (
   element: ExcalidrawElement,
   // Point relative to the element position
-  point: Point,
+  point: Point
 ): Point => {
   const [x, y] = point
   const [x1, y1, x2, y2] = getElementAbsoluteCoords(element)
@@ -492,16 +441,12 @@ export const pointInAbsoluteCoords = (
   return [element.x + rotatedX, element.y + rotatedY]
 }
 
-const relativizationToElementCenter = (
-  element: ExcalidrawElement,
-): GA.Transform => {
+const relativizationToElementCenter = (element: ExcalidrawElement): GA.Transform => {
   const [x1, y1, x2, y2] = getElementAbsoluteCoords(element)
   const center = coordsCenter([x1, y1, x2, y2])
   // GA has angle orientation opposite to `rotate`
   const rotate = GATransform.rotation(center, element.angle)
-  const translate = GA.reverse(
-    GATransform.translation(GADirection.from(center)),
-  )
+  const translate = GA.reverse(GATransform.translation(GADirection.from(center)))
   return GATransform.compose(rotate, translate)
 }
 
@@ -519,7 +464,7 @@ export const determineFocusDistance = (
   // Point on the line, in absolute coordinates
   a: Point,
   // Another point on the line, in absolute coordinates (closer to element)
-  b: Point,
+  b: Point
 ): number => {
   const relateToCenter = relativizationToElementCenter(element)
   const aRel = GATransform.apply(relateToCenter, GAPoint.from(a))
@@ -551,7 +496,7 @@ export const determineFocusPoint = (
   // The oriented, relative distance from the center of `element` of the
   // returned focusPoint
   focus: number,
-  adjecentPoint: Point,
+  adjecentPoint: Point
 ): Point => {
   if (focus === 0) {
     const [x1, y1, x2, y2] = getElementAbsoluteCoords(element)
@@ -559,10 +504,7 @@ export const determineFocusPoint = (
     return GAPoint.toTuple(center)
   }
   const relateToCenter = relativizationToElementCenter(element)
-  const adjecentPointRel = GATransform.apply(
-    relateToCenter,
-    GAPoint.from(adjecentPoint),
-  )
+  const adjecentPointRel = GATransform.apply(relateToCenter, GAPoint.from(adjecentPoint))
   const reverseRelateToCenter = GA.reverse(relateToCenter)
   let point
   switch (element.type) {
@@ -589,21 +531,16 @@ export const intersectElementWithLine = (
   // Another point on the line, in absolute coordinates
   b: Point,
   // If given, the element is inflated by this value
-  gap = 0,
+  gap = 0
 ): Point[] => {
   const relateToCenter = relativizationToElementCenter(element)
   const aRel = GATransform.apply(relateToCenter, GAPoint.from(a))
   const bRel = GATransform.apply(relateToCenter, GAPoint.from(b))
   const line = GALine.through(aRel, bRel)
   const reverseRelateToCenter = GA.reverse(relateToCenter)
-  const intersections = getSortedElementLineIntersections(
-    element,
-    line,
-    aRel,
-    gap,
-  )
-  return intersections.map((point) =>
-    GAPoint.toTuple(GATransform.apply(reverseRelateToCenter, point)),
+  const intersections = getSortedElementLineIntersections(element, line, aRel, gap)
+  return intersections.map(point =>
+    GAPoint.toTuple(GATransform.apply(reverseRelateToCenter, point))
   )
 }
 
@@ -613,7 +550,7 @@ const getSortedElementLineIntersections = (
   line: GA.Line,
   // Relative to element center
   nearPoint: GA.Point,
-  gap = 0,
+  gap = 0
 ): GA.Point[] => {
   let intersections: GA.Point[]
   switch (element.type) {
@@ -628,9 +565,7 @@ const getSortedElementLineIntersections = (
           const edge: [GA.Point, GA.Point] = [point, corners[(i + 1) % 4]]
           return intersectSegment(line, offsetSegment(edge, gap))
         })
-        .concat(
-          corners.flatMap((point) => getCircleIntersections(point, gap, line)),
-        )
+        .concat(corners.flatMap(point => getCircleIntersections(point, gap, line)))
       break
     case 'ellipse':
       intersections = getEllipseIntersections(element, gap, line)
@@ -641,13 +576,9 @@ const getSortedElementLineIntersections = (
     return []
   }
   const sortedIntersections = intersections.sort(
-    (i1, i2) =>
-      GAPoint.distance(i1, nearPoint) - GAPoint.distance(i2, nearPoint),
+    (i1, i2) => GAPoint.distance(i1, nearPoint) - GAPoint.distance(i2, nearPoint)
   )
-  return [
-    sortedIntersections[0],
-    sortedIntersections[sortedIntersections.length - 1],
-  ]
+  return [sortedIntersections[0], sortedIntersections[sortedIntersections.length - 1]]
 }
 
 const getCorners = (
@@ -657,7 +588,7 @@ const getCorners = (
     | ExcalidrawImageElement
     | ExcalidrawDiamondElement
     | ExcalidrawTextElement,
-  scale = 1,
+  scale = 1
 ): GA.Point[] => {
   const hx = (scale * element.width) / 2
   const hy = (scale * element.height) / 2
@@ -665,29 +596,17 @@ const getCorners = (
     case 'rectangle':
     case 'image':
     case 'text':
-      return [
-        GA.point(hx, hy),
-        GA.point(hx, -hy),
-        GA.point(-hx, -hy),
-        GA.point(-hx, hy),
-      ]
+      return [GA.point(hx, hy), GA.point(hx, -hy), GA.point(-hx, -hy), GA.point(-hx, hy)]
     case 'diamond':
-      return [
-        GA.point(0, hy),
-        GA.point(hx, 0),
-        GA.point(0, -hy),
-        GA.point(-hx, 0),
-      ]
+      return [GA.point(0, hy), GA.point(hx, 0), GA.point(0, -hy), GA.point(-hx, 0)]
   }
+  return []
 }
 
 // Returns intersection of `line` with `segment`, with `segment` moved by
 // `gap` in its polar direction.
 // If intersection coincides with second segment point returns empty array.
-const intersectSegment = (
-  line: GA.Line,
-  segment: [GA.Point, GA.Point],
-): GA.Point[] => {
+const intersectSegment = (line: GA.Line, segment: [GA.Point, GA.Point]): GA.Point[] => {
   const [a, b] = segment
   const aDist = GAPoint.distanceToLine(a, line)
   const bDist = GAPoint.distanceToLine(b, line)
@@ -698,22 +617,16 @@ const intersectSegment = (
   return [GAPoint.intersect(line, GALine.through(a, b))]
 }
 
-const offsetSegment = (
-  segment: [GA.Point, GA.Point],
-  distance: number,
-): [GA.Point, GA.Point] => {
+const offsetSegment = (segment: [GA.Point, GA.Point], distance: number): [GA.Point, GA.Point] => {
   const [a, b] = segment
-  const offset = GATransform.translationOrthogonal(
-    GADirection.fromTo(a, b),
-    distance,
-  )
+  const offset = GATransform.translationOrthogonal(GADirection.fromTo(a, b), distance)
   return [GATransform.apply(offset, a), GATransform.apply(offset, b)]
 }
 
 const getEllipseIntersections = (
   element: ExcalidrawEllipseElement,
   gap: number,
-  line: GA.Line,
+  line: GA.Line
 ): GA.Point[] => {
   const a = element.width / 2 + gap
   const b = element.height / 2 + gap
@@ -729,21 +642,15 @@ const getEllipseIntersections = (
   const xn = -a * a * m * c
   const yn = -b * b * n * c
   return [
-    GA.point(
-      (xn + a * b * n * discrRoot) / squares,
-      (yn - a * b * m * discrRoot) / squares,
-    ),
-    GA.point(
-      (xn - a * b * n * discrRoot) / squares,
-      (yn + a * b * m * discrRoot) / squares,
-    ),
+    GA.point((xn + a * b * n * discrRoot) / squares, (yn - a * b * m * discrRoot) / squares),
+    GA.point((xn - a * b * n * discrRoot) / squares, (yn + a * b * m * discrRoot) / squares)
   ]
 }
 
 export const getCircleIntersections = (
   center: GA.Point,
   radius: number,
-  line: GA.Line,
+  line: GA.Line
 ): GA.Point[] => {
   if (radius === 0) {
     return GAPoint.distanceToLine(line, center) === 0 ? [center] : []
@@ -764,7 +671,7 @@ export const getCircleIntersections = (
 
   return [
     GA.point((xn + n * discrRoot) / squares, (yn - m * discrRoot) / squares),
-    GA.point((xn - n * discrRoot) / squares, (yn + m * discrRoot) / squares),
+    GA.point((xn - n * discrRoot) / squares, (yn + m * discrRoot) / squares)
   ]
 }
 
@@ -777,7 +684,7 @@ export const findFocusPointForEllipse = (
   relativeDistance: number,
   // The point for which we're trying to find the focus point, relative
   // to the ellipse center.
-  point: GA.Point,
+  point: GA.Point
 ): GA.Point => {
   const relativeDistanceAbs = Math.abs(relativeDistance)
   const a = (ellipse.width * relativeDistanceAbs) / 2
@@ -792,9 +699,7 @@ export const findFocusPointForEllipse = (
   const squares = px ** 2 * b ** 2 + py ** 2 * a ** 2
   // Tangent mx + ny + 1 = 0
   const m =
-    (-px * b ** 2 +
-      orientation * py * Math.sqrt(Math.max(0, squares - a ** 2 * b ** 2))) /
-    squares
+    (-px * b ** 2 + orientation * py * Math.sqrt(Math.max(0, squares - a ** 2 * b ** 2))) / squares
 
   const n = (-m * px - 1) / py
 
@@ -814,7 +719,7 @@ export const findFocusPointForRectangulars = (
   relativeDistance: number,
   // The point for which we're trying to find the focus point, relative
   // to the element center.
-  point: GA.Point,
+  point: GA.Point
 ): GA.Point => {
   const relativeDistanceAbs = Math.abs(relativeDistance)
   const orientation = Math.sign(relativeDistance)
@@ -822,7 +727,7 @@ export const findFocusPointForRectangulars = (
 
   let maxDistance = 0
   let tangentPoint: null | GA.Point = null
-  corners.forEach((corner) => {
+  corners.forEach(corner => {
     const distance = orientation * GALine.through(point, corner)[1]
     if (distance > maxDistance) {
       maxDistance = distance
@@ -838,7 +743,7 @@ const pointInBezierEquation = (
   p2: Point,
   p3: Point,
   [mx, my]: Point,
-  lineThreshold: number,
+  lineThreshold: number
 ) => {
   // B(t) = p0 * (1-t)^3 + 3p1 * t * (1-t)^2 + 3p2 * t^2 * (1-t) + p3 * t^3
   const equation = (t: number, idx: number) =>
@@ -869,7 +774,7 @@ const hitTestCurveInside = (
   drawable: Drawable,
   x: number,
   y: number,
-  roundness: StrokeRoundness,
+  roundness: StrokeRoundness
 ) => {
   const ops = getCurvePathOps(drawable)
   const points: Mutable<Point>[] = []
@@ -902,12 +807,7 @@ const hitTestCurveInside = (
   return false
 }
 
-const hitTestRoughShape = (
-  drawable: Drawable,
-  x: number,
-  y: number,
-  lineThreshold: number,
-) => {
+const hitTestRoughShape = (drawable: Drawable, x: number, y: number, lineThreshold: number) => {
   // read operations from first opSet
   const ops = getCurvePathOps(drawable)
 
@@ -937,14 +837,7 @@ const hitTestRoughShape = (
       // check if points are on the curve
       // cubic bezier curves require four parameters
       // the first parameter is the last stored position (p0)
-      const retVal = pointInBezierEquation(
-        p0,
-        p1,
-        p2,
-        p3,
-        [x, y],
-        lineThreshold,
-      )
+      const retVal = pointInBezierEquation(p0, p1, p2, p3, [x, y], lineThreshold)
 
       // set end point of bezier curve as the new starting point for
       // upcoming operations as each operation is based on the last drawn

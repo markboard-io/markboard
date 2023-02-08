@@ -1,8 +1,5 @@
-import * as GA from '../ga'
-import { point, toString, direction, offset } from '../ga'
-import * as GAPoint from '../gapoints'
-import * as GALine from '../galines'
-import * as GATransform from '../gatransforms'
+import { point, toString, direction, offset } from '../ga/ga'
+import { GA, GAPoint, GALine, GATransform } from '../ga'
 
 describe('geometric algebra', () => {
   describe('points', () => {
@@ -22,9 +19,7 @@ describe('geometric algebra', () => {
     it('through', () => {
       const a = GA.point(0, 0)
       const b = GA.point(2, 0)
-      expect(toString(GALine.through(a, b))).toEqual(
-        toString(GALine.equation(0, 2, 0)),
-      )
+      expect(toString(GALine.through(a, b))).toEqual(toString(GALine.equation(0, 2, 0)))
     })
     it('parallel', () => {
       const point = GA.point(3, 3)
@@ -53,9 +48,7 @@ describe('geometric algebra', () => {
       const original = GALine.through(point(2, 2), point(3, 4))
       const move = GATransform.translation(offset(3, 4))
       const parallel = GATransform.apply(move, original)
-      expect(toString(parallel)).toEqual(
-        toString(GALine.through(point(5, 6), point(6, 8))),
-      )
+      expect(toString(parallel)).toEqual(toString(GALine.through(point(5, 6), point(6, 8))))
     })
   })
   describe('rotation', () => {
