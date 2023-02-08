@@ -1,4 +1,4 @@
-import { rotate } from './math'
+import { rotate } from '/imports/excalidraw/math'
 
 describe('rotate', () => {
   it('should rotate over (x2, y2) and return the rotated coordinates for (x1, y1)', () => {

@@ -1,4 +1,4 @@
-import { parseClipboard } from './clipboard'
+import { parseClipboard } from '/imports/excalidraw/clipboard'
 
 describe('Test parseClipboard', () => {
   it('should parse valid json correctly', async () => {
@@ -7,8 +7,8 @@ describe('Test parseClipboard', () => {
     let clipboardData = await parseClipboard({
       //@ts-ignore
       clipboardData: {
-        getData: () => text,
-      },
+        getData: () => text
+      }
     })
 
     expect(clipboardData.text).toBe(text)
@@ -18,8 +18,8 @@ describe('Test parseClipboard', () => {
     clipboardData = await parseClipboard({
       //@ts-ignore
       clipboardData: {
-        getData: () => text,
-      },
+        getData: () => text
+      }
     })
 
     expect(clipboardData.text).toBe(text)

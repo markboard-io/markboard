@@ -815,7 +815,7 @@ const hitTestRoughShape = (drawable: Drawable, x: number, y: number, lineThresho
   // move operation does not exist (unlikely but it is worth safekeeping it)
   let currentP: Point = [0, 0]
 
-  return ops.some(({ op, data }, idx) => {
+  return ops.some(({ op, data }) => {
     // There are only four operation types:
     // move, bcurveTo, lineTo, and curveTo
     if (op === 'move') {
