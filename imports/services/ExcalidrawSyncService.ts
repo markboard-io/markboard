@@ -8,7 +8,7 @@ import { BaseService } from './BaseService'
  */
 export class ExcalidrawSyncService extends BaseService {
   constructor() {
-    super('excalidraw-sync')
+    super('excalidrawSync')
   }
 
   public startup(): void {

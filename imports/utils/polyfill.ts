@@ -2,7 +2,7 @@ export default function polyfill() {
   if (!Array.prototype.at) {
     // Taken from https://github.com/tc39/proposal-relative-indexing-method#polyfill so that it works in tests
     /* eslint-disable */
-    Object.defineProperty(Array.prototype, "at", {
+    Object.defineProperty(Array.prototype, 'at', {
       value: function (n: number) {
         // ToInteger() abstract op
         n = Math.trunc(n) || 0
@@ -19,7 +19,7 @@ export default function polyfill() {
       },
       writable: true,
       enumerable: false,
-      configurable: true,
+      configurable: true
     })
   }
 }
