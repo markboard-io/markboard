@@ -1,5 +1,5 @@
 import React from 'react'
-import { alignElements, Alignment } from '../align'
+import { alignElements, Alignment } from './align'
 import {
   AlignBottomIcon,
   AlignLeftIcon,
@@ -8,15 +8,15 @@ import {
   CenterHorizontallyIcon,
   CenterVerticallyIcon
 } from '/imports/components/icons'
-import { ToolButton } from '../components/ToolButton'
-import { getNonDeletedElements } from '../element'
-import { ExcalidrawElement } from '../element/types'
-import { t } from  '/imports/i18n'
-import { KEYS } from '../keys'
-import { getSelectedElements, isSomeElementSelected } from '../scene'
-import { AppState } from '../types'
-import { arrayToMap, getShortcutKey } from '../utils'
-import { register } from './register'
+import { ToolButton } from '../../components/ToolButton'
+import { getNonDeletedElements } from '../../element'
+import { ExcalidrawElement } from '../../element/types'
+import { t } from '/imports/i18n'
+import { KEYS } from '../../keys'
+import { getSelectedElements, isSomeElementSelected } from '../../scene'
+import { AppState } from '../../types'
+import { arrayToMap, getShortcutKey } from '../../utils'
+import { register } from '../register'
 
 const enableActionGroup = (elements: readonly ExcalidrawElement[], appState: AppState) =>
   getSelectedElements(getNonDeletedElements(elements), appState).length > 1
@@ -27,9 +27,7 @@ const alignSelectedElements = (
   alignment: Alignment
 ) => {
   const selectedElements = getSelectedElements(getNonDeletedElements(elements), appState)
-
   const updatedElements = alignElements(selectedElements, alignment)
-
   const updatedElementsMap = arrayToMap(updatedElements)
 
   return elements.map(element => updatedElementsMap.get(element.id) || element)
