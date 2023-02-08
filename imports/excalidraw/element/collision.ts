@@ -99,8 +99,8 @@ export const isHittingElementNotConsideringBoundingBox = (
   const check = isTextElement(element)
     ? isStrictlyInside
     : isElementDraggableFromInside(element)
-    ? isInsideCheck
-    : isNearCheck
+      ? isInsideCheck
+      : isNearCheck
   return hitTestPointAgainstElement({ element, point, threshold, check })
 }
 
