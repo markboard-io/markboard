@@ -17,14 +17,15 @@ export class TopErrorBoundary extends React.Component<any, TopErrorBoundaryState
   }
 
   componentDidCatch(error: Error, errorInfo: any) {
-    const _localStorage: any = {}
+    const parsedLocalStorage: Record<string, any> = {}
     for (const [key, value] of Object.entries({ ...localStorage })) {
       try {
-        _localStorage[key] = JSON.parse(value)
+        parsedLocalStorage[key] = JSON.parse(value)
       } catch (error: any) {
-        _localStorage[key] = value
+        parsedLocalStorage[key] = value
       }
     }
+    console.error({ error, errorInfo, parsedLocalStorage })
   }
 
   private selectTextArea(event: React.MouseEvent<HTMLTextAreaElement>) {
@@ -72,9 +73,7 @@ export class TopErrorBoundary extends React.Component<any, TopErrorBoundaryState
           <div>
             <div className='ErrorSplash-paragraph'>
               {t('errorSplash.openIssueMessage_pre')}
-              <button>
-                {t('errorSplash.openIssueMessage_button')}
-              </button>
+              <button>{t('errorSplash.openIssueMessage_button')}</button>
               {t('errorSplash.openIssueMessage_post')}
             </div>
             <div className='ErrorSplash-paragraph'>
