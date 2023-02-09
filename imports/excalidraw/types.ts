@@ -502,3 +502,11 @@ export type UIChildrenComponents = {
     | React.ReactPortal
     | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>
 }
+
+/** Types represents InnoDeck's board object */
+export interface IBoard {
+  id: string
+  elements: readonly NonDeletedExcalidrawElement[]
+  appState: AppState
+  files: BinaryFiles
+}

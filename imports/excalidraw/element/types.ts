@@ -1,11 +1,5 @@
 import { Point } from '../types'
-import {
-  FONT_FAMILY,
-  ROUNDNESS,
-  TEXT_ALIGN,
-  THEME,
-  VERTICAL_ALIGN,
-} from '../constants'
+import { FONT_FAMILY, ROUNDNESS, TEXT_ALIGN, THEME, VERTICAL_ALIGN } from '../constants'
 
 export type ChartType = 'bar' | 'line'
 export type FillStyle = 'hachure' | 'cross-hatch' | 'solid'
@@ -54,11 +48,11 @@ type _ExcalidrawElementBase = Readonly<{
   groupIds: readonly GroupId[]
   /** other elements that are bound to this element */
   boundElements:
-  | readonly Readonly<{
-    id: ExcalidrawLinearElement['id']
-    type: 'arrow' | 'text'
-  }>[]
-  | null
+    | readonly Readonly<{
+        id: ExcalidrawLinearElement['id']
+        type: 'arrow' | 'text'
+      }>[]
+    | null
   /** epoch (ms) timestamp of last element update */
   updated: number
   link: string | null
@@ -96,10 +90,7 @@ export type ExcalidrawImageElement = _ExcalidrawElementBase &
     scale: [number, number]
   }>
 
-export type InitializedExcalidrawImageElement = MarkNonNullable<
-  ExcalidrawImageElement,
-  'fileId'
->
+export type InitializedExcalidrawImageElement = MarkNonNullable<ExcalidrawImageElement, 'fileId'>
 
 /**
  * These are elements that don't have any additional properties.

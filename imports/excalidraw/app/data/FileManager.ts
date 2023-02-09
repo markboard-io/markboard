@@ -5,14 +5,14 @@ import {
   ExcalidrawElement,
   ExcalidrawImageElement,
   FileId,
-  InitializedExcalidrawImageElement,
+  InitializedExcalidrawImageElement
 } from '../../element/types'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import {
   BinaryFileData,
   BinaryFileMetadata,
   ExcalidrawImperativeAPI,
-  BinaryFiles,
+  BinaryFiles
 } from '../../types'
 
 export class FileManager {
@@ -29,7 +29,7 @@ export class FileManager {
 
   constructor({
     getFiles,
-    saveFiles,
+    saveFiles
   }: {
     getFiles: (fileIds: FileId[]) => Promise<{
       loadedFiles: BinaryFileData[]
@@ -62,7 +62,7 @@ export class FileManager {
 
   saveFiles = async ({
     elements,
-    files,
+    files
   }: {
     elements: readonly ExcalidrawElement[]
     files: BinaryFiles
@@ -82,7 +82,7 @@ export class FileManager {
 
     try {
       const { savedFiles, erroredFiles } = await this._saveFiles({
-        addedFiles,
+        addedFiles
       })
 
       for (const [fileId] of savedFiles) {
@@ -91,7 +91,7 @@ export class FileManager {
 
       return {
         savedFiles,
-        erroredFiles,
+        erroredFiles
       }
     } finally {
       for (const [fileId] of addedFiles) {
@@ -101,7 +101,7 @@ export class FileManager {
   }
 
   getFiles = async (
-    ids: FileId[],
+    ids: FileId[]
   ): Promise<{
     loadedFiles: BinaryFileData[]
     erroredFiles: Map<FileId, true>
@@ -109,7 +109,7 @@ export class FileManager {
     if (!ids.length) {
       return {
         loadedFiles: [],
-        erroredFiles: new Map(),
+        erroredFiles: new Map()
       }
     }
     for (const id of ids) {
@@ -142,7 +142,7 @@ export class FileManager {
    *  of during regular beforeUnload unsaved files check.
    */
   shouldPreventUnload = (elements: readonly ExcalidrawElement[]) => {
-    return elements.some((element) => {
+    return elements.some(element => {
       return (
         isInitializedImageElement(element) &&
         !element.isDeleted &&
@@ -155,7 +155,7 @@ export class FileManager {
    * helper to determine if image element status needs updating
    */
   shouldUpdateImageElementStatus = (
-    element: ExcalidrawElement,
+    element: ExcalidrawElement
   ): element is InitializedExcalidrawImageElement => {
     return (
       isInitializedImageElement(element) &&
@@ -175,7 +175,7 @@ export class FileManager {
 export const encodeFilesForUpload = async ({
   files,
   maxBytes,
-  encryptionKey,
+  encryptionKey
 }: {
   files: Map<FileId, BinaryFileData>
   maxBytes: number
@@ -195,21 +195,21 @@ export const encodeFilesForUpload = async ({
         id,
         mimeType: fileData.mimeType,
         created: Date.now(),
-        lastRetrieved: Date.now(),
-      },
+        lastRetrieved: Date.now()
+      }
     })
 
     if (buffer.byteLength > maxBytes) {
       throw new Error(
         t('errors.fileTooBig', {
-          maxSize: `${ Math.trunc(maxBytes / 1024 / 1024) }MB`,
-        }),
+          maxSize: `${Math.trunc(maxBytes / 1024 / 1024)}MB`
+        })
       )
     }
 
     processedFiles.push({
       id,
-      buffer: encodedFile,
+      buffer: encodedFile
     })
   }
 
@@ -225,18 +225,13 @@ export const updateStaleImageStatuses = (params: {
     return
   }
   params.excalidrawAPI.updateScene({
-    elements: params.excalidrawAPI
-      .getSceneElementsIncludingDeleted()
-      .map((element) => {
-        if (
-          isInitializedImageElement(element) &&
-          params.erroredFiles.has(element.fileId)
-        ) {
-          return newElementWith(element, {
-            status: 'error',
-          })
-        }
-        return element
-      }),
+    elements: params.excalidrawAPI.getSceneElementsIncludingDeleted().map(element => {
+      if (isInitializedImageElement(element) && params.erroredFiles.has(element.fileId)) {
+        return newElementWith(element, {
+          status: 'error'
+        })
+      }
+      return element
+    })
   })
 }
