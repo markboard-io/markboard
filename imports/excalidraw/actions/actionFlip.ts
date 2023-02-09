@@ -8,33 +8,18 @@ import { AppState } from '../types'
 import { getTransformHandles } from '../element/transformHandles'
 import { updateBoundElements } from '../element/binding'
 import { arrayToMap } from '../utils'
-import {
-  getElementAbsoluteCoords,
-  getElementPointsCoords,
-} from '../element/bounds'
+import { getElementAbsoluteCoords, getElementPointsCoords } from '../element/bounds'
 import { isLinearElement } from '../element/typeChecks'
 import { LinearElementEditor } from '../element/linearElementEditor'
 import { KEYS } from '../keys'
 
-const enableActionFlipHorizontal = (
-  elements: readonly ExcalidrawElement[],
-  appState: AppState,
-) => {
-  const eligibleElements = getSelectedElements(
-    getNonDeletedElements(elements),
-    appState,
-  )
+const enableActionFlipHorizontal = (elements: readonly ExcalidrawElement[], appState: AppState) => {
+  const eligibleElements = getSelectedElements(getNonDeletedElements(elements), appState)
   return eligibleElements.length === 1 && eligibleElements[0].type !== 'text'
 }
 
-const enableActionFlipVertical = (
-  elements: readonly ExcalidrawElement[],
-  appState: AppState,
-) => {
-  const eligibleElements = getSelectedElements(
-    getNonDeletedElements(elements),
-    appState,
-  )
+const enableActionFlipVertical = (elements: readonly ExcalidrawElement[], appState: AppState) => {
+  const eligibleElements = getSelectedElements(getNonDeletedElements(elements), appState)
   return eligibleElements.length === 1
 }
 
@@ -45,13 +30,12 @@ export const actionFlipHorizontal = register({
     return {
       elements: flipSelectedElements(elements, appState, 'horizontal'),
       appState,
-      commitToHistory: true,
+      commitToHistory: true
     }
   },
-  keyTest: (event) => event.shiftKey && event.code === 'KeyH',
+  keyTest: event => event.shiftKey && event.code === 'KeyH',
   contextItemLabel: 'labels.flipHorizontal',
-  contextItemPredicate: (elements, appState) =>
-    enableActionFlipHorizontal(elements, appState),
+  contextItemPredicate: (elements, appState) => enableActionFlipHorizontal(elements, appState)
 })
 
 export const actionFlipVertical = register({
@@ -61,50 +45,39 @@ export const actionFlipVertical = register({
     return {
       elements: flipSelectedElements(elements, appState, 'vertical'),
       appState,
-      commitToHistory: true,
+      commitToHistory: true
     }
   },
-  keyTest: (event) =>
-    event.shiftKey && event.code === 'KeyV' && !event[KEYS.CTRL_OR_CMD],
+  keyTest: event => event.shiftKey && event.code === 'KeyV' && !event[KEYS.CTRL_OR_CMD],
   contextItemLabel: 'labels.flipVertical',
-  contextItemPredicate: (elements, appState) =>
-    enableActionFlipVertical(elements, appState),
+  contextItemPredicate: (elements, appState) => enableActionFlipVertical(elements, appState)
 })
 
 const flipSelectedElements = (
   elements: readonly ExcalidrawElement[],
   appState: Readonly<AppState>,
-  flipDirection: 'horizontal' | 'vertical',
+  flipDirection: 'horizontal' | 'vertical'
 ) => {
-  const selectedElements = getSelectedElements(
-    getNonDeletedElements(elements),
-    appState,
-  )
+  const selectedElements = getSelectedElements(getNonDeletedElements(elements), appState)
 
   // remove once we allow for groups of elements to be flipped
   if (selectedElements.length > 1) {
     return elements
   }
 
-  const updatedElements = flipElements(
-    selectedElements,
-    appState,
-    flipDirection,
-  )
+  const updatedElements = flipElements(selectedElements, appState, flipDirection)
 
   const updatedElementsMap = arrayToMap(updatedElements)
 
-  return elements.map(
-    (element) => updatedElementsMap.get(element.id) || element,
-  )
+  return elements.map(element => updatedElementsMap.get(element.id) || element)
 }
 
 const flipElements = (
   elements: NonDeleted<ExcalidrawElement>[],
   appState: AppState,
-  flipDirection: 'horizontal' | 'vertical',
+  flipDirection: 'horizontal' | 'vertical'
 ): ExcalidrawElement[] => {
-  elements.forEach((element) => {
+  elements.forEach(element => {
     flipElement(element, appState)
     // If vertical flip, rotate an extra 180
     if (flipDirection === 'vertical') {
@@ -114,10 +87,7 @@ const flipElements = (
   return elements
 }
 
-const flipElement = (
-  element: NonDeleted<ExcalidrawElement>,
-  appState: AppState,
-) => {
+const flipElement = (element: NonDeleted<ExcalidrawElement>, appState: AppState) => {
   const originalX = element.x
   const originalY = element.y
   const width = element.width
@@ -126,7 +96,7 @@ const flipElement = (
 
   // Rotate back to zero, if necessary
   mutateElement(element, {
-    angle: normalizeAngle(0),
+    angle: normalizeAngle(0)
   })
   // Flip unrotated by pulling TransformHandle to opposite side
   const transformHandles = getTransformHandles(element, appState.zoom)
@@ -138,7 +108,7 @@ const flipElement = (
     nHandle = transformHandles.ne
     if (!nHandle) {
       mutateElement(element, {
-        angle: originalAngle,
+        angle: originalAngle
       })
       return
     }
@@ -147,8 +117,7 @@ const flipElement = (
   let finalOffsetX = 0
   if (isLinearElement(element) && element.points.length < 3) {
     finalOffsetX =
-      element.points.reduce((max, point) => Math.max(max, point[0]), 0) * 2 -
-      element.width
+      element.points.reduce((max, point) => Math.max(max, point[0]), 0) * 2 - element.width
   }
 
   let initialPointsCoords
@@ -162,8 +131,8 @@ const flipElement = (
       LinearElementEditor.movePoints(element, [
         {
           index,
-          point: [-element.points[index][0], element.points[index][1]],
-        },
+          point: [-element.points[index][0], element.points[index][1]]
+        }
       ])
     }
     LinearElementEditor.normalizePoints(element)
@@ -183,7 +152,7 @@ const flipElement = (
       usingNWHandle ? 'nw' : 'ne',
       true,
       usingNWHandle ? startPoint[0] + elWidth : startPoint[0] - elWidth,
-      startPoint[1],
+      startPoint[1]
     )
   }
 
@@ -194,7 +163,7 @@ const flipElement = (
     angle = normalizeAngle(angle + 2 * Math.PI)
   }
   mutateElement(element, {
-    angle,
+    angle
   })
 
   // Move back to original spot to appear "flipped in place"
@@ -202,7 +171,7 @@ const flipElement = (
     x: originalX + finalOffsetX,
     y: originalY,
     width,
-    height,
+    height
   })
 
   updateBoundElements(element)
@@ -222,7 +191,7 @@ const flipElement = (
       x: element.x + coordsDiff * 0.5,
       y: element.y,
       width,
-      height,
+      height
     })
   }
 }
@@ -236,12 +205,12 @@ const rotateElement = (element: ExcalidrawElement, rotationAngle: number) => {
     angle = normalizeAngle(2 * Math.PI + angle)
   }
   mutateElement(element, {
-    angle,
+    angle
   })
 
   // Move back to original spot
   mutateElement(element, {
     x: originalX,
-    y: originalY,
+    y: originalY
   })
 }

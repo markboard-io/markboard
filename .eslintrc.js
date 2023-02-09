@@ -54,6 +54,7 @@ module.exports = {
     'no-constant-condition': ['error', { checkLoops: false }],
     'no-useless-catch': ['off'],
     'react/display-name': ['off'],
-    'no-debugger': ['off']
+    'no-debugger': ['off'],
+    '@typescript-eslint/no-namespace': ['off']
   }
 }

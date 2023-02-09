@@ -29,9 +29,7 @@
     "resolveJsonModule": true,
     "types": [
       "node",
-      "jest",
-      "types/scss.d.ts",
-      "types/global.d.ts"
+      "jest"
     ],
     "esModuleInterop": true,
     "preserveSymlinks": true
