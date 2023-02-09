@@ -1,5 +1,6 @@
 import { AccountService } from './AccountService'
 import { BaseService } from './BaseService'
+import { BoardService } from './BoardService'
 import { ExcalidrawSyncService } from './ExcalidrawSyncService'
 import { StaticAssetsService } from './StaticAssetsService'
 import { ServerServices } from './types'
@@ -11,6 +12,7 @@ class ServiceManagerServerClass {
     this._services['account'] = new AccountService()
     this._services['excalidrawSync'] = new ExcalidrawSyncService()
     this._services['staticAssets'] = new StaticAssetsService()
+    this._services['board'] = new BoardService()
   }
 
   public getService<T extends keyof ServerServices>(service: T): ServerServices[T] {

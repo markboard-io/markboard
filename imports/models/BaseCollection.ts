@@ -9,7 +9,7 @@ export type IMongoCollection = Mongo.Collection<Document, Document> & {
 export abstract class BaseCollection<T extends Mongo.OptionalId<{}>> {
   public name!: string
 
-  private collection!: IMongoCollection
+  protected collection!: IMongoCollection
 
   constructor(name: string) {
     this.setCollection(new Mongo.Collection(name))
@@ -28,6 +28,6 @@ export abstract class BaseCollection<T extends Mongo.OptionalId<{}>> {
   }
 
   protected insert(doc: T) {
-    this.collection.insert(doc)
+    return this.collection.insertAsync(doc)
   }
 }

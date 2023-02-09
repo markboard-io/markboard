@@ -505,8 +505,6 @@ export type UIChildrenComponents = {
 
 /** Types represents InnoDeck's board object */
 export interface IBoard {
-  id: string
   elements: readonly NonDeletedExcalidrawElement[]
-  appState: AppState
   files: BinaryFiles
 }

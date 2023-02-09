@@ -1,4 +1,5 @@
 import type { AccountService } from './AccountService'
+import type { BoardService } from './BoardService'
 import type { ExcalidrawSyncService } from './ExcalidrawSyncService'
 import type { StaticAssetsService } from './StaticAssetsService'
 
@@ -16,6 +17,7 @@ export interface IServices {
   account: AccountService
   excalidrawSync: ExcalidrawSyncService
   staticAssets: StaticAssetsService
+  board: BoardService
 }
 
 export type ServerServices = {

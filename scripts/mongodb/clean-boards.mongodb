@@ -1,0 +1,3 @@
+use('boardx')
+
+db.getCollection('users').remove({ username: 'shiqi.mei' })
