@@ -1,19 +1,13 @@
 import { ExcalidrawElement } from '../../element/types'
 import { AppState } from '../../types'
-import {
-  clearAppStateForLocalStorage,
-  getDefaultAppState,
-} from '../../appState'
+import { clearAppStateForLocalStorage, getDefaultAppState } from '../../appState'
 import { clearElementsForLocalStorage } from '../../element'
 import { STORAGE_KEYS } from '../app_constants'
 import { ImportedDataState } from '../../data/types'
 
 export const saveUsernameToLocalStorage = (username: string) => {
   try {
-    localStorage.setItem(
-      STORAGE_KEYS.LOCAL_STORAGE_COLLAB,
-      JSON.stringify({ username }),
-    )
+    localStorage.setItem(STORAGE_KEYS.LOCAL_STORAGE_COLLAB, JSON.stringify({ username }))
   } catch (error: any) {
     // Unable to access window.localStorage
     console.error(error)
@@ -61,9 +55,7 @@ export const importFromLocalStorage = () => {
     try {
       appState = {
         ...getDefaultAppState(),
-        ...clearAppStateForLocalStorage(
-          JSON.parse(savedState) as Partial<AppState>,
-        ),
+        ...clearAppStateForLocalStorage(JSON.parse(savedState) as Partial<AppState>)
       }
     } catch (error: any) {
       console.error(error)
@@ -104,7 +96,7 @@ export const getTotalStorageSize = () => {
 export const getLibraryItemsFromStorage = () => {
   try {
     const libraryItems: ImportedDataState['libraryItems'] = JSON.parse(
-      localStorage.getItem(STORAGE_KEYS.LOCAL_STORAGE_LIBRARY) as string,
+      localStorage.getItem(STORAGE_KEYS.LOCAL_STORAGE_LIBRARY) as string
     )
 
     return libraryItems || []
