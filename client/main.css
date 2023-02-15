@@ -3,19 +3,17 @@ body {
   font-family: sans-serif;
 }
 
-@media (prefers-color-scheme: light) {
-  html {
-    --main-bg-color: #000000;
-    --card-shadow-color: #333333;
-    --primary-text-color: #ffffff;
-    --secondry-text-color: #cfcfcf;
-    --sidebar-background-color: #f5f6f9;
-    --title-text-color: rgb(4, 4, 4);
-    --description-text-color: #5e646e;
-    --button-text-color: rgb(17, 17, 17);
-    --background-primary: #1668e3;
-    --shadow-primary: 0 0 0 0.5px #e4e4e4, 0 4px 12px 0 rgb(0 0 0 / 8%);
-  }
+html {
+  --main-bg-color: #000000;
+  --card-shadow-color: #333333;
+  --primary-text-color: #ffffff;
+  --secondry-text-color: #cfcfcf;
+  --sidebar-background-color: #f5f6f9;
+  --title-text-color: rgb(4, 4, 4);
+  --description-text-color: #5e646e;
+  --button-text-color: rgb(17, 17, 17);
+  --background-primary: #1668e3;
+  --shadow-primary: 0 0 0 0.5px #e4e4e4, 0 4px 12px 0 rgb(0 0 0 / 8%);
 }
 
 @media (prefers-color-scheme: dark) {
