@@ -1,7 +1,5 @@
 import { isSyncableElement, SocketUpdateData, SocketUpdateDataSource } from '../data'
 
-import { TCollabClass } from './Collab'
-
 import { ExcalidrawElement } from '../../element/types'
 import { WS_EVENTS, FILE_UPLOAD_TIMEOUT, WS_SCENE_EVENT_TYPES } from '../app_constants'
 import { UserIdleState } from '../../types'
@@ -11,16 +9,17 @@ import { newElementWith } from '../../element/mutateElement'
 import { BroadcastedExcalidrawElement } from './reconciliation'
 import { encryptData } from '../../data/encryption'
 import { PRECEDING_ELEMENT_KEY } from '../../constants'
+import { CollabClass } from './Collab'
 
 export default class Portal {
-  collab: TCollabClass
+  collab: CollabClass
   socket: SocketIOClient.Socket | null = null
   socketInitialized = false // we don't want the socket to emit any updates until it is fully initialized
   roomId: string | null = null
   roomKey: string | null = null
   broadcastedElementVersions: Map<string, number> = new Map()
 
-  constructor(collab: TCollabClass) {
+  constructor(collab: CollabClass) {
     this.collab = collab
   }
 
@@ -31,7 +30,6 @@ export default class Portal {
 
     // Initialize socket listeners
     this.socket.on('init-room', () => {
-      console.log('[debug] init-room')
       if (this.socket) {
         this.socket.emit('join-room', this.roomId)
         trackEvent('share', 'room joined')

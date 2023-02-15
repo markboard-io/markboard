@@ -71,7 +71,7 @@ export class CollabClass {
   private lastBroadcastedOrReceivedSceneVersion = -1
   private collaborators = new Map<string, Collaborator>()
 
-  constructor(private excalidrawAPI: ExcalidrawImperativeAPI) {
+  constructor(public excalidrawAPI: ExcalidrawImperativeAPI) {
     this.portal = new Portal(this)
     this.fileManager = new FileManager({
       getFiles: async fileIds => {
