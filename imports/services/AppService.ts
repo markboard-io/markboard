@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor'
 
 export class AppService extends BaseService {
   constructor() {
-    super('board')
+    super('app')
   }
 
   public startup(): void {}

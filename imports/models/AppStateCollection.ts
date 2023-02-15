@@ -19,7 +19,7 @@ export class AppStateCollectionClass extends BaseCollection<AppStateRecord> {
   }
 
   public setCurrentBoardId(userid: string, boardId: string) {
-    return this.collection.upsertAsync({ userid }, { currentBoardId: boardId })
+    return this.collection.upsertAsync({ userid }, { $set: { currentBoardId: boardId } })
   }
 
   public async getAppState(userid: string) {
