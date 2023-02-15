@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './OrganizationButton.style.scss'
 import { Avatar } from '/imports/components/Avatar'
 import { getClientColors } from '/imports/utils/clients'
 import { Meteor } from 'meteor/meteor'
 import { Tracker } from 'meteor/tracker'
 import { ArrowDownIcon } from '/imports/components/icons'
+import { useStore } from '/imports/store'
 
 export function OrganizationButton() {
   const { stroke, background } = getClientColors(Meteor.userId()!)
-  const [username, setUsername] = useState('')
+  const username = useStore(state => state.user.username)
+  const setUsername = useStore(state => state.setUsername)
 
   useEffect(() => {
     const autorunUser = Tracker.autorun(() => {

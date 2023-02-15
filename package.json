@@ -62,7 +62,8 @@
     "simpl-schema": "^3.4.0",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",
-    "ts-jest": "^29.0.3"
+    "ts-jest": "^29.0.3",
+    "zustand": "^4.3.3"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
