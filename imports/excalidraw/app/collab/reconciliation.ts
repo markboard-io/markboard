@@ -2,18 +2,27 @@ import { PRECEDING_ELEMENT_KEY } from '../../constants'
 import { ExcalidrawElement } from '../../element/types'
 import { AppState } from '../../types'
 
+/**
+ * Brand the reconciledElements array with a "_brand" property to make it
+ * distinguishable from a plain ExcalidrawElement array.
+ */
 export type ReconciledElements = readonly ExcalidrawElement[] & {
-  _brand: 'reconciledElements';
-};
+  _brand: 'reconciledElements'
+}
 
+/**
+ * The BroadcastedExcalidrawElement type is an extension of the ExcalidrawElement
+ * type with an additional preceding element key.
+ */
 export type BroadcastedExcalidrawElement = ExcalidrawElement & {
-  [PRECEDING_ELEMENT_KEY]?: string;
-};
+  [PRECEDING_ELEMENT_KEY]?: string
+}
 
+/** Determine whether to discard a remote element or not. */
 const shouldDiscardRemoteElement = (
   localAppState: AppState,
   local: ExcalidrawElement | undefined,
-  remote: BroadcastedExcalidrawElement,
+  remote: BroadcastedExcalidrawElement
 ): boolean => {
   if (
     local &&
@@ -25,38 +34,36 @@ const shouldDiscardRemoteElement = (
       local.version > remote.version ||
       // resolve conflicting edits deterministically by taking the one with
       // the lowest versionNonce
-      (local.version === remote.version &&
-        local.versionNonce < remote.versionNonce))
+      (local.version === remote.version && local.versionNonce < remote.versionNonce))
   ) {
     return true
   }
   return false
 }
 
-const getElementsMapWithIndex = <T extends ExcalidrawElement>(
-  elements: readonly T[],
-) =>
-    elements.reduce(
-      (
-        acc: {
-        [key: string]: [element: T, index: number] | undefined;
+/** Get a map of the ExcalidrawElement array with their respective index. */
+const getElementsMapWithIndex = <T extends ExcalidrawElement>(elements: readonly T[]) =>
+  elements.reduce(
+    (
+      acc: {
+        [key: string]: [element: T, index: number] | undefined
       },
-        element: T,
-        idx,
-      ) => {
-        acc[element.id] = [element, idx]
-        return acc
-      },
-      {},
-    )
+      element: T,
+      idx
+    ) => {
+      acc[element.id] = [element, idx]
+      return acc
+    },
+    {}
+  )
 
+/** Reconcile two arrays of ExcalidrawElements. */
 export const reconcileElements = (
   localElements: readonly ExcalidrawElement[],
   remoteElements: readonly BroadcastedExcalidrawElement[],
-  localAppState: AppState,
+  localAppState: AppState
 ): ReconciledElements => {
-  const localElementsData =
-    getElementsMapWithIndex<ExcalidrawElement>(localElements)
+  const localElementsData = getElementsMapWithIndex<ExcalidrawElement>(localElements)
 
   const reconciledElements: ExcalidrawElement[] = localElements.slice()
 
@@ -93,9 +100,7 @@ export const reconcileElements = (
     // parent may not be defined in case the remote client is running an older
     // excalidraw version
     const parent =
-      remoteElement[PRECEDING_ELEMENT_KEY] ||
-      remoteElements[remoteElementIdx - 1]?.id ||
-      null
+      remoteElement[PRECEDING_ELEMENT_KEY] || remoteElements[remoteElementIdx - 1]?.id || null
 
     if (parent != null) {
       delete remoteElement[PRECEDING_ELEMENT_KEY]
@@ -105,46 +110,32 @@ export const reconcileElements = (
         offset++
         if (cursor === 0) {
           reconciledElements.unshift(remoteElement)
-          localElementsData[remoteElement.id] = [
-            remoteElement,
-            cursor - offset,
-          ]
+          localElementsData[remoteElement.id] = [remoteElement, cursor - offset]
         } else {
           reconciledElements.splice(cursor + 1, 0, remoteElement)
-          localElementsData[remoteElement.id] = [
-            remoteElement,
-            cursor + 1 - offset,
-          ]
+          localElementsData[remoteElement.id] = [remoteElement, cursor + 1 - offset]
           cursor++
         }
       } else {
-        let idx = localElementsData[parent]
-          ? localElementsData[parent]![1]
-          : null
+        let idx = localElementsData[parent] ? localElementsData[parent]![1] : null
         if (idx != null) {
           idx += offset
         }
         if (idx != null && idx >= cursor) {
           reconciledElements.splice(idx + 1, 0, remoteElement)
           offset++
-          localElementsData[remoteElement.id] = [
-            remoteElement,
-            idx + 1 - offset,
-          ]
+          localElementsData[remoteElement.id] = [remoteElement, idx + 1 - offset]
           cursor = idx + 1
         } else if (idx != null) {
           reconciledElements.splice(cursor + 1, 0, remoteElement)
           offset++
-          localElementsData[remoteElement.id] = [
-            remoteElement,
-            cursor + 1 - offset,
-          ]
+          localElementsData[remoteElement.id] = [remoteElement, cursor + 1 - offset]
           cursor++
         } else {
           reconciledElements.push(remoteElement)
           localElementsData[remoteElement.id] = [
             remoteElement,
-            reconciledElements.length - 1 - offset,
+            reconciledElements.length - 1 - offset
           ]
         }
       }
@@ -155,15 +146,12 @@ export const reconcileElements = (
       // otherwise push to the end
     } else {
       reconciledElements.push(remoteElement)
-      localElementsData[remoteElement.id] = [
-        remoteElement,
-        reconciledElements.length - 1 - offset,
-      ]
+      localElementsData[remoteElement.id] = [remoteElement, reconciledElements.length - 1 - offset]
     }
   }
 
   const ret: readonly ExcalidrawElement[] = reconciledElements.filter(
-    (element) => !duplicates.has(element),
+    element => !duplicates.has(element)
   )
 
   return ret as ReconciledElements

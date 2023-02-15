@@ -840,7 +840,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     })
   }
 
-  public async componentDidMount() {
+  public async mount() {
     this.unmounted = false
     this.excalidrawContainerValue.container = this.excalidrawContainerRef.current
 
@@ -934,7 +934,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     }
   }
 
-  public componentWillUnmount() {
+  public unmount() {
     this.files = {}
     this.imageCache.clear()
     this.resizeObserver?.disconnect()

@@ -1,8 +1,5 @@
-import React from 'react'
 import throttle from 'lodash.throttle'
-import { PureComponent } from 'react'
 import { ExcalidrawImperativeAPI } from '../../types'
-import { ErrorDialog } from '../../components/ErrorDialog'
 import { APP_NAME, ENV, EVENT } from '../../constants'
 import { ImportedDataState } from '../../data/types'
 import { ExcalidrawElement, InitializedExcalidrawImageElement } from '../../element/types'
@@ -32,9 +29,7 @@ import {
   saveFilesToFirebase,
   saveToFirebase
 } from '../data/firebase'
-import { importUsernameFromLocalStorage, saveUsernameToLocalStorage } from '../data/localStorage'
 import Portal from './Portal'
-import RoomDialog from './RoomDialog'
 import { t } from '/imports/i18n'
 import { UserIdleState } from '../../types'
 import { IDLE_THRESHOLD, ACTIVE_THRESHOLD } from '../../constants'
@@ -54,13 +49,7 @@ export const collabAPIAtom = attachDebugLabel(atom<CollabAPI | null>(null), 'col
 export const collabDialogShownAtom = attachDebugLabel(atom(false), 'collabDialogShownAtom')
 export const isCollaboratingAtom = attachDebugLabel(atom(false), 'isCollaboratingAtom')
 
-interface CollabState {
-  errorMessage: string
-  username: string
-  activeRoomLink: string
-}
-
-type CollabInstance = InstanceType<typeof Collab>
+type CollabInstance = InstanceType<typeof CollabClass>
 
 export interface CollabAPI {
   /** function so that we can access the latest value from stale callbacks */
@@ -70,19 +59,11 @@ export interface CollabAPI {
   stopCollaboration: CollabInstance['stopCollaboration']
   syncElements: CollabInstance['syncElements']
   fetchImageFilesFromFirebase: CollabInstance['fetchImageFilesFromFirebase']
-  setUsername: (username: string) => void
 }
 
-interface PublicProps {
-  excalidrawAPI: ExcalidrawImperativeAPI
-}
-
-type Props = PublicProps & { modalIsShown: boolean }
-
-class Collab extends PureComponent<Props, CollabState> {
+export class CollabClass {
   portal: Portal
   fileManager: FileManager
-  excalidrawAPI: Props['excalidrawAPI']
   activeIntervalId: number | null
   idleTimeoutId: number | null
 
@@ -90,13 +71,7 @@ class Collab extends PureComponent<Props, CollabState> {
   private lastBroadcastedOrReceivedSceneVersion = -1
   private collaborators = new Map<string, Collaborator>()
 
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      errorMessage: '',
-      username: importUsernameFromLocalStorage() || '',
-      activeRoomLink: ''
-    }
+  constructor(private excalidrawAPI: ExcalidrawImperativeAPI) {
     this.portal = new Portal(this)
     this.fileManager = new FileManager({
       getFiles: async fileIds => {
@@ -123,12 +98,11 @@ class Collab extends PureComponent<Props, CollabState> {
         })
       }
     })
-    this.excalidrawAPI = props.excalidrawAPI
     this.activeIntervalId = null
     this.idleTimeoutId = null
   }
 
-  componentDidMount() {
+  mount() {
     window.addEventListener(EVENT.BEFORE_UNLOAD, this.beforeUnload)
     window.addEventListener(EVENT.UNLOAD, this.onUnload)
 
@@ -138,11 +112,11 @@ class Collab extends PureComponent<Props, CollabState> {
       startCollaboration: this.startCollaboration,
       syncElements: this.syncElements,
       fetchImageFilesFromFirebase: this.fetchImageFilesFromFirebase,
-      stopCollaboration: this.stopCollaboration,
-      setUsername: this.setUsername
+      stopCollaboration: this.stopCollaboration
     }
 
     jotaiStore.set(collabAPIAtom, collabAPI)
+    this.startCollaboration(null)
 
     if (process.env.NODE_ENV === ENV.TEST || process.env.NODE_ENV === ENV.DEVELOPMENT) {
       window.collab = window.collab || ({} as Window['collab'])
@@ -155,7 +129,7 @@ class Collab extends PureComponent<Props, CollabState> {
     }
   }
 
-  componentWillUnmount() {
+  unmount() {
     window.removeEventListener(EVENT.BEFORE_UNLOAD, this.beforeUnload)
     window.removeEventListener(EVENT.UNLOAD, this.onUnload)
     window.removeEventListener(EVENT.POINTER_MOVE, this.onPointerMove)
@@ -258,9 +232,6 @@ class Collab extends PureComponent<Props, CollabState> {
     this.fileManager.reset()
     if (!opts?.isUnload) {
       this.setIsCollaborating(false)
-      this.setState({
-        activeRoomLink: ''
-      })
       this.collaborators = new Map()
       this.excalidrawAPI.updateScene({
         collaborators: this.collaborators
@@ -317,7 +288,7 @@ class Collab extends PureComponent<Props, CollabState> {
 
   private fallbackInitializationHandler: null | (() => any) = null
 
-  startCollaboration = async (
+  public startCollaboration = async (
     existingRoomLinkData: null | { roomId: string; roomKey: string }
   ): Promise<ImportedDataState | null> => {
     if (this.portal.socket) {
@@ -333,7 +304,8 @@ class Collab extends PureComponent<Props, CollabState> {
     } else {
       // eslint-disable-next-line @typescript-eslint/no-extra-semi
       ;({ roomId, roomKey } = await generateCollaborationLinkData())
-      window.history.pushState({}, APP_NAME, getCollaborationLink({ roomId, roomKey }))
+      // TODO use boardId board/:boardId
+      // window.history.pushState({}, APP_NAME, getCollaborationLink({ roomId, roomKey }))
     }
 
     const scenePromise = resolvablePromise<ImportedDataState | null>()
@@ -362,7 +334,6 @@ class Collab extends PureComponent<Props, CollabState> {
       this.portal.socket.once('connect_error', fallbackInitializationHandler)
     } catch (error: any) {
       console.error(error)
-      this.setState({ errorMessage: error.message })
       return null
     }
 
@@ -471,10 +442,6 @@ class Collab extends PureComponent<Props, CollabState> {
     })
 
     this.initializeIdleDetector()
-
-    this.setState({
-      activeRoomLink: window.location.href
-    })
 
     return scenePromise
   }
@@ -620,7 +587,7 @@ class Collab extends PureComponent<Props, CollabState> {
   }
 
   setCollaborators(sockets: string[]) {
-    const collaborators: InstanceType<typeof Collab>['collaborators'] = new Map()
+    const collaborators: InstanceType<typeof CollabClass>['collaborators'] = new Map()
     for (const socketId of sockets) {
       if (this.collaborators.has(socketId)) {
         collaborators.set(socketId, this.collaborators.get(socketId)!)
@@ -703,60 +670,14 @@ class Collab extends PureComponent<Props, CollabState> {
   handleClose = () => {
     jotaiStore.set(collabDialogShownAtom, false)
   }
-
-  setUsername = (username: string) => {
-    this.setState({ username })
-  }
-
-  onUsernameChange = (username: string) => {
-    this.setUsername(username)
-    saveUsernameToLocalStorage(username)
-  }
-
-  render() {
-    const { username, errorMessage, activeRoomLink } = this.state
-
-    const { modalIsShown } = this.props
-
-    return (
-      <>
-        {modalIsShown && (
-          <RoomDialog
-            handleClose={this.handleClose}
-            activeRoomLink={activeRoomLink}
-            username={username}
-            onUsernameChange={this.onUsernameChange}
-            onRoomCreate={() => this.startCollaboration(null)}
-            onRoomDestroy={this.stopCollaboration}
-            setErrorMessage={errorMessage => {
-              this.setState({ errorMessage })
-            }}
-            theme={this.excalidrawAPI.getAppState().theme}
-          />
-        )}
-        {errorMessage && (
-          <ErrorDialog message={errorMessage} onClose={() => this.setState({ errorMessage: '' })} />
-        )}
-      </>
-    )
-  }
 }
 
 declare global {
   interface Window {
-    collab: InstanceType<typeof Collab>
+    collab: InstanceType<typeof CollabClass>
   }
 }
 
 if (process.env.NODE_ENV === ENV.TEST || process.env.NODE_ENV === ENV.DEVELOPMENT) {
   window.collab = window.collab || ({} as Window['collab'])
 }
-
-const _Collab: React.FC<PublicProps> = props => {
-  const [collabDialogShown] = useAtom(collabDialogShownAtom)
-  return <Collab {...props} modalIsShown={collabDialogShown} />
-}
-
-export default _Collab
-
-export type TCollabClass = Collab

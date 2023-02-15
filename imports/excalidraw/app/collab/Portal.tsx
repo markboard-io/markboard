@@ -12,7 +12,7 @@ import { BroadcastedExcalidrawElement } from './reconciliation'
 import { encryptData } from '../../data/encryption'
 import { PRECEDING_ELEMENT_KEY } from '../../constants'
 
-class Portal {
+export default class Portal {
   collab: TCollabClass
   socket: SocketIOClient.Socket | null = null
   socketInitialized = false // we don't want the socket to emit any updates until it is fully initialized
@@ -166,7 +166,7 @@ class Portal {
         payload: {
           socketId: this.socket.id,
           userState,
-          username: this.collab.state.username
+          username: 'TODO'
         }
       }
       return this._broadcastSocketData(
@@ -188,7 +188,7 @@ class Portal {
           pointer: payload.pointer,
           button: payload.button || 'up',
           selectedElementIds: this.collab.excalidrawAPI.getAppState().selectedElementIds,
-          username: this.collab.state.username
+          username: 'TODO'
         }
       }
       return this._broadcastSocketData(
@@ -198,5 +198,3 @@ class Portal {
     }
   }
 }
-
-export default Portal

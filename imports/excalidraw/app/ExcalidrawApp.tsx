@@ -27,7 +27,8 @@ import {
   resolvablePromise
 } from '../utils'
 import { FIREBASE_STORAGE_PREFIXES, STORAGE_KEYS, SYNC_BROWSER_TABS_TIMEOUT } from './app_constants'
-import Collab, {
+import {
+  CollabClass,
   CollabAPI,
   collabAPIAtom,
   collabDialogShownAtom,
@@ -225,6 +226,16 @@ const ExcalidrawWrapper = () => {
     getInitialLibraryItems: getLibraryItemsFromStorage
   })
 
+  const isExcalidrawAPIAvailable = !!excalidrawAPI
+  useEffect(() => {
+    if (isExcalidrawAPIAvailable) {
+      const collab = new CollabClass(excalidrawAPI)
+      console.log('excalidrawAPI', excalidrawAPI)
+      collab.mount()
+      return () => collab.unmount()
+    }
+  }, [isExcalidrawAPIAvailable])
+
   useEffect(() => {
     if (!collabAPI || !excalidrawAPI) {
       return
@@ -337,7 +348,8 @@ const ExcalidrawWrapper = () => {
           excalidrawAPI.updateLibrary({
             libraryItems: getLibraryItemsFromStorage()
           })
-          collabAPI.setUsername(username || '')
+          // TODO use Meteor.user().username
+          // collabAPI.setUsername(username || '')
         }
 
         if (isBrowserStorageStateNewer(STORAGE_KEYS.VERSION_FILES)) {
@@ -551,7 +563,6 @@ const ExcalidrawWrapper = () => {
         theme={theme}
         gridModeEnabled={false}
       />
-      {excalidrawAPI && <Collab excalidrawAPI={excalidrawAPI} />}
       {errorMessage && <ErrorDialog message={errorMessage} onClose={() => setErrorMessage('')} />}
     </div>
   )
