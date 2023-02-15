@@ -1,3 +1,4 @@
+import { AppStateCollection } from './AppStateCollection'
 import { BaseCollection } from './BaseCollection'
 import type { IBoard } from '/imports/excalidraw/types'
 
@@ -7,7 +8,7 @@ export type BoardRecord = IBoard & {
   last_updated: number
 }
 
-export class BoardCollectionClass extends BaseCollection<IBoard> {
+export class BoardCollectionClass extends BaseCollection<BoardRecord> {
   constructor() {
     super('boards')
     this.attachSchema({
@@ -30,6 +31,7 @@ export class BoardCollectionClass extends BaseCollection<IBoard> {
       .fetchAsync()
     if (!documents.length) {
       const _id = await this.insert(this.generateEmptyBoard(userid))
+      await AppStateCollection.setCurrentBoardId(userid, _id)
       return this.collection.findOneAsync({ _id }) as Promise<BoardRecord>
     }
     return documents[0] as BoardRecord
