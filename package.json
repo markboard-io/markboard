@@ -12,7 +12,7 @@
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer",
     "lint": "meteor npx eslint server client imports",
-    "test": "meteor npx jest",
+    "test": "meteor npx jest --silent",
     "postinstall": "meteor node scripts/postinstall.js",
     "build": "node scripts/build.js"
   },
