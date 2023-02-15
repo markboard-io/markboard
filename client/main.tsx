@@ -32,6 +32,6 @@ const Launcher = () => (
 Meteor.startup(() => {
   const root = document.getElementById('root') as HTMLDivElement
   startupClient()
-  Services.get('board').getLastCreatedBoard().then(console.log)
+  Services.get('app').getAppState().then(console.log)
   createRoot(root).render(<Launcher />)
 })

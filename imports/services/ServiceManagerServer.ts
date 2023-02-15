@@ -3,12 +3,14 @@ import { BaseService } from './BaseService'
 import { BoardService } from './BoardService'
 import { ExcalidrawSyncService } from './ExcalidrawSyncService'
 import { StaticAssetsService } from './StaticAssetsService'
+import { AppService } from './AppService'
 import { ServerServices } from './types'
 
 class ServiceManagerServerClass {
   private _services = {} as ServerServices
 
   constructor() {
+    this._services['app'] = new AppService()
     this._services['account'] = new AccountService()
     this._services['excalidrawSync'] = new ExcalidrawSyncService()
     this._services['staticAssets'] = new StaticAssetsService()

@@ -1,4 +1,5 @@
 import { BaseCollection } from './BaseCollection'
+import { BoardCollection } from './BoardCollection'
 
 export interface IAppState {
   currentBoardId: string
@@ -18,11 +19,17 @@ export class AppStateCollectionClass extends BaseCollection<AppStateRecord> {
   }
 
   public setCurrentBoardId(userid: string, boardId: string) {
-    return this.collection.insertAsync({ userid, currentBoardId: boardId })
+    return this.collection.upsertAsync({ userid }, { currentBoardId: boardId })
   }
 
-  public getAppState(userid: string) {
-    return this.collection.findOneAsync({ userid }) as Promise<AppStateRecord | null>
+  public async getAppState(userid: string) {
+    let state = await this.collection.findOneAsync({ userid })
+    if (state == null) {
+      const { _id: boardId } = await BoardCollection.getLastCreatedBoard(userid)
+      await this.setCurrentBoardId(userid, boardId)
+      state = await this.collection.findOneAsync({ userid })
+    }
+    return state as Promise<AppStateRecord>
   }
 }
 

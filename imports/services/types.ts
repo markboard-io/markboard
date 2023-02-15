@@ -2,6 +2,7 @@ import type { AccountService } from './AccountService'
 import type { BoardService } from './BoardService'
 import type { ExcalidrawSyncService } from './ExcalidrawSyncService'
 import type { StaticAssetsService } from './StaticAssetsService'
+import type { AppService } from './AppService'
 
 type OmitPrivateProperties<T> = Omit<T, '_startup' | 'startup' | 'serviceName'>
 
@@ -14,6 +15,7 @@ export type PromisifyClass<T> = {
 }
 
 export interface IServices {
+  app: AppService
   account: AccountService
   excalidrawSync: ExcalidrawSyncService
   staticAssets: StaticAssetsService
