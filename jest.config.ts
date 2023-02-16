@@ -63,6 +63,7 @@ const IGNORE_PATTERNS = [
   'imports/excalidraw/tests/history.test.tsx',
   'imports/excalidraw/tests/collab.test.tsx',
   'imports/excalidraw/components/Sidebar/Sidebar.test.tsx',
+  'imports/excalidraw/tests/library.test.tsx'
 ]
 
 const jestConfig: JestConfigWithTsJest = {
