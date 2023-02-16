@@ -13,21 +13,26 @@ import { jotaiStore } from '/imports/store/jotai'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { Services } from '/imports/services/client'
+import { useSubUsername } from '/imports/hooks'
 
 const DebugAtoms = () => {
   useAtomsDebugValue()
   return null
 }
 
-const Launcher = () => (
-  <TopErrorBoundary>
-    <Provider unstable_createStore={() => jotaiStore}>
-      <DebugAtoms />
-      <RouterProvider router={router} />
-      <ToastContainer />
-    </Provider>
-  </TopErrorBoundary>
-)
+const Launcher = () => {
+  useSubUsername()
+
+  return (
+    <TopErrorBoundary>
+      <Provider unstable_createStore={() => jotaiStore}>
+        <DebugAtoms />
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </Provider>
+    </TopErrorBoundary>
+  )
+}
 
 Meteor.startup(() => {
   const root = document.getElementById('root') as HTMLDivElement
