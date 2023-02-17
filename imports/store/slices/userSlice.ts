@@ -1,4 +1,4 @@
-import { StoreSetter } from './types'
+import { StoreMethod, StoreSetter } from '../types'
 
 export interface IUser {
   _id: string
@@ -7,8 +7,8 @@ export interface IUser {
 
 export interface IUserStore {
   user: IUser
-  setUser: StoreSetter<IUserStore>
-  setUsername: StoreSetter<IUser['username']>
+  setUser: StoreMethod<IUser>
+  setUsername: StoreMethod<IUser['username']>
 }
 
 export const createUserSlice = (set: StoreSetter<Pick<IUserStore, 'user'>>) => ({

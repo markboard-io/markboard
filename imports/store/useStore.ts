@@ -1,8 +1,9 @@
 import { create } from 'zustand'
-import { IUserStore, createUserSlice } from './userSlice'
+import { IUserStore, createUserSlice, IAppStore, createAppSlice } from './slices'
 
-export type Store = IUserStore
+export type Store = IUserStore & IAppStore
 
 export const useStore = create<Store>((set: any) => ({
-  ...createUserSlice(set)
+  ...createUserSlice(set),
+  ...createAppSlice(set)
 }))
