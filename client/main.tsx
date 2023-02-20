@@ -12,7 +12,6 @@ import { jotaiStore } from '/imports/store/jotai'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { Services } from '/imports/services/client'
 import { useSubUsername } from '/imports/hooks'
 
 const DebugAtoms = () => {
@@ -37,6 +36,5 @@ const Launcher = () => {
 Meteor.startup(() => {
   const root = document.getElementById('root') as HTMLDivElement
   startupClient()
-  Services.get('app').getAppState().then(console.log)
   createRoot(root).render(<Launcher />)
 })

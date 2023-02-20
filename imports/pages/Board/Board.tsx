@@ -6,7 +6,11 @@ import './Board.style.scss'
 import { useAtomValue } from 'jotai'
 import { isSidebarOpenAtom } from '/imports/store/atomSidebar'
 
-export function Board() {
+interface IBoardProps {
+  id: string
+}
+
+export const Board: React.FC<IBoardProps> = ({ id: _id }) => {
   const isSidebarOpen = useAtomValue(isSidebarOpenAtom)
 
   return (

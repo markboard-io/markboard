@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
 import { Meteor } from 'meteor/meteor'
 
+const Home = lazy(() => import('./Home'))
 const Board = lazy(() => import('./Board'))
 const Login = lazy(() => import('./Login'))
 const Signup = lazy(() => import('./Signup'))
@@ -15,10 +16,13 @@ export interface IRouteRequirements {
   permissions: [] /* TODO: update it when role-based permission is introduced */
 }
 
-const suspense = (LazyComponent: React.LazyExoticComponent<() => JSX.Element>) => {
+type LazyComponent<T> = React.FC<T> & { lazy?: boolean }
+
+function suspense<T extends {}>(Component: LazyComponent<T>, props?: T) {
+  const defaultProps = { ...props } as T
   return (
     <Suspense fallback={null}>
-      <LazyComponent />
+      <Component {...defaultProps} />
     </Suspense>
   )
 }
@@ -42,6 +46,10 @@ const withRouteProtected = (
 export const router = createBrowserRouter([
   {
     path: '/',
+    element: withRouteProtected(suspense(Home))
+  },
+  {
+    path: '/board/:id',
     element: withRouteProtected(suspense(Board))
   },
   {
