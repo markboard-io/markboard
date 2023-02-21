@@ -1,0 +1,60 @@
+.LoadingSkeleton {
+	width: 100vw;
+	height: 100vh;
+	background-color: #fff;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 99999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.LoadingSkeleton__center {
+		width: 180px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 100px;
+	}
+	.LoadingSkeleton__logo {
+		margin: auto;
+		width: 86px;
+		height: 86px;
+		border-radius: 15px;
+		background: url(/images/logo.svg) no-repeat center;
+		background-size: cover;
+		margin-bottom: 20px;
+		box-shadow: var(--shadow-primary);
+	}
+
+	.LoadingSkeleton__bg {
+		width: 180px;
+		height: 4px;
+		border-radius: 4px;
+		background-color: rgba(0, 0, 0, 0.16);
+		display: flex;
+		align-items: center;
+		margin-top: 24px;
+		overflow: hidden;
+	}
+
+	.LoadingSkeleton__progress {
+		width: 100%;
+		height: 100%;
+		border-radius: 4px;
+		transition: all 0.5s cubic-bezier(0, 0.64, 0.36, 1);
+		background-color: #150d33;
+		animation: progressAnimation 5s ease forwards;
+		transform-origin: 0%;
+	}
+}
+
+@keyframes progressAnimation {
+	from {
+		transform: scaleX(0%);
+	}
+
+	to {
+		transform: scaleX(100%);
+	}
+}
