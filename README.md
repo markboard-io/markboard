@@ -1,6 +1,5 @@
 <p align="center">
   <a href="https://InnoDeck.app" target="_blank">
-    <img src="./public/images/logo_bottom.svg" height="30" alt="Logo" />
     <img src="./public/images/title.png" height="30" alt="InnoDeck" />
   </a>
 </p>
