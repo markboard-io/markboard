@@ -1,7 +1,7 @@
 <p align="center">
   <img src="./public/images/innodeck.png" />
 </p>
-<p align="center"><i>Wysiwyg markdown whiteboard for note-taking and building team knowledge base.</p>
+<p align="center"><i>Wysiwyg markdown whiteboard for note-taking and building team knowledge base.</i></p>
 
 <p align="center">
  <img src="https://img.shields.io/github/license/innodeck/innodeck?style=flat-square" />
