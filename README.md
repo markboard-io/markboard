@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://InnoDeck.app" target="_blank">
-    <img src="./public/images/title.png" alt="InnoDeck" />
+    <img src="./public/images/title.png" height="30" alt="InnoDeck" />
   </a>
 </p>
 <p align="center"><i>Wysiwyg markdown whiteboard for note-taking and building team knowledge base.</i></p>
