@@ -1,8 +1,11 @@
+<h1 align="center">InnoDeck</h1>
+<p><i><a href="https://InnoDeck.app" target="_blank">InnoDeck</a> is an open-source <b>wysiwyg markdown whiteboard</b> for note-taking and building team knowledge base.</i></p>
+
 ![InnoDeck Preview](./public/images/preview.png)
 
-<h1 align="center">Wysiwyg Markdown Whiteboard</h3>
+InnoDeck brings together **Markdown** and **Whiteboard** for all your writing, diagramming, sketching, and drawing needs in one place, making your creative process more efficient and effective.
 
-[InnoDeck](https://InnoDeck.app) is an open-source wysiwyg markdown whiteboard for note-taking and building team knowledge base.
+Say goodbye to the hassle of switching between different tools and hello to a more streamlined and collaborative workflow. Try [InnoDeck.app](https://InnoDeck.app) now to revolutionize your creative process!
 
 ## Core Features
 
