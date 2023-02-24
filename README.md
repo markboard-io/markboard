@@ -12,7 +12,9 @@
  <img src="https://img.shields.io/github/commit-activity/w/innodeck/innodeck?style=flat-square" />
 </p>
 
-![InnoDeck Preview](./public/images/preview.png)
+<a href="https://InnoDeck.app" target="_blank">
+<img src="./public/images/preview.png" alt="InnoDeck Preview" />
+</a>
 
 InnoDeck brings together **Markdown** and **Whiteboard** for all your writing, diagramming, sketching, and drawing needs in one place, making your creative process more efficient and effective.
 
