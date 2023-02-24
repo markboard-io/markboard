@@ -16,7 +16,7 @@
 
 InnoDeck brings together **Markdown** and **Whiteboard** for all your writing, diagramming, sketching, and drawing needs in one place, making your creative process more efficient and effective.
 
-Say goodbye to the hassle of switching between different tools and hello to a more streamlined and collaborative workflow. Try [InnoDeck.app](https://InnoDeck.app) now to revolutionize your creative process!
+Say goodbye to the hassle of switching between different tools and hello to a more streamlined and collaborative workflow. Try <a href="https://InnoDeck.app" target="_blank">InnoDeck.app</a> now to revolutionize your creative process!
 
 ## Core Features
 
