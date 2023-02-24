@@ -1,5 +1,14 @@
-<h1 align="center">InnoDeck</h1>
-<p><i><a href="https://InnoDeck.app" target="_blank">InnoDeck</a> is an open-source <b>wysiwyg markdown whiteboard</b> for note-taking and building team knowledge base.</i></p>
+<p align="center">
+  <img src="./public/images/innodeck.png" />
+</p>
+<p align="center"><i>Wysiwyg markdown whiteboard for note-taking and building team knowledge base.</p>
+
+<p align="center">
+ <img src="https://img.shields.io/github/license/innodeck/innodeck?style=flat-square" />
+ <img src="https://img.shields.io/github/issues/InnoDeck/InnoDeck?style=flat-square"">
+ <img src="https://img.shields.io/github/stars/innodeck/innodeck?style=flat-square" />
+ <img src="https://img.shields.io/github/commit-activity/w/innodeck/innodeck?style=flat-square" />
+</p>
 
 ![InnoDeck Preview](./public/images/preview.png)
 
