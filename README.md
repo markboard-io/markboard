@@ -16,7 +16,7 @@
 <img src="./public/images/preview.png" alt="markboard Preview" />
 </a>
 
-Markboard brings together **Markdown** and **Whiteboard** for all your writing, diagramming, sketching, and drawing needs in one place, making your creative process more efficient and effective.
+[Markboard](https://markboard.app) brings together **Markdown** and **Whiteboard** for all your writing, diagramming, sketching, and drawing needs in one place, making your creative process more efficient and effective.
 
 Say goodbye to the hassle of switching between different tools and hello to a more streamlined and collaborative workflow. Try <a href="https://markboard.app" target="_blank">markboard.io</a> now to revolutionize your creative process!
 
