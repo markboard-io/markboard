@@ -7,7 +7,7 @@ import { useDocumentTitle } from '/imports/hooks'
 
 export function NotFound() {
   const navigate = useNavigate()
-  useDocumentTitle('InnoDeck - Page Not Found')
+  useDocumentTitle('markboard - Page Not Found')
 
   return (
     <SiteLayout>

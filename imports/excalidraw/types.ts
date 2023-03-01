@@ -503,7 +503,7 @@ export type UIChildrenComponents = {
     | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>
 }
 
-/** Types represents InnoDeck's board object */
+/** Types represents markboard's board object */
 export interface IBoard {
   elements: readonly NonDeletedExcalidrawElement[]
   files: BinaryFiles

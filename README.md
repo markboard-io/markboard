@@ -1,28 +1,28 @@
 <p align="center">
-  <a href="https://InnoDeck.app" target="_blank">
-    <img src="./public/images/title.png" height="30" alt="InnoDeck" />
+  <a href="https://markboard.io" target="_blank">
+    <img src="./public/images/title.png" height="30" alt="markboard" />
   </a>
 </p>
 <p align="center"><i>Wysiwyg markdown whiteboard for note-taking and building team knowledge base.</i></p>
 
 <p align="center">
- <img src="https://img.shields.io/github/license/innodeck/innodeck?style=flat-square" />
- <img src="https://img.shields.io/github/issues/InnoDeck/InnoDeck?style=flat-square"">
- <img src="https://img.shields.io/github/stars/innodeck/innodeck?style=flat-square" />
- <img src="https://img.shields.io/github/commit-activity/w/innodeck/innodeck?style=flat-square" />
+ <img src="https://img.shields.io/github/license/markboard-io/markboard?style=flat-square" />
+ <img src="https://img.shields.io/github/issues/markboard-io/markboard?style=flat-square"">
+ <img src="https://img.shields.io/github/stars/markboard-io/markboard?style=flat-square" />
+ <img src="https://img.shields.io/github/commit-activity/w/markboard-io/markboard?style=flat-square" />
 </p>
 
-<a href="https://InnoDeck.app" target="_blank">
-<img src="./public/images/preview.png" alt="InnoDeck Preview" />
+<a href="https://markboard.app" target="_blank">
+<img src="./public/images/preview.png" alt="markboard Preview" />
 </a>
 
-InnoDeck brings together **Markdown** and **Whiteboard** for all your writing, diagramming, sketching, and drawing needs in one place, making your creative process more efficient and effective.
+Markboard brings together **Markdown** and **Whiteboard** for all your writing, diagramming, sketching, and drawing needs in one place, making your creative process more efficient and effective.
 
-Say goodbye to the hassle of switching between different tools and hello to a more streamlined and collaborative workflow. Try <a href="https://InnoDeck.app" target="_blank">InnoDeck.app</a> now to revolutionize your creative process!
+Say goodbye to the hassle of switching between different tools and hello to a more streamlined and collaborative workflow. Try <a href="https://markboard.app" target="_blank">markboard.io</a> now to revolutionize your creative process!
 
 ## Core Features
 
-[Website](https://InnoDeck.app) • [Live Demo](https://InnoDeck.app) • [Open Server](https://InnoDeck.app) • [Docs](https://InnoDeck.app/docs) • [Blog](https://InnoDeck.app/blog)
+[Website](https://markboard.app) • [Live Demo](https://markboard.app) • [Open Server](https://markboard.app) • [Docs](https://markboard.app/docs) • [Blog](https://markboard.app/blog)
 
 - Collaborative whiteboard
 - Wysiwyg markdown
@@ -31,23 +31,23 @@ Say goodbye to the hassle of switching between different tools and hello to a mo
 
 ## Installation Guide
 
-InnoDeck is an open-source software, you can deploy InnoDeck on your own server without any concern, or you can use our SaaS version by visiting [InnoDeck.app](https://InnoDeck.app).
+markboard is an open-source software, you can deploy markboard on your own server without any concern, or you can use our SaaS version by visiting [markboard.app](https://markboard.app).
 
 We officially provide 3 ways of deployment: Digital Ocean, Docker Images and Manual Installation.
 
 ### Deploy via DigitalOcean
 
-Deploying InnoDeck with [DigitalOcean](digitalocean.com) is the recommended way to have your own instance running, especially if you are not an expert in linux server or tired of typing a set of commands manually.
+Deploying markboard with [DigitalOcean](digitalocean.com) is the recommended way to have your own instance running, especially if you are not an expert in linux server or tired of typing a set of commands manually.
 
-Click the folloying button to get your first InnoDeck instance running in minutes:
+Click the folloying button to get your first markboard instance running in minutes:
 
 <p>
-  <a href="https://cloud.digitalocean.com/apps/new?repo=https://github.com/InnoDeck/InnoDeck/tree/main" target="_blank">
+  <a href="https://cloud.digitalocean.com/apps/new?repo=https://github.com/markboard/markboard/tree/main" target="_blank">
   <img src="https://www.deploytodo.com/do-btn-blue.svg" alt="Deploy to DO">
   </a>
 </p>
 
-The cost of DigitalOcean's deployment is super low, starting from $5 per instance per month. Our official server [InnoDeck.app](https://InnoDeck.app) is deployed on DigitalOcean too.
+The cost of DigitalOcean's deployment is super low, starting from $5 per instance per month. Our official server [markboard.app](https://markboard.app) is deployed on DigitalOcean too.
 
 ### Deploy via docker
 

@@ -8,7 +8,7 @@ spec:
     - name: inno-deck
       github:
         branch: main
-        repo: InnoDeck/InnoDeck
+        repo: markboard-io/markboard
         deploy_on_push: true
       dockerfile_path: Dockerfile
       http_port: 3000

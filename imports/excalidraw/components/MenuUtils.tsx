@@ -5,7 +5,7 @@ export const MenuLinks = () => (
   <>
     <a
       className='menu-item'
-      href='https://github.com/InnoDeck/InnoDeck'
+      href='https://github.com/markboard/markboard'
       target='_blank'
       rel='noopener noreferrer'
     >
@@ -24,7 +24,7 @@ export const MenuLinks = () => (
     <a
       className='menu-item'
       target='_blank'
-      href='https://twitter.com/InnoDeckapp'
+      href='https://twitter.com/markboardapp'
       rel='noopener noreferrer'
     >
       <div className='menu-item__icon'>{TwitterIcon}</div>

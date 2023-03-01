@@ -34,7 +34,7 @@ export function ResetPassword() {
   const [confirmPassError, setConfirmPassError] = useState('')
   const params = useParams() as unknown as IResetPasswordParams
 
-  useDocumentTitle('InnoDeck - Reset Password')
+  useDocumentTitle('markboard - Reset Password')
 
   const onFocus = () => {
     const { password } = getFormValues()

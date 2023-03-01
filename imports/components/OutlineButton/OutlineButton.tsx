@@ -29,7 +29,7 @@ export const OutlineButton: React.FC<IOutlineButtonProps> = ({
   return (
     <button
       style={style}
-      className={cx('innodeck-outline-btn', className)}
+      className={cx('markboard-outline-btn', className)}
       onClick={onClick}
       onFocus={onFocus}
     >
