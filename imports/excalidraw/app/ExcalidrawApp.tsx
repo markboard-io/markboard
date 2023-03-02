@@ -26,7 +26,12 @@ import {
   ResolvablePromise,
   resolvablePromise
 } from '../utils'
-import { FIREBASE_STORAGE_PREFIXES, STORAGE_KEYS, SYNC_BROWSER_TABS_TIMEOUT } from './app_constants'
+import {
+  FIREBASE_STORAGE_PREFIXES,
+  SAVE_TO_CLOUD_STORAGE_TIMEOUT,
+  STORAGE_KEYS,
+  SYNC_BROWSER_TABS_TIMEOUT
+} from './app_constants'
 import {
   CollabClass,
   CollabAPI,
@@ -76,11 +81,16 @@ const initializeScene = async (opts: {
   const jsonBackendMatch = window.location.hash.match(/^#json=([a-zA-Z0-9_-]+),([a-zA-Z0-9_-]+)$/)
   const externalUrlMatch = window.location.hash.match(/^#url=(.*)$/)
 
+  // Load board data from cloud
+  const boardId = getCurrentBoardId()
+  const boardFromCloud = await Services.get('board').getBoardById(boardId)
+
   const localDataState = importFromLocalStorage()
 
   let scene: RestoredDataState & {
     scrollToContent?: boolean
-  } = await loadScene(null, null, localDataState)
+  } = await loadScene(null, null, Object.assign(localDataState, boardFromCloud))
+
 
   let roomLinkData = getCollaborationLinkData(window.location.href)
   const isExternalScene = !!(id || jsonBackendMatch || roomLinkData)
@@ -454,39 +464,35 @@ const ExcalidrawWrapper = () => {
 
     setTheme(appState.theme)
 
-    const { currentBoardId } = useStore.getState().appState
-    const ret = await Services.get('board').saveBoard({
-      _id: currentBoardId,
-      files,
-      elements
-    })
-    console.log('ret', ret)
+    // sync board to cloud
+    saveBoardToCloud(files, elements)
+
     // this check is redundant, but since this is a hot path, it's best
     // not to evaludate the nested expression every time
-    // if (!LocalData.isSavePaused()) {
-    //   LocalData.save(elements, appState, files, () => {
-    //     if (excalidrawAPI) {
-    //       let didChange = false
+    if (!LocalData.isSavePaused()) {
+      LocalData.save(elements, appState, files, () => {
+        if (excalidrawAPI) {
+          let didChange = false
 
-    //       const elements = excalidrawAPI.getSceneElementsIncludingDeleted().map(element => {
-    //         if (LocalData.fileStorage.shouldUpdateImageElementStatus(element)) {
-    //           const newElement = newElementWith(element, { status: 'saved' })
-    //           if (newElement !== element) {
-    //             didChange = true
-    //           }
-    //           return newElement
-    //         }
-    //         return element
-    //       })
+          const elements = excalidrawAPI.getSceneElementsIncludingDeleted().map(element => {
+            if (LocalData.fileStorage.shouldUpdateImageElementStatus(element)) {
+              const newElement = newElementWith(element, { status: 'saved' })
+              if (newElement !== element) {
+                didChange = true
+              }
+              return newElement
+            }
+            return element
+          })
 
-    //       if (didChange) {
-    //         excalidrawAPI.updateScene({
-    //           elements
-    //         })
-    //       }
-    //     }
-    //   })
-    // }
+          if (didChange) {
+            excalidrawAPI.updateScene({
+              elements
+            })
+          }
+        }
+      })
+    }
   }
 
   const onExportToBackend = async (
@@ -579,3 +585,19 @@ const ExcalidrawWrapper = () => {
 export function ExcalidrawApp() {
   return <ExcalidrawWrapper />
 }
+
+export function getCurrentBoardId() {
+  const { currentBoardId } = useStore.getState().appState
+  const boardIdFromPath = location.href.split('/board/').pop() ?? ''
+
+  return currentBoardId.length > 0 ? currentBoardId : boardIdFromPath
+}
+
+export const saveBoardToCloud = debounce(async function (files: BinaryFiles, elements) {
+  const ret = await Services.get('board').saveBoard({
+    _id: getCurrentBoardId(),
+    files,
+    elements
+  })
+  console.log('[SaveBoardToMongoDB] success:', ret)
+}, SAVE_TO_CLOUD_STORAGE_TIMEOUT)

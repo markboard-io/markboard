@@ -26,4 +26,12 @@ export class BoardService extends BaseService {
     }
     throw new Meteor.Error('Unauthorized')
   }
+
+  public async getBoardById(boardId: string) {
+    const userid = Meteor.userId()
+    if (userid != null) {
+      return BoardCollection.getBoardById(boardId)
+    }
+    throw new Meteor.Error('Unauthorized')
+  }
 }
