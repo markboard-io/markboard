@@ -23,7 +23,6 @@ react-meteor-data       # React higher-order component for reactively tracking M
 fourseven:scss
 accounts-password@2.3.3
 accounts-base@2.2.6
-aldeed:collection2
 accounts-github@1.5.0
 service-configuration@1.3.1
 accounts-google@1.4.0

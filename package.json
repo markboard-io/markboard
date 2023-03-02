@@ -59,7 +59,6 @@
     "react-router-dom": "^6.6.1",
     "react-toastify": "^9.1.1",
     "roughjs": "^4.5.2",
-    "simpl-schema": "^3.4.0",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",
     "ts-jest": "^29.0.3",

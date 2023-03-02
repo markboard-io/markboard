@@ -1,10 +1,7 @@
 import { Mongo } from 'meteor/mongo'
-import SimpleSchema from 'simpl-schema'
 import { Document } from 'bson'
 
-export type IMongoCollection = Mongo.Collection<Document, Document> & {
-  attachSchema(schema: SimpleSchema): void
-}
+export type IMongoCollection = Mongo.Collection<Document, Document>
 
 export abstract class BaseCollection<T extends Mongo.OptionalId<{}>> {
   public name!: string
@@ -21,10 +18,6 @@ export abstract class BaseCollection<T extends Mongo.OptionalId<{}>> {
 
   protected setCollection(collection: Mongo.Collection<Document, Document>) {
     this.collection = collection as unknown as IMongoCollection
-  }
-
-  protected attachSchema(schema: Record<string, any>) {
-    this.collection.attachSchema(new SimpleSchema(schema))
   }
 
   protected insert(doc: T) {

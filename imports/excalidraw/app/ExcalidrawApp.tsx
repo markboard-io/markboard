@@ -56,7 +56,8 @@ import { atom, useAtom } from 'jotai'
 import { useAtomWithInitialValue } from '../../store/jotai'
 import { reconcileElements } from './collab/reconciliation'
 import { parseLibraryTokensFromUrl, useHandleLibrary } from '../data/library'
-import { attachDebugLabel } from '/imports/store'
+import { attachDebugLabel, useStore } from '/imports/store'
+import { Services } from '/imports/services/client'
 
 polyfill()
 window.EXCALIDRAW_THROTTLE_RENDER = true
@@ -442,7 +443,7 @@ const ExcalidrawWrapper = () => {
     document.documentElement.classList.toggle('dark', theme === THEME.DARK)
   }, [theme])
 
-  const onChange = (
+  const onChange = async (
     elements: readonly ExcalidrawElement[],
     appState: AppState,
     files: BinaryFiles
@@ -453,32 +454,39 @@ const ExcalidrawWrapper = () => {
 
     setTheme(appState.theme)
 
+    const { currentBoardId } = useStore.getState().appState
+    const ret = await Services.get('board').saveBoard({
+      _id: currentBoardId,
+      files,
+      elements
+    })
+    console.log('ret', ret)
     // this check is redundant, but since this is a hot path, it's best
     // not to evaludate the nested expression every time
-    if (!LocalData.isSavePaused()) {
-      LocalData.save(elements, appState, files, () => {
-        if (excalidrawAPI) {
-          let didChange = false
+    // if (!LocalData.isSavePaused()) {
+    //   LocalData.save(elements, appState, files, () => {
+    //     if (excalidrawAPI) {
+    //       let didChange = false
 
-          const elements = excalidrawAPI.getSceneElementsIncludingDeleted().map(element => {
-            if (LocalData.fileStorage.shouldUpdateImageElementStatus(element)) {
-              const newElement = newElementWith(element, { status: 'saved' })
-              if (newElement !== element) {
-                didChange = true
-              }
-              return newElement
-            }
-            return element
-          })
+    //       const elements = excalidrawAPI.getSceneElementsIncludingDeleted().map(element => {
+    //         if (LocalData.fileStorage.shouldUpdateImageElementStatus(element)) {
+    //           const newElement = newElementWith(element, { status: 'saved' })
+    //           if (newElement !== element) {
+    //             didChange = true
+    //           }
+    //           return newElement
+    //         }
+    //         return element
+    //       })
 
-          if (didChange) {
-            excalidrawAPI.updateScene({
-              elements
-            })
-          }
-        }
-      })
-    }
+    //       if (didChange) {
+    //         excalidrawAPI.updateScene({
+    //           elements
+    //         })
+    //       }
+    //     }
+    //   })
+    // }
   }
 
   const onExportToBackend = async (

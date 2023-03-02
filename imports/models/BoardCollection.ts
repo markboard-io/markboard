@@ -12,14 +12,6 @@ export type BoardRecord = IBoard & {
 export class BoardCollectionClass extends BaseCollection<BoardRecord> {
   constructor() {
     super('boards')
-    this.attachSchema({
-      userid: String,
-      created_at: Number,
-      last_updated: Number,
-      elements: Array,
-      'elements.$': Object,
-      files: Object
-    })
   }
 
   public async getLastCreatedBoard(userid: string): Promise<BoardRecord> {
@@ -32,6 +24,14 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
       return this.collection.findOneAsync({ _id }) as Promise<BoardRecord>
     }
     return documents[0] as BoardRecord
+  }
+
+  public async updateBoard(board: IBoard & Pick<BoardRecord, '_id'>) {
+    const { _id, files, elements } = board
+    const values = { files, elements, last_updated: Date.now() }
+
+    // TODO check "edit" permission here
+    return this.collection.updateAsync({ _id }, { $set: values })
   }
 
   private generateEmptyBoard(userid: string): Omit<BoardRecord, '_id'> {

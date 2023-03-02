@@ -12,10 +12,6 @@ export type AppStateRecord = IAppState & {
 export class AppStateCollectionClass extends BaseCollection<AppStateRecord> {
   constructor() {
     super('appState')
-    this.attachSchema({
-      userid: String,
-      currentBoardId: String
-    })
   }
 
   public setCurrentBoardId(userid: string, boardId: string) {

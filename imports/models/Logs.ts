@@ -10,11 +10,6 @@ export interface ILog {
 export class LogsCollection extends BaseCollection<ILog> {
   constructor() {
     super('logs')
-    this.attachSchema({
-      type: String,
-      content: String,
-      timestamp: Number
-    })
   }
 
   public appendStartupLog() {
