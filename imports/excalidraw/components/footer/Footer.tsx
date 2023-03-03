@@ -10,19 +10,26 @@ import { Section } from '../Section'
 import Stack from '../Stack'
 import WelcomeScreenDecor from '../WelcomeScreenDecor'
 import FooterCenter from './FooterCenter'
+import { HelpMenuPanel } from '/imports/excalidraw/components'
 
-const Footer = ({
-  appState,
-  actionManager,
-  showExitZenModeBtn,
-  renderWelcomeScreen,
-  children
-}: {
+interface IFooterProps {
   appState: AppState
   actionManager: ActionManager
   showExitZenModeBtn: boolean
   renderWelcomeScreen: boolean
   children?: React.ReactNode
+  isMenuOpen: boolean
+  menuRef: React.RefObject<HTMLDivElement>
+}
+
+const Footer: React.FC<IFooterProps> = ({
+  appState,
+  actionManager,
+  showExitZenModeBtn,
+  renderWelcomeScreen,
+  children,
+  isMenuOpen,
+  menuRef
 }) => {
   const device = useDevice()
   const showFinalize = !appState.viewModeEnabled && appState.multiElement && device.isTouchScreen
@@ -70,7 +77,12 @@ const Footer = ({
               {WelcomeScreenHelpArrow}
             </div>
           </WelcomeScreenDecor>
-
+          <HelpMenuPanel
+            isMenuOpen={isMenuOpen}
+            menuRef={menuRef}
+            actionManager={actionManager}
+            appState={appState}
+          />
           {actionManager.renderAction('toggleHelpIsland')}
         </div>
       </div>
