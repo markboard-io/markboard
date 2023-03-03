@@ -41,13 +41,11 @@ import { Stats } from './Stats'
 import { actionToggleStats } from '../actions/actionToggleStats'
 import Footer from './footer/Footer'
 import { SidebarIcon, WelcomeScreenTopToolbarArrow } from '/imports/components/icons'
-import { MenuLinks, Separator } from './MenuUtils'
 import { useOutsideClickHook } from '../hooks/useOutsideClick'
 import WelcomeScreen from './WelcomeScreen'
 import { hostSidebarCountersAtom } from './Sidebar/Sidebar'
 import { jotaiScope } from '../../store/jotai'
 import { useAtom, useSetAtom } from 'jotai'
-import { LanguageList } from '../app/components/LanguageList'
 import WelcomeScreenDecor from './WelcomeScreenDecor'
 import { isSidebarOpenAtom } from '/imports/store/atomSidebar'
 
@@ -311,48 +309,6 @@ const LayerUI = ({
             {renderTopRightUI?.(device.isMobile, appState)}
           </div>
         </div>
-        {isMenuOpen && (
-          <div
-            ref={menuRef}
-            style={{ position: 'absolute', bottom: 75, marginTop: '.25rem', right: 12 }}
-          >
-            <Section heading='canvasActions'>
-              {/* the zIndex ensures this menu has higher stacking order,
-         see https://github.com/excalidraw/excalidraw/pull/1445 */}
-              <Island className='menu-container' padding={2} style={{ zIndex: 1 }}>
-                {actionManager.renderAction('toggleHelpIsland', undefined, true)}
-                {!appState.viewModeEnabled && actionManager.renderAction('clearCanvas')}
-                <Separator />
-                <MenuLinks />
-                <Separator />
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    rowGap: '.5rem'
-                  }}
-                >
-                  <div>{actionManager.renderAction('toggleTheme')}</div>
-                  <div style={{ padding: '10px 0.625rem' }}>
-                    <LanguageList style={{ width: '100%' }} />
-                  </div>
-                  {!appState.viewModeEnabled && (
-                    <div>
-                      <div style={{ fontSize: '.75rem', marginBottom: '.5rem' }}>
-                        {t('labels.canvasBackground')}
-                      </div>
-                      <div style={{ padding: '0 0.625rem' }}>
-                        {actionManager.renderAction('changeViewBackgroundColor', {
-                          verticalOffset: -40
-                        })}{' '}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </Island>
-            </Section>
-          </div>
-        )}
       </FixedSideContainer>
     )
   }
@@ -448,6 +404,8 @@ const LayerUI = ({
               appState={appState}
               actionManager={actionManager}
               showExitZenModeBtn={showExitZenModeBtn}
+              isMenuOpen={isMenuOpen}
+              menuRef={menuRef}
             >
               {childrenComponents.FooterCenter}
             </Footer>

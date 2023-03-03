@@ -1,0 +1,29 @@
+.help-menu-panel {
+    position: absolute;
+    bottom: 50px;
+    right: 0;
+    margin-top: 0.25rem;
+    .menu-container {
+        background-color: #fff !important;
+        max-height: calc(100vh - 150px);
+        overflow-y: auto;
+        z-index: 1;
+    }
+    .operation-items {
+        display: flex;
+        flex-direction: column;
+        row-gap: .5rem;
+        .language-list-item {
+            padding: 10px 0.625rem;
+        }
+        .canvas-background-item {
+            .canvas-background-item_label {
+                padding: 10px 0.625rem;
+            }
+            .canvas-background-item_select {
+                padding: 0 0.625rem;
+            }
+        }
+    }
+}
+

@@ -1,12 +1,6 @@
 @import "../css/variables.module";
 
 .excalidraw {
-  .menu-container {
-    background-color: #fff !important;
-    max-height: calc(100vh - 150px);
-    overflow-y: auto;
-  }
-
   .sidebar-button {
     @include outlineButtonStyles;
     background-color: var(--island-bg-color);
