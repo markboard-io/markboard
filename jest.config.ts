@@ -73,15 +73,19 @@ const jestConfig: JestConfigWithTsJest = {
     // See: https://stackoverflow.com/a/50572999
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^(\\.{1,2}/.*)\\.js$': '$1',
-    '\\/imports\\/(.+)': '<rootDir>/imports/$1'
+    '\\/imports\\/(.+)': '<rootDir>/imports/$1',
+    'meteor/meteor': 'identity-obj-proxy'
   },
   transform: {
-    '^.+\\.m?[tj]sx?$': ['ts-jest', {
-      useESM: true,
-      isolatedModules: true
-    }]
+    '^.+\\.m?[tj]sx?$': [
+      'ts-jest',
+      {
+        useESM: true,
+        isolatedModules: true
+      }
+    ]
   },
-  transformIgnorePatterns: [`node_modules/(?!(${ ESM_MODULES.join('|') })/)`],
+  transformIgnorePatterns: [`node_modules/(?!(${ESM_MODULES.join('|')})/)`],
   setupFilesAfterEnv: ['./tests/setupTests.ts'],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: IGNORE_PATTERNS
