@@ -31,6 +31,7 @@
     "bootstrap": "^5.2.3",
     "browser-fs-access": "^0.29.1",
     "chai": "^4.3.7",
+    "chatgpt": "^5.0.8",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
