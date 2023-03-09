@@ -13,6 +13,7 @@ import { jotaiStore } from '/imports/store/jotai'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { useSubUsername } from '/imports/hooks'
+import { Services } from '/imports/services/client'
 
 const DebugAtoms = () => {
   useAtomsDebugValue()
@@ -37,4 +38,8 @@ Meteor.startup(() => {
   const root = document.getElementById('root') as HTMLDivElement
   startupClient()
   createRoot(root).render(<Launcher />)
+
+  // mount Services onto window for testing
+  window.gtag
+  window.Services = Services
 })
