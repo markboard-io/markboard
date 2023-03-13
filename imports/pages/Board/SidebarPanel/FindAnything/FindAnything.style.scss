@@ -1,0 +1,25 @@
+.FindAnything {
+	background: #e7eaf1;
+	border-radius: 5px;
+	margin-top: 15px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	color: #c4c4c4;
+	padding-left: 10px;
+	padding-right: 10px;
+	svg {
+		width: 20px;
+		height: 20px;
+		flex-shrink: 0;
+		margin-right: 5px;
+	}
+	.FindAnything_input {
+		background: transparent;
+		border: none;
+		outline: none;
+		&::placeholder {
+			color: #c4c4c4;
+		}
+	}
+}

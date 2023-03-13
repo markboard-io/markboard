@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Panel, PanelResizeHandle } from 'react-resizable-panels'
 import { OrganizationButton } from './OrganizationButton'
+import { FindAnything } from './FindAnything'
 import { useEffect } from 'react'
 
 import './SidebarPanel.style.scss'
@@ -30,6 +31,7 @@ export const SidebarPanel: React.FC<ISidebarProps> = props => {
     <>
       <Panel style={panelStyle} defaultSize={15} minSize={15} className='FileExplorerPanel'>
         <OrganizationButton />
+        <FindAnything />
       </Panel>
       {isOpen ? (
         <PanelResizeHandle className='PanelResizeHandle'>
