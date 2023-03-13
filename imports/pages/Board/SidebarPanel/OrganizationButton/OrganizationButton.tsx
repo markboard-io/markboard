@@ -7,17 +7,18 @@ import { ArrowDownIcon } from '/imports/components/icons'
 import { useStore } from '/imports/store'
 
 export function OrganizationButton() {
-  const { stroke, background } = getClientColors(Meteor.userId()!)
+  const { background } = getClientColors(Meteor.userId()!)
   const username = useStore(state => state.user.username)
+  const avatarUrl = useStore(state => state.user.avatarUrl)
 
   return (
     <div className='OrganizationButton'>
       <Avatar
         className='OrganizationAvatar'
         color={background}
-        border={stroke}
+        border={null}
         name={username}
-        src={''}
+        src={avatarUrl}
       />
       <div className='OrganizationName'>{username}</div>
       {ArrowDownIcon}

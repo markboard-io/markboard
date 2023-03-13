@@ -1,7 +1,7 @@
 import { StoreMethod, StoreSetter } from '../types'
 
 export interface IUser {
-  _id: string
+  userid: string
   username: string
   avatarUrl: string
 }
@@ -14,7 +14,7 @@ export interface IUserStore {
 }
 
 export const createUserSlice = (set: StoreSetter<Pick<IUserStore, 'user'>>) => ({
-  user: { _id: '', username: '', avatarUrl: '' },
+  user: { userid: '', username: '', avatarUrl: '' },
   setUser: (user: IUser) => set({ user }),
   setUsername(username: string) {
     return set(state => ({

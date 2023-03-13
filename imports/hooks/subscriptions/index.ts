@@ -1,1 +1,1 @@
-export * from './useSubscribeUsername'
+export * from './useSubscribeUser'

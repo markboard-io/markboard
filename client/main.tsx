@@ -12,7 +12,7 @@ import { jotaiStore } from '/imports/store/jotai'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { useSubscribeUsername } from '/imports/hooks'
+import { useSubscribeUser } from '/imports/hooks'
 import { Services } from '/imports/services/client'
 
 const DebugAtoms = () => {
@@ -21,7 +21,7 @@ const DebugAtoms = () => {
 }
 
 const Launcher = () => {
-  useSubscribeUsername()
+  useSubscribeUser()
 
   return (
     <TopErrorBoundary>
