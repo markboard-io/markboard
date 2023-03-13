@@ -16,11 +16,11 @@ type AvatarProps = {
 export const Avatar = ({ color, onClick = () => {}, name, src, className = '' }: AvatarProps) => {
   const shortName = getClientInitials(name)
   const [error, setError] = useState(false)
-  const loadImg = !error && src
-  const style = loadImg ? undefined : { background: color }
+  const avatarImage = !error && src
+  const style = avatarImage ? undefined : { background: color }
   return (
     <div className={cx('Avatar', className)} style={style} onClick={onClick}>
-      {loadImg ? (
+      {avatarImage ? (
         <img
           className='Avatar-img'
           src={src}

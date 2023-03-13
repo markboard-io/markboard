@@ -3,7 +3,7 @@ import { Tracker } from 'meteor/tracker'
 import { useEffect } from 'react'
 import { useStore } from '/imports/store'
 
-export function useSubUsername() {
+export function useSubscribeUsername() {
   const setUsername = useStore(state => state.setUsername)
 
   useEffect(() => {
