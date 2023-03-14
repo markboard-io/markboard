@@ -3,17 +3,17 @@ import { BaseCollection } from './BaseCollection'
 export type IChatGPTMessage = {
   role: string
   content: string
+  ts: number
 }
 
 export interface IChatGPTSession {
-  model: string | undefined
-  currentParentMessageId: string | undefined
+  model?: string
   messages: IChatGPTMessage[]
 }
 
 export type ChatGPTSessionRecord = IChatGPTSession & {
   _id: string
-  boardid: string
+  boardId: string
   created_at: number
   last_updated: number
 }
@@ -23,32 +23,50 @@ export class ChatGPTCollectionClass extends BaseCollection<ChatGPTSessionRecord>
     super('chatGPTSessions')
   }
 
-  public async getChatGPTSessionByBoardId(boardid: string): Promise<ChatGPTSessionRecord | null> {
-    const sessions = await this.collection.findOneAsync({ boardid })
-    if (sessions === undefined) {
-      const _id = await this.collection.insertAsync(this.generateEmptyChatGPTSession(boardid))
+  public async getChatGPTSessionByBoardId(boardId: string): Promise<ChatGPTSessionRecord | null> {
+    const session = await this.collection.findOneAsync({ boardId })
+    if (session == null) {
+      const _id = await this.collection.insertAsync(this.generateEmptyChatGPTSession(boardId))
       return this.collection.findOneAsync({ _id }) as Promise<ChatGPTSessionRecord>
     }
 
-    return sessions[0] as ChatGPTSessionRecord
+    return session as ChatGPTSessionRecord
   }
 
-  public async updateChatGPTSession(session: IChatGPTSession & Pick<ChatGPTSessionRecord, '_id'>) {
-    const { _id, model, messages, currentParentMessageId } = session
-    const values = { model, messages, currentParentMessageId, last_updated: Date.now() }
+  public async updateChatGPTSession(boardId: string, session: IChatGPTSession) {
+    const { model, messages } = session
+    const values = { model, messages, last_updated: Date.now() }
 
-    return this.collection.updateAsync({ _id }, { $set: values })
+    return this.collection.updateAsync({ boardId }, { $set: values })
   }
 
-  private generateEmptyChatGPTSession(boardid: string): Omit<ChatGPTSessionRecord, '_id'> {
+  private generateEmptyChatGPTSession(boardId: string): Omit<ChatGPTSessionRecord, '_id'> {
     return {
-      boardid,
+      boardId,
       created_at: Date.now(),
       last_updated: Date.now(),
-      model: undefined,
-      currentParentMessageId: undefined,
       messages: []
     }
+  }
+
+  public async addMessagesToChatGPTSession(boardId: string, messages: IChatGPTMessage[]) {
+    return this.collection.updateAsync({ boardId }, { $push: { messages: { $each: messages } } })
+  }
+
+  public async getUserHistoryMessages(boardId: string): Promise<string> {
+    const session = await this.getChatGPTSessionByBoardId(boardId)
+
+    if (session) {
+      const longString = session.messages.map(message => message.content).join(' ')
+      let tokens = longString.split(' ')
+
+      //set MAX TOKEN = 3000, the max limit of open ai about gpt-3.5-turo is 4096
+      if (tokens.length > 3000) {
+        tokens.slice(tokens.length - 3000, tokens.length)
+      }
+      return tokens.join(' ')
+    }
+    return ''
   }
 }
 

@@ -8,12 +8,17 @@ import {
 import { BaseService } from './BaseService'
 import { ChatGPTAPI } from 'chatgpt'
 
+export type ChatGPTResponse = {
+  content: string
+  parentMessageId?: string
+}
+
 export class ChatGPTService extends BaseService {
-  private _chatGPTAPI: ChatGPTAPI | undefined
+  private _chatGPTAPI?: ChatGPTAPI
 
   constructor() {
     super('chatGPT')
-    if (process.env.CHATGPT_API_KEY !== undefined) {
+    if (process.env.CHATGPT_API_KEY) {
       this._chatGPTAPI = new ChatGPTAPI({
         apiKey: process.env.CHATGPT_API_KEY,
         completionParams: {
@@ -26,12 +31,10 @@ export class ChatGPTService extends BaseService {
 
   public startup(): void {}
 
-  public async saveChatGPTSession(
-    chatGPTSession: IChatGPTSession & Pick<ChatGPTSessionRecord, '_id'>
-  ) {
+  public async saveChatGPTSession(boardId: string, chatGPTSession: IChatGPTSession) {
     const userid = Meteor.userId()
     if (userid != null) {
-      const count = await ChatGPTCollection.updateChatGPTSession(chatGPTSession)
+      const count = await ChatGPTCollection.updateChatGPTSession(boardId, chatGPTSession)
       return count == 1
     }
     throw new Meteor.Error('Unauthorized')
@@ -40,39 +43,39 @@ export class ChatGPTService extends BaseService {
   public async getChatGPTSessionByBoardId(boardId: string): Promise<ChatGPTSessionRecord | null> {
     const userid = Meteor.userId()
     if (userid != null) {
-      const chatGPTSessionRecord = await ChatGPTCollection.getChatGPTSessionByBoardId(boardId)
-      return chatGPTSessionRecord
+      return ChatGPTCollection.getChatGPTSessionByBoardId(boardId)
     }
     throw new Meteor.Error('Unauthorized')
   }
 
-  public async sendMessageToChatGPTWithoutContext(message: string): Promise<string> {
-    if (this._chatGPTAPI === undefined) {
-      throw new Meteor.Error('ChatGPT API Key not set succeed')
-    }
-    const response = await this._chatGPTAPI.sendMessage(message)
-    return response.text
-  }
-
   public async sendMessageToChatGPTWithContext(
-    boardid: string,
+    boardId: string,
     message: string,
-    model = 'gpt-3.5-turbo'
-  ): Promise<string> {
-    const record = await this.getChatGPTSessionByBoardId(boardid)
-    if (record === null) {
+    model?: string,
+    parentMessageId?: string
+  ): Promise<ChatGPTResponse> {
+    const record = await this.getChatGPTSessionByBoardId(boardId)
+    if (record == null) {
       throw new Meteor.Error('ChatGPTSession not found')
     }
-    if (this._chatGPTAPI === undefined) {
+    if (this._chatGPTAPI == null) {
       throw new Meteor.Error('ChatGPT API Key not set succeed')
     }
+
     let response
-    if (record.currentParentMessageId === undefined) {
-      response = await this._chatGPTAPI.sendMessage(message)
+    if (!parentMessageId) {
+      response = await this._chatGPTAPI.sendMessage(message, {
+        parentMessageId
+      })
+    } else {
+      const historyMessages = await ChatGPTCollection.getUserHistoryMessages(boardId)
+      if (message.length) {
+        response = await this._chatGPTAPI.sendMessage(historyMessages)
+      } else {
+        response = await this._chatGPTAPI.sendMessage(message)
+      }
     }
-    response = await this._chatGPTAPI.sendMessage(message, {
-      parentMessageId: record.currentParentMessageId
-    })
+
     const userMsg = {
       role: 'user',
       content: message
@@ -81,10 +84,14 @@ export class ChatGPTService extends BaseService {
       role: 'assistant',
       content: response.text
     } as IChatGPTMessage
-    record.messages.push(userMsg, assistantMsg)
-    record.currentParentMessageId = response.id
+    const messages = [userMsg, assistantMsg]
     record.model = model
-    await ChatGPTCollection.updateChatGPTSession(record)
-    return response.text
+
+    await ChatGPTCollection.addMessagesToChatGPTSession(boardId, messages)
+
+    return {
+      content: response.text,
+      parentMessageId: response.parentMessageId
+    }
   }
 }
