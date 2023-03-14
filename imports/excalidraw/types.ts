@@ -505,6 +505,8 @@ export type UIChildrenComponents = {
 
 /** Types represents markboard's board object */
 export interface IBoard {
+  id: string
+  title: string
   elements: readonly NonDeletedExcalidrawElement[]
   files: BinaryFiles
 }

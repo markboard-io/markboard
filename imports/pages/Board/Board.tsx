@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { PanelGroup } from 'react-resizable-panels'
-import { SidebarPanel } from './SidebarPanel'
+import { FileExplorerPanel } from './FileExplorerPanel'
 import { MainPanel } from './MainPanel'
-import './Board.style.scss'
 import { useAtomValue } from 'jotai'
 import { isSidebarOpenAtom } from '/imports/store/atomSidebar'
 import { Services } from '/imports/services/client'
 import { useStore } from '/imports/store'
+
+import './Board.style.scss'
 
 interface IBoardProps {
   id: string
@@ -22,7 +23,7 @@ export const Board: React.FC<IBoardProps> = ({ id: _id }) => {
 
   return (
     <PanelGroup className='Board' direction='horizontal' autoSaveId='primary-panel-layouts'>
-      <SidebarPanel isOpen={isSidebarOpen} />
+      <FileExplorerPanel isOpen={isSidebarOpen} />
       <MainPanel />
     </PanelGroup>
   )

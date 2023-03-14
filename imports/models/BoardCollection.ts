@@ -36,12 +36,14 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
 
   public async getBoardById(boardId: string): Promise<BoardRecord | null> {
     const document = await this.collection.findOneAsync({ _id: boardId })
+    if (document != null) Object.assign(document, { id: document._id })
     return document as BoardRecord
   }
 
-  private generateEmptyBoard(userid: string): Omit<BoardRecord, '_id'> {
+  private generateEmptyBoard(userid: string): Omit<BoardRecord, 'id' | '_id'> {
     return {
       userid,
+      title: 'Untitled',
       created_at: Date.now(),
       last_updated: Date.now(),
       elements: [],
