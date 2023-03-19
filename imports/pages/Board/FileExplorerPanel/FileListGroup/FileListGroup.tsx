@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { IBoard } from '/imports/excalidraw/types'
+import styles from './FileListGroup.module.scss'
 
-import './FileListGroup.style.scss'
+console.log(styles)
 
 export interface IFileListGroupProps {
   groupId: 'Public' | 'Private' | 'Favorites'
@@ -69,7 +70,7 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId, limit })
   const sliceEnd = limit != null ? limit : boards.length
 
   return (
-    <div className='FileList'>
+    <div className={styles.FileListGroup}>
       <div className='FileListTitleContainer'>
         <div className='FileListTitle'>{groupId}</div>
       </div>

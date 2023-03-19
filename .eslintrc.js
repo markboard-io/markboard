@@ -1,4 +1,7 @@
 module.exports = {
+  global: {
+    Package: 'readonly'
+  },
   settings: {
     react: {
       version: 'detect'

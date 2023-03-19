@@ -1,0 +1,1 @@
+The folder is for placing custom Meteor packages maintained by this project.
