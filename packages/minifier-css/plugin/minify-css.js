@@ -188,8 +188,14 @@ const mergeCss = Profile('mergeCss', async function (css, postcssConfig) {
 
         for (const message of messages) {
           if (message.plugin === 'postcss-modules') {
-            console.log(filename, file.addJavaScript)
-            console.log(message.exportTokens)
+            file.addStylesheet({
+              data: `module.exports = ${JSON.stringify(message.exportTokens)}`,
+              path: filename.replace(/\.css$/, '.js')
+            })
+            console.log({
+              data: `module.exports = ${JSON.stringify(message.exportTokens)}`,
+              path: filename.replace(/\.scss$/, '.js')
+            })
           }
         }
 

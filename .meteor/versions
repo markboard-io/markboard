@@ -30,7 +30,6 @@ ejson@1.1.3
 email@2.2.4
 es5-shim@4.8.0
 fetch@0.1.3
-fourseven:scss@4.15.0
 geojson-utils@1.0.11
 github-oauth@1.4.1
 google-oauth@1.4.3
@@ -43,10 +42,9 @@ inter-process-messaging@0.1.1
 launch-screen@1.3.0
 localstorage@1.2.0
 logging@1.3.2
-markboard:minifier-css@1.10.0
+markboard:scss-modules@0.4.1
 meteor@1.11.1
 meteor-base@1.5.1
-minifier-css@1.6.2
 minifier-js@2.7.5
 minimongo@1.9.2
 mobile-experience@1.1.0
