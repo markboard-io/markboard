@@ -91,7 +91,6 @@ const initializeScene = async (opts: {
     scrollToContent?: boolean
   } = await loadScene(null, null, Object.assign(localDataState, boardFromCloud))
 
-
   let roomLinkData = getCollaborationLinkData(window.location.href)
   const isExternalScene = !!(id || jsonBackendMatch || roomLinkData)
   if (isExternalScene) {
@@ -241,7 +240,6 @@ const ExcalidrawWrapper = () => {
   useEffect(() => {
     if (isExcalidrawAPIAvailable) {
       const collab = new CollabClass(excalidrawAPI)
-      console.log('excalidrawAPI', excalidrawAPI)
       collab.mount()
       return () => collab.unmount()
     }
@@ -595,7 +593,8 @@ export function getCurrentBoardId() {
 
 export const saveBoardToCloud = debounce(async function (files: BinaryFiles, elements) {
   const ret = await Services.get('board').saveBoard({
-    _id: getCurrentBoardId(),
+    id: getCurrentBoardId(),
+    title: '', // TODO: use real names 
     files,
     elements
   })

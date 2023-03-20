@@ -3,8 +3,6 @@ import { IBoard } from '/imports/excalidraw/types'
 import styles from './FileListGroup.module.scss'
 import cx from 'clsx'
 
-console.log('styles:', styles)
-
 export interface IFileListGroupProps {
   groupId: 'Public' | 'Private' | 'Favorites'
   limit?: number

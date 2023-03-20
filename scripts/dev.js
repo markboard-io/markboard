@@ -1,12 +1,14 @@
 const { sh } = require('./sh')
+const fs = require('fs')
 
 main()
 
-function main() {
+async function main() {
   const args = parseArguments()
+  const envs = parseEnvironmentVariables()
   const port = args.port ?? 3000
 
-  sh(`export $(cat .env | xargs) && meteor --port ${port} run`)
+  sh(`export $(echo '${envs}' | xargs) && meteor --port ${port} run`)
 }
 
 function parseArguments() {
@@ -17,4 +19,13 @@ function parseArguments() {
     options[key.replace(/-/g, '')] = value
   }
   return options
+}
+
+function parseEnvironmentVariables() {
+  return fs
+    .readFileSync('.env')
+    .toString()
+    .split('\n')
+    .filter(line => !line.startsWith('#'))
+    .join(' ')
 }

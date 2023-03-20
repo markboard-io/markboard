@@ -26,12 +26,12 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     return documents[0] as BoardRecord
   }
 
-  public async updateBoard(board: IBoard & Pick<BoardRecord, '_id'>) {
-    const { _id, files, elements } = board
+  public async updateBoard(board: IBoard) {
+    const { id, files, elements } = board
     const values = { files, elements, last_updated: Date.now() }
 
     // TODO check "edit" permission here
-    return this.collection.updateAsync({ _id }, { $set: values })
+    return this.collection.updateAsync({ _id: id }, { $set: values })
   }
 
   public async getBoardById(boardId: string): Promise<BoardRecord | null> {

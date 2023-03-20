@@ -1,5 +1,5 @@
 import { IBoard } from '../excalidraw/types'
-import { BoardCollection, BoardRecord } from '../models'
+import { BoardCollection } from '../models'
 import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
 
@@ -18,7 +18,7 @@ export class BoardService extends BaseService {
     throw new Meteor.Error('Unauthorized')
   }
 
-  public async saveBoard(board: IBoard & Pick<BoardRecord, '_id'>) {
+  public async saveBoard(board: IBoard) {
     const userid = Meteor.userId()
     if (userid != null) {
       const count = await BoardCollection.updateBoard(board)
