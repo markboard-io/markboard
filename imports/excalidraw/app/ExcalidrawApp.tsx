@@ -62,6 +62,7 @@ import { useAtomWithInitialValue } from '../../store/jotai'
 import { reconcileElements } from './collab/reconciliation'
 import { parseLibraryTokensFromUrl, useHandleLibrary } from '../data/library'
 import { attachDebugLabel, useStore } from '/imports/store'
+import { updateBoard } from '/imports/services/client'
 import { Services } from '/imports/services/client'
 
 polyfill()
@@ -463,7 +464,7 @@ const ExcalidrawWrapper = () => {
     setTheme(appState.theme)
 
     // sync board to cloud
-    saveBoardToCloud(files, elements)
+    saveBoardToCloud(files, elements, appState)
 
     // this check is redundant, but since this is a hot path, it's best
     // not to evaludate the nested expression every time
@@ -591,12 +592,21 @@ export function getCurrentBoardId() {
   return currentBoardId.length > 0 ? currentBoardId : boardIdFromPath
 }
 
-export const saveBoardToCloud = debounce(async function (files: BinaryFiles, elements) {
-  const ret = await Services.get('board').saveBoard({
-    id: getCurrentBoardId(),
-    title: '', // TODO: use real names 
-    files,
-    elements
-  })
+export const saveBoardToCloud = debounce(async function (
+  files: BinaryFiles,
+  elements,
+  appState: AppState
+) {
+  const ret = await updateBoard(
+    {
+      id: getCurrentBoardId(),
+      title: '',
+      files,
+      elements
+    },
+    appState
+  )
   console.log('[SaveBoardToMongoDB] success:', ret)
-}, SAVE_TO_CLOUD_STORAGE_TIMEOUT)
+  return ret
+},
+SAVE_TO_CLOUD_STORAGE_TIMEOUT)

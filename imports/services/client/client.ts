@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { ClientServices } from './types'
+import { ClientServices } from '../types'
 
 class ServiceManagerCient {
   public get<T extends keyof ClientServices>(service: T): ClientServices[T] {
