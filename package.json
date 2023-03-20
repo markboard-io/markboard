@@ -5,7 +5,7 @@
   },
   "scripts": {
     "local": "export MONGO_URL= && meteor run",
-    "start": "npm run dev",
+    "start": "node scripts/dev.js",
     "debug": "export $(cat .env | xargs) && meteor run --inspect",
     "debug:brk": "export $(cat .env | xargs) && meteor --inspect-brk",
     "dev": "node scripts/dev.js",
