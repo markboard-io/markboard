@@ -60,8 +60,9 @@ The cost of DigitalOcean's deployment is super low, starting from $5 per instanc
 ## Local Development
 
 ```bash
-meteor npm install
+meteor npm install # install dependencies
 npm start # local dev
+npm start -- --port=1234 # run local dev on port 1234
 npm run lint # lint
 npm t # test
 meteor shell # debugging
