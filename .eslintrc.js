@@ -1,5 +1,5 @@
 module.exports = {
-  global: {
+  globals: {
     Package: 'readonly'
   },
   settings: {

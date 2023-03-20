@@ -7,7 +7,7 @@ import { useDocumentTitle } from '/imports/hooks'
 
 export function NotFound() {
   const navigate = useNavigate()
-  useDocumentTitle('markboard - Page Not Found')
+  useDocumentTitle('Markboard - Page Not Found')
 
   return (
     <SiteLayout>

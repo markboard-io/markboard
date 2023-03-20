@@ -48,7 +48,7 @@ export function ForgotPassword() {
   const [ref, getFormValues] = useFormValues()
   const [emailError, validateEmail] = useEmailValidator()
 
-  useDocumentTitle('markboard - Forgot Password')
+  useDocumentTitle('Markboard - Forgot Password')
 
   const sendPasswordResetLink = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()

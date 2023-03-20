@@ -34,7 +34,7 @@ export function ResetPassword() {
   const [confirmPassError, setConfirmPassError] = useState('')
   const params = useParams() as unknown as IResetPasswordParams
 
-  useDocumentTitle('markboard - Reset Password')
+  useDocumentTitle('Markboard - Reset Password')
 
   const onFocus = () => {
     const { password } = getFormValues()

@@ -27,7 +27,7 @@ function useFormValues() {
 
 export function Signup() {
   const navigate = useNavigate()
-  useDocumentTitle('markboard - Sign Up')
+  useDocumentTitle('Markboard - Sign Up')
 
   const [emailError, validateEmail] = useEmailValidator()
   const [usernameError, validateUsername] = useUsernameValidator()

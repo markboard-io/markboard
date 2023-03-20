@@ -26,7 +26,7 @@ export function Login() {
   const navigate = useNavigate()
   const [ref, getFormValues] = useFormValues()
 
-  useDocumentTitle('markboard - Log in')
+  useDocumentTitle('Markboard - Log in')
 
   const loginWithGoogle = () => {
     Meteor.loginWithGoogle({}, error => {
