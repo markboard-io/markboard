@@ -33,7 +33,6 @@ const convertToStandardPath = function convertToStandardPath(osPath) {
 
 const rootDir = convertToStandardPath((process.env.PWD || process.cwd()) + '/')
 
-// CompileResult is {css, sourceMap}.
 class SassCompiler extends MultiFileCachingCompiler {
   sassModuleCompiler = new ScssModulesCompiler()
 
@@ -71,23 +70,18 @@ class SassCompiler extends MultiFileCachingCompiler {
     return path.basename(file).startsWith('_')
   }
 
-  async compileOneFileLater(inputFile, getResult) {
+  compileOneFileLater(inputFile, getResult) {
     const path = inputFile.getPathInPackage()
     const isSassModule = /module\.(sass|scss)$/.test(path)
 
+    inputFile.addStylesheet({ path }, async () => {
+      const { css: data, sourceMap } = await getResult()
+      return result && { data, sourceMap }
+    })
     if (isSassModule) {
-      const { cssModuleCode } = await getResult()
-      console.log()
-      inputFile.addJavaScript({ data: cssModuleCode, path })
-    } else {
-      inputFile.addStylesheet({ path: path }, async () => {
-        const result = await getResult()
-        return (
-          result && {
-            data: result.css,
-            sourceMap: result.sourceMap
-          }
-        )
+      inputFile.addJavaScript({ path }, async () => {
+        const { cssModuleCode } = await getResult()
+        return { data: cssModuleCode }
       })
     }
   }
@@ -107,11 +101,8 @@ class SassCompiler extends MultiFileCachingCompiler {
 
     const getRealImportPath = importPath => {
       const isAbsolute = importPath.startsWith('/')
-
-      //SASS has a whole range of possible import files from one import statement, try each of them
       const possibleFiles = []
 
-      //If the referenced file has no extension, try possible extensions, starting with extension of the parent file.
       let possibleExtensions = ['scss', 'sass', 'css']
 
       if (!importPath.match(/\.s?(a|c)ss$/)) {
@@ -126,14 +117,12 @@ class SassCompiler extends MultiFileCachingCompiler {
         possibleFiles.push(importPath)
       }
 
-      //Try files prefixed with underscore
       for (const possibleFile of possibleFiles) {
         if (!this.hasUnderscore(possibleFile)) {
           possibleFiles.push(addUnderscore(possibleFile))
         }
       }
 
-      //Try if one of the possible files exists
       for (const possibleFile of possibleFiles) {
         if (
           (isAbsolute && fileExists(possibleFile)) ||
@@ -142,7 +131,7 @@ class SassCompiler extends MultiFileCachingCompiler {
           return { absolute: isAbsolute, path: possibleFile }
         }
       }
-      //Nothing found...
+
       return null
     }
 

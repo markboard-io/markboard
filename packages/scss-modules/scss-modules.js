@@ -8,7 +8,7 @@ export class ScssModulesCompiler {
 
     const cssModulesProcessor = postcss([
       cssModules({
-        generateScopedName: '[name]__[local]___[hash:base64:5]',
+        generateScopedName: '[local]-[hash:base64:4]',
         getJSON: (_, json) => (classNames = json)
       })
     ])
