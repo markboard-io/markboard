@@ -8,7 +8,7 @@
     "start": "npm run dev",
     "debug": "export $(cat .env | xargs) && meteor run --inspect",
     "debug:brk": "export $(cat .env | xargs) && meteor --inspect-brk",
-    "dev": "export $(cat .env | xargs) && meteor run",
+    "dev": "node scripts/dev.js",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer",
     "lint": "meteor npx eslint server client imports",

@@ -1,8 +1,10 @@
 const exec = require('child_process').execSync
 
-function sh(command) {
+function sh(command, echo = true) {
   try {
-    console.log(`> ${command}`)
+    if (echo) {
+      console.log(`> ${command}`)
+    }
     const out = exec(command, { stdio: 'inherit' })
   } catch (e) {}
 }
