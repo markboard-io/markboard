@@ -1,7 +1,7 @@
 Package.describe({
   name: 'markboard:scss-modules',
   version: '0.3.0',
-  summary: 'Simple SCSS Modules for Meteor'
+  summary: 'Scss and modules for Meteor'
 })
 
 Package.onUse(api => {
@@ -10,11 +10,12 @@ Package.onUse(api => {
 })
 
 Package.registerBuildPlugin({
-  name: 'compileScssModules',
+  name: 'compileScssBatch',
   use: ['caching-compiler@1.2.2', 'ecmascript@0.15.1'],
   sources: ['scss-modules.js'],
   npmDependencies: {
     postcss: '8.4.21',
-    'postcss-modules': '6.0.0'
+    'postcss-modules': '6.0.0',
+    'node-sass': '4.14.1'
   }
 })
