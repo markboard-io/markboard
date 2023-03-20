@@ -1,5 +1,5 @@
 import React from 'react'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { NonDeletedExcalidrawElement } from '../element/types'
 import { getSelectedElements } from '../scene'
 
@@ -82,7 +82,7 @@ const getHints = ({ appState, elements, isMobile, device }: HintViewerProps) => 
       return t('hints.deepBoxSelect')
     }
     if (!selectedElements.length && !isMobile) {
-      return t('hints.canvasPanning')
+      return t('hints.startTyping')
     }
   }
 
