@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { IBoard } from '/imports/excalidraw/types'
 import styles from './FileListGroup.module.scss'
+import cx from 'clsx'
 
 console.log('styles:', styles)
 
@@ -39,7 +40,7 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId, limit })
       },
       {
         id: Math.random().toString(36).slice(2, 7),
-        title: 'np scripts using env'
+        title: 'npm scripts using env'
       },
       {
         id: Math.random().toString(36).slice(2, 7),
@@ -71,16 +72,19 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId, limit })
 
   return (
     <div className={styles.FileListGroup}>
-      <div className={styles.Header}>
-        <div className='FileListTitle'>{groupId}</div>
+      <div className={styles.header}>
+        <div className={styles.title}>{groupId}</div>
       </div>
-      <div className='FileListItems'>
-        {boards.slice(0, sliceEnd).map(({ id, title }) => (
-          <div className='FileListItem' key={id}>
-            <div className='FileListItemDot'></div>
-            <div className='FileListItemName'>{title}</div>
-          </div>
-        ))}
+      <div className={styles.items}>
+        {boards.slice(0, sliceEnd).map(({ id, title }, index) => {
+          const isActiveItem = index === 0 && groupId === 'Private'
+          return (
+            <div className={cx(styles.item, isActiveItem && styles.active)} key={id}>
+              <div className={styles.dot}></div>
+              <div className={styles.name}>{title}</div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

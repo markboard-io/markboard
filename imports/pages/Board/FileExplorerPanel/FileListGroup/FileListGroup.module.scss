@@ -1,7 +1,45 @@
 .FileListGroup {
 	display: flex;
-	background: red;
-	.Header {
-		background: green;
+	margin-top: 20px;
+	flex-direction: column;
+	color: #3f434a;
+	font-size: 15px;
+
+	.header {
+		.title {
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+	}
+	.items {
+		.item {
+			cursor: pointer;
+			width: 100%;
+			padding: 5px 10px;
+			overflow: hidden;
+			user-select: none;
+			border-radius: 5px;
+			display: flex;
+			align-items: center;
+			&.active {
+				background: #e7eaf1;
+			}
+			&:hover {
+				background: #e7eaf1;
+			}
+			.dot {
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				background-color: #acb1b9;
+				margin-right: 10px;
+				flex-shrink: 0;
+			}
+			.name {
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 1;
+			}
+		}
 	}
 }
