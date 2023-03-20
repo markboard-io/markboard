@@ -1,6 +1,6 @@
 Package.describe({
   name: 'markboard:scss-modules',
-  version: '0.1.0',
+  version: '0.3.0',
   summary: 'Simple SCSS Modules for Meteor'
 })
 

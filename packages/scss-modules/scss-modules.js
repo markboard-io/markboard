@@ -18,39 +18,40 @@ class ScssModulesCompiler {
   processFilesForTarget(files) {
     for (const file of files) {
       const filename = file.getBasename()
-      if (filename === 'FileListGroup.module.scss') {
-        this.processFile(file)
-      }
+      console.log(filename)
+      // if (filename === 'FileListGroup.module.scss') {
+      //   this.processFile(file)
+      // }
     }
   }
 
-  async processFile(file) {
-    const moduleScss = file.getContentsAsString()
-    const getJSON = (_cssFileName, json) => {
-      const jsContent = `export default ${JSON.stringify(json)};`
-      file.addJavaScript({
-        path: file.getPathInPackage() + '.js',
-        data: jsContent
-      })
-    }
+  // async processFile(file) {
+  //   const moduleScss = file.getContentsAsString()
+  //   const getJSON = (_cssFileName, json) => {
+  //     const jsContent = `export default ${JSON.stringify(json)};`
+  //     file.addJavaScript({
+  //       path: file.getPathInPackage() + '.js',
+  //       data: jsContent
+  //     })
+  //   }
 
-    const plugins = [
-      applyModulesConditionally({
-        generateScopedName: '[name]__[local]___[hash:base64:5]',
-        getJSON
-      })
-    ]
+  //   const plugins = [
+  //     applyModulesConditionally({
+  //       generateScopedName: '[name]__[local]___[hash:base64:5]',
+  //       getJSON
+  //     })
+  //   ]
 
-    try {
-      const result = await postcss(plugins).process(moduleScss, { from: undefined })
-      file.addStylesheet({
-        path: file.getPathInPackage() + '.css',
-        data: result.css
-      })
-    } catch (error) {
-      console.error('Error processing CSS Modules:', error)
-    }
-  }
+  //   try {
+  //     const result = await postcss(plugins).process(moduleScss, { from: undefined })
+  //     file.addStylesheet({
+  //       path: file.getPathInPackage() + '.css',
+  //       data: result.css
+  //     })
+  //   } catch (error) {
+  //     console.error('Error processing CSS Modules:', error)
+  //   }
+  // }
 }
 
 Plugin.registerCompiler(
