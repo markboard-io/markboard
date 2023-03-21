@@ -1,5 +1,5 @@
 spec:
-  name: inno-deck
+  name: markboard
   region: sfo
   alerts:
     - rule: DEPLOYMENT_FAILED

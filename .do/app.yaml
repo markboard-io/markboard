@@ -1,10 +1,10 @@
-name: inno-deck
+name: markboard
 region: sfo
 alerts:
   - rule: DEPLOYMENT_FAILED
   - rule: DOMAIN_FAILED
 services:
-  - name: inno-deck
+  - name: markboard
     github:
       branch: main
       repo: markboard/markboard
