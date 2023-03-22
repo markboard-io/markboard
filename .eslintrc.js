@@ -1,6 +1,7 @@
 module.exports = {
   globals: {
-    Package: 'readonly'
+    Package: 'readonly',
+    MultiFileCachingCompiler: 'readonly'
   },
   settings: {
     react: {
