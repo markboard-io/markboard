@@ -586,10 +586,7 @@ export function ExcalidrawApp() {
 }
 
 export function getCurrentBoardId() {
-  const { currentBoardId } = useStore.getState().appState
-  const boardIdFromPath = location.href.split('/board/').pop() ?? ''
-
-  return currentBoardId.length > 0 ? currentBoardId : boardIdFromPath
+  return location.href.split('/board/').pop() ?? ''
 }
 
 export const saveBoardToCloud = debounce(async function (

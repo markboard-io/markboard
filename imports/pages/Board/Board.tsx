@@ -8,14 +8,16 @@ import { Services } from '/imports/services/client'
 import { useStore } from '/imports/store'
 
 import './Board.style.scss'
+import { useParams } from 'react-router-dom'
 
 interface IBoardProps {
   id: string
 }
 
-export const Board: React.FC<IBoardProps> = ({ id: _id }) => {
+export const Board: React.FC<IBoardProps> = () => {
   const setAppState = useStore(state => state.setAppState)
   const isSidebarOpen = useAtomValue(isSidebarOpenAtom)
+  const { id } = useParams()
 
   useEffect(() => {
     Services.get('app').getAppState().then(setAppState)
@@ -24,7 +26,7 @@ export const Board: React.FC<IBoardProps> = ({ id: _id }) => {
   return (
     <PanelGroup className='Board' direction='horizontal' autoSaveId='primary-panel-layouts'>
       <FileExplorerPanel isOpen={isSidebarOpen} />
-      <MainPanel />
+      <MainPanel boardId={id ?? ''} />
     </PanelGroup>
   )
 }
