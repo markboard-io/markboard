@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo'
 import { Document } from 'bson'
+import { Collections } from './Collections'
 
 export type IMongoCollection = Mongo.Collection<Document, Document>
 
@@ -8,8 +9,13 @@ export abstract class BaseCollection<T extends Mongo.OptionalId<{}>> {
 
   protected collection!: IMongoCollection
 
+  public get raw() {
+    return this.collection
+  }
+
   constructor(name: string) {
-    this.setCollection(new Mongo.Collection(name))
+    const collection = Collections.getCollectionByName(name)
+    this.setCollection(collection)
   }
 
   protected setName(name: string) {

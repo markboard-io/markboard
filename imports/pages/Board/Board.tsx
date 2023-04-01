@@ -9,6 +9,7 @@ import { useStore } from '/imports/store'
 
 import './Board.style.scss'
 import { useParams } from 'react-router-dom'
+import { SubscribersManager } from '/imports/subscriptions'
 
 interface IBoardProps {
   id: string
@@ -20,6 +21,7 @@ export const Board: React.FC<IBoardProps> = () => {
   const { id } = useParams()
 
   useEffect(() => {
+    SubscribersManager.subscribe()
     Services.get('app').getAppState().then(setAppState)
   }, [])
 

@@ -28,6 +28,19 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     return documents[0] as BoardRecord
   }
 
+  public async updateBoardById(boardId: string, board: Partial<IBoard>) {
+    // TODO check "edit" permission here
+    return this.collection.updateAsync(
+      { _id: boardId },
+      {
+        $set: {
+          last_updated: Date.now(),
+          ...board
+        }
+      }
+    )
+  }
+
   public async updateBoard(board: IBoard) {
     const { id, files, elements } = board
     const values = { files, elements, last_updated: Date.now() }
@@ -54,8 +67,10 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     if (options != null && options.favorite === true) {
       Object.assign(query, { favorite: true })
     }
-    console.log(query, options)
-    return this.collection.find(query).fetchAsync() as Promise<BoardRecord[]>
+    const lastCreatedSortTop = { created_at: -1 }
+    return this.collection.find(query, { sort: lastCreatedSortTop }).fetchAsync() as Promise<
+      BoardRecord[]
+    >
   }
 
   private generateEmptyBoard(userid: string): Omit<BoardRecord, 'id' | '_id'> {

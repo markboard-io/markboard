@@ -1,10 +1,11 @@
 import { IBoard } from '../excalidraw/types'
 import { BoardCollection, BoardRecord } from '../models'
+import { Collections } from '../models/Collections'
 import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
 
 export interface IBoardFilterOptions {
-  keys?: (keyof IBoard)[],
+  keys?: (keyof IBoard)[]
   favorite?: boolean
 }
 
@@ -13,7 +14,14 @@ export class BoardService extends BaseService {
     super('board')
   }
 
-  public startup(): void {}
+  public startup(): void {
+    Meteor.publish(Collections.names.boards, () => {
+      const userid = Meteor.userId()
+      if (userid != null) {
+        return BoardCollection.raw.find({ userid })
+      }
+    })
+  }
 
   public getLastCreatedBoard() {
     const userid = Meteor.userId()
@@ -49,11 +57,10 @@ export class BoardService extends BaseService {
     throw new Meteor.Error('Unauthorized')
   }
 
-  public async getMyBoards(options?: IBoardFilterOptions): Promise<IBoard[]> {
+  public async changeBoardTitle(boardId: string, title: string) {
     const userid = Meteor.userId()
     if (userid != null) {
-      const records = await BoardCollection.getMyBoards(userid, options)
-      return Array.isArray(records) ? this._makeBoards(records, options) : []
+      return BoardCollection.updateBoardById(boardId, { title })
     }
     throw new Meteor.Error('Unauthorized')
   }
@@ -71,9 +78,5 @@ export class BoardService extends BaseService {
       }, {} as Record<string, any>) as IBoard
     }
     return board
-  }
-
-  private _makeBoards(records: BoardRecord[], options?: IBoardFilterOptions): IBoard[] {
-    return records.map(record => this._makeBoard(record, options))
   }
 }

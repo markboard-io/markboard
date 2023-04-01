@@ -54,6 +54,7 @@ import { useAtom, useSetAtom } from 'jotai'
 import WelcomeScreenDecor from './WelcomeScreenDecor'
 import { isSidebarOpenAtom } from '/imports/store/atomSidebar'
 import { TopRightControls } from './TopRightControls'
+import { BoardTitleInput } from './BoardTitleInput'
 
 interface LayerUIProps {
   actionManager: ActionManager
@@ -225,7 +226,8 @@ const LayerUI = ({
               'disable-pointerEvents': appState.zenModeEnabled
             })}
           >
-            {renderCanvasActions()}
+            {renderCanvasActions()} {/* Sidebar button */}
+            <BoardTitleInput />
             {shouldRenderSelectedShapeActions && renderSelectedShapeActions()}
           </Stack.Col>
           {!appState.viewModeEnabled && (

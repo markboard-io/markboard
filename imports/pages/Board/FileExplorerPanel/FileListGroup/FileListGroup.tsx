@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { IBoard } from '/imports/excalidraw/types'
+import React from 'react'
 import styles from './FileListGroup.module.scss'
 import cx from 'clsx'
 import { AddIcon } from '/imports/components/icons'
@@ -7,40 +6,24 @@ import { Services } from '/imports/services/client'
 import { throttle } from 'lodash'
 import { useNavigate } from 'react-router-dom'
 import { getCurrentBoardId } from '/imports/utils/board'
-import type { IBoardFilterOptions } from '/imports/services/BoardService'
+import { useFavoriteBoards, usePrivateBoards } from '/imports/subscriptions'
 
 export interface IFileListGroupProps {
   groupId: 'Public' | 'Private' | 'Favorites'
   limit?: number
 }
 
-export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId, limit }) => {
+export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId }) => {
   const navigate = useNavigate()
-  const [boards, setBoards] = useState<Pick<IBoard, 'id' | 'title'>[]>([])
-  const [isDataFetched, setIsDataFetched] = useState(false)
-  const sliceEnd = limit != null ? limit : boards.length
+  const privateBoards = usePrivateBoards()
+  const favoriteBoards = useFavoriteBoards()
+  const boards = groupId === 'Private' ? privateBoards : favoriteBoards
   const currentBoardId = getCurrentBoardId()
 
   const createBoard = throttle(async () => {
     const boardId = await Services.get('board').createNewBoard()
     navigate(`/board/${boardId}`)
   }, 500)
-
-  const getMyBoards = async () => {
-    const options = {} as IBoardFilterOptions
-
-    if (groupId === 'Favorites') {
-      options.favorite = true
-    }
-
-    const boards = await Services.get('board').getMyBoards({ ...options, keys: ['title', 'id'] })
-    setBoards(boards)
-    setIsDataFetched(true)
-  }
-
-  useEffect(() => {
-    getMyBoards()
-  }, [])
 
   return (
     <div className={styles.FileListGroup}>
@@ -51,7 +34,7 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId, limit })
         </div>
       </div>
       <div className={styles.items}>
-        {boards.slice(0, sliceEnd).map(({ id, title }) => {
+        {boards.map(({ id, title }) => {
           const isActiveItem = currentBoardId === id && groupId === 'Private'
           return (
             <div
@@ -64,7 +47,7 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId, limit })
             </div>
           )
         })}
-        {isDataFetched && !boards.length ? (
+        {!boards.length ? (
           <div className={cx(styles.item, styles.empty)}>
             <div className={styles.name}>No boards to show here</div>
           </div>
