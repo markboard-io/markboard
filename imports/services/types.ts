@@ -3,6 +3,7 @@ import type { BoardService } from './BoardService'
 import type { ExcalidrawSyncService } from './ExcalidrawSyncService'
 import type { StaticAssetsService } from './StaticAssetsService'
 import type { AppService } from './AppService'
+import type { FilesService } from './FilesService'
 
 type OmitPrivateProperties<T> = Omit<T, '_startup' | 'startup' | 'serviceName'>
 
@@ -20,6 +21,7 @@ export interface IServices {
   excalidrawSync: ExcalidrawSyncService
   staticAssets: StaticAssetsService
   board: BoardService
+  files: FilesService
 }
 
 export type ServerServices = {

@@ -15,12 +15,8 @@ export const BoardTitleInput = () => {
     Services.get('board').changeBoardTitle(boardId, title)
   }, 200)
 
-  const currentBoard = privateBoards.find(({ id }) => id === getCurrentBoardId())
-  console.log('currentBoard2', currentBoard)
-
   useEffect(() => {
     const currentBoard = privateBoards.find(({ id }) => id === getCurrentBoardId())
-    console.log('currentBoard', currentBoard)
     if (currentBoard != null) {
       const element = $input.current!
       element.value = currentBoard.title ?? 'Untitled'

@@ -273,6 +273,7 @@ import { atom } from 'jotai'
 import { Fonts } from '../scene/Fonts'
 import { actionPaste } from '../actions/actionClipboard'
 import { attachDebugLabel } from '/imports/store'
+import { uploadFile } from '/imports/services/client/files'
 
 export const isMenuOpenAtom = attachDebugLabel(atom(false), 'isMenuOpenAtom')
 export const isDropdownOpenAtom = attachDebugLabel(atom(false), 'isDropdownOpenAtom')
@@ -4869,8 +4870,6 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
       this.setImagePreviewCursor(resizedFile || imageFile)
     }
 
-    const dataURL = this.files[fileId]?.dataURL || (await getDataURL(imageFile))
-
     const imageElement = mutateElement(
       _imageElement,
       {
@@ -4886,7 +4885,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
           [fileId]: {
             mimeType,
             id: fileId,
-            dataURL,
+            dataURL: (await uploadFile(imageFile)) as DataURL,
             created: Date.now(),
             lastRetrieved: Date.now()
           }

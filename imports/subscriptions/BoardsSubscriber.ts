@@ -52,20 +52,16 @@ class BoardsSubscriberClass {
 
   private _subscribe() {
     Meteor.subscribe(Collections.names.boards)
-    console.log('observeChanges')
     const BoardCollection = Collections.getCollectionByName('boards')
     const onBoardsChanged = this._onBoardsChanged.bind(this)
     BoardCollection.find({}).observeChanges({
-      added(id, fields) {
-        console.log('boards added:', id, fields)
+      added(_id, _fields) {
         onBoardsChanged()
       },
-      changed(id, fields) {
-        console.log('boards changed:', id, fields)
+      changed(_id, _fields) {
         onBoardsChanged()
       },
-      removed(id) {
-        console.log('boards removed:', id)
+      removed(_id) {
         onBoardsChanged()
       }
     })
