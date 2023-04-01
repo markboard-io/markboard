@@ -4,8 +4,8 @@ import { OrganizationButton } from './OrganizationButton'
 import { FindAnything } from './FindAnything'
 import { FileListGroup } from './FileListGroup'
 import { useEffect } from 'react'
-
-import './FileExplorerPanel.style.scss'
+import styles from './FileExplorerPanel.module.scss'
+import { BottomGroup } from './BottomGroup'
 
 export interface IFileExplorerPanel {
   isOpen: boolean
@@ -30,16 +30,19 @@ export const FileExplorerPanel: React.FC<IFileExplorerPanel> = props => {
 
   return (
     <>
-      <Panel style={panelStyle} defaultSize={15} minSize={15} className='FileExplorerPanel'>
+      <Panel style={panelStyle} defaultSize={15} minSize={15} className={styles.FileExplorerPanel}>
         <OrganizationButton />
         <FindAnything />
-        <FileListGroup groupId='Favorites' limit={5} />
-        <FileListGroup groupId='Private' />
+        <div className={styles.NonBottomGroups}>
+          <FileListGroup groupId='Favorites' limit={5} />
+          <FileListGroup groupId='Private' />
+        </div>
+        <BottomGroup />
       </Panel>
       {isOpen ? (
-        <PanelResizeHandle className='PanelResizeHandle'>
+        <PanelResizeHandle className={styles.PanelResizeHandle}>
           <div
-            className='Divider'
+            className={styles.divider}
             style={dividerStyle}
             onMouseDown={() => setIsDragging(true)}
           ></div>

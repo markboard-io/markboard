@@ -1,6 +1,6 @@
 .FileListGroup {
 	display: flex;
-	margin-top: 20px;
+	margin-bottom: 20px;
 	flex-direction: column;
 	color: #3f434a;
 	font-size: 15px;
@@ -25,7 +25,7 @@
 				background: #e7eaf1;
 			}
 			&:hover {
-				background: #e7eaf1;
+				background-color: #f1f2f4;
 			}
 			.dot {
 				width: 5px;
