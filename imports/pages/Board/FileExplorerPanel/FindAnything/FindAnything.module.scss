@@ -2,25 +2,26 @@
 	background: #e7eaf1;
 	border-radius: 5px;
 	margin-top: 15px;
-	height: 35px;
+	height: 32px;
 	display: flex;
 	align-items: center;
-	color: #c4c4c4;
+	color: rgba(106, 112, 124, 0.4);
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 20px;
 	svg {
-		width: 20px;
-		height: 20px;
+		width: 19px;
+		height: 19px;
 		flex-shrink: 0;
 		margin-right: 5px;
 	}
-	.FindAnything_input {
+	input {
 		background: transparent;
 		border: none;
 		outline: none;
 		&::placeholder {
-			color: #c4c4c4;
+			color: rgba(106, 112, 124, 0.4);
+			font-size: 15px;
 		}
 	}
 }

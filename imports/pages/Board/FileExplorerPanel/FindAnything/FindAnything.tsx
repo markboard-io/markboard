@@ -1,12 +1,12 @@
 import React from 'react'
 import { SearchIcon } from '/imports/components/icons'
-import './FindAnything.style.scss'
+import styles from './FindAnything.module.scss'
 
 export function FindAnything() {
   return (
-    <div className='FindAnything'>
+    <div className={styles.FindAnything}>
       {SearchIcon}
-      <input className='FindAnything_input' placeholder='Find Anything'></input>
+      <input placeholder='Find Anything'></input>
     </div>
   )
 }
