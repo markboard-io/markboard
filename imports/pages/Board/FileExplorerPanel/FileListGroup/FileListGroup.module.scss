@@ -35,11 +35,19 @@
 			border-radius: 5px;
 			display: flex;
 			align-items: center;
+			margin-bottom: 2px;
 			&.active {
-				background: #e7eaf1;
+				color: #135dcc;
+				background: #d0e0f9;
+				&:hover {
+					background: #d0e0f9;
+				}
+				.dot {
+					background: #598ddb;
+				}
 			}
 			&:hover {
-				background-color: #f1f2f4;
+				background: #e7eaf1;
 			}
 			&.empty {
 				display: flex;

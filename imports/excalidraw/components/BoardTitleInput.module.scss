@@ -3,6 +3,13 @@
 	border: none !important;
 	margin-left: 5px;
 	height: 30px;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	&:focus {
+		box-shadow: 0 0 0 2px rgb(0, 144, 255) !important;
+	}
 	&:hover {
 		background-color: transparent !important;
 	}
