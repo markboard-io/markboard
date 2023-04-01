@@ -64,6 +64,7 @@ import { parseLibraryTokensFromUrl, useHandleLibrary } from '../data/library'
 import { attachDebugLabel, useStore } from '/imports/store'
 import { updateBoard } from '/imports/services/client'
 import { Services } from '/imports/services/client'
+import { getCurrentBoardId } from '/imports/utils/board'
 
 polyfill()
 window.EXCALIDRAW_THROTTLE_RENDER = true
@@ -583,10 +584,6 @@ const ExcalidrawWrapper = () => {
 
 export function ExcalidrawApp() {
   return <ExcalidrawWrapper />
-}
-
-export function getCurrentBoardId() {
-  return location.href.split('/board/').pop() ?? ''
 }
 
 export const saveBoardToCloud = debounce(async function (

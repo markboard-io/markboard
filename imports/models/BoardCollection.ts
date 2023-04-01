@@ -44,6 +44,10 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     return this.collection.insertAsync(this.generateEmptyBoard(userid))
   }
 
+  public async getMyBoards(userid: string): Promise<BoardRecord[] | null> {
+    return this.collection.find({ userid }).fetchAsync() as Promise<BoardRecord[]>
+  }
+
   private generateEmptyBoard(userid: string): Omit<BoardRecord, 'id' | '_id'> {
     return {
       userid,

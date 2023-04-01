@@ -11,6 +11,9 @@ export const MainPanel: React.FC<IMainPanelProps> = ({ boardId }) => {
   console.log('[debug]', `switch board: ${boardId}`)
   return (
     <Panel>
+      {/* TODO: we should out rerender entire Excalidraw app when boards,
+        * rerender the canvas is enough. 
+        */}
       <ExcalidrawApp key={boardId} />
     </Panel>
   )
