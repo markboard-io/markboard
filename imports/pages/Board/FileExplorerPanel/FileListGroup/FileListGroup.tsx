@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { IBoard } from '/imports/excalidraw/types'
 import styles from './FileListGroup.module.scss'
 import cx from 'clsx'
+import { AddIcon } from '/imports/components/icons'
 
 export interface IFileListGroupProps {
   groupId: 'Public' | 'Private' | 'Favorites'
@@ -72,6 +73,7 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId, limit })
     <div className={styles.FileListGroup}>
       <div className={styles.header}>
         <div className={styles.title}>{groupId}</div>
+        {AddIcon}
       </div>
       <div className={styles.items}>
         {boards.slice(0, sliceEnd).map(({ id, title }, index) => {

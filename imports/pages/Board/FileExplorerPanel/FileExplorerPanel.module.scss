@@ -13,6 +13,9 @@
 		overflow-y: scroll;
 		height: calc(100vh - var(--sidebar-top-preserve-height));
 		padding-bottom: var(--sidebar-bottom-preserve-height);
+		&::-webkit-scrollbar {
+			display: none;
+		}
 	}
 }
 .PanelResizeHandle {

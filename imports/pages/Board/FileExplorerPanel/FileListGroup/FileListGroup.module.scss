@@ -6,9 +6,21 @@
 	font-size: 15px;
 
 	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
 		.title {
 			font-weight: bold;
-			margin-bottom: 5px;
+		}
+		svg {
+			cursor: pointer;
+			border-radius: 3px;
+			width: 24px;
+			height: 24px;
+			&:hover {
+				background: rgba(0, 0, 0, 0.06);
+			}
 		}
 	}
 	.items {
