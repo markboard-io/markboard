@@ -4,7 +4,8 @@ import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
 
 export interface IBoardFilterOptions {
-  keys: (keyof IBoard)[]
+  keys?: (keyof IBoard)[],
+  favorite?: boolean
 }
 
 export class BoardService extends BaseService {
@@ -51,7 +52,7 @@ export class BoardService extends BaseService {
   public async getMyBoards(options?: IBoardFilterOptions): Promise<IBoard[]> {
     const userid = Meteor.userId()
     if (userid != null) {
-      const records = await BoardCollection.getMyBoards(userid)
+      const records = await BoardCollection.getMyBoards(userid, options)
       return Array.isArray(records) ? this._makeBoards(records, options) : []
     }
     throw new Meteor.Error('Unauthorized')
@@ -63,7 +64,7 @@ export class BoardService extends BaseService {
 
     if (options != null && Array.isArray(options.keys)) {
       return Object.entries(board).reduce((o, [key, value]) => {
-        if (options.keys.includes(key as keyof IBoard)) {
+        if (options.keys!.includes(key as keyof IBoard)) {
           o[key] = value
         }
         return o

@@ -41,6 +41,16 @@
 			&:hover {
 				background-color: #f1f2f4;
 			}
+			&.empty {
+				display: flex;
+				justify-content: center;
+				color: rgba(106, 112, 124, 0.8);
+				font-size: 14px;
+				cursor: default;
+				&:hover {
+					background-color: transparent;
+				}
+			}
 			.dot {
 				width: 5px;
 				height: 5px;

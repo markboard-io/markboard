@@ -1,3 +1,4 @@
+import { IBoardFilterOptions } from '../services/BoardService'
 import { AppStateCollection } from './AppStateCollection'
 import { BaseCollection } from './BaseCollection'
 import type { IBoard } from '/imports/excalidraw/types'
@@ -7,6 +8,7 @@ export type BoardRecord = IBoard & {
   userid: string
   created_at: number
   last_updated: number
+  favorite: boolean
 }
 
 export class BoardCollectionClass extends BaseCollection<BoardRecord> {
@@ -44,8 +46,16 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     return this.collection.insertAsync(this.generateEmptyBoard(userid))
   }
 
-  public async getMyBoards(userid: string): Promise<BoardRecord[] | null> {
-    return this.collection.find({ userid }).fetchAsync() as Promise<BoardRecord[]>
+  public async getMyBoards(
+    userid: string,
+    options?: IBoardFilterOptions
+  ): Promise<BoardRecord[] | null> {
+    const query = { userid }
+    if (options != null && options.favorite === true) {
+      Object.assign(query, { favorite: true })
+    }
+    console.log(query, options)
+    return this.collection.find(query).fetchAsync() as Promise<BoardRecord[]>
   }
 
   private generateEmptyBoard(userid: string): Omit<BoardRecord, 'id' | '_id'> {
@@ -55,7 +65,8 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
       created_at: Date.now(),
       last_updated: Date.now(),
       elements: [],
-      files: {}
+      files: {},
+      favorite: false
     }
   }
 }
