@@ -5,14 +5,19 @@ import { BoardCollection, BoardRecord } from '../models'
 import { IBoardFilterOptions } from '../services/BoardService'
 import { useEffect, useState } from 'react'
 import { globalEventEmitter } from '../utils'
+import { attachDebugLabel } from '/imports/store'
+import { atom, useAtom } from 'jotai'
 
 export enum BoardEvents {
   FavoritesChanged = 'BoardEvents_FavoritesChanged',
   PrivateChanged = 'BoardEvents_PrivateChanged'
 }
 
+export const privateBoardsAtom = attachDebugLabel(atom<IBoard[]>([]), 'privateBoardsAtom')
+export const favoriteBoardsAtom = attachDebugLabel(atom<IBoard[]>([]), 'favoriteBoardsAtom')
+
 export function usePrivateBoards() {
-  const [boards, setBoards] = useState<IBoard[]>([])
+  const [boards, setBoards] = useAtom(privateBoardsAtom)
 
   useEffect(() => {
     const onBoardsChanged = (boards: IBoard[]) => setBoards(boards)
@@ -24,7 +29,7 @@ export function usePrivateBoards() {
 }
 
 export function useFavoriteBoards() {
-  const [boards, setBoards] = useState<IBoard[]>([])
+  const [boards, setBoards] = useAtom(favoriteBoardsAtom)
 
   useEffect(() => {
     const onBoardsChanged = (boards: IBoard[]) => setBoards(boards)
