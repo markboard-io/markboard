@@ -3,6 +3,9 @@ import { IBoard } from '/imports/excalidraw/types'
 import styles from './FileListGroup.module.scss'
 import cx from 'clsx'
 import { AddIcon } from '/imports/components/icons'
+import { Services } from '/imports/services/client'
+import { throttle } from 'lodash'
+import { useNavigate } from 'react-router-dom'
 
 export interface IFileListGroupProps {
   groupId: 'Public' | 'Private' | 'Favorites'
@@ -10,6 +13,7 @@ export interface IFileListGroupProps {
 }
 
 export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId, limit }) => {
+  const navigate = useNavigate()
   const [boards] = useState<Pick<IBoard, 'id' | 'title'>[]>(
     [
       {
@@ -69,11 +73,18 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId, limit })
   )
   const sliceEnd = limit != null ? limit : boards.length
 
+  const createBoard = throttle(async () => {
+    const boardId = await Services.get('board').createNewBoard()
+    navigate(`/board/${boardId}`)
+  }, 500)
+
   return (
     <div className={styles.FileListGroup}>
       <div className={styles.header}>
         <div className={styles.title}>{groupId}</div>
-        {AddIcon}
+        <div className={styles.createBoard} onClick={createBoard}>
+          {groupId !== 'Favorites' ? AddIcon : null}
+        </div>
       </div>
       <div className={styles.items}>
         {boards.slice(0, sliceEnd).map(({ id, title }, index) => {

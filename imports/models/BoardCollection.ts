@@ -19,7 +19,7 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
       .find({ userid }, { sort: { created_at: -1 }, limit: 1 })
       .fetchAsync()
     if (!documents.length) {
-      const _id = await this.collection.insertAsync(this.generateEmptyBoard(userid))
+      const _id = await this.createNewBoard(userid)
       await AppStateCollection.setCurrentBoardId(userid, _id)
       return this.collection.findOneAsync({ _id }) as Promise<BoardRecord>
     }
@@ -38,6 +38,10 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     const document = await this.collection.findOneAsync({ _id: boardId })
     if (document != null) Object.assign(document, { id: document._id })
     return document as BoardRecord
+  }
+
+  public createNewBoard(userid: string): Promise<string> {
+    return this.collection.insertAsync(this.generateEmptyBoard(userid))
   }
 
   private generateEmptyBoard(userid: string): Omit<BoardRecord, 'id' | '_id'> {
