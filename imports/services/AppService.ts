@@ -16,4 +16,12 @@ export class AppService extends BaseService {
     }
     throw new Meteor.Error('Unauthorized')
   }
+
+  public setCurrentBoardId(boardId: string) {
+    const userid = Meteor.userId()
+    if (userid != null) {
+      return AppStateCollection.setCurrentBoard(userid, boardId)
+    }
+    throw new Meteor.Error('Unauthorized')
+  }
 }

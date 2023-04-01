@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styles from './BoardTitleInput.module.scss'
-import { throttle } from 'lodash'
+import { debounce } from 'lodash'
 import { Services } from '/imports/services/client'
 import { getCurrentBoardId } from '/imports/utils/board'
 import { usePrivateBoards } from '/imports/subscriptions'
@@ -9,11 +9,11 @@ export const BoardTitleInput = () => {
   const privateBoards = usePrivateBoards()
   const $input = useRef<HTMLInputElement | null>(null)
 
-  const changeBoardTitle = throttle(() => {
+  const changeBoardTitle = debounce(() => {
     const title = $input.current!.value
     const boardId = getCurrentBoardId()
     Services.get('board').changeBoardTitle(boardId, title)
-  }, 200)
+  }, 500)
 
   useEffect(() => {
     const currentBoard = privateBoards.find(({ id }) => id === getCurrentBoardId())

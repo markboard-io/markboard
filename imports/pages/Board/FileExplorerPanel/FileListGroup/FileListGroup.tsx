@@ -4,9 +4,9 @@ import cx from 'clsx'
 import { AddIcon } from '/imports/components/icons'
 import { Services } from '/imports/services/client'
 import { throttle } from 'lodash'
-import { useNavigate } from 'react-router-dom'
 import { getCurrentBoardId } from '/imports/utils/board'
 import { useFavoriteBoards, usePrivateBoards } from '/imports/subscriptions'
+import { useSwitchBoard } from '/imports/hooks'
 
 export interface IFileListGroupProps {
   groupId: 'Public' | 'Private' | 'Favorites'
@@ -14,15 +14,15 @@ export interface IFileListGroupProps {
 }
 
 export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId }) => {
-  const navigate = useNavigate()
   const privateBoards = usePrivateBoards()
   const favoriteBoards = useFavoriteBoards()
   const boards = groupId === 'Private' ? privateBoards : favoriteBoards
   const currentBoardId = getCurrentBoardId()
+  const switchBoard = useSwitchBoard()
 
   const createBoard = throttle(async () => {
     const boardId = await Services.get('board').createNewBoard()
-    navigate(`/board/${boardId}`)
+    switchBoard(boardId)
   }, 500)
 
   return (
@@ -40,7 +40,7 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId }) => {
             <div
               className={cx(styles.item, isActiveItem && styles.active)}
               key={id}
-              onClick={() => navigate(`/board/${id}`)}
+              onClick={() => switchBoard(id)}
             >
               <div className={styles.dot}></div>
               <div className={styles.name}>{title ?? 'Untitled'}</div>
