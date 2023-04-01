@@ -40,7 +40,12 @@ import { isMenuOpenAtom, useDevice } from './ExcalidrawCore'
 import { Stats } from './Stats'
 import { actionToggleStats } from '../actions/actionToggleStats'
 import Footer from './footer/Footer'
-import { SidebarIcon, WelcomeScreenTopToolbarArrow } from '/imports/components/icons'
+import {
+  MoreIcon,
+  PinIcon,
+  SidebarIcon,
+  WelcomeScreenTopToolbarArrow
+} from '/imports/components/icons'
 import { useOutsideClickHook } from '../hooks/useOutsideClick'
 import WelcomeScreen from './WelcomeScreen'
 import { hostSidebarCountersAtom } from './Sidebar/Sidebar'
@@ -48,6 +53,7 @@ import { jotaiScope } from '../../store/jotai'
 import { useAtom, useSetAtom } from 'jotai'
 import WelcomeScreenDecor from './WelcomeScreenDecor'
 import { isSidebarOpenAtom } from '/imports/store/atomSidebar'
+import { TopRightControls } from './TopRightControls'
 
 interface LayerUIProps {
   actionManager: ActionManager
@@ -297,15 +303,7 @@ const LayerUI = ({
               'transition-right': appState.zenModeEnabled
             })}
           >
-            <UserList collaborators={appState.collaborators} actionManager={actionManager} />
-            {onCollabButtonClick && (
-              <CollabButton
-                isInHamburgerMenu={false}
-                isCollaborating={isCollaborating}
-                collaboratorCount={appState.collaborators.size}
-                onClick={onCollabButtonClick}
-              />
-            )}
+            <TopRightControls />
             {renderTopRightUI?.(device.isMobile, appState)}
           </div>
         </div>

@@ -1,0 +1,24 @@
+.TopRightControls {
+	display: flex;
+	align-items: center;
+	color: rgb(106, 112, 124);
+	justify-content: flex-end;
+	.button {
+		width: 36px;
+		height: 36px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		margin-left: 4px;
+		cursor: pointer;
+		&:hover {
+			border-radius: 5px;
+			background-color: #f1f2f4;
+		}
+	}
+	.share {
+		font-size: 14px;
+		padding: 8px 12px;
+		width: auto;
+	}
+}
