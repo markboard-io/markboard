@@ -1,8 +1,10 @@
 module.exports = {
   globals: {
     Package: 'readonly',
-    MultiFileCachingCompiler: 'readonly'
+    MultiFileCachingCompiler: 'readonly',
+    Npm: 'readonly'
   },
+  ignorePatterns: ['packages/meteor-files/*.js'],
   settings: {
     react: {
       version: 'detect'

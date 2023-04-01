@@ -6,6 +6,7 @@ import { StaticAssetsService } from './StaticAssetsService'
 import { AppService } from './AppService'
 import { ServerServices } from './types'
 import { FilesService } from './FilesService'
+import { RedirectService } from './RedirectService'
 
 class ServiceManagerServerClass {
   private _services = {} as ServerServices
@@ -17,6 +18,7 @@ class ServiceManagerServerClass {
     this._services['staticAssets'] = new StaticAssetsService()
     this._services['board'] = new BoardService()
     this._services['files'] = new FilesService()
+    this._services['redirect'] = new RedirectService()
   }
 
   public getService<T extends keyof ServerServices>(service: T): ServerServices[T] {
