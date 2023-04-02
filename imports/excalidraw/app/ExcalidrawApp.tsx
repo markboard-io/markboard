@@ -61,7 +61,7 @@ import { atom, useAtom } from 'jotai'
 import { useAtomWithInitialValue } from '../../store/jotai'
 import { reconcileElements } from './collab/reconciliation'
 import { parseLibraryTokensFromUrl, useHandleLibrary } from '../data/library'
-import { attachDebugLabel, useStore } from '/imports/store'
+import { attachDebugLabel, globalState, useStore } from '/imports/store'
 import { updateBoard } from '/imports/services/client'
 import { Services } from '/imports/services/client'
 import { getCurrentBoardId } from '/imports/utils/board'
@@ -465,6 +465,7 @@ const ExcalidrawWrapper = () => {
     setTheme(appState.theme)
 
     // sync board to cloud
+    globalState.isSavingChangesToRemote = true
     saveBoardToCloud(files, elements, appState)
 
     // this check is redundant, but since this is a hot path, it's best
@@ -557,7 +558,7 @@ const ExcalidrawWrapper = () => {
     >
       <Excalidraw
         ref={excalidrawRefCallback}
-        onChange={useCallback(onChange, [excalidrawAPI, collabAPI])}
+        onChange={useCallback(onChange, [excalidrawAPI])}
         initialData={initialStatePromiseRef.current.promise}
         onCollabButtonClick={useCallback(() => setCollabDialogShown(true), [])}
         isCollaborating={isCollaborating}
@@ -601,6 +602,7 @@ export const saveBoardToCloud = debounce(async function (
     appState
   )
   console.log('[SaveBoardToMongoDB] success:', ret)
+  globalState.isSavingChangesToRemote = false
   return ret
 },
 SAVE_TO_CLOUD_STORAGE_TIMEOUT)

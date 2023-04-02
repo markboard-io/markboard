@@ -351,6 +351,9 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
   device: Device = deviceContextInitialValue
   detachIsMobileMqHandler?: () => void
 
+  private prevElements = [] as readonly ExcalidrawElement[]
+  private prevFiles = {} as BinaryFiles
+
   private excalidrawContainerRef = React.createRef<HTMLDivElement>()
 
   public static defaultProps: Partial<AppProps> = {
@@ -1136,12 +1139,14 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
       console.log('----- render ----------------------')
       Object.entries(this.props).forEach(
         ([key, val]) =>
-          (prevProps as Record<string, any>)[key] !== val && console.log(`Prop '${key}' changed`)
+          (prevProps as Record<string, any>)[key] !== val &&
+          console.log(`Prop '${key}' changed`, typeof val)
       )
       if (this.state) {
         Object.entries(this.state).forEach(
           ([key, val]) =>
-            (prevState as Record<string, any>)[key] !== val && console.log(`State '${key}' changed`)
+            (prevState as Record<string, any>)[key] !== val &&
+            console.log(`State '${key}' changed`, typeof val)
         )
       }
     }
@@ -1151,7 +1156,16 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     // init, which would trigger onChange with empty elements, which would then
     // override whatever is in localStorage currently.
     if (!this.state.isLoading) {
-      this.props.onChange?.(this.scene.getElementsIncludingDeleted(), this.state, this.files)
+      const elements = this.scene.getElementsIncludingDeleted()
+      const files = this.files
+
+      const isElementsChanged = JSON.stringify(elements) !== JSON.stringify(this.prevElements)
+      const isFilesChanged = JSON.stringify(files) !== JSON.stringify(this.prevFiles)
+      if (isElementsChanged || isFilesChanged) {
+        this.props.onChange?.(elements, this.state, files)
+        this.prevElements = JSON.parse(JSON.stringify(elements))
+        this.prevFiles = JSON.parse(JSON.stringify(files))
+      }
     }
   }
 

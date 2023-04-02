@@ -17,18 +17,11 @@ import {
 } from '../app_constants'
 import {
   generateCollaborationLinkData,
-  getCollaborationLink,
   getSyncableElements,
   SocketUpdateDataSource,
   SyncableExcalidrawElement
 } from '../data'
-import {
-  isSavedToFirebase,
-  loadFilesFromFirebase,
-  loadFromFirebase,
-  saveFilesToFirebase,
-  saveToFirebase
-} from '../data/firebase'
+import { loadFilesFromFirebase, saveFilesToFirebase, saveToFirebase } from '../data/firebase'
 import Portal from './Portal'
 import { t } from '/imports/i18n'
 import { UserIdleState } from '../../types'
@@ -41,9 +34,9 @@ import { ReconciledElements, reconcileElements as _reconcileElements } from './r
 import { decryptData } from '../../data/encryption'
 import { resetBrowserStateVersions } from '../data/tabSync'
 import { LocalData } from '../data/LocalData'
-import { atom, useAtom } from 'jotai'
+import { atom } from 'jotai'
 import { jotaiStore } from '../../../store/jotai'
-import { attachDebugLabel } from '/imports/store'
+import { attachDebugLabel, globalState } from '/imports/store'
 
 export const collabAPIAtom = attachDebugLabel(atom<CollabAPI | null>(null), 'collabAPIAtom')
 export const collabDialogShownAtom = attachDebugLabel(atom(false), 'collabDialogShownAtom')
@@ -155,17 +148,8 @@ export class CollabClass {
   }
 
   private beforeUnload = withBatchedUpdates((event: BeforeUnloadEvent) => {
-    const syncableElements = getSyncableElements(this.getSceneElementsIncludingDeleted())
-
-    if (
-      this.isCollaborating() &&
-      (this.fileManager.shouldPreventUnload(syncableElements) ||
-        !isSavedToFirebase(this.portal, syncableElements))
-    ) {
-      // this won't run in time if user decides to leave the site, but
-      //  the purpose is to run in immediately after user decides to stay
-      this.saveCollabRoomToFirebase(syncableElements)
-
+    console.log('isSavingChangesToRemote', globalState.isSavingChangesToRemote)
+    if (globalState.isSavingChangesToRemote) {
       preventUnload(event)
     }
   })

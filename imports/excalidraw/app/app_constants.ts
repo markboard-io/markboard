@@ -1,6 +1,6 @@
 // time constants (ms)
 export const SAVE_TO_LOCAL_STORAGE_TIMEOUT = 300
-export const SAVE_TO_CLOUD_STORAGE_TIMEOUT = 300
+export const SAVE_TO_CLOUD_STORAGE_TIMEOUT = 50
 export const INITIAL_SCENE_UPDATE_TIMEOUT = 5000
 export const FILE_UPLOAD_TIMEOUT = 300
 export const LOAD_IMAGES_TIMEOUT = 500
@@ -15,17 +15,17 @@ export const FILE_CACHE_MAX_AGE_SEC = 31536000
 
 export const WS_EVENTS = {
   SERVER_VOLATILE: 'server-volatile-broadcast',
-  SERVER: 'server-broadcast',
+  SERVER: 'server-broadcast'
 }
 
 export enum WS_SCENE_EVENT_TYPES {
   INIT = 'SCENE_INIT',
-  UPDATE = 'SCENE_UPDATE',
+  UPDATE = 'SCENE_UPDATE'
 }
 
 export const FIREBASE_STORAGE_PREFIXES = {
   shareLinkFiles: '/files/shareLinks',
-  collabFiles: '/files/rooms',
+  collabFiles: '/files/rooms'
 }
 
 export const ROOM_ID_BYTES = 10
@@ -37,5 +37,5 @@ export const STORAGE_KEYS = {
   LOCAL_STORAGE_LIBRARY: 'excalidraw-library',
   LOCAL_STORAGE_THEME: 'excalidraw-theme',
   VERSION_DATA_STATE: 'version-dataState',
-  VERSION_FILES: 'version-files',
+  VERSION_FILES: 'version-files'
 } as const
