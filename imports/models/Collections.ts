@@ -1,14 +1,6 @@
 import { Mongo } from 'meteor/mongo'
 import { Document } from 'bson'
 import { FilesCollection } from 'meteor/ostrio:files'
-import { Meteor } from 'meteor/meteor'
-
-if (Meteor.isServer && !process.env.UPLOAD_ABSOLUTE_PATH) {
-  throw new Error(
-    'Envrionment variable UPLOAD_ABSOLUTE_PATH is not set, ' +
-      'please set it to the absolute path of the upload folder'
-  )
-}
 
 class CollectionsClass {
   private _collections = {

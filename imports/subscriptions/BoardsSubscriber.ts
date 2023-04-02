@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { Collections } from '../models/Collections'
+import { Collections } from '/imports/models/Collections'
 import { IBoard } from '../excalidraw/types'
 import { BoardCollection, BoardRecord } from '../models'
 import { IBoardFilterOptions } from '../services/BoardService'

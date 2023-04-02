@@ -19,6 +19,14 @@ jest.mock('meteor/meteor', () => ({
   }
 }))
 
+jest.mock('/imports/models/Collections', () => {
+  return {
+    Collections: {
+      getCollectionByName: jest.fn()
+    }
+  }
+})
+
 // ReactDOM is located inside index.tsx file
 // as a result, we need a place for it to render into
 const element = document.createElement('div')

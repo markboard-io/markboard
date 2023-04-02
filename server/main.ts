@@ -13,6 +13,16 @@ if (process.env.NODE_ENV === 'development') {
   import('global-agent/bootstrap')
 }
 
+// Check whether `uploads` path was set
+// we need a absolute path to store uploaded files
+// e.g. /home/username/uploads
+if (!process.env.UPLOAD_ABSOLUTE_PATH) {
+  throw new Error(
+    'Envrionment variable UPLOAD_ABSOLUTE_PATH is not set, ' +
+      'please set it to the absolute path of the upload folder'
+  )
+}
+
 dotenv.config()
 
 // Reset password configuration

@@ -74,7 +74,7 @@ const jestConfig: JestConfigWithTsJest = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^(\\.{1,2}/.*)\\.js$': '$1',
     '\\/imports\\/(.+)': '<rootDir>/imports/$1',
-    'meteor/meteor': 'identity-obj-proxy'
+    'meteor/.+': 'identity-obj-proxy'
   },
   transform: {
     '^.+\\.m?[tj]sx?$': [
