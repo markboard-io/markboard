@@ -24,11 +24,13 @@ export class RedirectService extends BaseService {
   }
 
   private _getUserIdFromCookieString(cookieString: string) {
-    const cookies = cookieString.split(';').reduce((acc, cookie) => {
-      const [key, value] = cookie.split('=') as [string, string]
-      acc[key.trim()] = value.trim()
-      return acc
-    }, {} as Record<string, string>)
+    const cookies = cookieString
+      .split(';')
+      .filter(Boolean)
+      .reduce((o, cookie) => {
+        const [key, value] = cookie.split('=') as [string, string]
+        return Object.assign(o, { [key.trim()]: value.trim() })
+      }, {} as Record<string, string>)
     return cookies['x_uid']
   }
 }
