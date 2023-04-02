@@ -9,7 +9,6 @@ import { Meteor } from 'meteor/meteor'
 import { Toast } from '/imports/utils'
 
 function useFormValues() {
-  const navigate = useNavigate()
   const ref = useRef<HTMLFormElement | null>(null)
 
   const getFormValues = () => {
@@ -25,6 +24,8 @@ function useFormValues() {
 export function Login() {
   const navigate = useNavigate()
   const [ref, getFormValues] = useFormValues()
+  const query = new URLSearchParams(location.search)
+  const isDemo = query.get('demo')
 
   useDocumentTitle('Markboard - Log in')
 
@@ -69,14 +70,24 @@ export function Login() {
           <Form ref={ref} onSubmit={loginWithPassword}>
             <Form.Group className='mb-3' controlId='username'>
               <Form.Label className='label'>Username</Form.Label>
-              <Form.Control type='text' placeholder='Enter Username' />
+              <Form.Control
+                type='text'
+                placeholder='Enter Username'
+                defaultValue={isDemo != null ? 'demo' : ''}
+              />
             </Form.Group>
 
             <Form.Group className='mb-3' controlId='password'>
               <Form.Label className='label'>Password</Form.Label>
-              <Form.Control type='password' placeholder='Enter Password' />
+              <Form.Control
+                type='password'
+                placeholder='Enter Password'
+                defaultValue={isDemo != null ? 'demodemo' : ''}
+              />
             </Form.Group>
-            <OutlineButton className='login-button'>Continue with email</OutlineButton>
+            <OutlineButton className='login-button'>
+              {isDemo ? 'Try with demo acccount' : 'Continue with email'}
+            </OutlineButton>
           </Form>
           <div className='links'>
             <LinkText onClick={() => navigate('/forgot-password')}>Forgot Password?</LinkText>
