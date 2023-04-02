@@ -33,6 +33,7 @@ export function Login() {
     Meteor.loginWithGoogle({}, error => {
       if (error) return Toast.error(error.message)
       Toast.success('Log In Success')
+      navigate('/')
     })
   }
 
@@ -40,6 +41,7 @@ export function Login() {
     Meteor.loginWithGithub({}, error => {
       if (error) return Toast.error(error.message)
       Toast.success('Log In Success')
+      navigate('/')
     })
   }
 
