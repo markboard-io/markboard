@@ -1,25 +1,33 @@
-import React, { useEffect, useRef } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 import styles from './BoardTitleInput.module.scss'
-import { debounce } from 'lodash'
 import { Services } from '/imports/services/client'
 import { getCurrentBoardId } from '/imports/utils/board'
 import { usePrivateBoards } from '/imports/subscriptions'
 
-export const BoardTitleInput = () => {
+export const BoardTitleInput = memo(() => {
   const privateBoards = usePrivateBoards()
   const $input = useRef<HTMLInputElement | null>(null)
+  const $isTyping = useRef<boolean>(false)
 
-  const changeBoardTitle = debounce(() => {
+  const changeBoardTitle = () => {
     const title = $input.current!.value
     const boardId = getCurrentBoardId()
     Services.get('board').changeBoardTitle(boardId, title)
-  }, 500)
+  }
+
+  const onFocus = () => {
+    $isTyping.current = true
+  }
+
+  const onBlur = () => {
+    $isTyping.current = false
+  }
 
   useEffect(() => {
-    const currentBoard = privateBoards.find(({ id }) => id === getCurrentBoardId())
-    if (currentBoard != null) {
+    if (!$isTyping.current) {
       const element = $input.current!
-      element.value = currentBoard.title ?? 'Untitled'
+      const currentBoard = privateBoards.find(board => board.id === getCurrentBoardId())
+      element.value = currentBoard?.title ?? 'Untitled'
     }
   }, [privateBoards])
 
@@ -28,7 +36,9 @@ export const BoardTitleInput = () => {
       type='text'
       className={styles.BoardTitleInput}
       onInput={changeBoardTitle}
+      onFocus={onFocus}
+      onBlur={onBlur}
       ref={$input}
     ></input>
   )
-}
+})
