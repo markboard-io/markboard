@@ -58,7 +58,6 @@
     "react-resizable-panels": "0.0.28",
     "react-router-dom": "^6.6.1",
     "react-toastify": "^9.1.1",
-    "reselect": "^4.1.7",
     "roughjs": "^4.5.2",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",
