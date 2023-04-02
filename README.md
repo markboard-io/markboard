@@ -22,7 +22,7 @@ Say goodbye to the hassle of switching between different tools and hello to a mo
 
 ## Core Features
 
-[Website](https://markboard.io) • [Live Demo](https://markboard.io) • [Open Server](https://markboard.io) • [Docs](https://markboard.io/docs) • [Blog](https://markboard.io/blog)
+[Website](https://markboard.io) • [Live Demo](https://markboard.io/login?demo=1) • [Open Server](https://markboard.io) • [Docs](https://markboard.io/docs) • [Blog](https://markboard.io/blog)
 
 - Collaborative whiteboard
 - Wysiwyg markdown
