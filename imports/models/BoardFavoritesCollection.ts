@@ -12,7 +12,7 @@ export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord
   }
 
   public async addFavoriteBoard(userid: string, boardId: string): Promise<void> {
-    await this.insert({ userid, boardId })
+    this.collection.update({ userid, boardId }, { userid, boardId }, { upsert: true })
   }
 
   public async removeFavoriteBoard(userid: string, boardId: string): Promise<void> {
@@ -20,11 +20,16 @@ export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord
   }
 
   public async getFavoriteBoards(userid: string) {
-    const favoriteBoardRecords = this.collection.find({ userid })
-    const favoriteBoardIds = favoriteBoardRecords.map((record: any) => record.boardId)
+    const favoriteBoardRecords = (await this.collection
+      .find({ userid })
+      .fetchAsync()) as BoardFavoriteRecord[]
+    const favoriteBoardIds = favoriteBoardRecords.map(
+      (record: BoardFavoriteRecord) => record.boardId
+    )
     const favoriteBoards = (await this.collection
       .find({ _id: { $in: favoriteBoardIds } })
       .fetchAsync()) as BoardRecord[]
-    return favoriteBoards
+
+    return favoriteBoards as BoardRecord[]
   }
 }
