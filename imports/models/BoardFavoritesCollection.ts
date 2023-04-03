@@ -1,7 +1,8 @@
 import { BaseCollection } from './BaseCollection'
+import { BoardRecord } from './BoardCollection'
 
 export interface BoardFavoriteRecord {
-  userid: string,
+  userid: string
   boardId: string
 }
 
@@ -18,7 +19,12 @@ export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord
     await this.remove({ userid, boardId })
   }
 
-  public async getFavoriteBoards(userid: string): Promise<BoardFavoriteRecord[]> {
-    return this.collection.find({ userid: userid }).fetchAsync() as Promise<BoardFavoriteRecord[]>
+  public async getFavoriteBoards(userid: string) {
+    const favoriteBoardRecords = this.collection.find({ userid })
+    const favoriteBoardIds = favoriteBoardRecords.map((record: any) => record.boardId)
+    const favoriteBoards = (await this.collection
+      .find({ _id: { $in: favoriteBoardIds } })
+      .fetchAsync()) as BoardRecord[]
+    return favoriteBoards
   }
 }
