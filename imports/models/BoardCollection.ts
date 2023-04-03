@@ -8,7 +8,6 @@ export type BoardRecord = IBoard & {
   userid: string
   created_at: number
   last_updated: number
-  favorite: boolean
 }
 
 export class BoardCollectionClass extends BaseCollection<BoardRecord> {
@@ -64,8 +63,8 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     options?: IBoardFilterOptions
   ): Promise<BoardRecord[] | null> {
     const query = { userid }
-    if (options != null && options.favorite === true) {
-      Object.assign(query, { favorite: true })
+    if (options != null) {
+      Object.assign(query)
     }
     const lastCreatedSortTop = { created_at: -1 }
     return this.collection.find(query, { sort: lastCreatedSortTop }).fetchAsync() as Promise<
@@ -80,8 +79,7 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
       created_at: Date.now(),
       last_updated: Date.now(),
       elements: [],
-      files: {},
-      favorite: false
+      files: {}
     }
   }
 }
