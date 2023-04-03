@@ -58,14 +58,9 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     return this.collection.insertAsync(this.generateEmptyBoard(userid))
   }
 
-  public async getMyBoards(
-    userid: string,
-    options?: IBoardFilterOptions
-  ): Promise<BoardRecord[] | null> {
+  public async getMyBoards(userid: string): Promise<BoardRecord[] | null> {
     const query = { userid }
-    if (options != null) {
-      Object.assign(query)
-    }
+    Object.assign(query)
     const lastCreatedSortTop = { created_at: -1 }
     return this.collection.find(query, { sort: lastCreatedSortTop }).fetchAsync() as Promise<
       BoardRecord[]
