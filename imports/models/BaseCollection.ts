@@ -29,4 +29,8 @@ export abstract class BaseCollection<T extends Mongo.OptionalId<{}>> {
   protected insert(doc: T) {
     return this.collection.insertAsync(doc)
   }
+  
+  protected remove(doc: T){
+    return this.collection.removeAsync(doc)
+  }
 }
