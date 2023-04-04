@@ -32,13 +32,21 @@ export function useFavoriteBoards() {
   const [boards, setBoards] = useAtom(favoriteBoardsAtom)
 
   useEffect(() => {
-    const onBoardsChanged = (boards: IBoard[]) => setBoards(boards)
+    const onBoardsChanged = async () => {
+      const favoriteBoards = await BoardFavoritesSubscriber.getFavoriteBoards()
+      setBoards(favoriteBoards)
+    }
+    BoardFavoritesSubscriber.subscribe()
+    onBoardsChanged()
     globalEventEmitter.on(BoardEvents.FavoritesChanged, onBoardsChanged)
-    return () => globalEventEmitter.off(BoardEvents.FavoritesChanged, onBoardsChanged)
+    return () => {
+      globalEventEmitter.off(BoardEvents.FavoritesChanged, onBoardsChanged)
+    }
   }, [])
 
   return boards
 }
+
 
 class BoardsSubscriberClass {
   private _isSubscribed = false
@@ -76,7 +84,7 @@ class BoardsSubscriberClass {
 
   public async getMyBoards(options?: IBoardFilterOptions): Promise<IBoard[]> {
     const userid = Meteor.userId()!
-    const records = await BoardCollection.getMyBoards(userid, options)
+    const records = await BoardCollection.getMyBoards(userid)
     return Array.isArray(records) ? this._makeBoards(records, options) : []
   }
 
@@ -100,4 +108,53 @@ class BoardsSubscriberClass {
   }
 }
 
+class BoardFavoritesSubscriberClass {
+  private _isSubscribed = false
+
+  public subscribe() {
+    if (!this._isSubscribed) {
+      this._isSubscribed = true
+      this._subscribe()
+    }
+  }
+
+  private _subscribe() {
+    Meteor.subscribe(Collections.names.board_favorites)
+    const BoardFavoritesCollection = Collections.getCollectionByName('board_favorites')
+    const onFavoritesChanged = this._onFavoritesChanged.bind(this)
+    BoardFavoritesCollection.find({}).observeChanges({
+      added(_id, _fields) {
+        onFavoritesChanged()
+      },
+      changed(_id, _fields) {
+        onFavoritesChanged()
+      },
+      removed(_id) {
+        onFavoritesChanged()
+      }
+    })
+  }
+
+  private async _onFavoritesChanged() {
+    const favoriteBoards = await this.getFavoriteBoards()
+    globalEventEmitter.emit(BoardEvents.FavoritesChanged, favoriteBoards)
+  }
+
+  public async getFavoriteBoards(): Promise<IBoard[]> {
+    const userid = Meteor.userId()!
+    const records = await BoardCollection.getMyBoards(userid)
+    return Array.isArray(records) ? this._makeBoards(records) : []
+  }
+
+  private _makeBoards(records: BoardRecord[]): IBoard[] {
+    return records.map(record => this._makeBoard(record))
+  }
+
+  private _makeBoard(record: BoardRecord): IBoard {
+    const { _id: id, title, elements, files } = record
+    return { id, title, elements, files }
+  }
+}
+
+export const BoardFavoritesSubscriber = new BoardFavoritesSubscriberClass()
 export const BoardsSubscriber = new BoardsSubscriberClass()

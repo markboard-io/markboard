@@ -7,6 +7,7 @@ class CollectionsClass {
     boards: new Mongo.Collection('boards'),
     logs: new Mongo.Collection('logs'),
     appState: new Mongo.Collection('appState'),
+    board_favorites: new Mongo.Collection('board_favorite'),
     files: new FilesCollection({
       storagePath: process.env.UPLOAD_ABSOLUTE_PATH,
       collectionName: 'files',

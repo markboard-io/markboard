@@ -111,7 +111,7 @@ export class BoardService extends BaseService {
       )
       return favoriteBoards
     } else {
-      throw new Meteor.Error('Unable to fe')
+      throw new Meteor.Error('Unable to fetch star boards')
     }
   }
 }
