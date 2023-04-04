@@ -41,7 +41,7 @@ export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord
       const favoriteBoardRecords = (await this.collection
         .find({ userid })
         .fetchAsync()) as BoardFavoriteRecord[]
-      const favoriteBoardIds = favoriteBoardRecords.map(boardId => boardId)
+      const favoriteBoardIds = favoriteBoardRecords.map(({boardId}) => boardId)
       const favoriteBoards = (await this.collection
         .find({ _id: { $in: favoriteBoardIds } })
         .fetchAsync()) as BoardRecord[]
