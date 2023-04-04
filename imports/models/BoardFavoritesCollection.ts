@@ -11,34 +11,45 @@ export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord
     super('board_favorites')
   }
 
-  public async addFavoriteBoard(userid: string, boardId: string): Promise<boolean> {
-    try {
-      this.collection.update({ userid, boardId }, { userid, boardId }, { upsert: true })
-      return true
-    } catch (err) {
-      console.error('Error adding board to favorites:', err)
-      return false
+  public async addFavoriteBoard(userid: string, boardId: string): Promise<BoardFavoriteRecord> {
+    const query = { userid, boardId }
+    const update = { $set: { userid, boardId } }
+    const result = await this.collection.upsertAsync(query, update)
+    if (result && result.numberAffected && result.numberAffected > 0) {
+      const newRecord = { userid, boardId }
+      return newRecord
+    } else if (result && result.numberAffected === 1) {
+      const existingRecord = { userid, boardId }
+      return existingRecord
+    } else {
+      throw new Error(`Failed to add favorite board for user ${userid} and board ${boardId}`)
     }
   }
 
   public async removeFavoriteBoard(userid: string, boardId: string): Promise<boolean> {
-    try {
-      this.remove({ userid, boardId })
+    const query = { userid, boardId }
+    const result = await this.collection.removeAsync(query)
+    if (result && result > 0) {
       return true
-    } catch (err) {
-      console.error('Error removing board from favorites:', err)
-      return false
+    } else {
+      throw new Error(`Failed to remove favorite board for user ${userid} and board ${boardId}`)
     }
   }
-  public async getFavoriteBoards(userid: string) {
-    const favoriteBoardRecords = (await this.collection
-      .find({ userid })
-      .fetchAsync()) as BoardFavoriteRecord[]
-    const favoriteBoardIds = favoriteBoardRecords.map(boardId => boardId)
-    const favoriteBoards = (await this.collection
-      .find({ _id: { $in: favoriteBoardIds } })
-      .fetchAsync()) as BoardRecord[]
 
-    return favoriteBoards as BoardRecord[]
+  public async getFavoriteBoards(userid: string): Promise<BoardRecord[]> {
+    try {
+      const favoriteBoardRecords = (await this.collection
+        .find({ userid })
+        .fetchAsync()) as BoardFavoriteRecord[]
+      const favoriteBoardIds = favoriteBoardRecords.map(({boardId}) => boardId)
+      const favoriteBoards = (await this.collection
+        .find({ _id: { $in: favoriteBoardIds } })
+        .fetchAsync()) as BoardRecord[]
+
+      return favoriteBoards
+    } catch (err) {
+      console.error(`Error getting favorite boards for user ${userid}:`, err)
+      throw new Error(`Failed to get favorite boards for user ${userid}`)
+    }
   }
 }
