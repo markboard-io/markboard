@@ -1,5 +1,9 @@
 import { IBoard } from '../excalidraw/types'
-import { BoardCollection, BoardRecord } from '../models'
+import {
+  BoardCollection,
+  BoardRecord,
+  BoardFavoritesCollection,
+} from '../models'
 import { Collections } from '../models/Collections'
 import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
@@ -78,5 +82,36 @@ export class BoardService extends BaseService {
       }, {} as Record<string, any>) as IBoard
     }
     return board
+  }
+
+  public async starBoard(boardId: string): Promise<boolean> {
+    const userId = Meteor.userId()
+    if (userId != null) {
+      return BoardFavoritesCollection.addFavoriteBoard(userId, boardId)
+    } else {
+      throw new Meteor.Error('Cannot Star the board')
+    }
+  }
+
+  public cancelStarBoard(boardId: string): Promise<boolean> {
+    const userId = Meteor.userId()
+    if (userId != null) {
+      return BoardFavoritesCollection.removeFavoriteBoard(userId, boardId)
+    } else {
+      throw new Meteor.Error('Cannot Unstar the board')
+    }
+  }
+
+  public async getMineFavoriteBoards(): Promise<IBoard[]> {
+    const userid = Meteor.userId()
+    if (userid != null) {
+      const favoriteBoardRecords = await BoardFavoritesCollection.getFavoriteBoards(userid)
+      const favoriteBoards = favoriteBoardRecords.map(record =>
+        this._makeBoard(record, { keys: ['id', 'title'] })
+      )
+      return favoriteBoards
+    } else {
+      throw new Meteor.Error('Unable to fe')
+    }
   }
 }

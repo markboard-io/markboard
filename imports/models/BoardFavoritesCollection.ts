@@ -7,18 +7,17 @@ export interface BoardFavoriteRecord {
   boardId: string
 }
 
-export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord> {
+export class BoardFavoritesCollectionClass extends BaseCollection<BoardFavoriteRecord> {
   constructor() {
     super('board_favorites')
   }
 
-  public async addFavoriteBoard(userid: string, boardId: string): Promise<BoardFavoriteRecord> {
+  public async addFavoriteBoard(userid: string, boardId: string): Promise<boolean> {
     const query = { userid, boardId }
     const update = { $set: { userid, boardId } }
     const result = await this.collection.upsertAsync(query, update)
     if (result && result.numberAffected && result.numberAffected > 0) {
-      const newRecord = { userid, boardId }
-      return newRecord
+      return result?.numberAffected > 0
     } else {
       throw new Meteor.Error(`Failed to add favorite board for user ${userid} and board ${boardId}`)
     }
@@ -47,3 +46,5 @@ export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord
     }
   }
 }
+
+export const BoardFavoritesCollection = new BoardFavoritesCollectionClass()
