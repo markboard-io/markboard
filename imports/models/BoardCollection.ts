@@ -1,4 +1,3 @@
-import { IBoardFilterOptions } from '../services/BoardService'
 import { AppStateCollection } from './AppStateCollection'
 import { BaseCollection } from './BaseCollection'
 import type { IBoard } from '/imports/excalidraw/types'
@@ -60,7 +59,6 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
 
   public async getMyBoards(userid: string): Promise<BoardRecord[] | null> {
     const query = { userid }
-    Object.assign(query)
     const lastCreatedSortTop = { created_at: -1 }
     return this.collection.find(query, { sort: lastCreatedSortTop }).fetchAsync() as Promise<
       BoardRecord[]

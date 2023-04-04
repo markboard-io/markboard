@@ -1,5 +1,6 @@
 import { BaseCollection } from './BaseCollection'
 import { BoardRecord } from './BoardCollection'
+import { Meteor } from 'meteor/meteor'
 
 export interface BoardFavoriteRecord {
   userid: string
@@ -18,22 +19,15 @@ export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord
     if (result && result.numberAffected && result.numberAffected > 0) {
       const newRecord = { userid, boardId }
       return newRecord
-    } else if (result && result.numberAffected === 1) {
-      const existingRecord = { userid, boardId }
-      return existingRecord
     } else {
-      throw new Error(`Failed to add favorite board for user ${userid} and board ${boardId}`)
+      throw new Meteor.Error(`Failed to add favorite board for user ${userid} and board ${boardId}`)
     }
   }
 
   public async removeFavoriteBoard(userid: string, boardId: string): Promise<boolean> {
     const query = { userid, boardId }
     const result = await this.collection.removeAsync(query)
-    if (result && result > 0) {
-      return true
-    } else {
-      throw new Error(`Failed to remove favorite board for user ${userid} and board ${boardId}`)
-    }
+    return result > 0
   }
 
   public async getFavoriteBoards(userid: string): Promise<BoardRecord[]> {
@@ -41,7 +35,7 @@ export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord
       const favoriteBoardRecords = (await this.collection
         .find({ userid })
         .fetchAsync()) as BoardFavoriteRecord[]
-      const favoriteBoardIds = favoriteBoardRecords.map(({boardId}) => boardId)
+      const favoriteBoardIds = favoriteBoardRecords.map(({ boardId }) => boardId)
       const favoriteBoards = (await this.collection
         .find({ _id: { $in: favoriteBoardIds } })
         .fetchAsync()) as BoardRecord[]
@@ -49,7 +43,7 @@ export class BoardFavoritesCollection extends BaseCollection<BoardFavoriteRecord
       return favoriteBoards
     } catch (err) {
       console.error(`Error getting favorite boards for user ${userid}:`, err)
-      throw new Error(`Failed to get favorite boards for user ${userid}`)
+      throw new Meteor.Error(`Failed to get favorite boards for user ${userid}`)
     }
   }
 }
