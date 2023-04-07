@@ -1,12 +1,9 @@
 import { IBoard } from '../excalidraw/types'
-import {
-  BoardCollection,
-  BoardRecord,
-  BoardFavoritesCollection,
-} from '../models'
+import { BoardCollection, BoardRecord, BoardFavoritesCollection } from '../models'
 import { Collections } from '../models/Collections'
 import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
+import { _makeBoard, _makeBoards } from '../subscriptions/utils'
 
 export interface IBoardFilterOptions {
   keys?: (keyof IBoard)[]
@@ -43,12 +40,21 @@ export class BoardService extends BaseService {
     }
     throw new Meteor.Error('Unauthorized')
   }
-
+  public static async getMyBoards(options?: IBoardFilterOptions): Promise<IBoard[]> {
+    const userId = Meteor.userId()
+    if (!userId) {
+      return []
+    }
+    const boardRecords = await BoardCollection.getMyBoards(userId) ?? []
+    const boards = boardRecords.map((record) => _makeBoard(record, options))
+    return boards
+  }
+  
   public async getBoardById(boardId: string) {
     const userid = Meteor.userId()
     if (userid != null) {
       const record = await BoardCollection.getBoardById(boardId)
-      return record != null ? this._makeBoard(record) : null
+      return record != null ? BoardService._makeBoard(record) : null
     }
     throw new Meteor.Error('Unauthorized')
   }
@@ -69,7 +75,7 @@ export class BoardService extends BaseService {
     throw new Meteor.Error('Unauthorized')
   }
 
-  private _makeBoard(record: BoardRecord, options?: IBoardFilterOptions): IBoard {
+  private static _makeBoard(record: BoardRecord, options?: IBoardFilterOptions): IBoard {
     const { _id: id, title, elements, files } = record
     const board = { id, title, elements, files }
 
@@ -89,7 +95,7 @@ export class BoardService extends BaseService {
     if (userId != null) {
       return BoardFavoritesCollection.addFavoriteBoard(userId, boardId)
     } else {
-      throw new Meteor.Error('Cannot Star the board')
+      throw new Meteor.Error('Unauthorized')
     }
   }
 
@@ -98,11 +104,11 @@ export class BoardService extends BaseService {
     if (userId != null) {
       return BoardFavoritesCollection.removeFavoriteBoard(userId, boardId)
     } else {
-      throw new Meteor.Error('Cannot Unstar the board')
+      throw new Meteor.Error('Unauthorized')
     }
   }
 
-  public async getMineFavoriteBoards(): Promise<IBoard[]> {
+  public static async getMyFavoriteBoards(): Promise<IBoard[]> {
     const userid = Meteor.userId()
     if (userid != null) {
       const favoriteBoardRecords = await BoardFavoritesCollection.getFavoriteBoards(userid)
@@ -111,7 +117,7 @@ export class BoardService extends BaseService {
       )
       return favoriteBoards
     } else {
-      throw new Meteor.Error('Unable to fetch star boards')
+      throw new Meteor.Error('Unauthorized')
     }
   }
 }
