@@ -2,12 +2,12 @@ import { BaseCollection } from './BaseCollection'
 import { BoardRecord } from './BoardCollection'
 import { Meteor } from 'meteor/meteor'
 
-export interface BoardFavoriteRecord {
+export interface IBoardFavoriteRecord {
   userid: string
   boardId: string
 }
 
-export class BoardFavoritesCollectionClass extends BaseCollection<BoardFavoriteRecord> {
+export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavoriteRecord> {
   constructor() {
     super('board_favorites')
   }
@@ -33,7 +33,7 @@ export class BoardFavoritesCollectionClass extends BaseCollection<BoardFavoriteR
     try {
       const favoriteBoardRecords = (await this.collection
         .find({ userid })
-        .fetchAsync()) as BoardFavoriteRecord[]
+        .fetchAsync()) as IBoardFavoriteRecord[]
       const favoriteBoardIds = favoriteBoardRecords.map(({ boardId }) => boardId)
       const favoriteBoards = (await this.collection
         .find({ _id: { $in: favoriteBoardIds } })

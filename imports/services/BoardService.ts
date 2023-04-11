@@ -3,7 +3,7 @@ import { BoardCollection, BoardRecord, BoardFavoritesCollection } from '../model
 import { Collections } from '../models/Collections'
 import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
-import { _makeBoard, _makeBoards } from '../subscriptions/utils'
+import { _makeBoard, _makeBoards } from '../utils/boards'
 
 export interface IBoardFilterOptions {
   keys?: (keyof IBoard)[]
@@ -38,6 +38,7 @@ export class BoardService extends BaseService {
       const count = await BoardCollection.updateBoard(board)
       return count == 1
     }
+    console.error('Unauthorized')
     throw new Meteor.Error('Unauthorized')
   }
   public static async getMyBoards(options?: IBoardFilterOptions): Promise<IBoard[]> {
