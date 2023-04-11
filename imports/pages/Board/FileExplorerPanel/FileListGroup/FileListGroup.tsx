@@ -22,7 +22,11 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId }) => {
 
   const createBoard = throttle(async () => {
     const boardId = await Services.get('board').createNewBoard()
-    switchBoard(boardId)
+
+    /**
+     * when receiving `isNewBoard: true` the board should focus on editing title input.
+     */
+    switchBoard(boardId, { state: { isNewBoard: true } })
   }, 500)
 
   return (

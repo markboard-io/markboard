@@ -1,10 +1,14 @@
-import React, { memo, useEffect, useRef } from 'react'
+import React, { KeyboardEventHandler, memo, useEffect, useRef } from 'react'
 import styles from './BoardTitleInput.module.scss'
 import { Services } from '/imports/services/client'
 import { getCurrentBoardId } from '/imports/utils/board'
 import { usePrivateBoards } from '/imports/subscriptions'
+import { useLocation } from 'react-router-dom'
+import { globalEventEmitter } from '/imports/utils'
+import { AppEvents } from '/imports/utils/constants'
 
 export const BoardTitleInput = memo(() => {
+  const location = useLocation()
   const privateBoards = usePrivateBoards()
   const $input = useRef<HTMLInputElement | null>(null)
   const $isTyping = useRef<boolean>(false)
@@ -21,6 +25,8 @@ export const BoardTitleInput = memo(() => {
 
   const onBlur = () => {
     $isTyping.current = false
+    delete location.state.isNewBoard
+    window.history.replaceState({}, document.title)
   }
 
   useEffect(() => {
@@ -31,6 +37,31 @@ export const BoardTitleInput = memo(() => {
     }
   }, [privateBoards])
 
+  const startEditingTitle = () => {
+    $input.current?.focus()
+    $input.current?.select()
+  }
+
+  const onKeyDown: KeyboardEventHandler<HTMLInputElement> = ev => {
+    if (['Enter', 'Tab'].includes(ev.key)) {
+      ev.preventDefault()
+      globalEventEmitter.emit(AppEvents.EDIT_BOARD)
+    }
+  }
+
+  const isInitialTitle = $input.current?.value === 'Untitled'
+  const isNewBoard = location.state != null && location.state.isNewBoard
+  console.log({ isInitialTitle, isNewBoard })
+  if (isInitialTitle && isNewBoard) {
+    // There's problems of when using useEffect(callback) with no deps
+    // in a memo component. We use setTimeout with 100ms timeout to simulate
+    // useEffect(callback), ensuring it was called after a render finished.
+    setTimeout(() => {
+      startEditingTitle()
+      window.history.replaceState({}, document.title)
+    }, 100)
+  }
+
   return (
     <input
       type='text'
@@ -38,6 +69,7 @@ export const BoardTitleInput = memo(() => {
       onInput={changeBoardTitle}
       onFocus={onFocus}
       onBlur={onBlur}
+      onKeyDown={onKeyDown}
       ref={$input}
     ></input>
   )

@@ -274,7 +274,8 @@ import { Fonts } from '../scene/Fonts'
 import { actionPaste } from '../actions/actionClipboard'
 import { attachDebugLabel } from '/imports/store'
 import { uploadFile } from '/imports/services/client/files'
-import { DEFAULT_TEXT_COLOR } from '/imports/utils/constants'
+import { AppEvents, DEFAULT_TEXT_COLOR } from '/imports/utils/constants'
+import { globalEventEmitter } from '/imports/utils'
 
 export const isMenuOpenAtom = attachDebugLabel(atom(false), 'isMenuOpenAtom')
 export const isDropdownOpenAtom = attachDebugLabel(atom(false), 'isDropdownOpenAtom')
@@ -1022,6 +1023,17 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     window.addEventListener(EVENT.BLUR, this.onBlur, false)
     this.excalidrawContainerRef.current?.addEventListener(EVENT.DRAG_OVER, this.disableEvent, false)
     this.excalidrawContainerRef.current?.addEventListener(EVENT.DROP, this.disableEvent, false)
+
+    // application-level events
+    globalEventEmitter.on(AppEvents.EDIT_BOARD, this.onEditBoard.bind(this))
+  }
+
+  private onEditBoard() {
+    this.startTextEditing({
+      sceneX: 0,
+      sceneY: 0,
+      insertAtParentCenter: true
+    })
   }
 
   componentDidUpdate(prevProps: AppProps, prevState: AppState) {
