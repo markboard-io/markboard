@@ -46,6 +46,14 @@
       display: flex;
       align-items: baseline;
 
+      &.startWritingHints {
+        left: 205px;
+        top: 60px;
+        & > div {
+          width: auto !important;
+        }
+      }
+
       &__label {
         width: 120px;
         position: relative;

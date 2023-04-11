@@ -79,7 +79,7 @@ export const THEME = {
 
 export const WINDOWS_EMOJI_FALLBACK_FONT = 'Segoe UI Emoji'
 
-export const DEFAULT_FONT_SIZE = 20
+export const DEFAULT_FONT_SIZE = 16 // Small
 export const DEFAULT_FONT_FAMILY: FontFamilyValues = FONT_FAMILY.Inter
 export const DEFAULT_TEXT_ALIGN = 'left'
 export const DEFAULT_VERTICAL_ALIGN = 'top'

@@ -47,7 +47,7 @@ export const BoardTitleInput = memo(() => {
       ev.preventDefault()
       const element = $input.current!
       const { x, y } = element.getBoundingClientRect()
-      globalEventEmitter.emit(AppEvents.EDIT_BOARD, { x: x, y: y + 90 })
+      globalEventEmitter.emit(AppEvents.EDIT_BOARD, { x: x + 10, y: y + 90 })
     }
   }
 
