@@ -1028,12 +1028,27 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     globalEventEmitter.on(AppEvents.EDIT_BOARD, this.onEditBoard.bind(this))
   }
 
-  private onEditBoard() {
-    this.startTextEditing({
-      sceneX: 0,
-      sceneY: 0,
-      insertAtParentCenter: true
-    })
+  private onEditBoard({ x, y }: { x: number; y: number }) {
+    let { x: sceneX, y: sceneY } = viewportCoordsToSceneCoords(
+      { clientX: x, clientY: y },
+      this.state
+    )
+    const textElements = this.getSceneElements().filter(element => isTextElement(element))
+
+    if (textElements.length > 0) {
+      const [textElement] = textElements
+      this.startTextEditing({
+        sceneX: textElement.x + textElement.width / 2,
+        sceneY: textElement.y + textElement.height / 2,
+        insertAtParentCenter: true
+      })
+    } else {
+      this.startTextEditing({
+        sceneX,
+        sceneY,
+        insertAtParentCenter: true
+      })
+    }
   }
 
   componentDidUpdate(prevProps: AppProps, prevState: AppState) {
@@ -3040,6 +3055,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     }
   }
   private handleCanvasPointerDown = (event: React.PointerEvent<HTMLCanvasElement>) => {
+    console.log('onPointerDown', event.clientX, event.clientY)
     // since contextMenu options are potentially evaluated on each render,
     // and an contextMenu action may depend on selection state, we must
     // close the contextMenu before we update the selection on pointerDown

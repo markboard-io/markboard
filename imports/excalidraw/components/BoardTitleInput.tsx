@@ -45,13 +45,14 @@ export const BoardTitleInput = memo(() => {
   const onKeyDown: KeyboardEventHandler<HTMLInputElement> = ev => {
     if (['Enter', 'Tab'].includes(ev.key)) {
       ev.preventDefault()
-      globalEventEmitter.emit(AppEvents.EDIT_BOARD)
+      const element = $input.current!
+      const { x, y } = element.getBoundingClientRect()
+      globalEventEmitter.emit(AppEvents.EDIT_BOARD, { x: x, y: y + 90 })
     }
   }
 
   const isInitialTitle = $input.current?.value === 'Untitled'
   const isNewBoard = location.state != null && location.state.isNewBoard
-  console.log({ isInitialTitle, isNewBoard })
   if (isInitialTitle && isNewBoard) {
     // There's problems of when using useEffect(callback) with no deps
     // in a memo component. We use setTimeout with 100ms timeout to simulate
