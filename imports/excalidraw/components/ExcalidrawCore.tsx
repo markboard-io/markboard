@@ -274,6 +274,7 @@ import { Fonts } from '../scene/Fonts'
 import { actionPaste } from '../actions/actionClipboard'
 import { attachDebugLabel } from '/imports/store'
 import { uploadFile } from '/imports/services/client/files'
+import { DEFAULT_TEXT_COLOR } from '/imports/utils/constants'
 
 export const isMenuOpenAtom = attachDebugLabel(atom(false), 'isMenuOpenAtom')
 export const isDropdownOpenAtom = attachDebugLabel(atom(false), 'isDropdownOpenAtom')
@@ -2288,6 +2289,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     return getElementsAtPosition(elements, element => hitTest(element, this.state, x, y))
   }
 
+  /** double click to start text editing here */
   private startTextEditing = ({
     sceneX,
     sceneY,
@@ -2353,7 +2355,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
       : newTextElement({
           x: parentCenterPosition ? parentCenterPosition.elementCenterX : sceneX,
           y: parentCenterPosition ? parentCenterPosition.elementCenterY : sceneY,
-          strokeColor: this.state.currentItemStrokeColor,
+          strokeColor: DEFAULT_TEXT_COLOR,
           backgroundColor: this.state.currentItemBackgroundColor,
           fillStyle: this.state.currentItemFillStyle,
           strokeWidth: this.state.currentItemStrokeWidth,

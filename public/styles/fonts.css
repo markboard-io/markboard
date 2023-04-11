@@ -20,6 +20,13 @@
 }
 
 @font-face {
+	font-family: "Inter";
+	src: url("/fonts/Inter-Regular.ttf");
+	font-display: swap;
+	font-weight: 400;
+}
+
+@font-face {
 	font-family: "Assistant";
 	src: url("/fonts/Assistant-Regular.woff2");
 	font-display: swap;

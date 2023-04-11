@@ -4,15 +4,14 @@ import {
   DEFAULT_FONT_SIZE,
   DEFAULT_TEXT_ALIGN,
   EXPORT_SCALES,
-  THEME,
+  THEME
 } from './constants'
-import { t } from  '/imports/i18n'
+import { t } from '/imports/i18n'
 import { AppState, NormalizedZoomValue } from './types'
 import { getDateTime } from './utils'
+import { Roughness } from '../utils/constants'
 
-const defaultExportScale = EXPORT_SCALES.includes(devicePixelRatio)
-  ? devicePixelRatio
-  : 1
+const defaultExportScale = EXPORT_SCALES.includes(devicePixelRatio) ? devicePixelRatio : 1
 
 export const getDefaultAppState = (): Omit<
   AppState,
@@ -23,13 +22,13 @@ export const getDefaultAppState = (): Omit<
     theme: THEME.LIGHT,
     collaborators: new Map(),
     currentChartType: 'bar',
-    currentItemBackgroundColor: '#ced4da',
+    currentItemBackgroundColor: 'rgba(0, 0, 0, 0)',
     currentItemEndArrowhead: 'arrow',
-    currentItemFillStyle: 'hachure',
+    currentItemFillStyle: 'solid',
     currentItemFontFamily: DEFAULT_FONT_FAMILY,
     currentItemFontSize: DEFAULT_FONT_SIZE,
     currentItemOpacity: 100,
-    currentItemRoughness: 1,
+    currentItemRoughness: Roughness.None,
     currentItemStartArrowhead: null,
     currentItemStrokeColor: oc.black,
     currentItemRoundness: 'round',
@@ -45,7 +44,7 @@ export const getDefaultAppState = (): Omit<
       type: 'selection',
       customType: null,
       locked: false,
-      lastActiveToolBeforeEraser: null,
+      lastActiveToolBeforeEraser: null
     },
     penMode: false,
     penDetected: false,
@@ -63,7 +62,7 @@ export const getDefaultAppState = (): Omit<
     isRotating: false,
     lastPointerDownWith: 'mouse',
     multiElement: null,
-    name: `${ t('labels.untitled') }-${ getDateTime() }`,
+    name: `${t('labels.untitled')}-${getDateTime()}`,
     contextMenu: null,
     openMenu: null,
     openPopup: null,
@@ -86,12 +85,12 @@ export const getDefaultAppState = (): Omit<
     viewBackgroundColor: oc.white,
     zenModeEnabled: false,
     zoom: {
-      value: 1 as NormalizedZoomValue,
+      value: 1 as NormalizedZoomValue
     },
     viewModeEnabled: false,
     pendingImageElementId: null,
     showHyperlinkPopup: false,
-    selectedLinearElement: null,
+    selectedLinearElement: null
   }
 }
 
@@ -108,9 +107,8 @@ const APP_STATE_STORAGE_CONF = (<
     /** server (shareLink/collab/...) */
     server: boolean
   },
-  T extends Record<keyof AppState, Values>,
->(config: { [K in keyof T]: K extends keyof AppState ? T[K] : never }) =>
-    config)({
+  T extends Record<keyof AppState, Values>
+>(config: { [K in keyof T]: K extends keyof AppState ? T[K] : never }) => config)({
   showWelcomeScreen: { browser: true, export: false, server: false },
   theme: { browser: true, export: false, server: false },
   collaborators: { browser: false, export: false, server: false },
@@ -123,7 +121,7 @@ const APP_STATE_STORAGE_CONF = (<
   currentItemRoundness: {
     browser: true,
     export: false,
-    server: false,
+    server: false
   },
   currentItemOpacity: { browser: true, export: false, server: false },
   currentItemRoughness: { browser: true, export: false, server: false },
@@ -184,28 +182,26 @@ const APP_STATE_STORAGE_CONF = (<
   viewModeEnabled: { browser: false, export: false, server: false },
   pendingImageElementId: { browser: false, export: false, server: false },
   showHyperlinkPopup: { browser: false, export: false, server: false },
-  selectedLinearElement: { browser: true, export: false, server: false },
+  selectedLinearElement: { browser: true, export: false, server: false }
 })
 
-const _clearAppStateForStorage = <
-  ExportType extends 'export' | 'browser' | 'server',
->(
-    appState: Partial<AppState>,
-    exportType: ExportType,
-  ) => {
+const _clearAppStateForStorage = <ExportType extends 'export' | 'browser' | 'server'>(
+  appState: Partial<AppState>,
+  exportType: ExportType
+) => {
   type ExportableKeys = {
     [K in keyof typeof APP_STATE_STORAGE_CONF]: typeof APP_STATE_STORAGE_CONF[K][ExportType] extends true
-    ? K
-    : never
+      ? K
+      : never
   }[keyof typeof APP_STATE_STORAGE_CONF]
   const stateForExport = {} as { [K in ExportableKeys]?: typeof appState[K] }
   for (const key of Object.keys(appState) as (keyof typeof appState)[]) {
     const propConfig = APP_STATE_STORAGE_CONF[key]
     if (propConfig?.[exportType]) {
-      const nextValue = appState[key];
+      const nextValue = appState[key]
 
       // https://github.com/microsoft/TypeScript/issues/31445
-      (stateForExport as any)[key] = nextValue
+      ;(stateForExport as any)[key] = nextValue
     }
   }
   return stateForExport
@@ -223,8 +219,5 @@ export const clearAppStateForDatabase = (appState: Partial<AppState>) => {
   return _clearAppStateForStorage(appState, 'server')
 }
 
-export const isEraserActive = ({
-  activeTool,
-}: {
-  activeTool: AppState['activeTool']
-}) => activeTool.type === 'eraser'
+export const isEraserActive = ({ activeTool }: { activeTool: AppState['activeTool'] }) =>
+  activeTool.type === 'eraser'
