@@ -109,6 +109,15 @@ export class BoardService extends BaseService {
     }
   }
 
+  public async isBoardFavorite(boardId: string): Promise<boolean> {
+    const userId = Meteor.userId()
+    if (userId != null) {
+      return BoardFavoritesCollection.isFavoriteBoard(userId, boardId)
+    } else {
+      throw new Meteor.Error('Unauthorized')
+    }
+  }
+
   public static async getMyFavoriteBoards(): Promise<IBoard[]> {
     const userid = Meteor.userId()
     if (userid != null) {

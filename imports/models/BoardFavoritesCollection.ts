@@ -29,16 +29,20 @@ export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavorite
     return result > 0
   }
 
+  public async isFavoriteBoard(userid: string, boardId: string): Promise<boolean> {
+    const query = { userid, boardId }
+    const result = await this.collection.findOneAsync(query)
+    return result != null
+  }
+
   public async getFavoriteBoards(userid: string): Promise<BoardRecord[]> {
     try {
-      const favoriteBoardRecords = (await this.collection
-        .find({ userid })
-        .fetchAsync()) as IBoardFavoriteRecord[]
-      const favoriteBoardIds = favoriteBoardRecords.map(({ boardId }) => boardId)
-      const favoriteBoards = (await this.collection
-        .find({ _id: { $in: favoriteBoardIds } })
-        .fetchAsync()) as BoardRecord[]
-
+      const query = { userid }
+      const lastCreatedSortTop = { created_at: -1 }
+      const favoriteBoards = this.collection
+        .find(query, { sort: lastCreatedSortTop })
+        .fetchAsync() as Promise<BoardRecord[]>
+      console.log('favoriteBoards', favoriteBoards)
       return favoriteBoards
     } catch (err) {
       console.error(`Error getting favorite boards for user ${userid}:`, err)
