@@ -41,21 +41,21 @@ export class BoardService extends BaseService {
     console.error('Unauthorized')
     throw new Meteor.Error('Unauthorized')
   }
-  public static async getMyBoards(options?: IBoardFilterOptions): Promise<IBoard[]> {
+  public async getMyBoards(options?: IBoardFilterOptions): Promise<IBoard[]> {
     const userId = Meteor.userId()
     if (!userId) {
       return []
     }
-    const boardRecords = await BoardCollection.getMyBoards(userId) ?? []
-    const boards = boardRecords.map((record) => _makeBoard(record, options))
+    const boardRecords = (await BoardCollection.getMyBoards(userId)) ?? []
+    const boards = boardRecords.map(record => _makeBoard(record, options))
     return boards
   }
-  
+
   public async getBoardById(boardId: string) {
     const userid = Meteor.userId()
     if (userid != null) {
       const record = await BoardCollection.getBoardById(boardId)
-      return record != null ? BoardService._makeBoard(record) : null
+      return record != null ? this._makeBoard(record) : null
     }
     throw new Meteor.Error('Unauthorized')
   }
@@ -76,7 +76,7 @@ export class BoardService extends BaseService {
     throw new Meteor.Error('Unauthorized')
   }
 
-  private static _makeBoard(record: BoardRecord, options?: IBoardFilterOptions): IBoard {
+  private _makeBoard(record: BoardRecord, options?: IBoardFilterOptions): IBoard {
     const { _id: id, title, elements, files } = record
     const board = { id, title, elements, files }
 
@@ -118,7 +118,7 @@ export class BoardService extends BaseService {
     }
   }
 
-  public static async getMyFavoriteBoards(): Promise<IBoard[]> {
+  public async getMyFavoriteBoards(): Promise<IBoard[]> {
     const userid = Meteor.userId()
     if (userid != null) {
       const favoriteBoardRecords = await BoardFavoritesCollection.getFavoriteBoards(userid)

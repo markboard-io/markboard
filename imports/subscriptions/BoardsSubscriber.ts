@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { globalEventEmitter } from '../utils'
 import { attachDebugLabel } from '/imports/store'
 import { atom, useAtom } from 'jotai'
-import { BoardService } from '../services/BoardService'
+import { Services } from '../services/client'
 
 export enum BoardEvents {
   PrivateChanged = 'BoardEvents_PrivateChanged'
@@ -53,7 +53,7 @@ class BoardsSubscriberClass {
   }
 
   private async _onBoardsChanged() {
-    const privateBoards = BoardService.getMyBoards()
+    const privateBoards = await Services.get('board').getMyBoards()
     globalEventEmitter.emit(BoardEvents.PrivateChanged, privateBoards)
   }
 }

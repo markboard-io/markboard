@@ -6,7 +6,7 @@ import { atom, useAtom } from 'jotai'
 import { attachDebugLabel } from '/imports/store'
 import { useEffect } from 'react'
 import { _makeBoard, _makeBoards } from '../utils/boards'
-import { BoardService } from '../services'
+import { Services } from '../services/client'
 
 export enum FavoriteBoardEvents {
   FavoritesChanged = 'BoardEvents_FavoritesChanged'
@@ -56,7 +56,7 @@ class BoardFavoritesSubscriberClass {
   }
 
   private async _onFavoritesChanged() {
-    const favoriteBoards = BoardService.getMyFavoriteBoards()
+    const favoriteBoards =await Services.get('board').getMyFavoriteBoards()
     globalEventEmitter.emit(FavoriteBoardEvents.FavoritesChanged, favoriteBoards)
   }
 }
