@@ -1,5 +1,5 @@
 import { IBoard } from '../excalidraw/types'
-import { BoardCollection, BoardRecord, BoardFavoritesCollection } from '../models'
+import { BoardCollection, BoardFavoritesCollection } from '../models'
 import { Collections } from '../models/Collections'
 import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
@@ -55,7 +55,7 @@ export class BoardService extends BaseService {
     const userid = Meteor.userId()
     if (userid != null) {
       const record = await BoardCollection.getBoardById(boardId)
-      return record != null ? this._makeBoard(record) : null
+      return record != null ? _makeBoard(record) : null
     }
     throw new Meteor.Error('Unauthorized')
   }
@@ -74,21 +74,6 @@ export class BoardService extends BaseService {
       return BoardCollection.updateBoardById(boardId, { title })
     }
     throw new Meteor.Error('Unauthorized')
-  }
-
-  private _makeBoard(record: BoardRecord, options?: IBoardFilterOptions): IBoard {
-    const { _id: id, title, elements, files } = record
-    const board = { id, title, elements, files }
-
-    if (options != null && Array.isArray(options.keys)) {
-      return Object.entries(board).reduce((o, [key, value]) => {
-        if (options.keys!.includes(key as keyof IBoard)) {
-          o[key] = value
-        }
-        return o
-      }, {} as Record<string, any>) as IBoard
-    }
-    return board
   }
 
   public async starBoard(boardId: string): Promise<boolean> {
@@ -118,16 +103,19 @@ export class BoardService extends BaseService {
     }
   }
 
-  public async getMyFavoriteBoards(): Promise<IBoard[]> {
+  public async getMyFavoriteBoard(): Promise<IBoard[]> {
     const userid = Meteor.userId()
     if (userid != null) {
-      const favoriteBoardRecords = await BoardFavoritesCollection.getFavoriteBoards(userid)
-      const favoriteBoards = favoriteBoardRecords.map(record =>
-        this._makeBoard(record, { keys: ['id', 'title'] })
+      const favoriteBoardRecords = (await BoardFavoritesCollection.getFavoriteBoards(userid)) ?? []
+      const favoriteBoards= await Promise.all(
+        favoriteBoardRecords.map(async (record) => {
+          const board = await this.getBoardById(record.boardId)
+          return board
+        })
       )
-      return favoriteBoards
+      return favoriteBoards.filter((board) => board != null) as IBoard[]
     } else {
       throw new Meteor.Error('Unauthorized')
     }
-  }
+  }  
 }

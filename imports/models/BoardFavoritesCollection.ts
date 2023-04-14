@@ -1,10 +1,12 @@
 import { BaseCollection } from './BaseCollection'
-import { BoardRecord } from './BoardCollection'
 import { Meteor } from 'meteor/meteor'
 
 export interface IBoardFavoriteRecord {
+  _id: string
   userid: string
   boardId: string
+  created_at: number
+  last_updated: number
 }
 
 export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavoriteRecord> {
@@ -35,13 +37,13 @@ export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavorite
     return result != null
   }
 
-  public async getFavoriteBoards(userid: string): Promise<BoardRecord[]> {
+  public async getFavoriteBoards(userid: string): Promise<IBoardFavoriteRecord[]> {
     try {
       const query = { userid }
       const lastCreatedSortTop = { created_at: -1 }
       const favoriteBoards = this.collection
         .find(query, { sort: lastCreatedSortTop })
-        .fetchAsync() as Promise<BoardRecord[]>
+        .fetchAsync() as Promise<IBoardFavoriteRecord[]>
       console.log('favoriteBoards', favoriteBoards)
       return favoriteBoards
     } catch (err) {
