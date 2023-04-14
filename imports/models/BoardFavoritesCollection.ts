@@ -44,7 +44,6 @@ export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavorite
       const favoriteBoards = this.collection
         .find(query, { sort: lastCreatedSortTop })
         .fetchAsync() as Promise<IBoardFavoriteRecord[]>
-      console.log('favoriteBoards', favoriteBoards)
       return favoriteBoards
     } catch (err) {
       console.error(`Error getting favorite boards for user ${userid}:`, err)
