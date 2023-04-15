@@ -15,7 +15,7 @@ export const TopRightControls = () => {
   useEffect(() => {
     const getFavoriteState = async () => {
       boardId = getCurrentBoardId()
-      const isFavorite = await Services.get('board').isBoardFavorite(boardId)
+      const isFavorite = await Services.get('board_favorite').isBoardFavorite(boardId)
       setFavoriteState(isFavorite)
       console.log('boardId', boardId)
       console.log('isFavorite', isFavorite)
@@ -24,10 +24,10 @@ export const TopRightControls = () => {
   }, [boardId])
   const toggleFavorite = throttle(async () => {
     if (!favoriteState) {
-      await Services.get('board').starBoard(boardId)
+      await Services.get('board_favorite').starBoard(boardId)
       setFavoriteState(true)
     } else {
-      await Services.get('board').cancelStarBoard(boardId)
+      await Services.get('board_favorite').cancelStarBoard(boardId)
       setFavoriteState(false)
     }
   }, 500)

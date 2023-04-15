@@ -1,5 +1,6 @@
 import { BaseCollection } from './BaseCollection'
 import { Meteor } from 'meteor/meteor'
+import { BoardRecord } from './BoardCollection'
 
 export interface IBoardFavoriteRecord {
   _id: string
@@ -35,6 +36,11 @@ export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavorite
     const query = { userid, boardId }
     const result = await this.collection.findOneAsync(query)
     return result != null
+  }
+  public async getBoardById(boardId: string): Promise<BoardRecord | null> {
+    const document = await this.collection.findOneAsync({ boardId: boardId })
+    if (document != null) Object.assign(document, { id: document._id })
+    return document as BoardRecord
   }
 
   public async getFavoriteBoards(userid: string): Promise<IBoardFavoriteRecord[]> {

@@ -1,5 +1,5 @@
 import { IBoard } from '../excalidraw/types'
-import { BoardCollection, BoardFavoritesCollection } from '../models'
+import { BoardCollection} from '../models'
 import { Collections } from '../models/Collections'
 import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
@@ -7,7 +7,6 @@ import { _makeBoard, _makeBoards } from '../utils/boards'
 
 export interface IBoardFilterOptions {
   keys?: (keyof IBoard)[]
-  favorite?: boolean
 }
 
 export class BoardService extends BaseService {
@@ -75,47 +74,4 @@ export class BoardService extends BaseService {
     }
     throw new Meteor.Error('Unauthorized')
   }
-
-  public async starBoard(boardId: string): Promise<boolean> {
-    const userId = Meteor.userId()
-    if (userId != null) {
-      return BoardFavoritesCollection.addFavoriteBoard(userId, boardId)
-    } else {
-      throw new Meteor.Error('Unauthorized')
-    }
-  }
-
-  public cancelStarBoard(boardId: string): Promise<boolean> {
-    const userId = Meteor.userId()
-    if (userId != null) {
-      return BoardFavoritesCollection.removeFavoriteBoard(userId, boardId)
-    } else {
-      throw new Meteor.Error('Unauthorized')
-    }
-  }
-
-  public async isBoardFavorite(boardId: string): Promise<boolean> {
-    const userId = Meteor.userId()
-    if (userId != null) {
-      return BoardFavoritesCollection.isFavoriteBoard(userId, boardId)
-    } else {
-      throw new Meteor.Error('Unauthorized')
-    }
-  }
-
-  public async getMyFavoriteBoard(): Promise<IBoard[]> {
-    const userid = Meteor.userId()
-    if (userid != null) {
-      const favoriteBoardRecords = (await BoardFavoritesCollection.getFavoriteBoards(userid)) ?? []
-      const favoriteBoards= await Promise.all(
-        favoriteBoardRecords.map(async (record) => {
-          const board = await this.getBoardById(record.boardId)
-          return board
-        })
-      )
-      return favoriteBoards.filter((board) => board != null) as IBoard[]
-    } else {
-      throw new Meteor.Error('Unauthorized')
-    }
-  }  
 }

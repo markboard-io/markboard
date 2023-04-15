@@ -40,7 +40,7 @@ class BoardFavoritesSubscriberClass {
 
   private _subscribe() {
     Meteor.subscribe(Collections.names.board_favorites)
-    const BoardFavoritesCollection = Collections.getCollectionByName('boards')
+    const BoardFavoritesCollection = Collections.getCollectionByName('board_favorites')
     const onFavoritesChanged = this._onFavoritesChanged.bind(this)
     BoardFavoritesCollection.find({}).observeChanges({
       added(_id, _fields) {
@@ -56,7 +56,7 @@ class BoardFavoritesSubscriberClass {
   }
 
   private async _onFavoritesChanged() {
-    const favoriteBoards =await Services.get('board').getMyFavoriteBoard()
+    const favoriteBoards =await Services.get('board_favorite').getMyFavoriteBoard()
     globalEventEmitter.emit(FavoriteBoardEvents.FavoritesChanged, favoriteBoards)
   }
 }

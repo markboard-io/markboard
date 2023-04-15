@@ -5,6 +5,7 @@ import type { StaticAssetsService } from './StaticAssetsService'
 import type { AppService } from './AppService'
 import type { FilesService } from './FilesService'
 import type { RedirectService } from './RedirectService'
+import type { BoardFavoriteService } from './BoardFavoriteService'
 
 type OmitPrivateProperties<T> = Omit<T, '_startup' | 'startup' | 'serviceName'>
 
@@ -22,6 +23,7 @@ export interface IServices {
   excalidrawSync: ExcalidrawSyncService
   staticAssets: StaticAssetsService
   board: BoardService
+  board_favorite: BoardFavoriteService
   files: FilesService
   redirect: RedirectService
 }
