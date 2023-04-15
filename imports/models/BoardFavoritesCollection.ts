@@ -19,7 +19,8 @@ export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavorite
     const values = { userid: userid, files, title, elements, last_updated: Date.now() }
     const result = await this.collection.upsertAsync({_id:id}, { $set: values })
     if (result && result.numberAffected && result.numberAffected > 0) {
-      return result?.numberAffected > 0
+      const numberAffected=result?.numberAffected ?? 0
+      return numberAffected > 0
     } else {
       throw new Meteor.Error(`Failed to add favorite board for user and board ${id}`)
     }
