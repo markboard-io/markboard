@@ -28,6 +28,7 @@
     "@types/pako": "^2.0.0",
     "@types/pica": "^9.0.1",
     "@types/socket.io": "^2.1.13",
+    "@welldone-software/why-did-you-render": "^7.0.1",
     "bootstrap": "^5.2.3",
     "browser-fs-access": "^0.29.1",
     "chai": "^4.3.7",

@@ -274,6 +274,8 @@ import { Fonts } from '../scene/Fonts'
 import { actionPaste } from '../actions/actionClipboard'
 import { attachDebugLabel } from '/imports/store'
 import { uploadFile } from '/imports/services/client/files'
+import { AppEvents, DEFAULT_TEXT_COLOR } from '/imports/utils/constants'
+import { globalEventEmitter } from '/imports/utils'
 
 export const isMenuOpenAtom = attachDebugLabel(atom(false), 'isMenuOpenAtom')
 export const isDropdownOpenAtom = attachDebugLabel(atom(false), 'isDropdownOpenAtom')
@@ -1021,6 +1023,32 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     window.addEventListener(EVENT.BLUR, this.onBlur, false)
     this.excalidrawContainerRef.current?.addEventListener(EVENT.DRAG_OVER, this.disableEvent, false)
     this.excalidrawContainerRef.current?.addEventListener(EVENT.DROP, this.disableEvent, false)
+
+    // application-level events
+    globalEventEmitter.on(AppEvents.EDIT_BOARD, this.onEditBoard.bind(this))
+  }
+
+  private onEditBoard({ x, y }: { x: number; y: number }) {
+    let { x: sceneX, y: sceneY } = viewportCoordsToSceneCoords(
+      { clientX: x, clientY: y },
+      this.state
+    )
+    const textElements = this.getSceneElements().filter(element => isTextElement(element))
+
+    if (textElements.length > 0) {
+      const [textElement] = textElements
+      this.startTextEditing({
+        sceneX: textElement.x + textElement.width / 2,
+        sceneY: textElement.y + textElement.height / 2,
+        insertAtParentCenter: true
+      })
+    } else {
+      this.startTextEditing({
+        sceneX,
+        sceneY,
+        insertAtParentCenter: true
+      })
+    }
   }
 
   componentDidUpdate(prevProps: AppProps, prevState: AppState) {
@@ -2288,6 +2316,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     return getElementsAtPosition(elements, element => hitTest(element, this.state, x, y))
   }
 
+  /** double click to start text editing here */
   private startTextEditing = ({
     sceneX,
     sceneY,
@@ -2353,7 +2382,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
       : newTextElement({
           x: parentCenterPosition ? parentCenterPosition.elementCenterX : sceneX,
           y: parentCenterPosition ? parentCenterPosition.elementCenterY : sceneY,
-          strokeColor: this.state.currentItemStrokeColor,
+          strokeColor: DEFAULT_TEXT_COLOR,
           backgroundColor: this.state.currentItemBackgroundColor,
           fillStyle: this.state.currentItemFillStyle,
           strokeWidth: this.state.currentItemStrokeWidth,
@@ -3026,6 +3055,7 @@ export class ExcalidrawCore extends React.Component<AppProps, AppState> {
     }
   }
   private handleCanvasPointerDown = (event: React.PointerEvent<HTMLCanvasElement>) => {
+    console.log('onPointerDown', event.clientX, event.clientY)
     // since contextMenu options are potentially evaluated on each render,
     // and an contextMenu action may depend on selection state, we must
     // close the contextMenu before we update the selection on pointerDown

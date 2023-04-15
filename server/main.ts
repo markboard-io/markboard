@@ -17,10 +17,15 @@ if (process.env.NODE_ENV === 'development') {
 // we need a absolute path to store uploaded files
 // e.g. /home/username/uploads
 if (!process.env.UPLOAD_ABSOLUTE_PATH) {
-  throw new Error(
-    'Envrionment variable UPLOAD_ABSOLUTE_PATH is not set, ' +
-      'please set it to the absolute path of the upload folder'
-  )
+  if (process.env.NODE_ENV === 'development') {
+    process.env.UPLOAD_ABSOLUTE_PATH = `${process.env.PWD}/uploads`
+    console.log('UPLOAD_ABSOLUTE_PATH:', process.env.UPLOAD_ABSOLUTE_PATH)
+  } else {
+    throw new Error(
+      'Envrionment variable UPLOAD_ABSOLUTE_PATH is not set, ' +
+        'please set it to the absolute path of the upload folder'
+    )
+  }
 }
 
 dotenv.config()

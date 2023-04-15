@@ -1,7 +1,7 @@
 import { duplicateElement } from './newElement'
 import { mutateElement } from './mutateElement'
 import { API } from '../tests/helpers/api'
-import { FONT_FAMILY, ROUNDNESS } from '../constants'
+import { DEFAULT_FONT_FAMILY, ROUNDNESS } from '../constants'
 import { isPrimitive } from '../utils'
 
 const assertCloneObjects = (source: any, clone: any) => {
@@ -76,7 +76,7 @@ it('clones text element', () => {
     opacity: 100,
     text: 'hello',
     fontSize: 20,
-    fontFamily: FONT_FAMILY['"Kose", "Virgil"'],
+    fontFamily: DEFAULT_FONT_FAMILY,
     textAlign: 'left',
     verticalAlign: 'top'
   })
