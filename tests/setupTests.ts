@@ -27,6 +27,16 @@ jest.mock('/imports/models/Collections', () => {
   }
 })
 
+jest.mock('react-router-dom', () => {
+  return {
+    useLocation() {
+      return {
+        state: {}
+      }
+    }
+  }
+})
+
 // ReactDOM is located inside index.tsx file
 // as a result, we need a place for it to render into
 const element = document.createElement('div')

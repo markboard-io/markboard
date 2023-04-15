@@ -12,7 +12,6 @@ import { ExportType } from '../scene/types'
 import { AppProps, AppState, ExcalidrawProps, BinaryFiles, UIChildrenComponents } from '../types'
 import { muteFSAbortError, ReactChildrenToObject } from '../utils'
 import { SelectedShapeActions, ShapesSwitcher } from './Actions'
-import CollabButton from './CollabButton'
 import { ErrorDialog } from './ErrorDialog'
 import { ExportCB, ImageExportDialog } from './ImageExportDialog'
 import { FixedSideContainer } from './FixedSideContainer'
@@ -25,7 +24,6 @@ import { PasteChartDialog } from '../charts'
 import { Section } from './Section'
 import { ShortcutsDialog } from './ShortcutsDialog'
 import Stack from './Stack'
-import { UserList } from './UserList'
 import Library from '../data/library'
 import { JSONExportDialog } from './JSONExportDialog'
 import { LibraryButton } from './LibraryButton'
@@ -40,12 +38,7 @@ import { isMenuOpenAtom, useDevice } from './ExcalidrawCore'
 import { Stats } from './Stats'
 import { actionToggleStats } from '../actions/actionToggleStats'
 import Footer from './footer/Footer'
-import {
-  MoreIcon,
-  PinIcon,
-  SidebarIcon,
-  WelcomeScreenTopToolbarArrow
-} from '/imports/components/icons'
+import { SidebarIcon, WelcomeScreenTopToolbarArrow } from '/imports/components/icons'
 import { useOutsideClickHook } from '../hooks/useOutsideClick'
 import WelcomeScreen from './WelcomeScreen'
 import { hostSidebarCountersAtom } from './Sidebar/Sidebar'
@@ -55,6 +48,7 @@ import WelcomeScreenDecor from './WelcomeScreenDecor'
 import { isSidebarOpenAtom } from '/imports/store/atomSidebar'
 import { TopRightControls } from './TopRightControls'
 import { BoardTitleInput } from './BoardTitleInput'
+import { useLocation } from 'react-router-dom'
 
 interface LayerUIProps {
   actionManager: ActionManager
@@ -110,6 +104,8 @@ const LayerUI = ({
   children
 }: LayerUIProps) => {
   const device = useDevice()
+  const location = useLocation()
+  const isNewBoard = location.state != null && location.state.isNewBoard
 
   const childrenComponents = ReactChildrenToObject<UIChildrenComponents>(children)
 
@@ -216,6 +212,7 @@ const LayerUI = ({
 
   const renderFixedSideContainer = () => {
     const shouldRenderSelectedShapeActions = showSelectedShapeActions(appState, elements)
+    const shouldRenderStartWritingHints = renderWelcomeScreen && !appState.isLoading && isNewBoard
 
     return (
       <FixedSideContainer side='top'>
@@ -225,9 +222,17 @@ const LayerUI = ({
             className={clsx('App-menu_top__left', {
               'disable-pointerEvents': appState.zenModeEnabled
             })}
+            style={{ position: shouldRenderStartWritingHints ? 'relative' : 'static' }}
           >
             {renderCanvasActions()} {/* Sidebar button */}
             <BoardTitleInput />
+            <WelcomeScreenDecor shouldRender={shouldRenderStartWritingHints}>
+              <div className='virgil WelcomeScreen-decor WelcomeScreen-decor--top-toolbar-pointer startWritingHints'>
+                <div className='WelcomeScreen-decor--top-toolbar-pointer__label'>
+                  {t('welcomeScreen.startWritingHints')}
+                </div>
+              </div>
+            </WelcomeScreenDecor>
             {shouldRenderSelectedShapeActions && renderSelectedShapeActions()}
           </Stack.Col>
           {!appState.viewModeEnabled && (

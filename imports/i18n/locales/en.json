@@ -446,6 +446,7 @@
     "data": "All your data is saved locally in your browser.",
     "switchToPlusApp": "Did you want to go to the Excalidraw+ instead?",
     "toolbarHints": "Pick a tool & Start drawing!",
+    "startWritingHints": "Press Enter or Tab to start writing...",
     "helpHints": "Help"
   }
 }
