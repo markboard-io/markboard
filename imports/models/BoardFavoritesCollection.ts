@@ -6,7 +6,6 @@ export interface IBoardFavoriteRecord {
   _id: string
   userid: string
   boardId: string
-  created_at: number
   last_updated: number
 }
 
@@ -15,14 +14,14 @@ export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavorite
     super('board_favorites')
   }
 
-  public async addFavoriteBoard(userid: string, boardId: string): Promise<boolean> {
-    const query = { userid, boardId }
-    const update = { $set: { userid, boardId } }
-    const result = await this.collection.upsertAsync(query, update)
+  public async addFavoriteBoard(board: BoardRecord | null, userid: string): Promise<boolean> {
+    const { id, title, files, elements } = board ?? {}
+    const values = { userid: userid, files, title, elements, last_updated: Date.now() }
+    const result = await this.collection.upsertAsync({_id:id}, { $set: values })
     if (result && result.numberAffected && result.numberAffected > 0) {
       return result?.numberAffected > 0
     } else {
-      throw new Meteor.Error(`Failed to add favorite board for user ${userid} and board ${boardId}`)
+      throw new Meteor.Error(`Failed to add favorite board for user and board ${id}`)
     }
   }
 
@@ -32,13 +31,13 @@ export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavorite
     return result > 0
   }
 
-  public async isFavoriteBoard(userid: string, boardId: string): Promise<boolean> {
-    const query = { userid, boardId }
+  public async isFavoriteBoard(userid: string, _id: string): Promise<boolean> {
+    const query = { userid, _id }
     const result = await this.collection.findOneAsync(query)
     return result != null
   }
   public async getBoardById(boardId: string): Promise<BoardRecord | null> {
-    const document = await this.collection.findOneAsync({ boardId: boardId })
+    const document = await this.collection.findOneAsync({ _id: boardId })
     if (document != null) Object.assign(document, { id: document._id })
     return document as BoardRecord
   }

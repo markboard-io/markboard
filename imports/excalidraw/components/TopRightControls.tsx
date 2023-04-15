@@ -17,8 +17,6 @@ export const TopRightControls = () => {
       boardId = getCurrentBoardId()
       const isFavorite = await Services.get('board_favorite').isBoardFavorite(boardId)
       setFavoriteState(isFavorite)
-      console.log('boardId', boardId)
-      console.log('isFavorite', isFavorite)
     }
     getFavoriteState()
   }, [boardId])

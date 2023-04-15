@@ -1,5 +1,5 @@
 import { IBoard } from '../excalidraw/types'
-import { BoardFavoritesCollection } from '../models'
+import { BoardFavoritesCollection,BoardCollection } from '../models'
 import { Collections } from '../models/Collections'
 import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
@@ -35,7 +35,9 @@ export class BoardFavoriteService extends BaseService {
   public async starBoard(boardId: string): Promise<boolean> {
     const userId = Meteor.userId()
     if (userId != null) {
-      return BoardFavoritesCollection.addFavoriteBoard(userId, boardId)
+      const board= await BoardCollection.getBoardById(boardId)
+      const result=BoardFavoritesCollection.addFavoriteBoard(board,userId)
+      return result
     } else {
       throw new Meteor.Error('Unauthorized')
     }
@@ -65,7 +67,7 @@ export class BoardFavoriteService extends BaseService {
       const favoriteBoardRecords = (await BoardFavoritesCollection.getFavoriteBoards(userid)) ?? []
       const favoriteBoards = await Promise.all(
         favoriteBoardRecords.map(async record => {
-          const board = await this.getBoardById(record.boardId)
+          const board = await this.getBoardById(record._id)
           return board
         })
       )
