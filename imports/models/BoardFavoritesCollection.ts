@@ -25,8 +25,8 @@ export class BoardFavoritesCollectionClass extends BaseCollection<IBoardFavorite
     }
   }
 
-  public async removeFavoriteBoard(userid: string, boardId: string): Promise<boolean> {
-    const query = { userid, boardId }
+  public async removeFavoriteBoard(userid: string, _id: string): Promise<boolean> {
+    const query = { userid, _id }
     const result = await this.collection.removeAsync(query)
     return result > 0
   }
