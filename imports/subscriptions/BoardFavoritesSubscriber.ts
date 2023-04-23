@@ -5,7 +5,6 @@ import { globalEventEmitter } from '../utils'
 import { atom, useAtom } from 'jotai'
 import { attachDebugLabel } from '/imports/store'
 import { useEffect } from 'react'
-import { _makeBoard, _makeBoards } from '../utils/boards'
 import { Services } from '../services/client'
 
 export enum FavoriteBoardEvents {
