@@ -7,6 +7,7 @@ import { AppService } from './AppService'
 import { ServerServices } from './types'
 import { FilesService } from './FilesService'
 import { RedirectService } from './RedirectService'
+import { BoardFavoriteService } from './BoardFavoriteService'
 
 class ServiceManagerServerClass {
   private _services = {} as ServerServices
@@ -17,6 +18,7 @@ class ServiceManagerServerClass {
     this._services['excalidrawSync'] = new ExcalidrawSyncService()
     this._services['staticAssets'] = new StaticAssetsService()
     this._services['board'] = new BoardService()
+    this._services['board_favorite'] = new BoardFavoriteService()
     this._services['files'] = new FilesService()
     this._services['redirect'] = new RedirectService()
   }
