@@ -19,6 +19,20 @@ jest.mock('meteor/meteor', () => ({
   }
 }))
 
+jest.mock('/imports/subscriptions/BoardFavoritesSubscriber', () => {
+  return {
+    BoardFavoriteSubscriber: {
+      subscribe: jest.fn()
+    },
+    useFavoriteBoards() {
+      return {
+        boards: [],
+        find(): void {},
+      }
+    }
+  }
+})
+
 jest.mock('/imports/models/Collections', () => {
   return {
     Collections: {
