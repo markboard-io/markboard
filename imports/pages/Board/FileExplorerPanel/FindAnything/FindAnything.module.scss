@@ -1,27 +1,67 @@
+
 .FindAnything {
-	background: #e7eaf1;
-	border-radius: 5px;
-	margin-top: 15px;
-	height: 32px;
-	display: flex;
-	align-items: center;
-	color: rgba(106, 112, 124, 0.4);
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 20px;
-	svg {
-		width: 19px;
-		height: 19px;
-		flex-shrink: 0;
-		margin-right: 5px;
-	}
-	input {
-		background: transparent;
-		border: none;
-		outline: none;
-		&::placeholder {
-			color: rgba(106, 112, 124, 0.4);
-			font-size: 15px;
-		}
-	}
+  background: #e7eaf1;
+  border-radius: 5px;
+  margin-top: 15px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  color: rgba(106, 112, 124, 0.4);
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 20px;
+  svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+    margin-right: 5px;
+  }
+  input {
+    background: transparent;
+    border: none;
+    outline: none;
+    &::placeholder {
+      color: rgba(106, 112, 124, 0.4);
+      font-size: 15px;
+    }
+  }
+}
+.Modal {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items:flex-start;
+  height: 100%;
+  width: 100%;
+  z-index: 6;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+    margin-right: 5px;
+  }
+  input {
+    border: none;
+    outline: none;
+    &::placeholder {
+      color: rgba(106, 112, 124, 0.4);
+      font-size: 20px;
+    }
+  }
+}
+
+.Modal_Content{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: white;
+  width: 600px;
+  margin-top: 50px;
+  border-radius: 5px;
+  padding: 10px;
 }
