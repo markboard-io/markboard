@@ -6,6 +6,7 @@ import type { AppService } from './AppService'
 import type { FilesService } from './FilesService'
 import type { RedirectService } from './RedirectService'
 import type { BoardFavoriteService } from './BoardFavoriteService'
+import type { SearchService } from './SearchService'
 
 type OmitPrivateProperties<T> = Omit<T, '_startup' | 'startup' | 'serviceName'>
 
@@ -24,6 +25,7 @@ export interface IServices {
   staticAssets: StaticAssetsService
   board: BoardService
   board_favorite: BoardFavoriteService
+  search: SearchService
   files: FilesService
   redirect: RedirectService
 }
