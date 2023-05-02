@@ -10,6 +10,9 @@ export type BoardRecord = IBoard & {
 }
 
 export class BoardCollectionClass extends BaseCollection<BoardRecord> {
+  searchBoards() {
+    throw new Error("Method not implemented.")
+  }
   constructor() {
     super('boards')
   }

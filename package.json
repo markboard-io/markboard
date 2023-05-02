@@ -36,6 +36,7 @@
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
     "firebase": "^8.3.3",
+    "fuse.js": "^6.6.2",
     "global-agent": "^3.0.0",
     "i18next-browser-languagedetector": "^7.0.1",
     "idb-keyval": "^6.2.0",
