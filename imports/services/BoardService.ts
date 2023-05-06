@@ -74,4 +74,13 @@ export class BoardService extends BaseService {
     }
     throw new Meteor.Error('Unauthorized')
   }
+  
+  public searchBoards(searchTerm: string) {
+    const userId = Meteor.userId()
+    if (userId == null) {
+      throw new Meteor.Error('Unauthorized')
+    }
+    const boards = BoardCollection.searchBoard(searchTerm)
+    return boards
+  }
 }

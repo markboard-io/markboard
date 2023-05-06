@@ -10,9 +10,6 @@ export type BoardRecord = IBoard & {
 }
 
 export class BoardCollectionClass extends BaseCollection<BoardRecord> {
-  searchBoards() {
-    throw new Error("Method not implemented.")
-  }
   constructor() {
     super('boards')
   }
@@ -78,6 +75,30 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
       files: {}
     }
   }
-}
 
+  public async searchBoard(searchTerm: string): Promise<BoardRecord[]> {
+    const query = {
+      $or: [
+        {
+          'elements.text': {
+            $regex: `${searchTerm}`,
+            $options: 'i'
+          }
+        },
+        {
+          title: {
+            $regex: `${searchTerm}`,
+            $options: 'i'
+          }
+        }
+      ]
+    }
+
+    const cursor = this.collection.find(query)
+    const documents = await cursor.fetchAsync()
+    console.log(documents)
+    
+    return documents as BoardRecord[]
+  }
+}
 export const BoardCollection = new BoardCollectionClass()
