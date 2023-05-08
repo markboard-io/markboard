@@ -8,6 +8,10 @@ export type BoardRecord = IBoard & {
   created_at: number
   last_updated: number
 }
+export type SearchResults = {
+  titles: []
+  validTexts: []
+}
 
 export class BoardCollectionClass extends BaseCollection<BoardRecord> {
   constructor() {
@@ -76,7 +80,7 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     }
   }
 
-  public async searchBoard(searchTerm: string): Promise<BoardRecord[]> {
+  public async searchBoard(searchTerm: string): Promise<SearchResults> {
     const query = {
       $or: [
         {
@@ -93,12 +97,18 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
         }
       ]
     }
-
     const cursor = this.collection.find(query)
     const documents = await cursor.fetchAsync()
-    console.log(documents)
-    
-    return documents as BoardRecord[]
-  }
+    const titles = documents.map(document => document.title)
+    const text = documents.flatMap(document =>
+      document.elements
+        .filter((element: { text: any }) => element.text !== undefined && element.text.match(new RegExp(searchTerm, 'i')))
+        .map((element: { text: any }) => element.text)
+    )
+    const validTexts = text.filter((element: any) => element.length > 0)
+    console.log(validTexts)
+    const searchResults = { titles, validTexts }
+    return searchResults as SearchResults
+  }  
 }
 export const BoardCollection = new BoardCollectionClass()
