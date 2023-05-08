@@ -62,29 +62,34 @@
   background: white;
   width: 600px;
   margin-top: 50px;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   padding: 10px;
 }
 
 .SearchResults {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   position: absolute;
-  top: 6.2em;
+  top: 6.15em;
   z-index: 7;
-  max-width: 31%;
+  width: 600px;
   background-color: white;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
+  border-radius:0 0 5px 5px;
   overflow-y: auto;
 }
 
 .SearchResult {
+  display: flex;
+  flex-direction: column;
+  padding: .5em;
+  margin-right: -2.8rem;
+  margin-left: -2.8rem;
+  margin: 0;
+  list-style-type: none;
   cursor: pointer;
   &:hover {
-    background-color: #f5f5f5;
+    background-color: rgb(239, 241, 245)
   }
 }
 

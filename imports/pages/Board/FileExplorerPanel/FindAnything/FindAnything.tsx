@@ -2,12 +2,13 @@ import React, { useState, useRef, useEffect, MutableRefObject } from 'react'
 import { SearchIcon } from '/imports/components/icons'
 import styles from './FindAnything.module.scss'
 import { Services } from '/imports/services/client'
-import { BoardRecord } from '/imports/models'
+import { useSwitchBoard } from '/imports/hooks'
 
 export function FindAnything() {
   const [isFindAnythingModalOpen, setIsFindAnythingModalOpen] = useState(false)
-  const [searchResults, setSearchResults] = useState<BoardRecord[]>([])
+  const [searchResults, setSearchResults] = useState([])
   const modalInputRef = useRef<HTMLInputElement>(null) as MutableRefObject<HTMLInputElement>
+  const switchBoard = useSwitchBoard()
 
   const toggleFindAnythingModal = () => {
     setIsFindAnythingModalOpen(!isFindAnythingModalOpen)
@@ -24,8 +25,9 @@ export function FindAnything() {
   const searchAnything = async () => {
     const searchTerm = modalInputRef.current.value
     const results = await Services.get('board').searchBoards(searchTerm)
-    console.log('searchAnything', results)
-    setSearchResults(results)
+    const searchArray = results.titles.concat(...results.validTexts)
+    setSearchResults(searchArray)
+    console.log('searchAnything', searchArray)
   }
 
   return (
@@ -48,15 +50,24 @@ export function FindAnything() {
                 />
               </div>
               {searchResults.length > 0 ? (
-                <div className={styles.SearchResults}>
-                  <ul>
-                    {searchResults.map(result => (
-                      <li className={styles.SearchResult} key={result._id}>
-                        {result.title}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <>
+                  <div className={styles.SearchResults}>
+                    {searchResults.map((result, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className={styles.SearchResult}
+                          onClick={() => {
+                            switchBoard(result)
+                            toggleFindAnythingModal()
+                          }}
+                        >
+                          {result}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </>
               ) : (
                 []
               )}

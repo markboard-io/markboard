@@ -106,7 +106,6 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
         .map((element: { text: any }) => element.text)
     )
     const validTexts = text.filter((element: any) => element.length > 0)
-    console.log(validTexts)
     const searchResults = { titles, validTexts }
     return searchResults as SearchResults
   }  
