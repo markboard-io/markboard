@@ -9,9 +9,10 @@ export type BoardRecord = IBoard & {
   last_updated: number
 }
 export type SearchResults = {
-  titles: []
-  validTexts: []
-}
+  boardId: string
+  titles: string
+  validTexts: string[]
+}[]
 
 export class BoardCollectionClass extends BaseCollection<BoardRecord> {
   constructor() {
@@ -99,15 +100,19 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     }
     const cursor = this.collection.find(query)
     const documents = await cursor.fetchAsync()
-    const titles = documents.map(document => document.title)
-    const text = documents.flatMap(document =>
-      document.elements
-        .filter((element: { text: any }) => element.text !== undefined && element.text.match(new RegExp(searchTerm, 'i')))
+    const searchResults = documents.map(document => {
+      const titles = document.title
+      const text = document.elements
+        .filter(
+          (element: { text: any }) =>
+            element.text !== undefined && element.text.match(new RegExp(searchTerm, 'i'))
+        )
         .map((element: { text: any }) => element.text)
-    )
-    const validTexts = text.filter((element: any) => element.length > 0)
-    const searchResults = { titles, validTexts }
+      const validTexts = text.filter((element: any) => element.length > 0)
+      const boardId = document._id
+      return { boardId, titles, validTexts }
+    })
     return searchResults as SearchResults
-  }  
+  }
 }
 export const BoardCollection = new BoardCollectionClass()
