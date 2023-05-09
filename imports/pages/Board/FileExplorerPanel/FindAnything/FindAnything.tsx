@@ -3,10 +3,11 @@ import { SearchIcon } from '/imports/components/icons'
 import styles from './FindAnything.module.scss'
 import { Services } from '/imports/services/client'
 import { useSwitchBoard } from '/imports/hooks'
+import { SearchResults } from '/imports/models'
 
 export function FindAnything() {
   const [isFindAnythingModalOpen, setIsFindAnythingModalOpen] = useState(false)
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState<SearchResults>([])
   const modalInputRef = useRef<HTMLInputElement>(null) as MutableRefObject<HTMLInputElement>
   const switchBoard = useSwitchBoard()
 
@@ -25,9 +26,7 @@ export function FindAnything() {
   const searchAnything = async () => {
     const searchTerm = modalInputRef.current.value
     const results = await Services.get('board').searchBoards(searchTerm)
-    const searchArray = results.titles.concat(...results.validTexts)
-    setSearchResults(searchArray)
-    console.log('searchAnything', searchArray)
+    setSearchResults(results)
   }
 
   return (
@@ -54,15 +53,27 @@ export function FindAnything() {
                   <div className={styles.SearchResults}>
                     {searchResults.map((result, index) => {
                       return (
-                        <div
-                          key={index}
-                          className={styles.SearchResult}
-                          onClick={() => {
-                            switchBoard(result)
-                            toggleFindAnythingModal()
-                          }}
-                        >
-                          {result}
+                        <div key={index} className={styles.SearchResult}>
+                          <div
+                            onClick={() => {
+                              switchBoard(result.boardId)
+                              toggleFindAnythingModal()
+                            }}
+                          >
+                            {result.titles}
+                          </div>
+                          <div className={styles.SearchResultTexts}>
+                            {result.validTexts
+                              .join(' ')
+                              .split(' ')
+                              .map((text, index) => {
+                                return (
+                                  <div key={index} className={styles.SearchResultText}>
+                                    {text}
+                                  </div>
+                                )
+                              })}
+                          </div>
                         </div>
                       )
                     })}
