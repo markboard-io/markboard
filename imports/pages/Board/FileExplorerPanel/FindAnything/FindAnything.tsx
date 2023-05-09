@@ -60,19 +60,46 @@ export function FindAnything() {
                               toggleFindAnythingModal()
                             }}
                           >
-                            {result.titles}
+                            {result.titles
+                              .split(new RegExp(`(${modalInputRef.current.value})`, 'gi'))
+                              .map((part, index) => {
+                                if (
+                                  part.toLowerCase() === modalInputRef.current.value.toLowerCase()
+                                ) {
+                                  return (
+                                    <span key={index} style={{ fontWeight: 'bold' }}>
+                                      {part}
+                                    </span>
+                                  )
+                                } else {
+                                  return part
+                                }
+                              })}
                           </div>
                           <div className={styles.SearchResultTexts}>
-                            {result.validTexts
-                              .join(' ')
-                              .split(' ')
-                              .map((text, index) => {
-                                return (
-                                  <div key={index} className={styles.SearchResultText}>
-                                    {text}
-                                  </div>
-                                )
-                              })}
+                            {result.validTexts.map((text, index) => {
+                              const parts = text.split(
+                                new RegExp(`(${modalInputRef.current.value})`, 'gi')
+                              )
+                              return (
+                                <div key={index} className={styles.SearchResultText}>
+                                  {parts.map((part, index) => {
+                                    if (
+                                      part.toLowerCase() ===
+                                      modalInputRef.current.value.toLowerCase()
+                                    ) {
+                                      return (
+                                        <span key={index} style={{ fontWeight: 'bold' }}>
+                                          {part}
+                                        </span>
+                                      )
+                                    } else {
+                                      return part
+                                    }
+                                  })}
+                                </div>
+                              )
+                            })}
                           </div>
                         </div>
                       )
