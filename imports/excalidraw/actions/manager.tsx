@@ -10,6 +10,8 @@ import {
 import { ExcalidrawElement } from '../element/types'
 import { AppClassProperties, AppState } from '../types'
 import { trackEvent } from '../analytics'
+import { globalEventEmitter } from '/imports/utils'
+import { EVENT } from '../constants'
 
 const trackAction = (
   action: Action,
@@ -77,6 +79,7 @@ export class ActionManager {
   }
 
   handleKeyDown(event: React.KeyboardEvent | KeyboardEvent) {
+    globalEventEmitter.emit(EVENT.KEYDOWN, event)
     const canvasActions = this.app.props.UIOptions.canvasActions
     const data = Object.values(this.actions)
       .sort((a, b) => (b.keyPriority || 0) - (a.keyPriority || 0))
