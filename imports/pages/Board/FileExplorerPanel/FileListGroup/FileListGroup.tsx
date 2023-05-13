@@ -39,7 +39,7 @@ export const FileListGroup: React.FC<IFileListGroupProps> = ({ groupId }) => {
       </div>
       <div className={styles.items}>
         {boards.map(({ id, title }) => {
-          const isActiveItem = currentBoardId === id && groupId === 'Private'
+          const isActiveItem = currentBoardId === id
           return (
             <div
               className={cx(styles.item, isActiveItem && styles.active)}
