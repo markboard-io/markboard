@@ -9,7 +9,6 @@
  <img src="https://img.shields.io/github/license/markboard-io/markboard?style=flat-square" />
  <img src="https://img.shields.io/github/issues/markboard-io/markboard?style=flat-square"">
  <img src="https://img.shields.io/github/stars/markboard-io/markboard?style=flat-square" />
- <img src="https://img.shields.io/github/commit-activity/w/markboard-io/markboard?style=flat-square" />
 </p>
 
 <a href="https://markboard.io" target="_blank">
