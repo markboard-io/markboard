@@ -82,6 +82,7 @@
     position: absolute;
     top: calc(var(--margin-top) + var(--search-box-height) - var(--search-box-radius));
     padding-top: var(--search-box-radius);
+    max-height: calc(90vh - var(--margin-top));
     width: 600px;
     background-color: white;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
@@ -111,10 +112,10 @@
 
   .SearchResultText {
     display: flex;
-    flex-direction: row;
     font-size: 0.8em;
     padding: 0 0.1em 0 0;
     color: rgb(163, 163, 163);
+    flex-wrap: wrap;
   }
 
   .SearchResultTexts {

@@ -40,13 +40,29 @@ export function FindAnything() {
     // `Ctrl + P` to select previous item
     if (isFindAnythingModalOpen && ctrlKey && key === 'p') {
       ev.preventDefault()
-      setActiveIndex(index => Math.max(0, index - 1))
+      setActiveIndex(index => {
+        const nextIndex = Math.max(0, index - 1)
+
+        const activeElement = document.querySelector(`#search-item-${nextIndex}`)
+        if (activeElement != null) {
+          activeElement.scrollIntoView({ block: 'center' })
+        }
+        return nextIndex
+      })
     }
 
     // `Ctrl + N` to select next item
     if (isFindAnythingModalOpen && ctrlKey && key === 'n') {
       ev.preventDefault()
-      setActiveIndex(index => Math.min(candidateBoards.length - 1, index + 1))
+      setActiveIndex(index => {
+        const nextIndex = Math.min(candidateBoards.length - 1, index + 1)
+
+        const activeElement = document.querySelector(`#search-item-${nextIndex}`)
+        if (activeElement != null) {
+          activeElement.scrollIntoView({ block: 'center' })
+        }
+        return nextIndex
+      })
     }
 
     // `Escape` hide search modal if it's open
@@ -96,15 +112,18 @@ export function FindAnything() {
           </div>
           {candidateBoards.length > 0 ? (
             <div className={styles.SearchResults}>
-              {candidateBoards.map((result, index) => {
+              {candidateBoards.map((board, index) => {
+                if (input$.current == null) return null
                 return (
                   <div
                     key={index}
                     className={cx(styles.SearchResult, index === activeIndex && styles.active)}
+                    id={`search-item-${index}`}
+                    onClick={() => switchBoard(board.boardId)}
                   >
-                    <div onClick={() => switchBoard(result.boardId)}>
-                      {result.titles
-                        .split(new RegExp(`(${input$.current.value})`, 'gi'))
+                    <div>
+                      {board.titles
+                        .split(new RegExp(`(${input$?.current?.value ?? ''})`, 'gi'))
                         .map((part, index) => {
                           const isMatch = part.toLowerCase() === input$.current.value.toLowerCase()
                           if (isMatch) {
@@ -119,7 +138,7 @@ export function FindAnything() {
                         })}
                     </div>
                     <div className={styles.SearchResultTexts}>
-                      {result.validTexts.map((text, index) => {
+                      {board.validTexts.map((text, index) => {
                         const parts = text.split(new RegExp(`(${input$.current.value})`, 'gi'))
                         return (
                           <div key={index} className={styles.SearchResultText}>
