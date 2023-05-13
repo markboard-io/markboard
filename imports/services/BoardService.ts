@@ -1,6 +1,6 @@
-import { IBoard } from '../excalidraw/types'
-import { BoardCollection} from '../models'
-import { Collections } from '../models/Collections'
+import { IBoard } from '/imports/excalidraw/types'
+import { BoardCollection } from '/imports/models'
+import { Collections } from '/imports/models/Collections'
 import { BaseService } from './BaseService'
 import { Meteor } from 'meteor/meteor'
 import { _makeBoard, _makeBoards } from '../utils/boards'
@@ -74,13 +74,13 @@ export class BoardService extends BaseService {
     }
     throw new Meteor.Error('Unauthorized')
   }
-  
+
   public searchBoards(searchTerm: string) {
     const userId = Meteor.userId()
     if (userId == null) {
       throw new Meteor.Error('Unauthorized')
     }
-    const boards = BoardCollection.searchBoard(searchTerm)
+    const boards = BoardCollection.searchBoard(userId, searchTerm)
     return boards
   }
 }

@@ -81,8 +81,9 @@ export class BoardCollectionClass extends BaseCollection<BoardRecord> {
     }
   }
 
-  public async searchBoard(searchTerm: string): Promise<SearchResults> {
+  public async searchBoard(userid: string, searchTerm: string): Promise<SearchResults> {
     const query = {
+      userid,
       $or: [
         {
           'elements.text': {
