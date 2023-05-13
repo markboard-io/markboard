@@ -8,4 +8,6 @@ sh('node --version')
 // build the project
 sh('rm -rf dist')
 sh('meteor build --directory --server-only dist')
-sh('cd dist/bundle/programs/server && npm install')
+sh('cd dist/bundle/programs/server && npm install && cd -')
+sh('pm2 delete markboard')
+sh('export $(cat .env | xargs) && pm2 start --name "markboard" dist/bundle/main.js')
