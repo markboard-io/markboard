@@ -8,6 +8,7 @@ import { ServerServices } from './types'
 import { FilesService } from './FilesService'
 import { RedirectService } from './RedirectService'
 import { BoardFavoriteService } from './BoardFavoriteService'
+import { RocketChatService } from './RocketChatService'
 
 class ServiceManagerServerClass {
   private _services = {} as ServerServices
@@ -21,6 +22,7 @@ class ServiceManagerServerClass {
     this._services['board_favorite'] = new BoardFavoriteService()
     this._services['files'] = new FilesService()
     this._services['redirect'] = new RedirectService()
+    this._services['rocketChat'] = new RocketChatService()
   }
 
   public getService<T extends keyof ServerServices>(service: T): ServerServices[T] {

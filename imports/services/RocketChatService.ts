@@ -12,6 +12,7 @@ export class RocketChatService extends BaseService {
     WebApp.rawConnectHandlers.use((req, res, next) => {
       const { url } = req
       if (url === '/api/v2/rocketchat') {
+        console.log(req)
         const query = req.url ? require('url').parse(req.url, true) : {}
         const { token } = query
         const { headers } = req

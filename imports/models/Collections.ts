@@ -15,7 +15,8 @@ class CollectionsClass {
       onBeforeUpload(_file: File) {
         return true
       }
-    })
+    }),
+    rocketChat: new Mongo.Collection('rocketChat')
   } as const
 
   public getCollectionByName(name: string) {
