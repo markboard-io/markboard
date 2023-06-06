@@ -6,6 +6,7 @@ import type { AppService } from './AppService'
 import type { FilesService } from './FilesService'
 import type { RedirectService } from './RedirectService'
 import type { BoardFavoriteService } from './BoardFavoriteService'
+import { RocketChatService } from './RocketChatService'
 
 type OmitPrivateProperties<T> = Omit<T, '_startup' | 'startup' | 'serviceName'>
 
@@ -26,6 +27,7 @@ export interface IServices {
   board_favorite: BoardFavoriteService
   files: FilesService
   redirect: RedirectService
+  rocketChat: RocketChatService
 }
 
 export type ServerServices = {
