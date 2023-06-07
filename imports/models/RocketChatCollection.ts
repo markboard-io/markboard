@@ -3,22 +3,45 @@ import { BaseCollection } from './BaseCollection'
 export type RocketChatUserRecord = {
   _id: string
   userId: string
-  authToken: string
-  token: string
+  username: string
+  boardname: string
 }
 
 export class RocketChatCollectionClass extends BaseCollection<RocketChatUserRecord> {
   constructor() {
     super('rocketChat')
   }
-  public async getRocketChatUserByToken(token: string): Promise<RocketChatUserRecord | null> {
-    const document = await this.collection.findOneAsync({ token })
-    if (document != null) Object.assign(document, { id: document._id })
-    return document as RocketChatUserRecord
+
+  public async createRocketChatBoard(
+    userId: string,
+    username: string,
+    boardname: string
+  ): Promise<number> {
+    const board = this.generateEmptyBoard(username, userId, boardname)
+    const result = await this.collection.updateAsync(
+      board,
+      {
+        $set: board
+      },
+      {
+        upsert: true
+      }
+    )
+
+    return result
   }
-  public async getRocketChatUserByUserId(userId: string): Promise<RocketChatUserRecord | null> {
-    const document = await this.collection.findOneAsync({ userId })
-    if (document != null) Object.assign(document, { id: document._id })
-    return document as RocketChatUserRecord
+
+  private generateEmptyBoard(userId: string, username: string, boarname: string) {
+    return {
+      userId: userId,
+      username: username,
+      title: boarname,
+      created_at: Date.now(),
+      last_updated: Date.now(),
+      elements: [],
+      files: {}
+    }
   }
 }
+
+export const RocketChatCollection = new RocketChatCollectionClass()
