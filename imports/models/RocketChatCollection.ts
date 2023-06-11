@@ -16,26 +16,43 @@ export class RocketChatCollectionClass extends BaseCollection<RocketChatUserReco
     userId: string,
     username: string,
     boardname: string
-  ): Promise<number> {
+  ): Promise<string> {
     const board = this.generateEmptyBoard(username, userId, boardname)
-    const result = await this.collection.updateAsync(
-      board,
-      {
-        $set: board
-      },
-      {
-        upsert: true
-      }
-    )
+    const ifBoardExists = await this.getRocketChatBoard(userId, username, boardname)
+    if (ifBoardExists == undefined) {
+      await this.collection.insertAsync(board)
+      return 'success'
+    } else {
+      console.log(ifBoardExists._id)
+      return ifBoardExists._id
+    }
+  }
 
+  public async deleteRocketChatBoard(
+    userId: string,
+    username: string,
+    boardname: string
+  ): Promise<number> {
+    const board = this.getRocketChatBoard(userId, username, boardname)
+    const result = await this.collection.removeAsync(board)
     return result
   }
 
-  private generateEmptyBoard(userId: string, username: string, boarname: string) {
+  public async getRocketChatBoard(
+    userId: string,
+    username: string,
+    boardname: string
+  ): Promise<RocketChatUserRecord | null> {
+    const document = await this.collection.findOneAsync({ _id: boardname })
+    console.log('Document', document)
+    return document as RocketChatUserRecord
+  }
+
+  private generateEmptyBoard(userId: string, username: string, boardname: string) {
     return {
-      userId: userId,
+      _id: boardname,
       username: username,
-      title: boarname,
+      title: boardname,
       created_at: Date.now(),
       last_updated: Date.now(),
       elements: [],
