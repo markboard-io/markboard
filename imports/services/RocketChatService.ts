@@ -38,7 +38,7 @@ export class RocketChatService extends BaseService {
       )
       console.log('Create Result', createBoard)
 
-      if (createBoard == null) {
+      if (createBoard == null || createBoard === 'error') {
         res.writeHead(500, {
           'Content-Type': 'Unauthorized application/json'
         })
@@ -48,7 +48,7 @@ export class RocketChatService extends BaseService {
           'Content-Type': 'Authorized application/json'
         })
         res.end()
-      } else {
+      } else if (createBoard === 'success') {
         res.writeHead(200, {
           'Content-Type': 'Authorized application/json'
         })

@@ -19,15 +19,21 @@ export class RocketChatCollectionClass extends BaseCollection<RocketChatUserReco
   ): Promise<string> {
     const board = this.generateEmptyBoard(username, userId, boardname)
     const ifBoardExists = await this.getRocketChatBoard(userId, username, boardname)
+    
     if (ifBoardExists == undefined) {
-      await this.collection.insertAsync(board)
-      return 'success'
+      try {
+        await this.collection.insertAsync(board)
+        return 'success' 
+      } catch (error) {
+        console.error('Error inserting board:', error)
+        return 'error'
+      }
     } else {
       console.log(ifBoardExists._id)
       return ifBoardExists._id
     }
   }
-
+  
   public async deleteRocketChatBoard(
     userId: string,
     username: string,
@@ -38,7 +44,7 @@ export class RocketChatCollectionClass extends BaseCollection<RocketChatUserReco
     return result
   }
 
-  public async getRocketChatBoard(
+  public async getRocketChatBoard( 
     userId: string,
     username: string,
     boardname: string
