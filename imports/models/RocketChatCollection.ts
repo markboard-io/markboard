@@ -43,7 +43,7 @@ export class RocketChatCollectionClass extends BaseCollection<RocketChatUserReco
     username: string,
     boardname: string
   ): Promise<RocketChatUserRecord | null> {
-    const document = await this.collection.findOneAsync({ _id: boardname })
+    const document = await this.collection.findOneAsync({ _id: boardname, userId: userId, username: username })
     console.log('Document', document)
     return document as RocketChatUserRecord
   }
@@ -52,6 +52,7 @@ export class RocketChatCollectionClass extends BaseCollection<RocketChatUserReco
     return {
       _id: boardname,
       username: username,
+      userId: userId,
       title: boardname,
       created_at: Date.now(),
       last_updated: Date.now(),
