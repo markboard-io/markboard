@@ -9,7 +9,9 @@ export class RocketChatService extends BaseService {
 
   public startup(): void {
     WebApp.connectHandlers.use('/rocketchat/v2/auth', async (req, res) => {
-      const authToken = req.headers['x-auth-token'] as string
+      const body = await this.getRequestBody(req)
+      console.log(body)
+      const authToken = body.userId as string
       if (authToken != null) {
         res.writeHead(200, {
           'Content-Type': 'Authorized application/json'
@@ -25,16 +27,16 @@ export class RocketChatService extends BaseService {
     })
 
     WebApp.connectHandlers.use('/rocketchat/v2/createBoard', async (req, res) => {
-      const boardname = req.headers['x-board-name'] as string
-      const username = req.headers['x-user-name'] as string
-      const userid = req.headers['x-user-id'] as string
-      console.log(boardname)
+      const body = await this.getRequestBody(req)
+      const boardname = body.boardName as string
+      const username = body.userName as string
+      const userid = body.userId as string
+      
       const createBoard = await RocketChatCollection.createRocketChatBoard(
         username,
         userid,
         boardname
       )
-      console.log(createBoard)
       if (createBoard == null) {
         res.writeHead(500, {
           'Content-Type': 'Unauthorized application/json'
@@ -45,6 +47,22 @@ export class RocketChatService extends BaseService {
           'Content-Type': 'Authorized application/json'
         })
         res.end()
+      }
+    })
+  }
+
+  public async getRequestBody(req: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        let body = ''
+        req.on('data', (chunk: { toString: () => string }) => {
+          body += chunk.toString() // convert Buffer to string
+        })
+        req.on('end', () => {
+          resolve(JSON.parse(body))
+        })
+      } catch (e) {
+        reject(e)
       }
     })
   }
