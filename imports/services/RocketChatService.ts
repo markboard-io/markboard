@@ -80,6 +80,14 @@ export class RocketChatService extends BaseService {
         res.end()
       }
     })
+
+    WebApp.connectHandlers.use('/rocketchat/v2/oembed', async (req, res) => {
+      console.log('oembed')
+      res.writeHead(200, {
+        'Content-Type': 'Authorized application/json'
+      })
+      res.end()
+    })
   }
 
   public async getRequestBody(req: any): Promise<any> {
