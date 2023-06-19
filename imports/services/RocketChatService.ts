@@ -86,6 +86,20 @@ export class RocketChatService extends BaseService {
       res.writeHead(200, {
         'Content-Type': 'Authorized application/json'
       })
+      const boardname = req.url?.split('/')[3]
+      const iframeHtml = `
+      <iframe src="http://localhost:4000/board/${boardname}" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe>`
+      const oembed = {
+        type: 'video',
+        version: '1.0',
+        title: `${boardname} Whiteboard`,
+        provider_name: 'Markboard',
+        provider_url: 'http://localhost:4000',
+        width: 560,
+        height: 315,
+        html: iframeHtml
+      }
+      res.write(JSON.stringify(oembed))
       res.end()
     })
   }
