@@ -81,20 +81,53 @@ export class RocketChatService extends BaseService {
       }
     })
 
-    WebApp.connectHandlers.use('/rocketchat/v2/oembed', async (req, res) => {
-      console.log('oembed')
+    WebApp.rawConnectHandlers.use('/rocketchat/v2/oembed', async (req, res) => {
       res.writeHead(200, {
         'Content-Type': 'Authorized application/json'
       })
-      const boardname = req.url?.split('/')[3]
+      const urlParam = req.url?.split('?')[1]
+      let decodedUrl = urlParam?.split('=')[1]
+      let boardname = ''
+
+      if (decodedUrl && decodedUrl.includes('%')) {
+        decodedUrl = decodeURIComponent(decodedUrl.replace(/\+/g, ' '))
+        boardname = decodedUrl.split('/')[4]
+      } else {
+        boardname = req.url?.split('/')[1] ?? ''
+      }
+
+      console.log('Decoded URL:', decodedUrl)
+      console.log('url', req.url)
+      console.log('boardname', boardname)
       const iframeHtml = `
-      <iframe src="http://localhost:4000/board/${boardname}" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe>`
+        <iframe src="http://localhost:4000/board/${boardname}" width="770" height="775" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+        <html>
+          <head>
+            <style>
+              .FileExplorerPanel-M1Sq {
+                display: none;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="FileExplorerPanel-M1Sq" style="display:none"></div>
+            <script>
+              // Add script to hide specific elements within the iframe
+              window.onload = function() {
+                var elementsToHide = document.getElementsByClassName('FileExplorerPanel-M1Sq');
+                for (var i = 0; i < elementsToHide.length; i++) {
+                  elementsToHide[i].style.display = 'none';
+                }
+              };
+            </script>
+          </body>
+        </html>`
       const oembed = {
         type: 'video',
         version: '1.0',
-        title: `${boardname} Whiteboard`,
+        title: 'Whiteboard',
         provider_name: 'Markboard',
-        provider_url: 'http://localhost:4000',
+        provider_url: `http://localhost:4000/board/${boardname}`,
         width: 560,
         height: 315,
         html: iframeHtml
