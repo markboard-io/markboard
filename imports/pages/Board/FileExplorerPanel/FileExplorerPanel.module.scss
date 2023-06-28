@@ -17,6 +17,9 @@
 			display: none;
 		}
 	}
+	@media screen and (max-width: 500px) {
+		display: none;
+	}
 }
 .PanelResizeHandle {
 	width: 3px;
@@ -29,5 +32,8 @@
 	}
 	&:hover .Divider {
 		border-right: 2px solid var(--background-primary);
+	}
+	@media screen and (max-width: 500px) {
+		display: none;
 	}
 }

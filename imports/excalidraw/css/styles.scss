@@ -239,6 +239,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 8px;
+    @media screen and (max-width: 500px) {
+      padding: 0px;
+    }
   }
 
   .App-mobile-menu {

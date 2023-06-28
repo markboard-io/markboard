@@ -85,6 +85,7 @@ export class RocketChatService extends BaseService {
       res.writeHead(200, {
         'Content-Type': 'Authorized application/json'
       })
+
       const urlParam = req.url?.split('?')[1]
       let decodedUrl = urlParam?.split('=')[1]
       let boardname = ''
@@ -96,32 +97,8 @@ export class RocketChatService extends BaseService {
         boardname = req.url?.split('/')[1] ?? ''
       }
 
-      console.log('Decoded URL:', decodedUrl)
-      console.log('url', req.url)
-      console.log('boardname', boardname)
-      const iframeHtml = `
-        <iframe src="http://localhost:4000/board/${boardname}" width="770" height="775" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-        <html>
-          <head>
-            <style>
-              .FileExplorerPanel-M1Sq {
-                display: none;
-              }
-            </style>
-          </head>
-          <body>
-            <div class="FileExplorerPanel-M1Sq" style="display:none"></div>
-            <script>
-              // Add script to hide specific elements within the iframe
-              window.onload = function() {
-                var elementsToHide = document.getElementsByClassName('FileExplorerPanel-M1Sq');
-                for (var i = 0; i < elementsToHide.length; i++) {
-                  elementsToHide[i].style.display = 'none';
-                }
-              };
-            </script>
-          </body>
-        </html>`
+      const iframeHtml = `<iframe src="http://localhost:4000/board/${boardname}" width="770" height="775" frameborder="0" allowfullscreen="allowfullscreen"></iframe>`
+
       const oembed = {
         type: 'video',
         version: '1.0',
@@ -132,6 +109,7 @@ export class RocketChatService extends BaseService {
         height: 315,
         html: iframeHtml
       }
+
       res.write(JSON.stringify(oembed))
       res.end()
     })
