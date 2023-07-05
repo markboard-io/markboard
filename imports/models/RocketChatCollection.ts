@@ -29,7 +29,6 @@ export class RocketChatCollectionClass extends BaseCollection<RocketChatUserReco
         return 'error'
       }
     } else {
-      console.log(ifBoardExists._id)
       return ifBoardExists._id
     }
   }
@@ -50,7 +49,6 @@ export class RocketChatCollectionClass extends BaseCollection<RocketChatUserReco
     boardname: string
   ): Promise<RocketChatUserRecord | null> {
     const document = await this.collection.findOneAsync({ _id: boardname, userId: userId, username: username })
-    console.log('Document', document)
     return document as RocketChatUserRecord
   }
 

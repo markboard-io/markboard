@@ -36,8 +36,6 @@ export class RocketChatService extends BaseService {
         userid,
         boardname
       )
-      console.log('Create Result', createBoard)
-
       if (createBoard == null || createBoard === 'error') {
         res.writeHead(500, {
           'Content-Type': 'Unauthorized application/json'
@@ -67,7 +65,6 @@ export class RocketChatService extends BaseService {
         username,
         boardname
       )
-      console.log('Delete Result', deleteBoard)
       if (deleteBoard == null || deleteBoard === 0) {
         res.writeHead(500, {
           'Content-Type': 'Unauthorized application/json'
