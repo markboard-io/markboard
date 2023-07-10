@@ -22,4 +22,8 @@
     width: var(--lg-icon-size);
     height: var(--lg-icon-size);
   }
+  @media screen and (max-width: 500px) {
+    width: var(--sm-button-size);
+    height: var(--sm-button-size);
+  }
 }
